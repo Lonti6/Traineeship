@@ -29,12 +29,7 @@ public class DashboardFragment extends Fragment {
         View root = binding.getRoot();
 
         final TextView textView = binding.textDashboard;
-        dashboardViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
+        dashboardViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 

@@ -29,12 +29,7 @@ public class NotificationsFragment extends Fragment {
         View root = binding.getRoot();
 
         final TextView textView = binding.textNotifications;
-        notificationsViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
+        notificationsViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 
