@@ -7,4 +7,6 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "Traineeship"
+include ':forAll'
 include ':app'
+include ':server'
