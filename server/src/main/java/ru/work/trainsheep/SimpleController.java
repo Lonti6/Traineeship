@@ -16,4 +16,20 @@ public class SimpleController {
         return "jsonTemplate";
     }
 
+    @GetMapping("/user")
+    public String user(Model model){
+        model.addAttribute("status", "ok");
+        return "jsonTemplate";
+    }
+
+    @PostMapping("/register")
+    public String register(Model model, @RequestBody UserRegistrationDto userRegistration){
+        if(userRegistration.email != null && userRegistration.password != null)
+            model.addAttribute("status", "ok");
+        else
+            model.addAttribute("status", "fail");
+
+        return "jsonTemplate";
+    }
+
 }
