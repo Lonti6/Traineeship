@@ -1,9 +1,5 @@
 package ru.work.trainsheep.data;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
-import java.io.Serializable;
 
 public class Result<T> {
 
@@ -23,7 +19,7 @@ public class Result<T> {
         }
     }
 
-    static class Error<T> extends Result<T> {
+    public static class Error<T> extends Result<T> {
         private Exception exception;
 
         public Error(Exception exception) {
@@ -46,5 +42,16 @@ public class Result<T> {
         return new Error<>(e);
     }
 
+    public boolean isError(){
+        return this instanceof Error;
+    }
+
+    public boolean isSuccess(){
+        return this instanceof Success;
+    }
+
+    public T getResult(){
+        return ((Success<T>) this).result;
+    }
 
 }

@@ -9,4 +9,7 @@
     <string name="password">Password</string>
     <string name="register">Зарегистрироваться</string>
     <string name="forgot_password"><u>Забыли пароль?</u></string>
+    <string name="authorization">Авторизация</string>
+    <string name="enter_email">Введите почту...</string>
+    <string name="enter_password">Введите пароль...</string>
 </resources>
