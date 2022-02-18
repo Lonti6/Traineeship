@@ -23,7 +23,7 @@ public class SimpleController {
     }
 
     @PostMapping("/register")
-    public String register(Model model, @RequestBody UserRegistrationDto userRegistration){
+    public String register(Model model, @RequestBody UserRegistrationData userRegistration){
         if(userRegistration.email != null && userRegistration.password != null)
             model.addAttribute("status", "ok");
         else

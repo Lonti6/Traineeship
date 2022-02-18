@@ -1,18 +1,19 @@
 package ru.work.trainsheep;
 
 
+import java.io.Serializable;
 
-public class UserRegistrationDto {
+public class UserRegistrationData {
     String email;
     String password;
 
 
-    public UserRegistrationDto(String email, String password) {
+    public UserRegistrationData(String email, String password) {
         this.email = email;
         this.password = password;
     }
 
-    public UserRegistrationDto() {
+    public UserRegistrationData() {
     }
 
     public String getEmail() {
