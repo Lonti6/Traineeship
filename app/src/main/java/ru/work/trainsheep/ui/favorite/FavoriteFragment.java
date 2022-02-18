@@ -1,4 +1,4 @@
-package ru.work.trainsheep.ui.dashboard;
+package ru.work.trainsheep.ui.favorite;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -7,29 +7,26 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import ru.work.trainsheep.R;
-import ru.work.trainsheep.databinding.FragmentDashboardBinding;
+import ru.work.trainsheep.databinding.FragmentFavoriteBinding;
 
-public class DashboardFragment extends Fragment {
+public class FavoriteFragment extends Fragment {
 
-    private DashboardViewModel dashboardViewModel;
-    private FragmentDashboardBinding binding;
+    private FavoriteViewModel favoriteViewModel;
+    private FragmentFavoriteBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        dashboardViewModel =
-                new ViewModelProvider(this).get(DashboardViewModel.class);
+        favoriteViewModel =
+                new ViewModelProvider(this).get(FavoriteViewModel.class);
 
-        binding = FragmentDashboardBinding.inflate(inflater, container, false);
+        binding = FragmentFavoriteBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         final TextView textView = binding.textDashboard;
-        dashboardViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        favoriteViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 
