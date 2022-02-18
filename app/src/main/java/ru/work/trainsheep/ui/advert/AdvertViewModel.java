@@ -9,7 +9,7 @@ public class AdvertViewModel extends ViewModel {
 
     public AdvertViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is dashboard fragment");
+        mText.setValue("fd");
     }
 
     public LiveData<String> getText() {

@@ -10,19 +10,20 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import ru.work.trainsheep.databinding.FragmentAdvertBinding;
 import ru.work.trainsheep.databinding.FragmentFavoriteBinding;
 import ru.work.trainsheep.ui.favorite.FavoriteViewModel;
 
 public class AdvertFragment extends Fragment {
     private AdvertViewModel advertViewModel;
-    private FragmentFavoriteBinding binding;
+    private FragmentAdvertBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         advertViewModel =
                 new ViewModelProvider(this).get(AdvertViewModel.class);
 
-        binding = FragmentFavoriteBinding.inflate(inflater, container, false);
+        binding = FragmentAdvertBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         final TextView textView = binding.textDashboard;

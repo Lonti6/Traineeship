@@ -25,6 +25,12 @@
     <fragment
         android:id="@+id/navigation_profile"
         android:name="ru.work.trainsheep.ui.profile.ProfileFragment"
-        android:label="@string/title_messages"
-        tools:layout="@layout/fragment_messages" />
+        android:label="@string/title_profile"
+        tools:layout="@layout/fragment_profile" />
+
+    <fragment
+        android:id="@+id/navigation_advert"
+        android:name="ru.work.trainsheep.ui.advert.AdvertFragment"
+        android:label="@string/title_advert"
+        tools:layout="@layout/fragment_advert" />
 </navigation>
