@@ -5,4 +5,7 @@
     <string name="title_messages">Сообщения</string>
     <string name="title_profile">Профиль</string>
     <string name="title_advert">Объявления</string>
+    <string name="login">Login</string>
+    <string name="password">Password</string>
+    <string name="register">Зарегистрироваться</string>
 </resources>
