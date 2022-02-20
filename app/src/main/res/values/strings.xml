@@ -6,10 +6,14 @@
     <string name="title_profile">Профиль</string>
     <string name="title_advert">Объявления</string>
     <string name="login">Login</string>
+    <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="register">Зарегистрироваться</string>
     <string name="forgot_password"><u>Забыли пароль?</u></string>
-    <string name="authorization">Авторизация</string>
+    <string name="authorization">Войти</string>
     <string name="enter_email">Введите почту...</string>
     <string name="enter_password">Введите пароль...</string>
+    <string name="help_autorization_text">Введите свою почту и пароль чтобы войти</string>
+    <string name="no_account">Нет аккаунта?</string>
+    <string name="registration">Зарегистрируйтесь</string>
 </resources>
