@@ -40,7 +40,8 @@ public class SimpleController {
     }
 
     @PostMapping("/addUser")
-    public String addUser(Model model, @RequestBody User user) {
+    public String addUser(Model model, @RequestBody UserData userData) {
+        User user = User.from(userData);
         System.out.println("add user " + user);
         boolean status = userService.addUser(user);
         if (status) {

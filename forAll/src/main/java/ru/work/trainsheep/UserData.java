@@ -1,18 +1,9 @@
-package ru.work.trainsheep.entity;
+package ru.work.trainsheep;
 
-import ru.work.trainsheep.UserData;
-
-import javax.persistence.*;
 import java.util.Date;
 
-@Entity
-@Table (name = "User")
-public class User {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-
+public class UserData {
     private String login;
     private String firstName;
     private String lastName;
@@ -22,12 +13,11 @@ public class User {
     private String mail;
     private boolean isStudent;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "resume_id", referencedColumnName = "id")
-    private Resume resume;
+    private String university;
+    private String specialization;
+    private int year; //год обучения
 
-    public User(String login, String firstName, String lastName, String patronymic, Date birthdate, Date registrationDate, String mail, boolean isStudent, Resume resume) {
-
+    public UserData(String login, String firstName, String lastName, String patronymic, Date birthdate, Date registrationDate, String mail, boolean isStudent, String university, String specialization, int year) {
         this.login = login;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -36,34 +26,12 @@ public class User {
         this.registrationDate = registrationDate;
         this.mail = mail;
         this.isStudent = isStudent;
-        this.resume = resume;
+        this.university = university;
+        this.specialization = specialization;
+        this.year = year;
     }
 
-    public User(){
-
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", login='" + login + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", patronymic='" + patronymic + '\'' +
-                ", birthdate=" + birthdate +
-                ", registrationDate=" + registrationDate +
-                ", mail='" + mail + '\'' +
-                ", isStudent=" + isStudent +
-                '}';
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
+    public UserData() {
     }
 
     public String getLogin() {
@@ -130,9 +98,27 @@ public class User {
         isStudent = student;
     }
 
+    public String getUniversity() {
+        return university;
+    }
 
-    public static User from(UserData data){
-        Resume resume = new Resume( data.getUniversity(), data.getSpecialization(), data.getYear());
-        return new User(data.getLogin(), data.getFirstName(), data.getLastName(), data.getPatronymic(), data.getBirthdate(), data.getRegistrationDate(), data.getMail(), data.isStudent(), resume);
+    public void setUniversity(String university) {
+        this.university = university;
+    }
+
+    public String getSpecialization() {
+        return specialization;
+    }
+
+    public void setSpecialization(String specialization) {
+        this.specialization = specialization;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
     }
 }
