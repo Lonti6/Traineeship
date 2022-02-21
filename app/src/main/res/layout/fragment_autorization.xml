@@ -10,8 +10,8 @@
     <Button
         android:id="@+id/autorizationButton"
         style="@style/ButtonStyle"
-        android:layout_width="201dp"
-        android:layout_height="80dp"
+        android:layout_width="105pt"
+        android:layout_height="30pt"
         android:layout_marginBottom="84dp"
         android:background="@drawable/round_style"
         android:fontFamily="@font/open_sans"
@@ -52,12 +52,12 @@
     <RelativeLayout
         android:id="@+id/relativeLayout"
         android:layout_width="160pt"
-        android:layout_height="wrap_content"
+        android:layout_height="30pt"
         android:layout_marginStart="20dp"
         android:layout_marginTop="50dp"
         android:layout_marginEnd="20dp"
         android:background="@drawable/border_style"
-        android:padding="5pt"
+        android:paddingLeft="5pt"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2"
@@ -67,7 +67,7 @@
             android:id="@+id/mail_field"
             style="@style/MyTextFieldStyle"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginLeft="0.5pt"
             android:layout_marginTop="3pt"
             android:layout_marginRight="10pt"
@@ -81,7 +81,7 @@
             android:layout_width="20pt"
             android:layout_height="20pt"
             android:layout_marginLeft="3pt"
-            android:layout_marginTop="2pt"
+            android:layout_marginTop="5pt"
             android:padding="3dp"
             android:src="@drawable/mail_icon" />
 
@@ -90,12 +90,12 @@
     <RelativeLayout
         android:id="@+id/relativeLayout2"
         android:layout_width="160pt"
-        android:layout_height="wrap_content"
+        android:layout_height="30pt"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20pt"
         android:layout_marginEnd="20dp"
         android:background="@drawable/border_style"
-        android:padding="5pt"
+        android:paddingLeft="5pt"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -106,13 +106,15 @@
             android:id="@+id/password_field"
             style="@style/MyTextFieldStyle"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginLeft="0.5pt"
             android:layout_marginTop="3pt"
             android:layout_marginRight="10pt"
             android:layout_toRightOf="@+id/username_icon1"
             android:fontFamily="@font/open_sans"
             android:hint="@string/password"
+            android:ems="10"
+            android:inputType="textPassword"
             android:padding="10dp" />
 
         <ImageView
@@ -120,7 +122,7 @@
             android:layout_width="20pt"
             android:layout_height="20pt"
             android:layout_marginLeft="3pt"
-            android:layout_marginTop="2pt"
+            android:layout_marginTop="5pt"
             android:padding="3dp"
             android:src="@drawable/password_icon" />
 
