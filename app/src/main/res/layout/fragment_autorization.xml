@@ -28,7 +28,7 @@
         style="@style/HeadingText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80pt"
+        android:layout_marginTop="140dp"
         android:fontFamily="@font/open_sans"
         android:rotationX="0"
         android:text="Авторизация"
@@ -142,6 +142,7 @@
             android:layout_height="10pt"
             android:layout_toEndOf="@+id/no_acc_text"
             android:fontFamily="@font/open_sans"
+            android:onClick="setRegistrationScreen"
             android:text="@string/registration" />
 
         <TextView

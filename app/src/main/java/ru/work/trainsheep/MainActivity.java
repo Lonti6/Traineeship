@@ -67,4 +67,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    public void setRegistrationScreen(View view)
+    {
+        setContentView(R.layout.fragment_registration);
+    }
+
+    public void setAutorizationScreen(View view)
+    {
+        setContentView(R.layout.fragment_autorization);
+    }
 }
