@@ -21,4 +21,5 @@
     <string name="fill_fielsd_for_reg">Заполните все поля, чтобы создать аккаунт</string>
     <string name="full_name">Полное имя</string>
     <string name="create">Создать</string>
+    <string name="find_stage">Найти стажировку</string>
 </resources>
