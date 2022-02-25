@@ -1,6 +1,10 @@
 package ru.work.trainsheep.data;
 
 
+import androidx.annotation.NonNull;
+
+import org.jetbrains.annotations.Contract;
+
 public class Result<T> {
 
     static class Success<T> extends Result<T >{
@@ -35,9 +39,13 @@ public class Result<T> {
         }
     }
 
+    @NonNull
+    @Contract("_ -> new")
     public static <T> Result<T> success(T t){
         return new Success<>(t);
     }
+    @NonNull
+    @Contract("_ -> new")
     public static <T> Result<T> error(Exception e){
         return new Error<>(e);
     }
