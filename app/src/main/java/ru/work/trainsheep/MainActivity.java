@@ -23,6 +23,8 @@ import ru.work.trainsheep.data.ServerRepository;
 import ru.work.trainsheep.data.ServerRepositoryFactory;
 import ru.work.trainsheep.databinding.ActivityMainBinding;
 
+import javax.xml.transform.Result;
+
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
@@ -35,6 +37,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Bundle bundle = getIntent().getExtras();
         Log.d(getClass().getSimpleName(), "" + bundle);
+
+        // пример получения объявлений, пустой массив тегов означает поиск всех
+        ServerRepository server = ServerRepositoryFactory.getInstance();
+        server.getAdverts(new AdvertRequest(new ArrayList<String>(), 3, 11), (result) ->{
+            if (result.isSuccess()){
+                System.out.println(result.getResult());
+            } else {
+                result.getException().printStackTrace();
+            }
+        });
 
         if (bundle != null && bundle.containsKey(IS_LOGIN)){
             binding = ActivityMainBinding.inflate(getLayoutInflater());
@@ -75,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
         EditText pass = findViewById(R.id.password_field);
         TextView error = findViewById(R.id.error_text_view);
         error.setVisibility(View.GONE);
-        server.register(this, new UserRegistrationData(mail.getText().toString(), pass.getText().toString()), (result) -> {
+        server.register(new UserRegistrationData(mail.getText().toString(), pass.getText().toString()), (result) -> {
             if(result.isError()){
                 error.setVisibility(View.VISIBLE);
             }else{

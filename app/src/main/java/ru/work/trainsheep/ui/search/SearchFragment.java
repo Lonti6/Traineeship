@@ -28,14 +28,11 @@ public class SearchFragment extends Fragment {
         binding = FragmentSearchBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        root.findViewById(R.id.search_field).setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (v.hasFocus())
-                    ((RelativeLayout)(v.getParent())).setBackgroundResource(R.drawable.border_style_color);
-                else
-                    ((RelativeLayout)(v.getParent())).setBackgroundResource(R.drawable.border_style_gray);
-            }
+        root.findViewById(R.id.search_field).setOnFocusChangeListener((v, hasFocus) -> {
+            if (v.hasFocus())
+                ((RelativeLayout)(v.getParent())).setBackgroundResource(R.drawable.border_style_color);
+            else
+                ((RelativeLayout)(v.getParent())).setBackgroundResource(R.drawable.border_style_gray);
         });
 
         return root;

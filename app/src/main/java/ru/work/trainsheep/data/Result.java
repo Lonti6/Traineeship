@@ -62,4 +62,8 @@ public class Result<T> {
         return ((Success<T>) this).result;
     }
 
+    public Exception getException() {
+        return ((Error<T>) this).exception;
+    }
+
 }
