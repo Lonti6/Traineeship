@@ -7,17 +7,264 @@
     android:layout_height="match_parent"
     tools:context=".ui.search.SearchFragment">
 
-    <TextView
-        android:id="@+id/text_home"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="160pt"
+        android:layout_height="30pt"
+        android:layout_marginTop="0pt"
+        android:background="@drawable/border_style_gray"
+        android:paddingLeft="5pt"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints">
+
+        <EditText
+            android:id="@+id/search_field"
+            style="@style/MyTextFieldStyle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="0.5pt"
+            android:layout_marginTop="3pt"
+            android:layout_marginRight="10pt"
+            android:layout_toRightOf="@+id/username_icon"
+            android:fontFamily="@font/open_sans"
+            android:hint="@string/find_stage"
+            android:padding="10dp" />
+
+        <ImageView
+            android:id="@+id/username_icon"
+            android:layout_width="20pt"
+            android:layout_height="20pt"
+            android:layout_marginLeft="3pt"
+            android:layout_marginTop="5pt"
+            android:padding="3dp"
+            android:src="@drawable/search_icon" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="35pt"
+        android:layout_marginBottom="30pt"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10pt"
+            android:layout_marginRight="10pt">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <TextView
+                            style="@style/AdvertHeadingText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="C# Junior разработчик"></TextView>
+
+                        <org.apmem.tools.layouts.FlowLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <RelativeLayout
+                                style="@style/TagsContainer"
+                                android:background="@drawable/tag_bg">
+
+                                <TextView
+                                    style="@style/AdvertTagText"
+                                    android:text="Junior" />
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                style="@style/TagsContainer"
+                                android:background="@drawable/tag_bg">
+
+                                <TextView
+                                    style="@style/AdvertTagText"
+                                    android:text="C#" />
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                style="@style/TagsContainer"
+                                android:background="@drawable/tag_bg">
+
+                                <TextView
+                                    style="@style/AdvertTagText"
+                                    android:text=".Net" />
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                style="@style/TagsContainer"
+                                android:background="@drawable/tag_bg">
+
+                                <TextView
+                                    style="@style/AdvertTagText"
+                                    android:text="Неоплачиваемая" />
+                            </RelativeLayout>
+
+                        </org.apmem.tools.layouts.FlowLayout>
+
+                        <TableLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/border_style_color">
+
+                            <TextView
+                                style="@style/AdvertDescriptionText"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10pt"
+                                android:layout_marginTop="5pt"
+                                android:layout_marginRight="10pt"
+                                android:layout_marginBottom="5pt"
+                                android:text="Очень срочно ищем разработчика!!расрас
+Уметь должен всё: стрелять, варить халву, петь в хоре.
+График плавающий, в идеале - жить на работе, есть и спать тут же, а лучше не спать вообще.
+Опыт от ста миллионов лет и выше."></TextView>
+                        </TableLayout>
+                    </LinearLayout>
+
+                    <TextView
+                        style="@style/AdvertHeadingText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Java Junior разработчик"></TextView>
+
+                    <org.apmem.tools.layouts.FlowLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <RelativeLayout
+                            style="@style/TagsContainer"
+                            android:background="@drawable/tag_bg">
+
+                            <TextView
+                                style="@style/AdvertTagText"
+                                android:text="Junior" />
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            style="@style/TagsContainer"
+                            android:background="@drawable/tag_bg">
+
+                            <TextView
+                                style="@style/AdvertTagText"
+                                android:text="Java 16+" />
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            style="@style/TagsContainer"
+                            android:background="@drawable/tag_bg">
+
+                            <TextView
+                                style="@style/AdvertTagText"
+                                android:text="Spring" />
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            style="@style/TagsContainer"
+                            android:background="@drawable/tag_bg">
+
+                            <TextView
+                                style="@style/AdvertTagText"
+                                android:text="Неоплачиваемая" />
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            style="@style/TagsContainer"
+                            android:background="@drawable/tag_bg">
+
+                            <TextView
+                                style="@style/AdvertTagText"
+                                android:text="Английский" />
+                        </RelativeLayout>
+
+                    </org.apmem.tools.layouts.FlowLayout>
+
+                    <TableLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/border_style_color">
+
+                        <TextView
+                            style="@style/AdvertDescriptionText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10pt"
+                            android:layout_marginTop="5pt"
+                            android:layout_marginRight="10pt"
+                            android:layout_marginBottom="5pt"
+                            android:text="Очень срочно ищем разработчика!!расрас
+Уметь должен всё: стрелять, варить халву, петь в хоре.
+График плавающий, в идеале - жить на работе, есть и спать тут же, а лучше не спать вообще.
+Опыт от ста миллионов лет и выше."></TextView>
+                    </TableLayout>
+                </LinearLayout>
+
+                <TextView
+                    style="@style/AdvertHeadingText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Перепись легаси кода"></TextView>
+
+                <org.apmem.tools.layouts.FlowLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <RelativeLayout
+                        style="@style/TagsContainer"
+                        android:background="@drawable/tag_bg">
+
+                        <TextView
+                            style="@style/AdvertTagText"
+                            android:text="Любой" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        style="@style/TagsContainer"
+                        android:background="@drawable/tag_bg">
+
+                        <TextView
+                            style="@style/AdvertTagText"
+                            android:text="Ассемблер" />
+                    </RelativeLayout>
+
+                </org.apmem.tools.layouts.FlowLayout>
+
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/border_style_color">
+
+                    <TextView
+                        style="@style/AdvertDescriptionText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10pt"
+                        android:layout_marginTop="5pt"
+                        android:layout_marginRight="10pt"
+                        android:layout_marginBottom="5pt"
+                        android:text="Нужно переписать дофига легаси кода!!!!!
+                        \nПлатить может быть будем"></TextView>
+                </TableLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

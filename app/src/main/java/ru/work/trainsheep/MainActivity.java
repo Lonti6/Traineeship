@@ -4,11 +4,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-
-import android.widget.EdgeEffect;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,7 +17,8 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import ru.work.trainsheep.data.Result;
+import java.util.ArrayList;
+
 import ru.work.trainsheep.data.ServerRepository;
 import ru.work.trainsheep.data.ServerRepositoryFactory;
 import ru.work.trainsheep.databinding.ActivityMainBinding;
@@ -26,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
     public static final String IS_LOGIN = "is_login";
+    private static EditTextActivitys activitys = new EditTextActivitys();
+    ArrayList<EditText> list = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,8 +50,23 @@ public class MainActivity extends AppCompatActivity {
             //NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
             NavigationUI.setupWithNavController(binding.navView, navController);
         } else {
-            setContentView(R.layout.fragment_registration);
+            setContentView(R.layout.fragment_autorization);
+            list.add(findViewById(R.id.mail_field));
+            list.add(findViewById(R.id.password_field));
+            for (EditText field: list)
+            {
+                field.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                    @Override
+                    public void onFocusChange(View v, boolean hasFocus) {
+                        if (v.hasFocus())
+                            ((RelativeLayout)(v.getParent())).setBackgroundResource(R.drawable.border_style_color);
+                        else
+                            ((RelativeLayout)(v.getParent())).setBackgroundResource(R.drawable.border_style_gray);
+                    }
+                });
+            }
         }
+
     }
 
     public void authorizationUser(View view) {
@@ -68,5 +86,45 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    public void setRegistrationScreen(View view)
+    {
+        setContentView(R.layout.fragment_registration);
+        list.add(findViewById(R.id.reg_name_field));
+        list.add(findViewById(R.id.reg_mail_field));
+        list.add(findViewById(R.id.reg_password_field));
+        list.add(findViewById(R.id.reg_conf_password_field));
+        for (EditText field: list)
+        {
+            field.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                @Override
+                public void onFocusChange(View v, boolean hasFocus) {
+                    if (v.hasFocus())
+                        ((RelativeLayout)(v.getParent())).setBackgroundResource(R.drawable.border_style_color);
+                    else
+                        ((RelativeLayout)(v.getParent())).setBackgroundResource(R.drawable.border_style_gray);
+                }
+            });
+        }
+    }
+
+    public void setAutorizationScreen(View view)
+    {
+        setContentView(R.layout.fragment_autorization);
+        list.add(findViewById(R.id.mail_field));
+        list.add(findViewById(R.id.password_field));
+        for (EditText field: list)
+        {
+            field.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                @Override
+                public void onFocusChange(View v, boolean hasFocus) {
+                    if (v.hasFocus())
+                        ((RelativeLayout)(v.getParent())).setBackgroundResource(R.drawable.border_style_color);
+                    else
+                        ((RelativeLayout)(v.getParent())).setBackgroundResource(R.drawable.border_style_gray);
+                }
+            });
+        }
     }
 }

@@ -4,12 +4,15 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 
+import ru.work.trainsheep.R;
 import ru.work.trainsheep.databinding.FragmentSearchBinding;
 
 public class SearchFragment extends Fragment {
@@ -25,8 +28,16 @@ public class SearchFragment extends Fragment {
         binding = FragmentSearchBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textHome;
-        searchViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        root.findViewById(R.id.search_field).setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (v.hasFocus())
+                    ((RelativeLayout)(v.getParent())).setBackgroundResource(R.drawable.border_style_color);
+                else
+                    ((RelativeLayout)(v.getParent())).setBackgroundResource(R.drawable.border_style_gray);
+            }
+        });
+
         return root;
     }
 

@@ -1,0 +1,20 @@
+POST /addUser HTTP/1.1
+Host: localhost:8080
+User-Agent: client android
+Accept: application/json
+Content-Type: application/json
+
+{
+  "email": "mail@test.ru",
+  "password": "1234561",
+  "login": "Admin",
+  "firstName": "Adm",
+  "lastName": "Admm",
+  "patronymic": "",
+  "birthdate": "2012-07-11T12:34:57.05",
+  "mail": "Admin2@admin",
+  "isStudent": false,
+  "resume": {
+
+  }
+}

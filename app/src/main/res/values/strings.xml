@@ -5,11 +5,21 @@
     <string name="title_messages">Сообщения</string>
     <string name="title_profile">Профиль</string>
     <string name="title_advert">Объявления</string>
-    <string name="login">Login</string>
-    <string name="password">Password</string>
+    <string name="login">Логин</string>
+    <string name="email">Почта</string>
+    <string name="password">Пароль</string>
+    <string name="conf_password">Подтвердите Пароль</string>
     <string name="register">Зарегистрироваться</string>
     <string name="forgot_password"><u>Забыли пароль?</u></string>
-    <string name="authorization">Авторизация</string>
+    <string name="authorization">Войти</string>
     <string name="enter_email">Введите почту...</string>
     <string name="enter_password">Введите пароль...</string>
+    <string name="help_autorization_text">Введите свою почту и пароль чтобы войти</string>
+    <string name="no_account">Нет аккаунта?</string>
+    <string name="registration">Зарегистрируйтесь</string>
+    <string name="reg">Регистрация</string>
+    <string name="fill_fielsd_for_reg">Заполните все поля, чтобы создать аккаунт</string>
+    <string name="full_name">Полное имя</string>
+    <string name="create">Создать</string>
+    <string name="find_stage">Найти стажировку</string>
 </resources>
