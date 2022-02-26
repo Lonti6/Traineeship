@@ -45,27 +45,25 @@ public class SimpleController {
 
     @PostMapping("/login")
     public String register(Model model, Authentication authentication) {
-        if(authentication != null)
-        model.addAttribute("status", authentication.isAuthenticated());
-        else
+        if(authentication != null) {
+            model.addAttribute("status", "ok");
+        } else
             model.addAttribute("status", "fail");
         return "jsonTemplate";
     }
 
     @PostMapping("/register")
-    public String register(Model model, @RequestBody UserRegistrationData user, HttpSession session) {
+    public String register(Model model, @RequestBody UserRegistrationData user) {
 
 
-        if (user.email != null && user.password != null) {
-            model.addAttribute("status", "ok");
+        if (user.getEmail() != null && user.getPassword() != null && userPasswordRepository.findByUsername(user.getEmail()) == null) {
             val userPass = new UserPasswords(user.getEmail(), passwordEncoder.encode(user.getPassword()), Role.USER.toString());
             userPasswordRepository.save(userPass);
+            model.addAttribute("status", "ok");
+            model.addAttribute("user", user);
         }
         else
             model.addAttribute("status", "fail");
-
-        model.addAttribute("session", session.getId());
-        model.addAttribute("all", userPasswordRepository.findAll());
 
         return "jsonTemplate";
     }
@@ -73,7 +71,6 @@ public class SimpleController {
     @PostMapping("/addUser")
     public String addUser(Model model, @RequestBody UserData userData) {
         User user = User.from(userData);
-        System.out.println("add user " + user);
         boolean status = userService.addUser(user);
         if (status) {
             model.addAttribute("status", "ok");

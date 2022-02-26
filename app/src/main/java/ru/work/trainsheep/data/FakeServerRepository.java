@@ -16,22 +16,27 @@ public class FakeServerRepository implements ServerRepository {
     Handler handler = new Handler(Looper.getMainLooper());
 
     @Override
-    public void register(UserRegistrationData user, Consumer<Result<LoginResult>> callback) {
+    public void register(UserRegistrationData user, Consumer<Result<UserRegistrationData>> callback) {
         executor.execute(() -> {
             try {
-                Thread.sleep(2000);
+                Thread.sleep(500);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
             handler.post(() -> {
                 if(random.nextBoolean())
-                    callback.accept(Result.success(new LoginResult("SuperUser")));
+                    callback.accept(Result.success(new UserRegistrationData("SuperUser", "pass")));
                 else
                     callback.accept(Result.error(new Exception("no correct username or login")));
             });
         });
-
     }
+
+    @Override
+    public void login(UserRegistrationData user, Consumer<Result<UserRegistrationData>> callback) {
+        register(user, callback);
+    }
+
 
     @Override
     public void getAdverts(AdvertRequest request, Consumer<Result<AdvertResult>> callback) {

@@ -11,7 +11,9 @@ import java.util.function.Consumer;
 
 public interface ServerRepository {
 
-    void register(UserRegistrationData user, Consumer<Result<LoginResult>> callback);
+    void register(UserRegistrationData user, Consumer<Result<UserRegistrationData>> callback);
+
+    void login(UserRegistrationData user, Consumer<Result<UserRegistrationData>> callback);
 
     void getAdverts(AdvertRequest request, Consumer<Result<AdvertResult>> callback);
 

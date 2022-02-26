@@ -7,6 +7,7 @@ public class ServerRepositoryFactory {
     public static ServerRepository getInstance(){
         if(serverRepository == null){
             serverRepository = new FakeServerRepository();
+            //serverRepository = new RealServerRepository();
         }
         return serverRepository;
     }

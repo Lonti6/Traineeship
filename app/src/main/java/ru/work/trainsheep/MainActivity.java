@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
             if(result.isError()){
                 error.setVisibility(View.VISIBLE);
             }else{
-                String login = result.getResult().getUsername();
+                String login = result.getResult().getEmail();
                 Toast.makeText(getApplicationContext(), "Здравствуйте, " + login, Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 intent.putExtra(IS_LOGIN, "true");
