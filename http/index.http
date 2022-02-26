@@ -2,3 +2,4 @@ GET / HTTP/1.1
 Host: localhost:8080
 User-Agent: client android
 Accept: application/json
+Cookie: JSESSIONID=1564433326AB60913762F233831C081F; Path=/; HttpOnly

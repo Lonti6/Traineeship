@@ -5,5 +5,5 @@ import ru.work.trainsheep.entity.User;
 
 public interface UserRepository extends CrudRepository<User, Long> {
     User findById(long id);
-    User findByMail(String mail);
+    User findByEmail(String email);
 }

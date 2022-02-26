@@ -1,34 +1,17 @@
 package ru.work.trainsheep;
 
 
-import java.io.Serializable;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor(force = true)
 public class UserRegistrationData {
+    @NonNull
     String email;
+    @NonNull
     String password;
-
-
-    public UserRegistrationData(String email, String password) {
-        this.email = email;
-        this.password = password;
-    }
-
-    public UserRegistrationData() {
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 }

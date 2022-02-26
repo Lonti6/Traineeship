@@ -3,6 +3,7 @@ Host: localhost:8080
 User-Agent: client android
 Accept: application/json
 Content-Type: application/json
+Cookie: JSESSIONID=1564433326AB60913762F233831C081F; Path=/; HttpOnly
 
 {
   "email": "mail@test.ru",
@@ -12,7 +13,6 @@ Content-Type: application/json
   "lastName": "Admm",
   "patronymic": "",
   "birthdate": "2012-07-11T12:34:57.05",
-  "mail": "Admin2@admin",
   "isStudent": false,
   "resume": {
 

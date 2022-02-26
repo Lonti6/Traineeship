@@ -48,4 +48,14 @@ dependencies {
 
     implementation "androidx.work:work-runtime:2.7.1"
     implementation 'org.apmem.tools:layouts:1.10@aar'
+
+    compileOnly 'org.projectlombok:lombok:1.18.22'
+    annotationProcessor 'org.projectlombok:lombok:1.18.22'
+
+    testCompileOnly 'org.projectlombok:lombok:1.18.22'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.22'
+
+    // https://mvnrepository.com/artifact/com.squareup.retrofit2/retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+
 }

@@ -23,6 +23,6 @@ public class UserService {
     }
 
     public boolean existUser(User user){
-        return userRepository.findByMail(user.getMail()) != null;
+        return userRepository.findByEmail(user.getEmail()) != null;
     }
 }
