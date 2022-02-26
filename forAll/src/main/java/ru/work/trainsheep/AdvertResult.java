@@ -5,13 +5,13 @@ import java.util.ArrayList;
 public class AdvertResult {
     ArrayList<Note> notes;
     int numberPage;
-    int allPages;
+    int allNotes;
     int countNotesInPage;
 
-    public AdvertResult(ArrayList<Note> notes, int numberPage, int allPages, int countNotesInPage) {
+    public AdvertResult(ArrayList<Note> notes, int numberPage, int allNotes, int countNotesInPage) {
         this.notes = notes;
         this.numberPage = numberPage;
-        this.allPages = allPages;
+        this.allNotes = allNotes;
         this.countNotesInPage = countNotesInPage;
     }
 
@@ -31,12 +31,12 @@ public class AdvertResult {
         this.numberPage = numberPage;
     }
 
-    public int getAllPages() {
-        return allPages;
+    public int getAllNotes() {
+        return allNotes;
     }
 
-    public void setAllPages(int allPages) {
-        this.allPages = allPages;
+    public void setAllNotes(int allNotes) {
+        this.allNotes = allNotes;
     }
 
     public int getCountNotesInPage() {
@@ -52,7 +52,7 @@ public class AdvertResult {
         return "AdvertResult{" +
                 "notes=" + notes +
                 ", numberPage=" + numberPage +
-                ", allPages=" + allPages +
+                ", allNotes=" + allNotes +
                 ", countNotesInPage=" + countNotesInPage +
                 '}';
     }

@@ -41,13 +41,13 @@ public class FakeServerRepository implements ServerRepository {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+            ArrayList<Note> notes = new ArrayList<>();
+            for (int i = 0; i < request.getCountNotesOnPage(); i++) {
+                notes.add(generateNote(request.getTags()));
+            }
             handler.post(() -> {
                 if(random.nextInt(100) > 2) {
-                    ArrayList<Note> notes = new ArrayList<>();
-                    for (int i = 0; i < request.getCountNotesOnPage(); i++) {
-                        notes.add(generateNote(request.getTags()));
-                    }
-                    callback.accept(Result.success(new AdvertResult(notes, request.getPage(), random.nextInt(100) + request.getPage(), request.getCountNotesOnPage())));
+                    callback.accept(Result.success(new AdvertResult(notes, request.getPage(), random.nextInt(100) + request.getPage() * request.getCountNotesOnPage(), request.getCountNotesOnPage())));
                 }
                 else
                     callback.accept(Result.error(new Exception("internal error try again")));
