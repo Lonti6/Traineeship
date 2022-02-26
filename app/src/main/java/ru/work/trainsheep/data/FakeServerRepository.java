@@ -8,6 +8,7 @@ import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 public class FakeServerRepository implements ServerRepository {
     Random random = new Random();
@@ -60,16 +61,14 @@ public class FakeServerRepository implements ServerRepository {
     private List<String> contents;
 
     private Note generateNote(List<String> tags){
-        if(tags.isEmpty())
-            tags = this.tags;
 
-        Set<String> ntags = new HashSet<>();
+        Set<String> ntags = new HashSet<>(tags);
         int countTags = random.nextInt(5) + 1;
         for (int i = 0; i < countTags; i++) {
-            ntags.add(getRandom(tags));
+            ntags.add(getRandom(this.tags));
         }
 
-        return new Note(new ArrayList<>(ntags), getRandom(headers), getRandom(contents), getRandom(companies));
+        return new Note(new ArrayList<>(ntags.stream().sorted().collect(Collectors.toList())), getRandom(headers), getRandom(contents), getRandom(companies));
     }
     private String getRandom(List<String> list){
         return list.get(random.nextInt(list.size()));

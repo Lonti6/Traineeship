@@ -58,11 +58,11 @@ public class Note {
 
     @Override
     public String toString() {
-        return "Note{" +
+        return "Note{\n" +
                 "tags=" + tags +
-                ", header='" + header + '\'' +
-                ", content='" + content + '\'' +
-                ", company='" + company + '\'' +
-                '}';
+                ", \n    header='" + header + '\'' +
+                ", \n    content='" + content + '\'' +
+                ", \n    company='" + company + '\'' +
+                "\n}\n";
     }
 }
