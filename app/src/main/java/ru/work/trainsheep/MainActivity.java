@@ -3,7 +3,9 @@ package ru.work.trainsheep;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -11,19 +13,21 @@ import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import ru.work.trainsheep.data.ServerRepository;
 import ru.work.trainsheep.data.ServerRepositoryFactory;
 import ru.work.trainsheep.databinding.ActivityMainBinding;
-
-import javax.xml.transform.Result;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     public static final String IS_LOGIN = "is_login";
     private static EditTextActivitys activitys = new EditTextActivitys();
     ArrayList<EditText> list = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,14 +72,11 @@ public class MainActivity extends AppCompatActivity {
             list.add(findViewById(R.id.password_field));
             for (EditText field: list)
             {
-                field.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-                    @Override
-                    public void onFocusChange(View v, boolean hasFocus) {
-                        if (v.hasFocus())
-                            ((RelativeLayout)(v.getParent())).setBackgroundResource(R.drawable.border_style_color);
-                        else
-                            ((RelativeLayout)(v.getParent())).setBackgroundResource(R.drawable.border_style_gray);
-                    }
+                field.setOnFocusChangeListener((v, hasFocus) -> {
+                    if (v.hasFocus())
+                        ((RelativeLayout)(v.getParent())).setBackgroundResource(R.drawable.border_style_color);
+                    else
+                        ((RelativeLayout)(v.getParent())).setBackgroundResource(R.drawable.border_style_gray);
                 });
             }
         }

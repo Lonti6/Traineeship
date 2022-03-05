@@ -10,7 +10,6 @@ import ru.work.trainsheep.R;
 
 public class SearchViewModel extends ViewModel {
 
-
     public SearchViewModel() {
     }
 

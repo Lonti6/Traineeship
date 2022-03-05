@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/advert_name"
+                android:layout_alignParentTop="true"
+                android:textSize="30sp"
+                style="@style/AdvertHeadingText"
+                android:text="C# Junior разработчик"
+                />
+
+            <org.apmem.tools.layouts.FlowLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/advert_name"
+                android:id="@+id/tags_field">
+                <RelativeLayout
+                    style="@style/TagsContainer"
+                    android:background="@drawable/tag_bg"
+                    android:id="@+id/tag_item">
+                    <TextView
+                        style="@style/AdvertTagText"
+                        android:text="Junior" />
+                </RelativeLayout>
+            </org.apmem.tools.layouts.FlowLayout>
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tags_field"
+                android:background="@drawable/advert_border_color"
+                android:id="@+id/advert_description_layout">
+
+                <TextView
+                    style="@style/AdvertDescriptionText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10pt"
+                    android:layout_marginTop="5pt"
+                    android:layout_marginRight="10pt"
+                    android:layout_marginBottom="5pt"
+                    android:text="Очень срочно ищем разработчика!!расрас
+Уметь должен всё: стрелять, варить халву, петь в хоре.
+График плавающий, в идеале - жить на работе, есть и спать тут же, а лучше не спать вообще.
+Опыт от ста миллионов лет и выше."
+                    android:id="@+id/advert_description"/>
+                <TextView
+                    style="@style/GreenText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10pt"
+                    android:layout_marginRight="10pt"
+                    android:layout_marginBottom="3pt"
+                    android:id="@+id/company_name"
+                    android:text="ООО УРГЭУ"/>
+            </TableLayout>
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>
