@@ -4,17 +4,29 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.mikepenz.iconics.typeface.FontAwesome;
+import com.mikepenz.materialdrawer.Drawer;
+import com.mikepenz.materialdrawer.model.DividerDrawerItem;
+import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
+import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
+import com.mikepenz.materialdrawer.model.SectionDrawerItem;
+import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -36,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
     private static EditTextActivitys activitys = new EditTextActivitys();
     ArrayList<EditText> list = new ArrayList<>();
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,15 +68,61 @@ public class MainActivity extends AppCompatActivity {
             binding = ActivityMainBinding.inflate(getLayoutInflater());
             setContentView(binding.getRoot());
 
-            BottomNavigationView navView = findViewById(R.id.nav_view);
+            Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+            setSupportActionBar(toolbar);
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
+            //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+            AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
+                    R.id.navigation_search, R.id.navigation_favorite, R.id.navigation_messages, R.id.navigation_profile, R.id.navigation_advert)
+                    .build();
+            NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
+/*            NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+            NavigationUI.setupWithNavController(binding.toolbar, navController);*/
+
+            new Drawer()
+                    .withActivity(this)
+                    .withHeader(R.layout.drawer_header)
+                    .addDrawerItems(
+                            new SectionDrawerItem().withName("Взаимодействие"),
+                            new PrimaryDrawerItem().withName("Поиск").withIcon(getDrawable(R.drawable.search_icon)).withIdentifier(1),
+                            new PrimaryDrawerItem().withName("Сообщения").withIcon(getDrawable(R.drawable.ic_message)).withIdentifier(2),
+                            new SectionDrawerItem().withName("Пользователь"),
+                            new SecondaryDrawerItem().withName("Профиль").withIcon(getDrawable(R.drawable.people_icon)).withIdentifier(3),
+                            new SecondaryDrawerItem().withName("Настройки").withIcon(getDrawable(R.drawable.settings_icon)).withIdentifier(4),
+                            new DividerDrawerItem(),
+                            new SecondaryDrawerItem().withName("Наши контакты").withIcon(FontAwesome.Icon.faw_github).withBadge("12+").withIdentifier(5)
+                    )
+                    .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id, IDrawerItem drawerItem) {
+                            if (drawerItem != null) {
+                                Intent intent = null;
+                                if (drawerItem.getIdentifier() == 1) {
+                                    navController.navigate(R.id.navigation_search);
+                                    Log.i("______________________________________", "________________________________________");
+                                }
+                                else if (drawerItem.getIdentifier() == 2) {
+                                    navController.navigate(R.id.navigation_messages);
+                                } else {
+                                    //if none of your static items were clicked handle the logic for the categories.
+                                    //now you have the drawerItem which were created from a category
+                                    //you can identify them by identifier, their tag, or name. Depends on what you need to do your logic here
+                                }
+                            }
+                        }
+                    })
+                    .build();
+
+            /*BottomNavigationView navView = findViewById(R.id.nav_view);
             // Passing each menu ID as a set of Ids because each
             // menu should be considered as top level destinations.
             AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
                     R.id.navigation_search, R.id.navigation_favorite, R.id.navigation_messages, R.id.navigation_profile, R.id.navigation_advert)
                     .build();
-            NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
+            NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);*/
             //NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-            NavigationUI.setupWithNavController(binding.navView, navController);
+            //NavigationUI.setupWithNavController(binding.navView, navController);
         } else {
             setContentView(R.layout.fragment_autorization);
             list.add(findViewById(R.id.mail_field));

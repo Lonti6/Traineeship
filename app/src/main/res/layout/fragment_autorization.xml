@@ -145,6 +145,7 @@
             android:layout_toEndOf="@+id/no_acc_text"
             android:fontFamily="@font/open_sans"
             android:onClick="setRegistrationScreen"
+            android:paddingLeft="2pt"
             android:text="@string/registration" />
 
         <TextView
