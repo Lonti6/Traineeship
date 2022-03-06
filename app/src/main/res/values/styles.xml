@@ -14,20 +14,19 @@
     
     <style name="HeadingText">
         <item name="android:textColor">@color/black</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:textSize">36dp</item>
+        <item name="android:textSize">24dp</item>
         <item name="android:fontFamily">@font/open_sans</item>
     </style>
 
     <style name="GrayText">
         <item name="android:textColor">#b0b0b0</item>
-        <item name="android:textSize">16dp</item>
+        <item name="android:textSize">14dp</item>
         <item name="android:fontFamily">@font/open_sans</item>
     </style>
 
     <style name="GreenText">
         <item name="android:textColor">@color/main_green</item>
-        <item name="android:textSize">16dp</item>
+        <item name="android:textSize">14dp</item>
         <item name="android:fontFamily">@font/open_sans</item>
 
     </style>
