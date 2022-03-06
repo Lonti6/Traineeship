@@ -134,37 +134,71 @@ final class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         this.companies = companies;
     }
 
+
+    private boolean isPositionFooter(int position) {
+        return position > headers.size();
+    }
+
+    @Override
+    public int getItemViewType(int position)
+    {
+        if (isPositionFooter(position)) {
+            return headers.size()-1;
+        }
+        return position;
+    }
+
+
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new RecyclerView.ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.advert_item, parent, false)){};
+
+        if (viewType == headers.size()-1) {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.footer_search,
+                    parent, false);
+            return new FooterViewHolder(view);
+        }
+        else
+            return new RecyclerView.ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.advert_item, parent, false)){};
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        TextView name = holder.itemView.findViewById(R.id.advert_name);
-        name.setText(headers.get(position));
-        //LinearLayout tagsField = (LinearLayout) LayoutInflater.from(holder.itemView.getContext()).inflate(R.layout.flow_layout_item, null, false);
+        if (holder instanceof FooterViewHolder){}
+        else {
+            TextView name = holder.itemView.findViewById(R.id.advert_name);
+            name.setText(headers.get(position));
+            //LinearLayout tagsField = (LinearLayout) LayoutInflater.from(holder.itemView.getContext()).inflate(R.layout.flow_layout_item, null, false);
 
-        FlowLayout tagsField = holder.itemView.findViewById(R.id.tags_field);
-        tagsField.removeAllViews();
+            FlowLayout tagsField = holder.itemView.findViewById(R.id.tags_field);
+            tagsField.removeAllViews();
 
-        //View view = LayoutInflater.from(holder.itemView.getContext()).inflate(R.layout.fragment_search, null, false);
-        for (String tag: tags.get(position)) {
-            LinearLayout layout = (LinearLayout) LayoutInflater.from(holder.itemView.getContext()).inflate(R.layout.tag_item, null, false);
-            ((TextView) ((RelativeLayout)layout.getChildAt(0)).getChildAt(0)).setText(tag);
-            tagsField.addView(layout);
+            //View view = LayoutInflater.from(holder.itemView.getContext()).inflate(R.layout.fragment_search, null, false);
+            for (String tag : tags.get(position)) {
+                LinearLayout layout = (LinearLayout) LayoutInflater.from(holder.itemView.getContext()).inflate(R.layout.tag_item, null, false);
+                ((TextView) ((RelativeLayout) layout.getChildAt(0)).getChildAt(0)).setText(tag);
+                tagsField.addView(layout);
+            }
+
+            TextView description = holder.itemView.findViewById(R.id.advert_description);
+            description.setText(descriptions.get(position));
+
+            TextView companyName = holder.itemView.findViewById(R.id.company_name);
+            companyName.setText(companies.get(position));
         }
-
-        TextView description = holder.itemView.findViewById(R.id.advert_description);
-        description.setText(descriptions.get(position));
-
-        TextView companyName = holder.itemView.findViewById(R.id.company_name);
-        companyName.setText(companies.get(position));
     }
 
     @Override
     public int getItemCount() {
         return this.headers.size();
+    }
+
+    public class FooterViewHolder extends RecyclerView.ViewHolder {
+        public View View;
+        public FooterViewHolder(View v) {
+            super(v);
+            View = v;
+            // Добавьте компоненты пользовательского интерфейса здесь.
+        }
     }
 }

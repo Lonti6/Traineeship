@@ -97,17 +97,11 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id, IDrawerItem drawerItem) {
                             if (drawerItem != null) {
-                                Intent intent = null;
                                 if (drawerItem.getIdentifier() == 1) {
                                     navController.navigate(R.id.navigation_search);
-                                    Log.i("______________________________________", "________________________________________");
                                 }
                                 else if (drawerItem.getIdentifier() == 2) {
                                     navController.navigate(R.id.navigation_messages);
-                                } else {
-                                    //if none of your static items were clicked handle the logic for the categories.
-                                    //now you have the drawerItem which were created from a category
-                                    //you can identify them by identifier, their tag, or name. Depends on what you need to do your logic here
                                 }
                             }
                         }

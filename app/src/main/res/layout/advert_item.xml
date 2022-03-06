@@ -30,14 +30,14 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/advert_name"
                 android:id="@+id/tags_field">
-                <RelativeLayout
+                <LinearLayout
                     style="@style/TagsContainer"
                     android:background="@drawable/tag_bg"
                     android:id="@+id/tag_item">
                     <TextView
                         style="@style/AdvertTagText"
                         android:text="Junior" />
-                </RelativeLayout>
+                </LinearLayout>
             </org.apmem.tools.layouts.FlowLayout>
 
             <TableLayout
