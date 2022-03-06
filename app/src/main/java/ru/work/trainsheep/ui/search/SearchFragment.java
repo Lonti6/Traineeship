@@ -5,6 +5,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -45,6 +47,9 @@ public class SearchFragment extends Fragment {
             else
                 ((RelativeLayout)(v.getParent())).setBackgroundResource(R.drawable.border_style_gray);
         });
+
+        ((ImageButton) root.findViewById(R.id.listButton)).setOnClickListener(v ->
+                ((RecyclerView)root.findViewById(R.id.rv)).smoothScrollToPosition(0));
 
         List<String> headers = Arrays.asList("Программист ERP",
                 "Frontend-разработчик (JS, Angular)",
