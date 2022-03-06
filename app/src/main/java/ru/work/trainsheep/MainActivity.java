@@ -101,6 +101,9 @@ public class MainActivity extends AppCompatActivity {
                             else if (drawerItem.getIdentifier() == 2) {
                                 navController.navigate(R.id.navigation_messages);
                             }
+                            else if (drawerItem.getIdentifier() == 3) {
+                                navController.navigate(R.id.navigation_profile);
+                            }
                         }
                     })
                     .build();
