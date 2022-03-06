@@ -39,6 +39,11 @@ public class ProfileFragment extends Fragment{
         List<String> tags = Arrays.asList("Бэкенд", "Angular", "Фронтенд", "Middle", "JavaScript", "HTML", "JQuery", "Angular",
                 "Linux", "Git", "PHP", "Golang", "React Native", "Sass", "React", "C#", ".NET", ".NET Core", "SQL", "python");
 
+        List<String> names = Arrays.asList("Никита Жильцов", "Диана Имранова", "Дмитрий Башкирцев", "Иван Малышев", "Кристина Казакова",
+                "Анна Маркова", "Иван Вешняков", "Полина Попова", "Роман Пирогов", "Вероника Киселева", "Егор Карасев", "София Макарова");
+
+        ((TextView)root.findViewById(R.id.name_user)).setText(names.get((int)(Math.random()*names.size())));
+
         for (int i = 0; i<((int)(Math.random()*7)+3); i++)
         {
             LinearLayout layout = (LinearLayout) LayoutInflater.from(root.getContext()).inflate(R.layout.tag_item, null, false);
