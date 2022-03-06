@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         ServerRepository server = ServerRepositoryFactory.getInstance();
         server.getAdverts(new AdvertRequest(new ArrayList<String>(), 3, 11), (result) ->{
             if (result.isSuccess()){
-                System.out.println(result.getResult());
+                //System.out.println(result.getResult());
             } else {
                 result.getException().printStackTrace();
             }
@@ -93,16 +93,13 @@ public class MainActivity extends AppCompatActivity {
                             new DividerDrawerItem(),
                             new SecondaryDrawerItem().withName("Наши контакты").withIcon(FontAwesome.Icon.faw_github).withBadge("12+").withIdentifier(5)
                     )
-                    .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
-                        @Override
-                        public void onItemClick(AdapterView<?> parent, View view, int position, long id, IDrawerItem drawerItem) {
-                            if (drawerItem != null) {
-                                if (drawerItem.getIdentifier() == 1) {
-                                    navController.navigate(R.id.navigation_search);
-                                }
-                                else if (drawerItem.getIdentifier() == 2) {
-                                    navController.navigate(R.id.navigation_messages);
-                                }
+                    .withOnDrawerItemClickListener((parent, view, position, id, drawerItem) -> {
+                        if (drawerItem != null) {
+                            if (drawerItem.getIdentifier() == 1) {
+                                navController.navigate(R.id.navigation_search);
+                            }
+                            else if (drawerItem.getIdentifier() == 2) {
+                                navController.navigate(R.id.navigation_messages);
                             }
                         }
                     })
