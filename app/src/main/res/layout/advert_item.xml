@@ -26,14 +26,26 @@
                 />
 
             <org.apmem.tools.layouts.FlowLayout
+                android:id="@+id/tags_field"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/advert_name"
-                android:id="@+id/tags_field">
+                android:layout_below="@+id/advert_name">
+
                 <LinearLayout
+                    android:id="@+id/tag_item"
                     style="@style/TagsContainer"
-                    android:background="@drawable/tag_bg"
-                    android:id="@+id/tag_item">
+                    android:background="@drawable/tag_bg">
+
+                    <TextView
+                        style="@style/AdvertTagText"
+                        android:text="Junior" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/r"
+                    style="@style/TagsContainer"
+                    android:background="@drawable/tag_bg">
+
                     <TextView
                         style="@style/AdvertTagText"
                         android:text="Junior" />
