@@ -172,7 +172,7 @@ public class MainActivity extends AppCompatActivity {
 
         public void addTags(List<String> tags) {
             for (String tag : tags) {
-                LinearLayout layout = (LinearLayout) LayoutInflater.from(itemView.getContext()).inflate(R.layout.tag_item, tagsField, false);
+                LinearLayout layout = (LinearLayout) LayoutInflater.from(itemView.getContext()).inflate(R.layout.tag_item, null, false);
                 ((TextView) layout.findViewById(R.id.tag)).setText(tag);
                 tagsField.addView(layout);
             }
