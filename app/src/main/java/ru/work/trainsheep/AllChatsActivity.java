@@ -41,6 +41,8 @@ public class AllChatsActivity extends AppCompatActivity {
             }
         });
 
+        LeftPanel.connect(this);
+
 
     }
 
