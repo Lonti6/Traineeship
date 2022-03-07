@@ -33,6 +33,7 @@ public class AllChatsActivity extends AppCompatActivity {
 
         val adapter = new Adapter(new ArrayList<>(), this);
         rv.setAdapter(adapter);
+        rv.addItemDecoration(new SpaceItemDecoration(60));
 
         ServerRepository server = ServerRepositoryFactory.getInstance();
         server.getChats((res) -> {
