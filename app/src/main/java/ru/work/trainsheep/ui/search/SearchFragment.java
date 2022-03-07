@@ -54,7 +54,7 @@ public class SearchFragment extends Fragment {
                 ((RelativeLayout)(v.getParent())).setBackgroundResource(R.drawable.border_style_gray);
         });
 
-        root.findViewById(R.id.listButton).setOnClickListener(v ->
+        root.findViewById(R.id.mail_field).setOnClickListener(v ->
                 ((RecyclerView)root.findViewById(R.id.rv)).smoothScrollToPosition(0));
         ArrayList<Note> notes = new ArrayList<>();
         ServerRepository server = ServerRepositoryFactory.getInstance();

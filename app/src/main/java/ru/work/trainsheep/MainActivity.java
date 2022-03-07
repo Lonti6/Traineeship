@@ -39,18 +39,19 @@ import java.util.List;
 
 import ru.work.trainsheep.data.ServerRepository;
 import ru.work.trainsheep.data.ServerRepositoryFactory;
-import ru.work.trainsheep.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ActivityMainBinding binding;
     public static final String IS_LOGIN = "is_login";
-    private static EditTextActivitys activitys = new EditTextActivitys();
     ArrayList<EditText> list = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Intent intent = new Intent(this, AllChatsActivity.class);
+        startActivity(intent);
+
         Bundle bundle = getIntent().getExtras();
         Log.d(getClass().getSimpleName(), "" + bundle);
 
@@ -65,18 +66,9 @@ public class MainActivity extends AppCompatActivity {
         });
 
         if (bundle != null && bundle.containsKey(IS_LOGIN)){
-            binding = ActivityMainBinding.inflate(getLayoutInflater());
-            setContentView(binding.getRoot());
 
-            Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-            setSupportActionBar(toolbar);
-            getSupportActionBar().setDisplayShowTitleEnabled(false);
-            //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-            AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                    R.id.navigation_search, R.id.navigation_favorite, R.id.navigation_messages, R.id.navigation_profile, R.id.navigation_advert)
-                    .build();
-            NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
+
 /*            NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
             NavigationUI.setupWithNavController(binding.toolbar, navController);*/
 
@@ -96,13 +88,13 @@ public class MainActivity extends AppCompatActivity {
                     .withOnDrawerItemClickListener((parent, view, position, id, drawerItem) -> {
                         if (drawerItem != null) {
                             if (drawerItem.getIdentifier() == 1) {
-                                navController.navigate(R.id.navigation_search);
+
                             }
                             else if (drawerItem.getIdentifier() == 2) {
-                                navController.navigate(R.id.navigation_messages);
+
                             }
                             else if (drawerItem.getIdentifier() == 3) {
-                                navController.navigate(R.id.navigation_profile);
+
                             }
                         }
                     })

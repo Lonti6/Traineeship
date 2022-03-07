@@ -5,12 +5,10 @@ import android.os.Looper;
 import lombok.val;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-import ru.work.trainsheep.AdvertRequest;
-import ru.work.trainsheep.AdvertResult;
-import ru.work.trainsheep.LoginResult;
-import ru.work.trainsheep.UserRegistrationData;
+import ru.work.trainsheep.*;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -46,6 +44,16 @@ public class RealServerRepository implements ServerRepository{
                 System.err.println(e.getMessage());
             }
         });
+    }
+
+    @Override
+    public void getChats(Consumer<Result<List<ChatBlock>>> callback) {
+
+    }
+
+    @Override
+    public void getMessages(ChatRequest request, Consumer<Result<ChatResult>> callback) {
+
     }
 
     @Override
