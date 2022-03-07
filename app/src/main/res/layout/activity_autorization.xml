@@ -128,35 +128,35 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="30pt"
-        android:padding="5pt"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/autorizationButton"
-        tools:ignore="MissingConstraints"
-        app:flow_horizontalAlign="center">
+            android:layout_width="wrap_content"
+            android:layout_height="30pt"
+            android:padding="5pt"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/autorizationButton"
+            tools:ignore="MissingConstraints"
+            app:flow_horizontalAlign="center" app:layout_constraintHorizontal_bias="0.538"
+            app:layout_constraintBottom_toBottomOf="parent">
 
         <TextView
-            style="@style/GreenText"
-            android:layout_width="wrap_content"
-            android:layout_height="10pt"
-            android:layout_toEndOf="@+id/no_acc_text"
-            android:fontFamily="@font/open_sans"
-            android:onClick="setRegistrationScreen"
-            android:paddingLeft="2pt"
-            android:text="@string/registration" />
+                style="@style/GreenText"
+                android:layout_width="wrap_content"
+                android:layout_height="10pt"
+                android:layout_toEndOf="@+id/no_acc_text"
+                android:fontFamily="@font/open_sans"
+                android:onClick="setRegistrationScreen"
+                android:paddingLeft="2pt"
+                android:text="@string/registration"/>
 
         <TextView
-            android:id="@+id/no_acc_text"
-            style="@style/GrayText"
-            android:layout_width="wrap_content"
-            android:layout_height="10pt"
-            android:layout_alignParentStart="true"
-            android:text="@string/no_account" />
+                android:id="@+id/no_acc_text"
+                style="@style/GrayText"
+                android:layout_width="wrap_content"
+                android:layout_height="10pt"
+                android:layout_alignParentStart="true"
+                android:text="@string/no_account"/>
 
     </RelativeLayout>
-
     <TextView
             android:id="@+id/error_text_view"
             android:layout_width="wrap_content"
