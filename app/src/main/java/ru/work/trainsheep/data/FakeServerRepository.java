@@ -17,13 +17,15 @@ public class FakeServerRepository implements ServerRepository {
     Random random = new Random();
     ExecutorService executor = Executors.newSingleThreadExecutor();
     Handler handler = new Handler(Looper.getMainLooper());
+    UserRegistrationData userData = null;
 
     @Override
     public void register(UserRegistrationData user, Consumer<Result<UserRegistrationData>> callback) {
         sleepAndRun(500, () -> {
-            if (random.nextBoolean())
-                callback.accept(Result.success(new UserRegistrationData("SuperUser", "pass")));
-            else
+            if (random.nextBoolean()) {
+                userData = new UserRegistrationData("SuperUser", "pass");
+                callback.accept(Result.success(userData));
+            } else
                 callback.accept(Result.error(new Exception("no correct username or login")));
         });
     }
@@ -67,6 +69,11 @@ public class FakeServerRepository implements ServerRepository {
                 (res) -> callback.accept(Result.success(res)));
     }
 
+    @Override
+    public boolean isLogin() {
+        return userData != null;
+    }
+
     private <T> void sleepAndRun(int millis, Supplier<T> runInService, Consumer<T> runInGui) {
         executor.execute(() -> {
             try {
@@ -94,14 +101,14 @@ public class FakeServerRepository implements ServerRepository {
 
 
 
-    private final List<String> tags;
-    private final List<String> companies;
-    private final List<String> headers;
-    private final List<String> contents;
+    public final List<String> tags;
+    public final List<String> companies;
+    public final List<String> headers;
+    public final List<String> contents;
 
-    private final List<String> names;
-    private final List<String> messages;
-    private final List<String> icons;
+    public final List<String> names;
+    public final List<String> messages;
+    public final List<String> icons;
 
 
     public FakeServerRepository() {
@@ -145,7 +152,8 @@ public class FakeServerRepository implements ServerRepository {
                         "Подтвержденные знания разработчика ПО."
         );
 
-        names = Arrays.asList("Калинина Ульяна", "Ефимов Егор", "Самсонов Ярослав", "Попов Илья", "Андрианова Аиша", "Соловьев Савелий", "Синицын Андрей", "Кравцова Софья", "Вдовин Филипп", "Жуков Фёдор", "Семенов Михаил", "Климов Иван", "Волкова Полина", "Белов Кирилл", "Ушакова Василиса", "Антонова Вероника", "Виноградова Алиса", "Булгаков Владимир", "Суворова Анастасия", "Титов Максим", "Иванов Андрей", "Лаптев Игорь", "Иванов Григорий", "Харитонова Виктория", "Иванова Алиса", "Трошина Юлия", "Тарасова Анастасия", "Белов Александр", "Власова Полина", "Иванов Святослав");
+        names = Arrays.asList("Никита Жильцов", "Диана Имранова", "Дмитрий Башкирцев", "Иван Малышев", "Кристина Казакова",
+                "Анна Маркова", "Иван Вешняков", "Полина Попова", "Роман Пирогов", "Вероника Киселева", "Егор Карасев", "София Макарова","Калинина Ульяна", "Ефимов Егор", "Самсонов Ярослав", "Попов Илья", "Андрианова Аиша", "Соловьев Савелий", "Синицын Андрей", "Кравцова Софья", "Вдовин Филипп", "Жуков Фёдор", "Семенов Михаил", "Климов Иван", "Волкова Полина", "Белов Кирилл", "Ушакова Василиса", "Антонова Вероника", "Виноградова Алиса", "Булгаков Владимир", "Суворова Анастасия", "Титов Максим", "Иванов Андрей", "Лаптев Игорь", "Иванов Григорий", "Харитонова Виктория", "Иванова Алиса", "Трошина Юлия", "Тарасова Анастасия", "Белов Александр", "Власова Полина", "Иванов Святослав");
         messages = Arrays.asList("Уснувшая степь слушала его шум. — Не смей отказаться! По гроб жизни обидишь! Не выпьешь —.",
                 "Не знаю, ослабел ли я от водки, или же бутылка была слишком.",
                 "Я всё понял с первого взгляда, да едва ли в Европе есть еще мужчины, которые не умеют отличить с.",
@@ -562,7 +570,7 @@ public class FakeServerRepository implements ServerRepository {
                 );
     }
 
-    private Note generateNote(List<String> tags) {
+    public Note generateNote(List<String> tags) {
 
         Set<String> ntags = new HashSet<>(tags);
         int countTags = random.nextInt(5) + 1;
@@ -581,7 +589,7 @@ public class FakeServerRepository implements ServerRepository {
                 .lastMessageDate(generateDate())
                 .build();
     }
-    private ChatMessage generateMessage(Date date, String sender){
+    public ChatMessage generateMessage(Date date, String sender){
         return ChatMessage.builder()
                 .message(getRandom(messages))
                 .date(date)
@@ -596,7 +604,7 @@ public class FakeServerRepository implements ServerRepository {
         }
         return res;
     }
-    private ChatResult generateChatResult(int page, int count, String sender) {
+    public ChatResult generateChatResult(int page, int count, String sender) {
         val res = new ArrayList<ChatMessage>(count);
         Date date = generateDate();
         for (int i = 0; i < count; i++) {
@@ -615,11 +623,11 @@ public class FakeServerRepository implements ServerRepository {
     private Date generateDate(){
         return new Date(START + random.nextLong() % (START / 10));
     }
-    private Date addRandom(Date start){
+    public Date addRandom(Date start){
         return new Date(start.getTime() + random.nextInt(601000) + 10000);
     }
 
-    private <T> T getRandom(List<T> list) {
+    public <T> T getRandom(List<T> list) {
         return list.get(random.nextInt(list.size()));
     }
 

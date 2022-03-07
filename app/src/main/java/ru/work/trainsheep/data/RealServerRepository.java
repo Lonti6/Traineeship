@@ -65,4 +65,9 @@ public class RealServerRepository implements ServerRepository{
     public void getAdverts(AdvertRequest request, Consumer<Result<AdvertResult>> callback) {
         //TODO
     }
+
+    @Override
+    public boolean isLogin() {
+        return false;
+    }
 }

@@ -19,4 +19,6 @@ public interface ServerRepository {
 
     void getMessages(ChatRequest request, Consumer<Result<ChatResult>> callback);
 
+    boolean isLogin();
+
 }

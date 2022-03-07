@@ -9,14 +9,13 @@
 
     <Button
         android:focusableInTouchMode="true"
-        android:id="@+id/autorizationButton"
+        android:id="@+id/enter"
         style="@style/ButtonStyle"
         android:background="@drawable/q"
         android:layout_width="105pt"
         android:layout_height="30pt"
         android:layout_marginBottom="84dp"
         android:fontFamily="@font/open_sans"
-        android:onClick="authorizationUser"
         android:text="@string/authorization"
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    >
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+>
     <RelativeLayout
-        style="@style/TagsContainer"
-        android:background="@drawable/tag_bg"
-        android:id="@+id/tag_item">
+            style="@style/TagsContainer"
+            android:background="@drawable/tag_bg"
+            android:id="@+id/tag_item">
         <TextView
-            style="@style/AdvertTagText"
-            android:text="Junior" />
+                android:id="@+id/tag"
+                style="@style/AdvertTagText"
+                android:text="Junior"/>
     </RelativeLayout>
 
 </LinearLayout>
