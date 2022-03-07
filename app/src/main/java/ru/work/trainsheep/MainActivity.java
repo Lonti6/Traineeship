@@ -60,34 +60,7 @@ public class MainActivity extends AppCompatActivity {
             Util.setEditTextFocusListener(this, R.id.search_field);
 
 
-            new Drawer()
-                    .withActivity(this)
-                    .withHeader(R.layout.drawer_header)
-                    .addDrawerItems(
-                            new SectionDrawerItem().withName("Взаимодействие"),
-                            new PrimaryDrawerItem().withName("Поиск").withIcon(getDrawable(R.drawable.search_icon)).withIdentifier(1),
-                            new PrimaryDrawerItem().withName("Сообщения").withIcon(getDrawable(R.drawable.ic_message)).withIdentifier(2),
-                            new SectionDrawerItem().withName("Пользователь"),
-                            new SecondaryDrawerItem().withName("Профиль").withIcon(getDrawable(R.drawable.people_icon)).withIdentifier(3),
-                            new SecondaryDrawerItem().withName("Настройки").withIcon(getDrawable(R.drawable.settings_icon)).withIdentifier(4),
-                            new DividerDrawerItem(),
-                            new SecondaryDrawerItem().withName("Наши контакты").withIcon(FontAwesome.Icon.faw_github).withBadge("12+").withIdentifier(5)
-                    )
-                    .withOnDrawerItemClickListener((parent, view, position, id, drawerItem) -> {
-                        if (drawerItem != null) {
-                            if (drawerItem.getIdentifier() == 1) {
-                                Intent intent = new Intent(this, MainActivity.class);
-                                startActivity(intent);
-                            } else if (drawerItem.getIdentifier() == 2) {
-                                Intent intent = new Intent(this, AllChatsActivity.class);
-                                startActivity(intent);
-                            } else if (drawerItem.getIdentifier() == 3) {
-                                Intent intent = new Intent(this, ProfileActivity.class);
-                                startActivity(intent);
-                            }
-                        }
-                    })
-                    .build();
+            LeftPanel.connect(this);
         }
 
 
