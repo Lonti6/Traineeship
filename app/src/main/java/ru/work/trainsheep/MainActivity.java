@@ -1,11 +1,14 @@
 package ru.work.trainsheep;
 
 import android.content.Intent;
+import android.graphics.Rect;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
@@ -48,6 +51,13 @@ public class MainActivity extends AppCompatActivity {
             recyclerView.setHasFixedSize(true);
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
             recyclerView.setAdapter(adapter);
+            recyclerView.addItemDecoration(new SpaceItemDecoration(50));
+            ((ImageButton)findViewById(R.id.listButton)).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ((RecyclerView)findViewById(R.id.rv)).smoothScrollToPosition(0);
+                }
+            });
 
             server.getAdverts(new AdvertRequest(new ArrayList<>(), 1, 10), (result) -> {
                 if (result.isSuccess()) {
