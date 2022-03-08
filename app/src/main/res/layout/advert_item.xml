@@ -55,6 +55,13 @@
             <TableLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+<<<<<<< HEAD
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="Очень срочно ищем разработчика!!расрас
+=======
                     android:layout_below="@id/tags_field"
                     android:background="@drawable/advert_border_color"
                     android:id="@+id/advert_description_layout">
@@ -68,11 +75,22 @@
                         android:layout_marginRight="10pt"
                         android:layout_marginBottom="5pt"
                         android:text="Очень срочно ищем разработчика!!расрас
+>>>>>>> a48097a399d145aa92c45530f5bd17a9218fd37d
 Уметь должен всё: стрелять, варить халву, петь в хоре.
 График плавающий, в идеале - жить на работе, есть и спать тут же, а лучше не спать вообще.
 Опыт от ста миллионов лет и выше."
                         android:id="@+id/advert_description"/>
                 <TextView
+<<<<<<< HEAD
+                    style="@style/GreenText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="6dp"
+                    android:id="@+id/company_name"
+                    android:text="ООО УРГЭУ"/>
+=======
                         style="@style/GreenText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -81,6 +99,7 @@
                         android:layout_marginBottom="3pt"
                         android:id="@+id/company_name"
                         android:text="ООО УРГЭУ"/>
+>>>>>>> a48097a399d145aa92c45530f5bd17a9218fd37d
             </TableLayout>
 
         </RelativeLayout>
