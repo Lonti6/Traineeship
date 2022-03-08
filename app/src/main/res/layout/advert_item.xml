@@ -8,7 +8,8 @@
 
     <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:background="@color/white">
+            android:layout_height="wrap_content"
+            android:background="@color/white">
         <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -16,90 +17,65 @@
                 android:background="@color/white">
 
             <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/advert_name"
-                    android:layout_alignParentTop="true"
-                    android:textSize="30sp"
-                    style="@style/AdvertHeadingText"
-                    android:text="C# Junior разработчик"
-            />
+                android:id="@+id/advert_name"
+                style="@style/AdvertHeadingText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="20dp"
+                android:text="C# Junior разработчик"
+                android:textSize="30sp" />
 
             <org.apmem.tools.layouts.FlowLayout
-                    android:id="@+id/tags_field"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/advert_name">
+                android:id="@+id/tags_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/advert_name"
+                android:layout_marginLeft="15dp">
 
                 <LinearLayout
-                        android:id="@+id/tag_item"
-                        style="@style/TagsContainer"
-                        android:background="@drawable/tag_bg">
+                    android:id="@+id/tag_item"
+                    style="@style/TagsContainer"
+                    android:background="@drawable/tag_bg">
 
                     <TextView
-                            style="@style/AdvertTagText"
-                            android:text="Junior"/>
-                </LinearLayout>
-
-                <LinearLayout
-                        android:id="@+id/r"
-                        style="@style/TagsContainer"
-                        android:background="@drawable/tag_bg">
-
-                    <TextView
-                            style="@style/AdvertTagText"
-                            android:text="Junior"/>
+                        style="@style/AdvertTagText"
+                        android:text="Junior" />
                 </LinearLayout>
             </org.apmem.tools.layouts.FlowLayout>
 
             <TableLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-<<<<<<< HEAD
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginBottom="10dp"
-                    android:text="Очень срочно ищем разработчика!!расрас
-=======
-                    android:layout_below="@id/tags_field"
-                    android:background="@drawable/advert_border_color"
-                    android:id="@+id/advert_description_layout">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tags_field"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/advert_border_color">
 
                 <TextView
-                        style="@style/AdvertDescriptionText"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10pt"
-                        android:layout_marginTop="5pt"
-                        android:layout_marginRight="10pt"
-                        android:layout_marginBottom="5pt"
-                        android:text="Очень срочно ищем разработчика!!расрас
->>>>>>> a48097a399d145aa92c45530f5bd17a9218fd37d
+                    android:id="@+id/advert_description"
+                    style="@style/AdvertDescriptionText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="5dp"
+                    android:text="Очень срочно ищем разработчика!!расрас
 Уметь должен всё: стрелять, варить халву, петь в хоре.
 График плавающий, в идеале - жить на работе, есть и спать тут же, а лучше не спать вообще.
-Опыт от ста миллионов лет и выше."
-                        android:id="@+id/advert_description"/>
+Опыт от ста миллионов лет и выше." />
+
                 <TextView
-<<<<<<< HEAD
+                    android:id="@+id/company_name"
                     style="@style/GreenText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:layout_marginBottom="6dp"
-                    android:id="@+id/company_name"
-                    android:text="ООО УРГЭУ"/>
-=======
-                        style="@style/GreenText"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10pt"
-                        android:layout_marginRight="10pt"
-                        android:layout_marginBottom="3pt"
-                        android:id="@+id/company_name"
-                        android:text="ООО УРГЭУ"/>
->>>>>>> a48097a399d145aa92c45530f5bd17a9218fd37d
+                    android:text="ООО УРГЭУ" />
             </TableLayout>
 
         </RelativeLayout>
