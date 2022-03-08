@@ -1,9 +1,7 @@
 package ru.work.trainsheep;
 
 import android.content.Intent;
-import android.graphics.Rect;
 import android.os.Bundle;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,12 +13,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import com.mikepenz.iconics.typeface.FontAwesome;
-import com.mikepenz.materialdrawer.Drawer;
-import com.mikepenz.materialdrawer.model.DividerDrawerItem;
-import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
-import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
-import com.mikepenz.materialdrawer.model.SectionDrawerItem;
 import lombok.val;
 import org.apmem.tools.layouts.FlowLayout;
 import ru.work.trainsheep.data.ServerRepository;
@@ -33,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static final String IS_LOGIN = "is_login";
     ArrayList<EditText> list = new ArrayList<>();
+    LeftPanel leftPanel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         } else {
             setContentView(R.layout.activity_search);
+            leftPanel = LeftPanel.createFor(this);
 
             val adapter = new ItemAdapter(new ArrayList<>());
             RecyclerView recyclerView = findViewById(R.id.rv);
@@ -54,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
             recyclerView.addItemDecoration(new SpaceItemDecoration(70));
             ((ImageButton)findViewById(R.id.listButton)).setOnClickListener(v ->
                     ((RecyclerView)findViewById(R.id.rv)).smoothScrollToPosition(0));
-            ((ImageButton)findViewById(R.id.user_button)).setOnClickListener(v -> LeftPanel.connect(this, true));
+            ((ImageButton)findViewById(R.id.user_button)).setOnClickListener(v -> leftPanel.open());
 
             server.getAdverts(new AdvertRequest(new ArrayList<>(), 1, 10), (result) -> {
                 if (result.isSuccess()) {
@@ -66,8 +60,6 @@ public class MainActivity extends AppCompatActivity {
 
             Util.setEditTextFocusListener(this, R.id.search_field);
 
-
-            LeftPanel.connect(this, false);
         }
 
 
