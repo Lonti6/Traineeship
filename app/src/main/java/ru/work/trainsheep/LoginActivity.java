@@ -11,19 +11,21 @@ import android.os.Bundle;
 import ru.work.trainsheep.data.ServerRepository;
 import ru.work.trainsheep.data.ServerRepositoryFactory;
 
-public class RegisterActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_autorization);
-        Button button = findViewById(R.id.enter);
-        button.setOnClickListener(this::onClickRegisterButton);
+
+        findViewById(R.id.enter).setOnClickListener(this::checkValidEmailAndPassword);
+        findViewById(R.id.open_register).setOnClickListener(this::openRegistrationActivity);
+
         Util.setEditTextFocusListener(this, R.id.mail_field, R.id.password_field);
     }
 
-    public void onClickRegisterButton(View view){
+    public void checkValidEmailAndPassword(View view){
         ServerRepository server = ServerRepositoryFactory.getInstance();
         EditText mail = findViewById(R.id.mail_field);
         EditText pass = findViewById(R.id.password_field);
@@ -39,5 +41,10 @@ public class RegisterActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    public void openRegistrationActivity(View view){
+        Intent intent = new Intent(getApplicationContext(), RegistrationActivity.class);
+        startActivity(intent);
     }
 }

@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         ServerRepository server = ServerRepositoryFactory.getInstance();
 
         if (!server.isLogin()) {
-            val intent = new Intent(this, RegisterActivity.class);
+            val intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
         } else {
             setContentView(R.layout.activity_search);

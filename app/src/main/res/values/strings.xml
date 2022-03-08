@@ -25,6 +25,7 @@
     <string name="create">Создать</string>
     <string name="find_stage">Найти стажировку</string>
     <string name="find_message">Найти сообщение</string>
+    <string name="error_password">Не верный пароль!</string>
     <string-array name="cat_names">
         <item>Рыжик</item>
         <item>Барсик</item>
