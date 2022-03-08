@@ -30,7 +30,7 @@ public class ProfileActivity extends AppCompatActivity {
             ((TextView) layout.findViewById(R.id.tag)).setText(server.getRandom(server.tags));
             flowLayout.addView(layout);
         }
-        LeftPanel.connect(this);
+        LeftPanel.connect(this, false);
     }
 
 

@@ -1,17 +1,23 @@
 package ru.work.trainsheep;
 
+import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
+import com.mikepenz.materialdrawer.Drawer;
+
 import lombok.NonNull;
 import lombok.val;
 import ru.work.trainsheep.data.FakeServerRepository;
@@ -34,7 +40,7 @@ public class AllChatsActivity extends AppCompatActivity {
 
         val adapter = new Adapter(new ArrayList<>(), this);
         rv.setAdapter(adapter);
-        rv.addItemDecoration(new SpaceItemDecoration(60));
+        rv.addItemDecoration(new SpaceItemDecoration(80));
 
         ServerRepository server = ServerRepositoryFactory.getInstance();
         server.getChats((res) -> {
@@ -43,9 +49,9 @@ public class AllChatsActivity extends AppCompatActivity {
             }
         });
 
-        LeftPanel.connect(this);
+        LeftPanel.connect(this, false);
 
-
+        ((ImageButton)findViewById(R.id.user_button)).setOnClickListener(v -> LeftPanel.connect(this, true));
     }
 
     static class Adapter extends RecyclerView.Adapter<MyViewHolder>{

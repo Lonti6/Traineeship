@@ -22,7 +22,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
                 android:text="C# Junior разработчик"
                 android:textSize="30sp" />
 
@@ -31,13 +32,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/advert_name"
-                android:layout_marginLeft="15dp">
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="15dp">
 
                 <LinearLayout
                     android:id="@+id/tag_item"
                     style="@style/TagsContainer"
                     android:background="@drawable/tag_bg">
-
                     <TextView
                         style="@style/AdvertTagText"
                         android:text="Junior" />
@@ -48,8 +50,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tags_field"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/advert_border_color">
 

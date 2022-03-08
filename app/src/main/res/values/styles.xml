@@ -4,6 +4,7 @@
     <style name="MyTextFieldStyle">
         <item name="android:backgroundTint">@color/white</item>
         <item name="android:fontFamily">@font/open_sans</item>
+        <item name="android:textSize">14sp</item>
     </style>
 
     <style name="ButtonStyle">

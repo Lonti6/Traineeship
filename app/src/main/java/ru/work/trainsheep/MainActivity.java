@@ -52,12 +52,9 @@ public class MainActivity extends AppCompatActivity {
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
             recyclerView.setAdapter(adapter);
             recyclerView.addItemDecoration(new SpaceItemDecoration(70));
-            ((ImageButton)findViewById(R.id.listButton)).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    ((RecyclerView)findViewById(R.id.rv)).smoothScrollToPosition(0);
-                }
-            });
+            ((ImageButton)findViewById(R.id.listButton)).setOnClickListener(v ->
+                    ((RecyclerView)findViewById(R.id.rv)).smoothScrollToPosition(0));
+            ((ImageButton)findViewById(R.id.user_button)).setOnClickListener(v -> LeftPanel.connect(this, true));
 
             server.getAdverts(new AdvertRequest(new ArrayList<>(), 1, 10), (result) -> {
                 if (result.isSuccess()) {
@@ -70,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
             Util.setEditTextFocusListener(this, R.id.search_field);
 
 
-            LeftPanel.connect(this);
+            LeftPanel.connect(this, false);
         }
 
 

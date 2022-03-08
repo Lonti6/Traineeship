@@ -2,6 +2,9 @@ package ru.work.trainsheep;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.util.Log;
+import android.view.View;
+
 import com.mikepenz.iconics.typeface.FontAwesome;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.model.DividerDrawerItem;
@@ -10,9 +13,9 @@ import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.SectionDrawerItem;
 
 public class LeftPanel {
-
-    public static void connect(Activity activity){
-        new Drawer()
+    static Drawer panel;
+    public static void connect(Activity activity, boolean state){
+        panel = new Drawer()
                 .withActivity(activity)
                 .withHeader(R.layout.drawer_header)
                 .addDrawerItems(
@@ -38,7 +41,10 @@ public class LeftPanel {
                             activity.startActivity(intent);
                         }
                     }
-                })
-                .build();
+                });
+        if (state)
+            panel.build().openDrawer();
+        else
+            panel.build().closeDrawer();
     }
 }
