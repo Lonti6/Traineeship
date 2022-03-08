@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
@@ -75,6 +76,15 @@ public class AllChatsActivity extends AppCompatActivity {
             holder.message.setText(chat.minMessage());
             holder.time.setText(format.format(chat.lastMessageDate));
             holder.header.setText(chat.name);
+            if (chat.countUnreadMessages > 0){
+                holder.bg.setBackgroundResource(R.color.bg_message);
+                holder.countMessages.setText("" + chat.countUnreadMessages);
+                holder.countMessages.setVisibility(View.VISIBLE);
+            } else {
+                holder.countMessages.setVisibility(View.GONE);
+                holder.bg.setBackgroundResource(R.color.white);
+            }
+
             Glide.with(context).load(chat.icon).circleCrop().into(holder.icon);
         }
 
@@ -90,6 +100,8 @@ public class AllChatsActivity extends AppCompatActivity {
         TextView message;
         TextView time;
         ImageView icon;
+        ConstraintLayout bg;
+        TextView countMessages;
 
         public MyViewHolder(View view) {
             super(view);
@@ -97,6 +109,8 @@ public class AllChatsActivity extends AppCompatActivity {
             message = view.findViewById(R.id.message);
             time = view.findViewById(R.id.time);
             icon = view.findViewById(R.id.icon);
+            bg = view.findViewById(R.id.bg);
+            countMessages = view.findViewById(R.id.count_messages);
         }
 
     }

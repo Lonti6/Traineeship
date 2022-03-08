@@ -18,10 +18,14 @@ public class ChatBlock {
     String icon;
     int countUnreadMessages;
     Date lastMessageDate;
-
+    public static final int L = 30;
     public String minMessage(){
-        if (lastMessage.length() > 24){
-            return lastMessage.substring(0, 24) + "...";
+
+        if (lastMessage.length() > L){
+            int index = lastMessage.lastIndexOf(' ', L - 1);
+            if (index == -1)
+                return lastMessage.substring(0, L) + "...";
+            return lastMessage.substring(0, index) + "\n" + lastMessage.substring(index + 1, Math.min(index + 1 + L, lastMessage.length())) + "...";
         }
         return lastMessage;
     }

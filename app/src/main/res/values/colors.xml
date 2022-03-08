@@ -11,4 +11,7 @@
     <color name="gray">#959595</color>
     <color name="light_green">#D7E9E9</color>
     <color name="grayTime">#556868</color>
+    <color name="bg_message">#E7EDED</color>
+    <color name="line_grey">#D0D0D0</color>
+
 </resources>
