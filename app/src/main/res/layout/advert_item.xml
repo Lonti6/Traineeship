@@ -63,10 +63,10 @@
                     style="@style/AdvertDescriptionText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10pt"
-                    android:layout_marginTop="5pt"
-                    android:layout_marginRight="10pt"
-                    android:layout_marginBottom="5pt"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="10dp"
                     android:text="Очень срочно ищем разработчика!!расрас
 Уметь должен всё: стрелять, варить халву, петь в хоре.
 График плавающий, в идеале - жить на работе, есть и спать тут же, а лучше не спать вообще.
@@ -76,9 +76,9 @@
                     style="@style/GreenText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10pt"
-                    android:layout_marginRight="10pt"
-                    android:layout_marginBottom="3pt"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="6dp"
                     android:id="@+id/company_name"
                     android:text="ООО УРГЭУ"/>
             </TableLayout>

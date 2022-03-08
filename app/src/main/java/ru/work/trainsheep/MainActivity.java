@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
             recyclerView.setHasFixedSize(true);
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
             recyclerView.setAdapter(adapter);
-            recyclerView.addItemDecoration(new SpaceItemDecoration(50));
+            recyclerView.addItemDecoration(new SpaceItemDecoration(70));
             ((ImageButton)findViewById(R.id.listButton)).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
