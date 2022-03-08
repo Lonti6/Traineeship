@@ -7,80 +7,80 @@
     >
 
     <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="16dp"
-            >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/advert_name"
-                android:layout_alignParentTop="true"
-                android:textSize="30sp"
-                style="@style/AdvertHeadingText"
-                android:text="C# Junior разработчик"
-                />
-
-            <org.apmem.tools.layouts.FlowLayout
-                android:id="@+id/tags_field"
+            android:layout_height="wrap_content" android:background="@color/white">
+        <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/advert_name">
+                android:padding="16dp"
+                android:background="@color/white">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/advert_name"
+                    android:layout_alignParentTop="true"
+                    android:textSize="30sp"
+                    style="@style/AdvertHeadingText"
+                    android:text="C# Junior разработчик"
+            />
+
+            <org.apmem.tools.layouts.FlowLayout
+                    android:id="@+id/tags_field"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/advert_name">
 
                 <LinearLayout
-                    android:id="@+id/tag_item"
-                    style="@style/TagsContainer"
-                    android:background="@drawable/tag_bg">
+                        android:id="@+id/tag_item"
+                        style="@style/TagsContainer"
+                        android:background="@drawable/tag_bg">
 
                     <TextView
-                        style="@style/AdvertTagText"
-                        android:text="Junior" />
+                            style="@style/AdvertTagText"
+                            android:text="Junior"/>
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/r"
-                    style="@style/TagsContainer"
-                    android:background="@drawable/tag_bg">
+                        android:id="@+id/r"
+                        style="@style/TagsContainer"
+                        android:background="@drawable/tag_bg">
 
                     <TextView
-                        style="@style/AdvertTagText"
-                        android:text="Junior" />
+                            style="@style/AdvertTagText"
+                            android:text="Junior"/>
                 </LinearLayout>
             </org.apmem.tools.layouts.FlowLayout>
 
             <TableLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/tags_field"
-                android:background="@drawable/advert_border_color"
-                android:id="@+id/advert_description_layout">
-
-                <TextView
-                    style="@style/AdvertDescriptionText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10pt"
-                    android:layout_marginTop="5pt"
-                    android:layout_marginRight="10pt"
-                    android:layout_marginBottom="5pt"
-                    android:text="Очень срочно ищем разработчика!!расрас
+                    android:layout_below="@id/tags_field"
+                    android:background="@drawable/advert_border_color"
+                    android:id="@+id/advert_description_layout">
+
+                <TextView
+                        style="@style/AdvertDescriptionText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10pt"
+                        android:layout_marginTop="5pt"
+                        android:layout_marginRight="10pt"
+                        android:layout_marginBottom="5pt"
+                        android:text="Очень срочно ищем разработчика!!расрас
 Уметь должен всё: стрелять, варить халву, петь в хоре.
 График плавающий, в идеале - жить на работе, есть и спать тут же, а лучше не спать вообще.
 Опыт от ста миллионов лет и выше."
-                    android:id="@+id/advert_description"/>
+                        android:id="@+id/advert_description"/>
                 <TextView
-                    style="@style/GreenText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10pt"
-                    android:layout_marginRight="10pt"
-                    android:layout_marginBottom="3pt"
-                    android:id="@+id/company_name"
-                    android:text="ООО УРГЭУ"/>
+                        style="@style/GreenText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10pt"
+                        android:layout_marginRight="10pt"
+                        android:layout_marginBottom="3pt"
+                        android:id="@+id/company_name"
+                        android:text="ООО УРГЭУ"/>
             </TableLayout>
 
         </RelativeLayout>
