@@ -1,6 +1,7 @@
 package ru.work.trainsheep;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -84,6 +85,11 @@ public class AllChatsActivity extends AppCompatActivity {
                 holder.countMessages.setVisibility(View.GONE);
                 holder.bg.setBackgroundResource(R.color.white);
             }
+            holder.bg.setOnClickListener((view) -> {
+                val intent = new Intent(view.getContext(), MessagesActivity.class);
+                intent.putExtra("name", chat.name);
+                view.getContext().startActivity(intent);
+            });
 
             Glide.with(context).load(chat.icon).circleCrop().into(holder.icon);
         }
