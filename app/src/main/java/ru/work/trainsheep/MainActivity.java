@@ -57,12 +57,8 @@ public class MainActivity extends AppCompatActivity {
                     result.getException().printStackTrace();
                 }
             });
-
             Util.setEditTextFocusListener(this, R.id.search_field);
-
         }
-
-
     }
 
 

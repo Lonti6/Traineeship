@@ -7,13 +7,13 @@
     android:layout_height="match_parent"
     android:background="#FFFFFF">
 
-<!--    <ImageView-->
-<!--        android:id="@+id/backButton"-->
-<!--        android:layout_width="50dp"-->
-<!--        android:layout_height="50dp"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        app:srcCompat="?attr/actionModeCloseDrawable" />-->
+    <ImageView
+        android:id="@+id/backButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="?attr/actionModeCloseDrawable" />
 
     <TextView
         android:id="@+id/textView3"
@@ -39,9 +39,11 @@
 
     <RelativeLayout
         android:id="@+id/relativeLayout"
-        android:layout_width="360dp"
-        android:layout_height="70dp"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
         android:layout_marginTop="32dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:background="@drawable/border_style_gray"
         android:paddingLeft="5dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -67,16 +69,18 @@
             android:layout_width="45dp"
             android:layout_height="45dp"
             android:layout_marginLeft="3dp"
-            android:layout_marginTop="13dp"
+            android:layout_marginTop="9dp"
             android:padding="3dp"
             android:src="@drawable/people_icon" />
     </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/relativeLayout2"
-        android:layout_width="360dp"
-        android:layout_height="70dp"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
         android:layout_marginTop="24dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:background="@drawable/border_style_gray"
         android:paddingLeft="5dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -102,7 +106,7 @@
             android:layout_width="45dp"
             android:layout_height="45dp"
             android:layout_marginLeft="3dp"
-            android:layout_marginTop="13dp"
+            android:layout_marginTop="8dp"
             android:padding="3dp"
             android:src="@drawable/mail_icon" />
 
@@ -110,9 +114,11 @@
 
     <RelativeLayout
         android:id="@+id/relativeLayout3"
-        android:layout_width="360dp"
-        android:layout_height="70dp"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
         android:layout_marginTop="24dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:background="@drawable/border_style_gray"
         android:paddingLeft="5dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -140,16 +146,18 @@
             android:layout_width="45dp"
             android:layout_height="45dp"
             android:layout_marginLeft="3dp"
-            android:layout_marginTop="13dp"
+            android:layout_marginTop="8dp"
             android:padding="3dp"
             android:src="@drawable/password_icon" />
     </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/relativeLayout4"
-        android:layout_width="360dp"
-        android:layout_height="70dp"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
         android:layout_marginTop="24dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:background="@drawable/border_style_gray"
         android:paddingLeft="5dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -177,7 +185,7 @@
             android:layout_width="45dp"
             android:layout_height="45dp"
             android:layout_marginLeft="3dp"
-            android:layout_marginTop="13dp"
+            android:layout_marginTop="8dp"
             android:padding="3dp"
             android:src="@drawable/password_icon" />
     </RelativeLayout>

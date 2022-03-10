@@ -24,7 +24,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         ((TextView)findViewById(R.id.name_user)).setText(server.getRandom(server.names));
 
-        for (int i = 0; i<((int)(Math.random()*7)+3); i++)
+        for (int i = 0; i<((int)(Math.random()*7)+100); i++)
         {
             LinearLayout layout = (LinearLayout) LayoutInflater.from(this).inflate(R.layout.tag_item, null, false);
             ((TextView) layout.findViewById(R.id.tag)).setText(server.getRandom(server.tags));
