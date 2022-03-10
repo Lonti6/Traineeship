@@ -17,6 +17,7 @@ public class RegistrationActivity extends AppCompatActivity {
         findViewById(R.id.registrationButton).setOnClickListener(this::register);
         findViewById(R.id.backButton).setOnClickListener(v -> {
             Intent intent = new Intent(this, LoginActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
             this.startActivity(intent);
         });
     }

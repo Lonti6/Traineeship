@@ -1,5 +1,6 @@
 package ru.work.trainsheep;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,7 +44,17 @@ public class MessagesActivity extends AppCompatActivity {
         server.getMessages(new ChatRequest(name, 1, 20), (res) -> {
             if(res.isSuccess()){
                 adapter.addAll(res.getResult().getMessages());
+                recyclerView.smoothScrollToPosition(adapter.size() - 1);
             }
+        });
+
+        TextView nameTop = findViewById(R.id.name_top);
+        nameTop.setText(name);
+
+        findViewById(R.id.backButton).setOnClickListener(v -> {
+            Intent intent = new Intent(this, AllChatsActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            this.startActivity(intent);
         });
 
     }
@@ -58,9 +69,13 @@ public class MessagesActivity extends AppCompatActivity {
         }
 
         public void addAll(List<ChatMessage> list){
-            this.list.addAll(list);
-            notifyItemRangeInserted(this.list.size(), list.size());
+            this.list.addAll(0, list);
+            notifyItemRangeInserted(0, list.size());
         }
+        public int size(){
+            return list.size();
+        }
+
 
 
         @Override
