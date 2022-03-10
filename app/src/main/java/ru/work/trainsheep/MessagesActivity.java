@@ -1,9 +1,11 @@
 package ru.work.trainsheep;
 
 import android.content.Intent;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,6 +18,7 @@ import ru.work.trainsheep.data.ServerRepositoryFactory;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -56,7 +59,27 @@ public class MessagesActivity extends AppCompatActivity {
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
             this.startActivity(intent);
         });
+        final EditText text = findViewById(R.id.text_message);
+        text.setImeActionLabel("Send", KeyEvent.KEYCODE_ENTER);
+        text.setOnEditorActionListener((v, actionId, event) -> {
+            if( event != null && event.getKeyCode() == KeyEvent.KEYCODE_ENTER){
+                sendMessage(adapter, recyclerView, text);
+                return true;
+            }
+            return false;
+        });
+        findViewById(R.id.press_send_message).setOnClickListener(v -> {
+            sendMessage(adapter, recyclerView, text);
+        });
 
+    }
+
+    private void sendMessage(Adapter adapter, RecyclerView recyclerView, EditText text) {
+        val mes = new ChatMessage("you", text.getText().toString(), new Date());
+        System.out.println("message");
+        adapter.add(mes);
+        recyclerView.smoothScrollToPosition(adapter.size() - 1);
+        text.setText("");
     }
 
     static class Adapter extends RecyclerView.Adapter<MyHolder>{
@@ -71,6 +94,10 @@ public class MessagesActivity extends AppCompatActivity {
         public void addAll(List<ChatMessage> list){
             this.list.addAll(0, list);
             notifyItemRangeInserted(0, list.size());
+        }
+        public void add(ChatMessage message) {
+            this.list.add(message);
+            notifyItemInserted(list.size() - 1);
         }
         public int size(){
             return list.size();

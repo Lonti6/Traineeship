@@ -28,6 +28,7 @@
     <string name="error_password">Не верный пароль!</string>
     <string name="_20_12">20:12</string>
     <string name="n_jakkk">Какой-то текст \n jakkk</string>
+    <string name="enter_message">Введите сообщение</string>
     <string-array name="cat_names">
         <item>Рыжик</item>
         <item>Барсик</item>
