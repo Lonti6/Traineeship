@@ -24,8 +24,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:text="C# Junior разработчик"
-                android:textSize="30sp" />
+                android:text="C# Junior разработчик" />
 
             <org.apmem.tools.layouts.FlowLayout
                 android:id="@+id/tags_field"
@@ -71,7 +70,7 @@
 
                 <TextView
                     android:id="@+id/company_name"
-                    style="@style/GreenText"
+                    style="@style/GreenBoldText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"

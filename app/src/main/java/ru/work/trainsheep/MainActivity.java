@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
             recyclerView.setHasFixedSize(true);
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
             recyclerView.setAdapter(adapter);
-            recyclerView.addItemDecoration(new SpaceItemDecoration(70));
+            recyclerView.addItemDecoration(new SpaceItemDecoration(90));
             ((ImageButton)findViewById(R.id.listButton)).setOnClickListener(v ->
                     ((RecyclerView)findViewById(R.id.rv)).smoothScrollToPosition(0));
             ((ImageButton)findViewById(R.id.user_button)).setOnClickListener(v -> leftPanel.open());
