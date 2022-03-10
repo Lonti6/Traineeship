@@ -112,6 +112,7 @@ public class MainActivity extends AppCompatActivity {
                 item.tagsField.removeAllViews();
                 item.description.setText(note.getContent());
                 item.companyName.setText(note.getCompany());
+                item.salaryText.setText(SplitSalary((int)(Math.random()*200000))+" ₽/Секунда");
                 item.addTags(note.tags);
             }
         }
@@ -121,7 +122,27 @@ public class MainActivity extends AppCompatActivity {
             return this.notes.size();
         }
 
-
+        public String SplitSalary(int salaryNum)
+        {
+            String salary = String.valueOf(salaryNum);
+            StringBuilder builder = new StringBuilder();
+            int q = 0;
+            for (int i = salary.length()-1; i>-1; i--)
+            {
+                if (q == 2)
+                {
+                    if (i != 0)
+                        builder.insert(0, " "+salary.charAt(i));
+                    q = 0;
+                }
+                else
+                {
+                    builder.insert(0, salary.charAt(i));
+                    q++;
+                }
+            }
+            return builder.toString();
+        }
     }
 
     public static class ItemViewHolder extends RecyclerView.ViewHolder {
@@ -129,6 +150,7 @@ public class MainActivity extends AppCompatActivity {
         FlowLayout tagsField;
         TextView description;
         TextView companyName;
+        TextView salaryText;
 
         public ItemViewHolder(View itemView) {
             super(itemView);
@@ -136,6 +158,7 @@ public class MainActivity extends AppCompatActivity {
             tagsField = itemView.findViewById(R.id.tags_field);
             description = itemView.findViewById(R.id.advert_description);
             companyName = itemView.findViewById(R.id.company_name);
+            salaryText = itemView.findViewById(R.id.salary_text);
         }
 
         public void addTags(List<String> tags) {
