@@ -2,6 +2,7 @@ package ru.work.trainsheep;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
 import lombok.val;
@@ -26,9 +27,8 @@ public class ProfileActivity extends AppCompatActivity {
 
         for (int i = 0; i<((int)(Math.random()*7)+100); i++)
         {
-            LinearLayout layout = (LinearLayout) LayoutInflater.from(this).inflate(R.layout.tag_item, null, false);
+            View layout = LayoutInflater.from(this).inflate(R.layout.tag_item, flowLayout, true);
             ((TextView) layout.findViewById(R.id.tag)).setText(server.getRandom(server.tags));
-            flowLayout.addView(layout);
         }
 
         LeftPanel.createFor(this);

@@ -22,7 +22,7 @@ public class FakeServerRepository implements ServerRepository {
     @Override
     public void register(UserRegistrationData user, Consumer<Result<UserRegistrationData>> callback) {
         sleepAndRun(500, () -> {
-            if (random.nextBoolean()) {
+            if (random.nextDouble() > 0.05) {
                 userData = new UserRegistrationData("SuperUser", "pass");
                 callback.accept(Result.success(userData));
             } else

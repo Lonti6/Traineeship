@@ -40,12 +40,12 @@
             android:layout_height="match_parent"
             android:id="@+id/user_tags_field">
             <RelativeLayout
-                android:id="@+id/tag_item"
-                style="@style/TagsContainer"
-                android:background="@drawable/tag_bg">
+                    android:id="@+id/tag_item"
+                    style="@style/TagsContainer"
+                    android:background="@drawable/tag">
                 <TextView
-                    style="@style/AdvertTagText"
-                    android:text="Senior"/>
+                        style="@style/AdvertTagText"
+                        android:text="Senior"/>
             </RelativeLayout>
         </org.apmem.tools.layouts.FlowLayout>
     </ScrollView>

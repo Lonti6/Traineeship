@@ -112,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
                 item.tagsField.removeAllViews();
                 item.description.setText(note.getContent());
                 item.companyName.setText(note.getCompany());
-                item.salaryText.setText(SplitSalary((int)(Math.random()*200000))+" ₽/Секунда");
+                item.salaryText.setText(splitSalary((int)(Math.random()*200000))+" ₽/Секунда");
                 item.addTags(note.tags);
             }
         }
@@ -122,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
             return this.notes.size();
         }
 
-        public String SplitSalary(int salaryNum)
+        public String splitSalary(int salaryNum)
         {
             String salary = String.valueOf(salaryNum);
             StringBuilder builder = new StringBuilder();
@@ -163,9 +163,8 @@ public class MainActivity extends AppCompatActivity {
 
         public void addTags(List<String> tags) {
             for (String tag : tags) {
-                LinearLayout layout = (LinearLayout) LayoutInflater.from(itemView.getContext()).inflate(R.layout.tag_item, null, false);
+                View layout = LayoutInflater.from(itemView.getContext()).inflate(R.layout.tag_item, tagsField, true);
                 ((TextView) layout.findViewById(R.id.tag)).setText(tag);
-                tagsField.addView(layout);
             }
         }
     }
