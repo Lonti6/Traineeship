@@ -12,6 +12,7 @@
         <item name="backgroundTint">@color/main_green</item>
         <item name="roundPercent">5</item>
         <item name="android:fontFamily">@font/open_sans</item>
+        <item name="android:textColor">@color/white</item>
     </style>
     
     <style name="HeadingText">
