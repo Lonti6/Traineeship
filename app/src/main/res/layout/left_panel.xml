@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <com.mxn.soul.flowingdrawer_core.FlowingDrawer
+        android:id="@+id/drawerlayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        app:edPosition="1"
+        app:edMenuSize="260dp"
+        app:edMenuBackground="@color/main_green">
+
+        <!--content-->
+        <RelativeLayout
+            android:id="@+id/content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            />
+
+        <!--menu-->
+        <com.mxn.soul.flowingdrawer_core.FlowingMenuLayout
+            android:id="@+id/menulayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/main_green">
+
+            <!--Контент-->
+            <LinearLayout
+                android:id="@+id/id_container_menu"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/main_green"
+                android:orientation="vertical">
+                <!--Начало шапки-->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:cardCornerRadius="50dp"
+                        android:layout_centerInParent="true"
+                        android:id="@+id/container_icon_user">
+                        <ImageButton
+                            android:id="@+id/icon_user"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:src="@drawable/header"/>
+                    </androidx.cardview.widget.CardView>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Дмитрий Башкирцев"
+                        android:id="@+id/name_user"
+                        android:textColor="@color/white"
+                        android:layout_marginTop="140dp"
+                        android:layout_centerHorizontal="true"
+                        style="@style/SomeSmallWhiteText"
+                        android:textSize="20dp"/>
+                </RelativeLayout>
+                <!--Конец шапки-->
+
+                <!--Линия-->
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@drawable/white_rect"
+                    android:layout_marginTop="15dp"/>
+
+                <!--Начало подпункта "стажировки"-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/stages"
+                        style="@style/SmallGrayTextLeftPanel"/>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:id="@+id/search_line">
+                        <ImageView
+                            style="@style/LeftPanelIcon"
+                            android:background="@drawable/search_icon_white"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Поиск"
+                            style="@style/SmallWhiteTextLeftPanel"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:id="@+id/favorite_line">
+                        <ImageView
+                            style="@style/LeftPanelIcon"
+                            android:background="@drawable/favorite_ic_white"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Избранное"
+                            style="@style/SmallWhiteTextLeftPanel"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+                <!--Конец подпункта "стажировки"-->
+
+                <!--Линия-->
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@drawable/white_rect"
+                    android:layout_marginTop="15dp"/>
+
+                <!--Начало подпункта "важное"-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Важное"
+                        style="@style/SmallGrayTextLeftPanel"/>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:id="@+id/message_line">
+                        <ImageView
+                            style="@style/LeftPanelIcon"
+                            android:background="@drawable/message_icon_white"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Сообщения"
+                            style="@style/SmallWhiteTextLeftPanel"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:id="@+id/profile_line">
+                        <ImageView
+                            style="@style/LeftPanelIcon"
+                            android:background="@drawable/profile_icon_white"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Профиль"
+                            style="@style/SmallWhiteTextLeftPanel"/>
+                    </LinearLayout>
+                </LinearLayout>
+                <!--Конец подпункта "стажировки"-->
+
+                <!--Линия-->
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@drawable/white_rect"
+                    android:layout_marginTop="15dp"/>
+                <!--Начало подпункта "прочее"-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:id="@+id/settings_line">
+                        <ImageView
+                            style="@style/LeftPanelIcon"
+                            android:background="@drawable/settings_icon_white"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Настройки"
+                            style="@style/SmallWhiteTextLeftPanel"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:id="@+id/contacts_line">
+                        <ImageView
+                            style="@style/LeftPanelIcon"
+                            android:background="@drawable/git_icon_white"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Наши контакты"
+                            style="@style/SmallWhiteTextLeftPanel"/>
+                    </LinearLayout>
+                </LinearLayout>
+                <!--Конец подпункта "прочее"-->
+            </LinearLayout>
+        </com.mxn.soul.flowingdrawer_core.FlowingMenuLayout>
+
+    </com.mxn.soul.flowingdrawer_core.FlowingDrawer>
+
+</LinearLayout>

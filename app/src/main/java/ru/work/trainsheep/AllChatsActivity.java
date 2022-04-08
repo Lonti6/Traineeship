@@ -2,10 +2,12 @@ package ru.work.trainsheep;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
@@ -44,9 +46,40 @@ public class AllChatsActivity extends AppCompatActivity {
             }
         });
 
-        val leftPanel = LeftPanel.createFor(this);
+        prepareLeftPanel();
+        //val leftPanel = LeftPanel.createFor(this);
 
-        findViewById(R.id.user_button).setOnClickListener(v -> leftPanel.open());
+        //findViewById(R.id.user_button).setOnClickListener(v -> leftPanel.open());
+    }
+
+    public void prepareLeftPanel()
+    {
+        ((LinearLayout)findViewById(R.id.search_line)).setOnClickListener(v -> {
+            Intent intent = new Intent(this, MainActivity.class);
+            this.startActivity(intent);
+        });
+
+        ((LinearLayout)findViewById(R.id.favorite_line)).setOnClickListener(v -> {
+            Log.e("Поля \"Избранное\" ещё не существует", "Поля \"Избранное\" ещё не существует");
+        });
+
+        ((LinearLayout)findViewById(R.id.message_line)).setOnClickListener(v -> {
+            Intent intent = new Intent(this, AllChatsActivity.class);
+            this.startActivity(intent);
+        });
+
+        ((LinearLayout)findViewById(R.id.profile_line)).setOnClickListener(v -> {
+            Intent intent = new Intent(this, ProfileActivity.class);
+            this.startActivity(intent);
+        });
+
+        ((LinearLayout)findViewById(R.id.settings_line)).setOnClickListener(v -> {
+            Log.e("Поля \"Настройки\" ещё не существует", "Поля \"Настройки\" ещё не существует");
+        });
+
+        ((LinearLayout)findViewById(R.id.settings_line)).setOnClickListener(v -> {
+            Log.e("Поля \"Наши контакты\" ещё не существует", "Поля \"Наши контакты\" ещё не существует");
+        });
     }
 
     static class Adapter extends RecyclerView.Adapter<MyViewHolder>{

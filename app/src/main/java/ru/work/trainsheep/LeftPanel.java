@@ -18,7 +18,7 @@ public class LeftPanel {
     }
 
     public static LeftPanel createFor(Activity activity){
-        return new LeftPanel(new Drawer()
+        LeftPanel l = new LeftPanel(new Drawer()
                 .withActivity(activity)
                 .withHeader(R.layout.drawer_header)
                 .addDrawerItems(
@@ -44,7 +44,9 @@ public class LeftPanel {
                             activity.startActivity(intent);
                         }
                     }
-                }).build());
+                }
+                ).build());
+        return l;
     }
 
     public void open(){

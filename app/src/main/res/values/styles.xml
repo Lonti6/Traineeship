@@ -27,12 +27,25 @@
         <item name="android:fontFamily">@font/open_sans</item>
     </style>
 
+    <style name="SmallGrayText">
+        <item name="android:textColor">#b0b0b0</item>
+        <item name="android:textSize">10dp</item>
+        <item name="android:fontFamily">@font/open_sans</item>
+    </style>
+
+    <style name="SmallGrayTextLeftPanel">
+        <item name="android:textColor">#b0b0b0</item>
+        <item name="android:textSize">10dp</item>
+        <item name="android:fontFamily">@font/open_sans</item>
+        <item name="android:layout_marginLeft">5dp</item>
+        <item name="android:layout_marginTop">5dp</item>
+    </style>
+
     <style name="GreenBoldText">
         <item name="android:textColor">@color/main_green</item>
         <item name="android:textSize">14dp</item>
         <item name="android:fontFamily">@font/open_sans</item>
         <item name="android:textStyle">bold</item>
-
     </style>
 
     <style name="BigWhiteText">
@@ -42,9 +55,22 @@
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="SmallWhiteText">
+    <style name="SomeSmallWhiteText">
         <item name="android:textColor">@color/white</item>
         <item name="android:textSize">16dp</item>
+        <item name="android:fontFamily">@font/open_sans</item>
+    </style>
+
+    <style name="SmallWhiteText">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">14dp</item>
+        <item name="android:fontFamily">@font/open_sans</item>
+    </style>
+
+    <style name="SmallWhiteTextLeftPanel">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">14dp</item>
+        <item name="android:layout_gravity">center_vertical</item>
         <item name="android:fontFamily">@font/open_sans</item>
     </style>
 
@@ -102,5 +128,12 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginLeft">5pt</item>
         <item name="android:layout_marginBottom">5pt</item>
+    </style>
+
+    <style name="LeftPanelIcon">
+        <item name="android:layout_width">25dp</item>
+        <item name="android:layout_height">25dp</item>
+        <item name="android:layout_marginLeft">30dp</item>
+        <item name="android:layout_marginRight">10dp</item>
     </style>
 </resources>
