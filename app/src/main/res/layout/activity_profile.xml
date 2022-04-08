@@ -6,27 +6,38 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white">
-    <ImageView
+
+    <com.mxn.soul.flowingdrawer_core.FlowingDrawer
+        android:id="@+id/drawerlayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        app:edPosition="1"
+        app:edMenuSize="260dp"
+        app:edMenuBackground="@color/main_green">
+    <RelativeLayout
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
             android:id="@+id/user_icon"
             android:layout_width="180dp"
             android:layout_height="180dp"
             android:layout_marginTop="20dp"
             android:src="@drawable/ic_profile"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            android:layout_centerHorizontal="true"/>
 
-    <TextView
+        <TextView
             android:id="@+id/name_user"
             style="@style/AdvertHeadingText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="230dp"
             android:text="Дмитрий Башкирцев"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/user_icon"
-            tools:ignore="MissingConstraints"/>
+            android:layout_centerHorizontal="true"
+            tools:ignore="MissingConstraints" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -64,6 +75,16 @@
         android:layout_gravity="top"
         android:gravity="top"
         android:background="@drawable/advert_border_color"/>
-
-    <include layout="@layout/left_panel"/>
+    </RelativeLayout>
+        <!--Конец контента сраницы-->
+        <!--Содержимое панели начало-->
+        <com.mxn.soul.flowingdrawer_core.FlowingMenuLayout
+            android:id="@+id/menulayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/main_green">
+            <include layout="@layout/left_panel"/>
+        </com.mxn.soul.flowingdrawer_core.FlowingMenuLayout>
+        <!--Содержимое панели конец-->
+    </com.mxn.soul.flowingdrawer_core.FlowingDrawer>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
             });
             Util.setEditTextFocusListener(this, R.id.search_field);
             mDrawer = (FlowingDrawer) findViewById(R.id.drawerlayout);
-            mDrawer.setTouchMode(ElasticDrawer.TOUCH_MODE_BEZEL);
+            mDrawer.setTouchMode(ElasticDrawer.TOUCH_MODE_FULLSCREEN);
             mDrawer.setOnDrawerStateChangeListener(new ElasticDrawer.OnDrawerStateChangeListener() {
                 @Override
                 public void onDrawerStateChange(int oldState, int newState) {
