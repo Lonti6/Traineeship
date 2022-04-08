@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -15,6 +16,8 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
+import com.mxn.soul.flowingdrawer_core.ElasticDrawer;
+import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
 
 import lombok.NonNull;
 import lombok.val;
@@ -26,6 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AllChatsActivity extends AppCompatActivity {
+    FlowingDrawer mDrawer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,40 +50,14 @@ public class AllChatsActivity extends AppCompatActivity {
             }
         });
 
-        prepareLeftPanel();
-        //val leftPanel = LeftPanel.createFor(this);
+        Util.prepareLeftPanel(this);
 
-        //findViewById(R.id.user_button).setOnClickListener(v -> leftPanel.open());
-    }
+        mDrawer = (FlowingDrawer) findViewById(R.id.drawerlayout);
+        mDrawer.setTouchMode(ElasticDrawer.TOUCH_MODE_FULLSCREEN);
+        Util.prepareLeftPanel(this);
+        ((ImageButton)findViewById(R.id.user_button)).setOnClickListener(v -> mDrawer.openMenu(true));
 
-    public void prepareLeftPanel()
-    {
-        ((LinearLayout)findViewById(R.id.search_line)).setOnClickListener(v -> {
-            Intent intent = new Intent(this, MainActivity.class);
-            this.startActivity(intent);
-        });
-
-        ((LinearLayout)findViewById(R.id.favorite_line)).setOnClickListener(v -> {
-            Log.e("Поля \"Избранное\" ещё не существует", "Поля \"Избранное\" ещё не существует");
-        });
-
-        ((LinearLayout)findViewById(R.id.message_line)).setOnClickListener(v -> {
-            Intent intent = new Intent(this, AllChatsActivity.class);
-            this.startActivity(intent);
-        });
-
-        ((LinearLayout)findViewById(R.id.profile_line)).setOnClickListener(v -> {
-            Intent intent = new Intent(this, ProfileActivity.class);
-            this.startActivity(intent);
-        });
-
-        ((LinearLayout)findViewById(R.id.settings_line)).setOnClickListener(v -> {
-            Log.e("Поля \"Настройки\" ещё не существует", "Поля \"Настройки\" ещё не существует");
-        });
-
-        ((LinearLayout)findViewById(R.id.settings_line)).setOnClickListener(v -> {
-            Log.e("Поля \"Наши контакты\" ещё не существует", "Поля \"Наши контакты\" ещё не существует");
-        });
+        findViewById(R.id.user_button).setOnClickListener(v -> mDrawer.openMenu(true));
     }
 
     static class Adapter extends RecyclerView.Adapter<MyViewHolder>{

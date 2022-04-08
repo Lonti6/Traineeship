@@ -41,7 +41,6 @@ public class MainActivity extends AppCompatActivity {
     public static final String IS_LOGIN = "is_login";
     ArrayList<EditText> list = new ArrayList<>();
     FlowingDrawer mDrawer;
-    //LeftPanel leftPanel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,7 +52,6 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         } else {
             setContentView(R.layout.activity_search);
-            //leftPanel = LeftPanel.createFor(this);
 
             val adapter = new ItemAdapter(new ArrayList<>());
             RecyclerView recyclerView = findViewById(R.id.rv);
@@ -63,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
             recyclerView.addItemDecoration(new SpaceItemDecoration(90));
             ((ImageButton)findViewById(R.id.listButton)).setOnClickListener(v ->
                     ((RecyclerView)findViewById(R.id.rv)).smoothScrollToPosition(0));
-            //((ImageButton)findViewById(R.id.user_button)).setOnClickListener(v -> leftPanel.open());
+
 
             server.getAdverts(new AdvertRequest(new ArrayList<>(), 1, 10), (result) -> {
                 if (result.isSuccess()) {
@@ -75,51 +73,9 @@ public class MainActivity extends AppCompatActivity {
             Util.setEditTextFocusListener(this, R.id.search_field);
             mDrawer = (FlowingDrawer) findViewById(R.id.drawerlayout);
             mDrawer.setTouchMode(ElasticDrawer.TOUCH_MODE_FULLSCREEN);
-            mDrawer.setOnDrawerStateChangeListener(new ElasticDrawer.OnDrawerStateChangeListener() {
-                @Override
-                public void onDrawerStateChange(int oldState, int newState) {
-                    if (newState == ElasticDrawer.STATE_CLOSED) {
-                        Log.i("MainActivity", "Drawer STATE_CLOSED");
-                    }
-                }
-
-                @Override
-                public void onDrawerSlide(float openRatio, int offsetPixels) {
-                    Log.i("MainActivity", "openRatio=" + openRatio + " ,offsetPixels=" + offsetPixels);
-                }
-            });
-            prepareLeftPanel();
+            Util.prepareLeftPanel(this);
+            ((ImageButton)findViewById(R.id.user_button)).setOnClickListener(v -> mDrawer.openMenu(true));
         }
-    }
-
-    public void prepareLeftPanel()
-    {
-        ((LinearLayout)findViewById(R.id.search_line)).setOnClickListener(v -> {
-            Intent intent = new Intent(this, MainActivity.class);
-            this.startActivity(intent);
-        });
-
-        ((LinearLayout)findViewById(R.id.favorite_line)).setOnClickListener(v -> {
-            Log.e("Поля \"Избранное\" ещё не существует", "Поля \"Избранное\" ещё не существует");
-        });
-
-        ((LinearLayout)findViewById(R.id.message_line)).setOnClickListener(v -> {
-            Intent intent = new Intent(this, AllChatsActivity.class);
-            this.startActivity(intent);
-        });
-
-        ((LinearLayout)findViewById(R.id.profile_line)).setOnClickListener(v -> {
-            Intent intent = new Intent(this, ProfileActivity.class);
-            this.startActivity(intent);
-        });
-
-        ((LinearLayout)findViewById(R.id.settings_line)).setOnClickListener(v -> {
-            Log.e("Поля \"Настройки\" ещё не существует", "Поля \"Настройки\" ещё не существует");
-        });
-
-        ((LinearLayout)findViewById(R.id.settings_line)).setOnClickListener(v -> {
-            Log.e("Поля \"Наши контакты\" ещё не существует", "Поля \"Наши контакты\" ещё не существует");
-        });
     }
 
     static final class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {

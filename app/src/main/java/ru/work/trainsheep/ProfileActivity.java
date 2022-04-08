@@ -7,12 +7,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
+
 import lombok.val;
 import org.apmem.tools.layouts.FlowLayout;
 import ru.work.trainsheep.data.FakeServerRepository;
 
 public class ProfileActivity extends AppCompatActivity {
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,37 +35,7 @@ public class ProfileActivity extends AppCompatActivity {
             ((TextView) layout.findViewById(R.id.tag)).setText(server.getRandom(server.tags));
         }
 
-        //LeftPanel.createFor(this);
-        prepareLeftPanel();
+        Util.prepareLeftPanel(this);
     }
 
-    public void prepareLeftPanel()
-    {
-        ((LinearLayout)findViewById(R.id.search_line)).setOnClickListener(v -> {
-            Intent intent = new Intent(this, MainActivity.class);
-            this.startActivity(intent);
-        });
-
-        ((LinearLayout)findViewById(R.id.favorite_line)).setOnClickListener(v -> {
-            Log.e("Поля \"Избранное\" ещё не существует", "Поля \"Избранное\" ещё не существует");
-        });
-
-        ((LinearLayout)findViewById(R.id.message_line)).setOnClickListener(v -> {
-            Intent intent = new Intent(this, AllChatsActivity.class);
-            this.startActivity(intent);
-        });
-
-        ((LinearLayout)findViewById(R.id.profile_line)).setOnClickListener(v -> {
-            Intent intent = new Intent(this, ProfileActivity.class);
-            this.startActivity(intent);
-        });
-
-        ((LinearLayout)findViewById(R.id.settings_line)).setOnClickListener(v -> {
-            Log.e("Поля \"Настройки\" ещё не существует", "Поля \"Настройки\" ещё не существует");
-        });
-
-        ((LinearLayout)findViewById(R.id.settings_line)).setOnClickListener(v -> {
-            Log.e("Поля \"Наши контакты\" ещё не существует", "Поля \"Наши контакты\" ещё не существует");
-        });
-    }
 }
