@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<androidx.coordinatorlayout.widget.CoordinatorLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white">
@@ -16,6 +15,9 @@
         app:edPosition="1"
         app:edMenuSize="260dp"
         app:edMenuBackground="@color/main_green">
+        <ScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
     <RelativeLayout
         android:id="@+id/content"
         android:layout_width="match_parent"
@@ -25,11 +27,11 @@
             android:id="@+id/user_button"
             android:layout_width="60dp"
             android:layout_height="60dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="20dp"
-            android:background="@drawable/ic_zaticha"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"/>
+            android:background="@drawable/ic_zaticha" />
 
         <RelativeLayout
             android:layout_width="125dp"
@@ -66,7 +68,9 @@
             </androidx.cardview.widget.CardView>
         </RelativeLayout>
 
+
         <TextView
+            android:id="@+id/name_user_profile"
             style="@style/AdvertHeadingText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -75,7 +79,36 @@
             android:layout_marginTop="20dp"
             android:text="Дмитрий Башкирцев" />
 
+        <Button
+            android:id="@+id/tags_but"
+            android:layout_width="160dp"
+            android:layout_height="60dp"
+            android:layout_below="@+id/name_user_profile"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/open_sans"
+            android:text="Текущие теги"
+            android:textColor="@color/white"
+            android:textSize="14dp"
+            android:textStyle="normal" />
+
+        <Button
+            android:id="@+id/stages_but"
+            android:layout_width="160dp"
+            android:layout_height="60dp"
+            android:layout_below="@+id/name_user_profile"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="20dp"
+            android:layout_toEndOf="@+id/tags_but"
+            android:fontFamily="@font/open_sans"
+            android:text="Старые стажировки"
+            android:textColor="@color/white"
+            android:textSize="14dp"
+            android:textStyle="normal" />
+
     </RelativeLayout>
+    </ScrollView>
         <!--Конец контента сраницы-->
         <!--Содержимое панели начало-->
         <com.mxn.soul.flowingdrawer_core.FlowingMenuLayout
@@ -87,4 +120,5 @@
         </com.mxn.soul.flowingdrawer_core.FlowingMenuLayout>
         <!--Содержимое панели конец-->
     </com.mxn.soul.flowingdrawer_core.FlowingDrawer>
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <include layout="@layout/bottom_sheet"/>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
