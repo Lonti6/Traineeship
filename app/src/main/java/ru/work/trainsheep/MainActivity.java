@@ -64,11 +64,7 @@ public class MainActivity extends AppCompatActivity {
 
 
             server.getAdverts(new AdvertRequest(new ArrayList<>(), 1, 10), (result) -> {
-                if (result.isSuccess()) {
-                    adapter.addAll(result.getResult().getNotes());
-                } else {
-                    result.getException().printStackTrace();
-                }
+                    adapter.addAll(result.getNotes());
             });
             Util.setEditTextFocusListener(this, R.id.search_field);
             mDrawer = (FlowingDrawer) findViewById(R.id.drawerlayout);

@@ -13,41 +13,54 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
-public class FakeServerRepository implements ServerRepository {
+public class FakeServerRepository extends ServerRepository {
     Random random = new Random();
     ExecutorService executor = Executors.newSingleThreadExecutor();
     Handler handler = new Handler(Looper.getMainLooper());
     UserRegistrationData userData = null;
 
     @Override
-    public void register(UserRegistrationData user, Consumer<Result<UserRegistrationData>> callback) {
+    public void register(UserRegistrationData user, Consumer<UserRegistrationData> callbackSuccess, Consumer<Exception> callbackFailure) {
         sleepAndRun(500, () -> {
             if (random.nextDouble() > 0.05) {
                 userData = new UserRegistrationData("SuperUser", "pass");
-                callback.accept(Result.success(userData));
+                callbackSuccess.accept(userData);
             } else
-                callback.accept(Result.error(new Exception("no correct username or login")));
+                callbackFailure.accept(new Exception("no correct username or login"));
         });
     }
 
     @Override
-    public void login(UserRegistrationData user, Consumer<Result<UserRegistrationData>> callback) {
-        register(user, callback);
+    public void login(UserRegistrationData user, Consumer<UserRegistrationData> callbackSuccess, Consumer<Exception> callbackFailure) {
+        register(user, callbackSuccess, callbackFailure);
     }
 
-
     @Override
-    public void getAdverts(AdvertRequest request, Consumer<Result<AdvertResult>> callback) {
+    public void getAdverts(AdvertRequest request, Consumer<AdvertResult> callbackSuccess, Consumer<Exception> callbackFailure) {
         sleepAndRun(500, () -> createNotes(request), (notes) -> {
             if (random.nextInt(100) > 2) {
-                callback.accept(Result.success(new AdvertResult(
+                callbackSuccess.accept(new AdvertResult(
                         notes, request.getPage(),
                         random.nextInt(100) + request.getPage() * request.getCountNotesOnPage(),
-                        request.getCountNotesOnPage())));
+                        request.getCountNotesOnPage()));
             } else
-                callback.accept(Result.error(new Exception("internal error try again")));
+                callbackFailure.accept(new Exception("internal error try again"));
         });
     }
+
+    @Override
+    public void getChats(Consumer<List<ChatBlock>> callbackSuccess, Consumer<Exception> callbackFailure) {
+        sleepAndRun(500, this::generateChats, callbackSuccess);
+    }
+
+    @Override
+    public void getMessages(ChatRequest request, Consumer<ChatResult> callbackSuccess, Consumer<Exception> callbackFailure) {
+        sleepAndRun(500,
+                () -> generateChatResult(request.getPage(), request.getCountMessageOnPage(), request.getName()),
+                callbackSuccess);
+    }
+
+
 
     @NonNull
     private ArrayList<Note> createNotes(AdvertRequest request) {
@@ -58,16 +71,6 @@ public class FakeServerRepository implements ServerRepository {
         return notes;
     }
 
-    @Override
-    public void getChats(Consumer<Result<List<ChatBlock>>> callback) {
-        sleepAndRun(500, this::generateChats, (chats) -> callback.accept(Result.success(chats)));
-    }
-
-    @Override
-    public void getMessages(ChatRequest request, Consumer<Result<ChatResult>> callback) {
-        sleepAndRun(500, () -> generateChatResult(request.getPage(), request.getCountMessageOnPage(), request.getName()),
-                (res) -> callback.accept(Result.success(res)));
-    }
 
     @Override
     public boolean isLogin() {

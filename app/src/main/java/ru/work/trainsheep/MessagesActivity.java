@@ -1,6 +1,7 @@
 package ru.work.trainsheep;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
-import android.os.Bundle;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -45,10 +45,8 @@ public class MessagesActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
         server.getMessages(new ChatRequest(name, 1, 20), (res) -> {
-            if(res.isSuccess()){
-                adapter.addAll(res.getResult().getMessages());
-                recyclerView.smoothScrollToPosition(adapter.size() - 1);
-            }
+            adapter.addAll(res.getMessages());
+            recyclerView.smoothScrollToPosition(adapter.size() - 1);
         });
 
         TextView nameTop = findViewById(R.id.name_top);
@@ -62,7 +60,7 @@ public class MessagesActivity extends AppCompatActivity {
         final EditText text = findViewById(R.id.text_message);
         text.setImeActionLabel("Send", KeyEvent.KEYCODE_ENTER);
         text.setOnEditorActionListener((v, actionId, event) -> {
-            if( event != null && event.getKeyCode() == KeyEvent.KEYCODE_ENTER){
+            if (event != null && event.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
                 sendMessage(adapter, recyclerView, text);
                 return true;
             }
@@ -82,7 +80,7 @@ public class MessagesActivity extends AppCompatActivity {
         text.setText("");
     }
 
-    static class Adapter extends RecyclerView.Adapter<MyHolder>{
+    static class Adapter extends RecyclerView.Adapter<MyHolder> {
         List<ChatMessage> list;
         String name;
 
@@ -91,18 +89,19 @@ public class MessagesActivity extends AppCompatActivity {
             this.list = new ArrayList<>();
         }
 
-        public void addAll(List<ChatMessage> list){
+        public void addAll(List<ChatMessage> list) {
             this.list.addAll(0, list);
             notifyItemRangeInserted(0, list.size());
         }
+
         public void add(ChatMessage message) {
             this.list.add(message);
             notifyItemInserted(list.size() - 1);
         }
-        public int size(){
+
+        public int size() {
             return list.size();
         }
-
 
 
         @Override
@@ -116,10 +115,10 @@ public class MessagesActivity extends AppCompatActivity {
         public void onBindViewHolder(MyHolder holder, int position) {
             val message = list.get(position);
             val params = (ConstraintLayout.LayoutParams) holder.bg.getLayoutParams();
-            if(Objects.equals(message.getSender(), name)) {
+            if (Objects.equals(message.getSender(), name)) {
                 params.horizontalBias = 0;
                 holder.bg.setBackgroundResource(R.drawable.left_message);
-            } else  {
+            } else {
                 params.horizontalBias = 1;
                 holder.bg.setBackgroundResource(R.drawable.right_message);
             }
@@ -135,7 +134,7 @@ public class MessagesActivity extends AppCompatActivity {
         }
     }
 
-    static class MyHolder extends RecyclerView.ViewHolder{
+    static class MyHolder extends RecyclerView.ViewHolder {
 
 
         TextView message;

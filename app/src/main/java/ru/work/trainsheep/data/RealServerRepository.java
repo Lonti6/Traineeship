@@ -14,7 +14,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.function.Consumer;
 
-public class RealServerRepository implements ServerRepository{
+public class RealServerRepository extends ServerRepository{
 
     Retrofit retrofit = new Retrofit.Builder()
             .baseUrl("http://localhost:8080/")
@@ -27,7 +27,7 @@ public class RealServerRepository implements ServerRepository{
     UserRegistrationData saveUserData = null;
 
     @Override
-    public void register(UserRegistrationData user, Consumer<Result<UserRegistrationData>> callback) {
+    public void register(UserRegistrationData user, Consumer<UserRegistrationData> callbackSuccess, Consumer<Exception> callbackFailure) {
         executor.execute(() -> {
             val call = api.register(user);
             try {
@@ -35,36 +35,38 @@ public class RealServerRepository implements ServerRepository{
                 val loginResult = response.body();
                 if (loginResult != null && Objects.equals(loginResult.getStatus(), "ok")) {
                     saveUserData = loginResult.getUser();
-                    handler.post(() -> callback.accept(Result.success(saveUserData)));
+                    handler.post(() -> callbackSuccess.accept(saveUserData));
                 } else
-                    handler.post(() -> callback.accept(Result.error(new Exception("status fail"))));
+                    handler.post(() -> callbackFailure.accept(new Exception("status fail")));
 
             } catch (IOException e) {
-                handler.post(() -> callback.accept(Result.error(e)));
+                handler.post(() -> callbackFailure.accept(e));
                 System.err.println(e.getMessage());
             }
         });
     }
 
     @Override
-    public void getChats(Consumer<Result<List<ChatBlock>>> callback) {
+    public void login(UserRegistrationData user, Consumer<UserRegistrationData> callbackSuccess, Consumer<Exception> callbackFailure) {
 
     }
 
     @Override
-    public void getMessages(ChatRequest request, Consumer<Result<ChatResult>> callback) {
+    public void getAdverts(AdvertRequest request, Consumer<AdvertResult> callbackSuccess, Consumer<Exception> callbackFailure) {
 
     }
 
     @Override
-    public void login(UserRegistrationData user, Consumer<Result<UserRegistrationData>> callback) {
-        //TODO
+    public void getChats(Consumer<List<ChatBlock>> callbackSuccess, Consumer<Exception> callbackFailure) {
+
     }
 
     @Override
-    public void getAdverts(AdvertRequest request, Consumer<Result<AdvertResult>> callback) {
-        //TODO
+    public void getMessages(ChatRequest request, Consumer<ChatResult> callbackSuccess, Consumer<Exception> callbackFailure) {
+
     }
+
+
 
     @Override
     public boolean isLogin() {

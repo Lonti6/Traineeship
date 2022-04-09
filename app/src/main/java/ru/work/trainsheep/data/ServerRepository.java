@@ -7,18 +7,40 @@ import ru.work.trainsheep.*;
 import java.util.List;
 import java.util.function.Consumer;
 
-public interface ServerRepository {
+public abstract class ServerRepository {
 
-    void register(UserRegistrationData user, Consumer<Result<UserRegistrationData>> callback);
+    public abstract void register(UserRegistrationData user, Consumer<UserRegistrationData> callbackSuccess, Consumer<Exception> callbackFailure);
 
-    void login(UserRegistrationData user, Consumer<Result<UserRegistrationData>> callback);
+    public abstract void login(UserRegistrationData user, Consumer<UserRegistrationData> callbackSuccess, Consumer<Exception> callbackFailure);
 
-    void getAdverts(AdvertRequest request, Consumer<Result<AdvertResult>> callback);
+    public abstract void getAdverts(AdvertRequest request, Consumer<AdvertResult> callbackSuccess, Consumer<Exception> callbackFailure);
 
-    void getChats(Consumer<Result<List<ChatBlock>>> callback);
+    public abstract void getChats(Consumer<List<ChatBlock>>callbackSuccess, Consumer<Exception> callbackFailure);
 
-    void getMessages(ChatRequest request, Consumer<Result<ChatResult>> callback);
+    public abstract void getMessages(ChatRequest request, Consumer<ChatResult> callbackSuccess, Consumer<Exception> callbackFailure);
 
-    boolean isLogin();
+    public abstract boolean isLogin();
+
+
+    public void register(UserRegistrationData user, Consumer<UserRegistrationData> callbackSuccess){
+        register(user, callbackSuccess, Throwable::printStackTrace);
+    }
+
+    public void login(UserRegistrationData user, Consumer<UserRegistrationData> callbackSuccess){
+        login(user, callbackSuccess, Throwable::printStackTrace);
+    }
+
+    public void getAdverts(AdvertRequest request, Consumer<AdvertResult> callbackSuccess){
+        getAdverts(request, callbackSuccess, Throwable::printStackTrace);
+    }
+
+    public void getChats(Consumer<List<ChatBlock>>callbackSuccess){
+        getChats(callbackSuccess, Throwable::printStackTrace);
+    }
+
+    public void getMessages(ChatRequest request, Consumer<ChatResult> callbackSuccess){
+        getMessages(request, callbackSuccess, Throwable::printStackTrace);
+    }
+
 
 }

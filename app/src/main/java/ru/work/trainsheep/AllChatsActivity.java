@@ -44,11 +44,7 @@ public class AllChatsActivity extends AppCompatActivity {
         rv.addItemDecoration(new SpaceItemDecoration(80));
 
         ServerRepository server = ServerRepositoryFactory.getInstance();
-        server.getChats((res) -> {
-            if(res.isSuccess()){
-                adapter.addAll(res.getResult());
-            }
-        });
+        server.getChats(adapter::addAll);
 
         Util.prepareLeftPanel(this);
 
