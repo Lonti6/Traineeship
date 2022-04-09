@@ -23,11 +23,11 @@
                         app:cardCornerRadius="50dp"
                         android:layout_centerInParent="true"
                         android:id="@+id/container_icon_user">
-                        <ImageButton
+                        <ImageView
                             android:id="@+id/icon_user"
                             android:layout_width="100dp"
                             android:layout_height="100dp"
-                            android:src="@drawable/header"/>
+                            android:background="@drawable/header"/>
                     </androidx.cardview.widget.CardView>
                     <TextView
                         android:layout_width="wrap_content"
