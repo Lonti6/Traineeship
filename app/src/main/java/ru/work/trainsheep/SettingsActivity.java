@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDialogFragment;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -28,6 +30,8 @@ import io.ghyeok.stickyswitch.widget.StickySwitch;
 
 public class SettingsActivity extends AppCompatActivity {
     FlowingDrawer mDrawer;
+    FragmentManager manager;
+    MyDialogFragment myDialogFragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,14 +63,27 @@ public class SettingsActivity extends AppCompatActivity {
                 stickySwitchVacansy.setSliderBackgroundColor(getColor(R.color.line_grey));
         });
 
-        findViewById(R.id.delete_text).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FragmentManager manager = getSupportFragmentManager();
-                MyDialogFragment myDialogFragment = new MyDialogFragment();
-                myDialogFragment.show(manager, "Frag");
-            }
+        manager = getSupportFragmentManager();
+        myDialogFragment = new MyDialogFragment();
+
+        /*findViewById(R.id.delete_field).setOnClickListener(v -> Log.e(v.getClass()+"","Ещё не умеем удалять"));
+        findViewById(R.id.cancel_field).setOnClickListener(v -> myDialogFragment.setCancelable(true));*/
+
+        findViewById(R.id.delete_text).setOnClickListener(v ->
+        {
+            myDialogFragment.show(manager, "Frag");
+            //manager.findFragmentById(R.id.cancel_field);
         });
+    }
+
+    public void cancelButEvent(View view)
+    {
+        myDialogFragment.getDialog().cancel();
+    }
+
+    public void deleteButEvent(View view)
+    {
+        Log.e(view.getClass()+"", "Мы ещё не умеем удалять аккаунт");
     }
 
     private void initToggleBut(StickySwitch stickySwitch)
@@ -89,7 +106,6 @@ public class SettingsActivity extends AppCompatActivity {
         public void onStart() {
             super.onStart();
             int width = (int)(getResources().getDisplayMetrics().widthPixels*0.85);
-            int heights = (int)(getResources().getDisplayMetrics().heightPixels*0.4);
             getDialog().getWindow().setLayout(width, ViewGroup.LayoutParams.WRAP_CONTENT);
         }
     }
