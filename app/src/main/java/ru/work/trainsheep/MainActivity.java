@@ -145,11 +145,9 @@ public class MainActivity extends AppCompatActivity {
 
         public void addTags(List<String> tags) {
             for (String tag : tags) {
-                LayoutInflater.from(itemView.getContext()).inflate(R.layout.tag_item, tagsField, true);
-                //((TextView) layout.findViewById(R.id.tag)).setText(tag);
-                ((TextView)(((ConstraintLayout)((FlowLayout)tagsField)
-                        .getChildAt(((FlowLayout)tagsField).getChildCount()-1))
-                        .getChildAt(0))).setText(tag);
+                val view = LayoutInflater.from(itemView.getContext()).inflate(R.layout.tag_item, tagsField, false);
+                tagsField.addView(view);
+                ((TextView) view.findViewById(R.id.tag)).setText(tag);
             }
         }
     }
