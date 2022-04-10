@@ -44,10 +44,12 @@ public class Util {
         });
 
         ((LinearLayout)activity.findViewById(R.id.settings_line)).setOnClickListener(v -> {
-            Log.e("Поля \"Настройки\" ещё не существует", "Поля \"Настройки\" ещё не существует");
+            Log.e("________________________________________", "_____________________________________________");
+            Intent intent = new Intent(activity, SettingsActivity.class);
+            activity.startActivity(intent);
         });
 
-        ((LinearLayout)activity.findViewById(R.id.settings_line)).setOnClickListener(v -> {
+        ((LinearLayout)activity.findViewById(R.id.contacts_line)).setOnClickListener(v -> {
             Log.e("Поля \"Наши контакты\" ещё не существует", "Поля \"Наши контакты\" ещё не существует");
         });
     }

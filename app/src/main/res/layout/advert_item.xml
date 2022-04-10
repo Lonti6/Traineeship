@@ -46,49 +46,50 @@
             </org.apmem.tools.layouts.FlowLayout>
 
             <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tags_field"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/advert_border_color">
+
+                <TextView
+                    android:id="@+id/company_name"
+                    style="@style/GreenBoldText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/tags_field"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:layout_marginBottom="10dp"
-                    android:background="@drawable/advert_border_color" android:layout_marginTop="10dp">
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="11dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="6dp"
+                    android:text="ООО УРГЭУ" />
 
                 <TextView
-                        android:id="@+id/company_name"
-                        style="@style/GreenBoldText"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp"
-                        android:layout_marginBottom="6dp"
-                        android:layout_marginTop="11dp"
-                        android:text="ООО УРГЭУ"/>
-
-                <TextView
-                        android:id="@+id/advert_description"
-                        style="@style/AdvertDescriptionText"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginRight="13dp"
-                        android:layout_marginBottom="12dp"
-                        android:text="Очень срочно ищем разработчика!!расрас
+                    android:id="@+id/advert_description"
+                    style="@style/AdvertDescriptionText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="13dp"
+                    android:layout_marginBottom="12dp"
+                    android:text="Очень срочно ищем разработчика!!расрас
 Уметь должен всё: стрелять, варить халву, петь в хоре.
 График плавающий, в идеале - жить на работе, есть и спать тут же, а лучше не спать вообще.
-Опыт от ста миллионов лет и выше."/>
+Опыт от ста миллионов лет и выше." />
 
                 <TextView
-                        android:id="@+id/salary_text"
-                        style="@style/GreenBoldText"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp"
-                        android:layout_marginBottom="6dp"
-                        android:layout_marginTop="6dp"
-                        android:text="ООО УРГЭУ"/>
+                    android:id="@+id/salary_text"
+                    style="@style/GreenBoldText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="6dp"
+                    android:text="ООО УРГЭУ" />
 
             </TableLayout>
 

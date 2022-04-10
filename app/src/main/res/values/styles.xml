@@ -85,6 +85,13 @@
         <item name="android:textSize">16dp</item>
         <item name="android:fontFamily">@font/open_sans</item>
     </style>
+
+    <style name="SomeStandartText">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">14dp</item>
+        <item name="android:fontFamily">@font/open_sans</item>
+    </style>
+
     <style name="HeaderMessageText">
         <item name="android:textColor">@color/black</item>
         <item name="android:textSize">18dp</item>
