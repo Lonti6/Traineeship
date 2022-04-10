@@ -1,8 +1,6 @@
 package ru.work.trainsheep;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.*;
@@ -10,18 +8,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.mxn.soul.flowingdrawer_core.ElasticDrawer;
 import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
 
-import lombok.val;
 import org.apmem.tools.layouts.FlowLayout;
-import ru.work.trainsheep.data.FakeServerRepository;
 
 public class ProfileActivity extends AppCompatActivity {
     FlowingDrawer mDrawer;
     FlowLayout flowLayout;
-    FakeServerRepository server;
+    DataGenerator generator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +25,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         //FlowLayout flowLayout = findViewById(R.id.user_tags_field);
         //flowLayout.removeAllViews();
-        server = new FakeServerRepository();
+        generator = new DataGenerator();
 
 
         //((TextView)findViewById(R.id.name_user)).setText(server.getRandom(server.names));
@@ -89,7 +84,7 @@ public class ProfileActivity extends AppCompatActivity {
                 for (int i = 0; i<((int)(Math.random()*20)+2); i++)
                 {
                     LayoutInflater.from(ProfileActivity.this).inflate(R.layout.tag_item, flowLayout, true);
-                    ((TextView)((ConstraintLayout)(flowLayout.getChildAt(flowLayout.getChildCount()-1))).getChildAt(0)).setText(server.getRandom(server.tags));
+                    ((TextView)((ConstraintLayout)(flowLayout.getChildAt(flowLayout.getChildCount()-1))).getChildAt(0)).setText(generator.getRandom(generator.tags));
                 }
                 return;
             }
@@ -100,7 +95,7 @@ public class ProfileActivity extends AppCompatActivity {
                 for (int i = 0; i<((int)(Math.random()*20)+2); i++)
                 {
                     LayoutInflater.from(ProfileActivity.this).inflate(R.layout.stage_title, flowLayout, true);
-                    ((TextView)((LinearLayout)(flowLayout.getChildAt(flowLayout.getChildCount()-1))).getChildAt(0)).setText(server.getRandom(server.companies));
+                    ((TextView)((LinearLayout)(flowLayout.getChildAt(flowLayout.getChildCount()-1))).getChildAt(0)).setText(generator.getRandom(generator.companies));
                 }
                 BottomSheetBehavior.from(findViewById(R.id.sheet)).setPeekHeight(600, true);
             }

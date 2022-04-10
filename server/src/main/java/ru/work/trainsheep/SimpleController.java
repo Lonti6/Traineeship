@@ -14,8 +14,10 @@ import ru.work.trainsheep.entity.User;
 import ru.work.trainsheep.entity.Role;
 import ru.work.trainsheep.entity.UserPasswords;
 import ru.work.trainsheep.repository.UserPasswordRepository;
+import ru.work.trainsheep.send.AdvertRequest;
 import ru.work.trainsheep.send.UserData;
 import ru.work.trainsheep.send.UserRegistrationData;
+import ru.work.trainsheep.service.NotesService;
 import ru.work.trainsheep.service.UserService;
 
 
@@ -29,6 +31,9 @@ public class SimpleController {
     private UserPasswordRepository userPasswordRepository;
 
     @Autowired
+    private NotesService notesService;
+
+    @Autowired
     PasswordEncoder passwordEncoder;
 
     @GetMapping("/")
@@ -40,6 +45,16 @@ public class SimpleController {
     @GetMapping("/user")
     public String user(Model model) {
         model.addAttribute("status", "ok");
+        return "jsonTemplate";
+    }
+
+    @PostMapping("/adverts")
+    public String adverts(Model model, @RequestBody AdvertRequest advertRequest) {
+        if (advertRequest != null) {
+            val result = notesService.getAdvertResult(advertRequest);
+            model.addAttribute("status", "ok");
+            model.addAttribute("result", result);
+        }
         return "jsonTemplate";
     }
 
