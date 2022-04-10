@@ -26,6 +26,7 @@ import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
 import org.jetbrains.annotations.NotNull;
 
 import io.ghyeok.stickyswitch.widget.StickySwitch;
+import io.ghyeok.stickyswitch.widget.StickySwitch.Direction;
 
 
 public class SettingsActivity extends AppCompatActivity {
@@ -47,7 +48,7 @@ public class SettingsActivity extends AppCompatActivity {
         initToggleBut(stickySwitchMessage);
 
         stickySwitchMessage.setOnSelectedChangeListener((direction, s) -> {
-            if (direction.name().equals("RIGHT"))
+            if (direction.equals(Direction.RIGHT))
                 stickySwitchMessage.setSliderBackgroundColor(getColor(R.color.light_green));
             if (direction.name().equals("LEFT"))
                 stickySwitchMessage.setSliderBackgroundColor(getColor(R.color.line_grey));
@@ -66,25 +67,10 @@ public class SettingsActivity extends AppCompatActivity {
         manager = getSupportFragmentManager();
         myDialogFragment = new MyDialogFragment();
 
-        /*findViewById(R.id.delete_field).setOnClickListener(v -> Log.e(v.getClass()+"","Ещё не умеем удалять"));
-        findViewById(R.id.cancel_field).setOnClickListener(v -> myDialogFragment.setCancelable(true));*/
-
         findViewById(R.id.delete_text).setOnClickListener(v ->
-        {
-            myDialogFragment.show(manager, "Frag");
-            //manager.findFragmentById(R.id.cancel_field);
-        });
+                myDialogFragment.show(manager, "Frag"));
     }
 
-    public void cancelButEvent(View view)
-    {
-        myDialogFragment.getDialog().cancel();
-    }
-
-    public void deleteButEvent(View view)
-    {
-        Log.e(view.getClass()+"", "Мы ещё не умеем удалять аккаунт");
-    }
 
     private void initToggleBut(StickySwitch stickySwitch)
     {
@@ -99,7 +85,11 @@ public class SettingsActivity extends AppCompatActivity {
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             getDialog().getWindow().setBackgroundDrawableResource(R.drawable.round_corner);
-            return inflater.inflate(R.layout.dialog_layout, container, false);
+            View view = inflater.inflate(R.layout.dialog_layout, container, true);
+            view.findViewById(R.id.delete_field).setOnClickListener(v1 -> Log.e(v1.getClass()+"","Ещё не умеем удалять"));
+            view.findViewById(R.id.cancel_field).setOnClickListener(v1 -> getDialog().cancel());
+
+            return view;
         }
 
         @Override

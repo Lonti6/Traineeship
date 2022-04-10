@@ -21,7 +21,7 @@
         android:layout_marginLeft="30dp"
         android:layout_marginTop="25dp"
         android:layout_marginBottom="20dp"
-        android:onClick="deleteButEvent"
+
         app:cardCornerRadius="60dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -44,7 +44,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginTop="25dp"
         android:layout_marginBottom="20dp"
-        android:onClick="cancelButEvent"
+
         app:cardCornerRadius="60dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/delete_field"

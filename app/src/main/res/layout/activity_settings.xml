@@ -51,15 +51,15 @@
                 android:orientation="horizontal"
                 android:layout_marginLeft="30dp">
                 <io.ghyeok.stickyswitch.widget.StickySwitch
-                    android:id="@+id/sticky_switch_vacansy"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:ss_animationDuration="600"
-                    app:ss_animationType="line"
-                    app:ss_iconPadding="15dp"
-                    app:ss_iconSize="8dp"
-                    app:ss_sliderBackgroundColor="@color/light_green"
-                    app:ss_switchColor="@color/main_green"/>
+                        android:id="@+id/sticky_switch_vacansy"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:ss_animationDuration="600"
+                        app:ss_animationType="line"
+                        app:ss_iconPadding="15dp"
+                        app:ss_iconSize="8dp"
+                        app:ss_sliderBackgroundColor="@color/light_green"
+                        app:ss_switchColor="@color/main_green"/>
 
                 <TextView
                     style="@style/SomeStandartText"
