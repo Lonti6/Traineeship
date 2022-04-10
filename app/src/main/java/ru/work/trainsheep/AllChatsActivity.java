@@ -81,7 +81,7 @@ public class AllChatsActivity extends AppCompatActivity {
         public void onBindViewHolder(AllChatsActivity.MyViewHolder holder, int position) {
             val chat = list.get(position);
             holder.message.setText(chat.minMessage());
-            holder.time.setText(format.format(chat.getLastMessage()));
+            holder.time.setText(format.format(chat.getLastMessageDate()));
             holder.header.setText(chat.getName());
             if (chat.getCountUnreadMessages() > 0){
                 holder.bg.setBackgroundResource(R.color.bg_message);
