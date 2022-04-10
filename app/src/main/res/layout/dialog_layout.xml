@@ -1,0 +1,60 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/main_green">
+
+    <TextView
+        android:id="@+id/headerWin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Точно удалить???"
+        style="@style/BigWhiteText"
+        tools:ignore="MissingConstraints"
+        android:textAlignment="center" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/delete_field"
+        android:layout_width="110dp"
+        android:layout_height="45dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="25dp"
+        app:cardCornerRadius="60dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/headerWin"
+        tools:ignore="MissingConstraints"
+        android:layout_marginBottom="20dp">
+
+        <TextView
+            style="@style/StandartText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Удалить"
+            android:textAlignment="center" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cancel_field"
+        android:layout_width="110dp"
+        android:layout_height="45dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="25dp"
+        app:cardCornerRadius="60dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/delete_field"
+        app:layout_constraintTop_toBottomOf="@+id/headerWin"
+        tools:ignore="MissingConstraints"
+        android:layout_marginBottom="20dp">
+
+        <TextView
+            style="@style/StandartText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Отмена"
+            android:textAlignment="center" />
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

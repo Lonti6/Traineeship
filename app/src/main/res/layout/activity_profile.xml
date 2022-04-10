@@ -146,5 +146,5 @@
         </com.mxn.soul.flowingdrawer_core.FlowingMenuLayout>
         <!--Содержимое панели конец-->
     </com.mxn.soul.flowingdrawer_core.FlowingDrawer>
-    <include layout="@layout/bottom_sheet"/>
+    <!--<include layout="@layout/bottom_sheet"/>-->
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
