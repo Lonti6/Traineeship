@@ -27,21 +27,22 @@
                 android:text="C# Junior разработчик" />
 
             <org.apmem.tools.layouts.FlowLayout
-                    android:id="@+id/tags_field"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/advert_name"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="15dp">
+                android:id="@+id/tags_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/advert_name"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="15dp">
 
                 <LinearLayout
-                        android:id="@+id/tag_item"
-                        style="@style/TagsContainer"
-                        android:background="@drawable/tag">
+                    android:id="@+id/tag_item"
+                    style="@style/TagsContainer"
+                    android:background="@drawable/tag">
+
                     <TextView
-                            style="@style/AdvertTagText"
-                            android:text="Junior"/>
+                        style="@style/AdvertTagText"
+                        android:text="Junior" />
                 </LinearLayout>
             </org.apmem.tools.layouts.FlowLayout>
 

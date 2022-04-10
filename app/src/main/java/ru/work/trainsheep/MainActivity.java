@@ -2,6 +2,7 @@ package ru.work.trainsheep;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -143,8 +145,11 @@ public class MainActivity extends AppCompatActivity {
 
         public void addTags(List<String> tags) {
             for (String tag : tags) {
-                View layout = LayoutInflater.from(itemView.getContext()).inflate(R.layout.tag_item, tagsField, true);
-                ((TextView) layout.findViewById(R.id.tag)).setText(tag);
+                LayoutInflater.from(itemView.getContext()).inflate(R.layout.tag_item, tagsField, true);
+                //((TextView) layout.findViewById(R.id.tag)).setText(tag);
+                ((TextView)(((ConstraintLayout)((FlowLayout)tagsField)
+                        .getChildAt(((FlowLayout)tagsField).getChildCount()-1))
+                        .getChildAt(0))).setText(tag);
             }
         }
     }
