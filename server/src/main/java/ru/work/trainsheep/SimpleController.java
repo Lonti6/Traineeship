@@ -14,9 +14,9 @@ import ru.work.trainsheep.entity.User;
 import ru.work.trainsheep.entity.Role;
 import ru.work.trainsheep.entity.UserPasswords;
 import ru.work.trainsheep.repository.UserPasswordRepository;
+import ru.work.trainsheep.send.UserData;
+import ru.work.trainsheep.send.UserRegistrationData;
 import ru.work.trainsheep.service.UserService;
-
-import javax.servlet.http.HttpSession;
 
 
 @Controller

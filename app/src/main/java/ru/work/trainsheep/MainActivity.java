@@ -1,30 +1,18 @@
 package ru.work.trainsheep;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.heinrichreimersoftware.materialdrawer.DrawerActivity;
-import com.heinrichreimersoftware.materialdrawer.structure.DrawerItem;
-import com.heinrichreimersoftware.materialdrawer.structure.DrawerProfile;
-import com.heinrichreimersoftware.materialdrawer.theme.DrawerTheme;
 import com.mxn.soul.flowingdrawer_core.ElasticDrawer;
 import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
 
@@ -32,6 +20,8 @@ import lombok.val;
 import org.apmem.tools.layouts.FlowLayout;
 import ru.work.trainsheep.data.ServerRepository;
 import ru.work.trainsheep.data.ServerRepositoryFactory;
+import ru.work.trainsheep.send.AdvertRequest;
+import ru.work.trainsheep.send.Note;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -123,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
                 item.description.setText(note.getContent());
                 item.companyName.setText(note.getCompany());
                 item.salaryText.setText(note.getSalary());
-                item.addTags(note.tags);
+                item.addTags(note.getTags());
             }
         }
 

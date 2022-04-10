@@ -5,7 +5,7 @@ import android.os.Looper;
 import lombok.val;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-import ru.work.trainsheep.*;
+import ru.work.trainsheep.send.*;
 
 import java.io.IOException;
 import java.util.List;

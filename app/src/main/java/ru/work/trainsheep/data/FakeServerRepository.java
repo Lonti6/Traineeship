@@ -4,7 +4,7 @@ import android.os.Handler;
 import android.os.Looper;
 import lombok.NonNull;
 import lombok.val;
-import ru.work.trainsheep.*;
+import ru.work.trainsheep.send.*;
 
 import java.util.*;
 import java.util.concurrent.ExecutorService;

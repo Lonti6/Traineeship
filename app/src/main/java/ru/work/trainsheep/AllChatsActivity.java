@@ -2,13 +2,11 @@ package ru.work.trainsheep;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
@@ -23,6 +21,7 @@ import lombok.NonNull;
 import lombok.val;
 import ru.work.trainsheep.data.ServerRepository;
 import ru.work.trainsheep.data.ServerRepositoryFactory;
+import ru.work.trainsheep.send.ChatBlock;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -82,11 +81,11 @@ public class AllChatsActivity extends AppCompatActivity {
         public void onBindViewHolder(AllChatsActivity.MyViewHolder holder, int position) {
             val chat = list.get(position);
             holder.message.setText(chat.minMessage());
-            holder.time.setText(format.format(chat.lastMessageDate));
-            holder.header.setText(chat.name);
-            if (chat.countUnreadMessages > 0){
+            holder.time.setText(format.format(chat.getLastMessage()));
+            holder.header.setText(chat.getName());
+            if (chat.getCountUnreadMessages() > 0){
                 holder.bg.setBackgroundResource(R.color.bg_message);
-                holder.countMessages.setText("" + chat.countUnreadMessages);
+                holder.countMessages.setText("" + chat.getCountUnreadMessages());
                 holder.countMessages.setVisibility(View.VISIBLE);
             } else {
                 holder.countMessages.setVisibility(View.GONE);
@@ -94,11 +93,11 @@ public class AllChatsActivity extends AppCompatActivity {
             }
             holder.bg.setOnClickListener((view) -> {
                 val intent = new Intent(view.getContext(), MessagesActivity.class);
-                intent.putExtra("name", chat.name);
+                intent.putExtra("name", chat.getName());
                 view.getContext().startActivity(intent);
             });
 
-            Glide.with(context).load(chat.icon).circleCrop().into(holder.icon);
+            Glide.with(context).load(chat.getIcon()).circleCrop().into(holder.icon);
         }
 
         @Override

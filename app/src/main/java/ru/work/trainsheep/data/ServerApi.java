@@ -3,8 +3,8 @@ package ru.work.trainsheep.data;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.POST;
-import ru.work.trainsheep.LoginResult;
-import ru.work.trainsheep.UserRegistrationData;
+import ru.work.trainsheep.send.LoginResult;
+import ru.work.trainsheep.send.UserRegistrationData;
 
 public interface ServerApi {
     @POST("/register")

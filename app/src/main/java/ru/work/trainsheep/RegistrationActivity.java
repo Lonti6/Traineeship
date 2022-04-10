@@ -7,6 +7,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import lombok.val;
 import ru.work.trainsheep.data.ServerRepositoryFactory;
+import ru.work.trainsheep.send.UserRegistrationData;
 
 public class RegistrationActivity extends AppCompatActivity {
 
