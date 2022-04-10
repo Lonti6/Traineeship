@@ -1,4 +1,4 @@
-package ru.work.trainsheep;
+package ru.work.trainsheep.send;
 
 
 import lombok.AllArgsConstructor;
@@ -14,11 +14,13 @@ public class Note {
     String header;
     String content;
     String company;
+    String salary;
 
-    public Note(String header, String content, String company, String... tags) {
+    public Note(String header, String content, String company, String salary, String... tags) {
         this.header = header;
         this.content = content;
         this.company = company;
+        this.salary = salary;
         this.tags = Arrays.asList(tags);
     }
 

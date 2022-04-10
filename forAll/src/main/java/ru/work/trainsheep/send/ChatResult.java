@@ -1,4 +1,4 @@
-package ru.work.trainsheep;
+package ru.work.trainsheep.send;
 
 import lombok.*;
 

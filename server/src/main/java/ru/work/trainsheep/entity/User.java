@@ -1,7 +1,7 @@
 package ru.work.trainsheep.entity;
 
 import lombok.*;
-import ru.work.trainsheep.UserData;
+import ru.work.trainsheep.send.UserData;
 
 import javax.persistence.*;
 import java.util.Date;

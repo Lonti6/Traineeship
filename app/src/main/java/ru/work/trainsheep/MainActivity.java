@@ -1,30 +1,18 @@
 package ru.work.trainsheep;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.heinrichreimersoftware.materialdrawer.DrawerActivity;
-import com.heinrichreimersoftware.materialdrawer.structure.DrawerItem;
-import com.heinrichreimersoftware.materialdrawer.structure.DrawerProfile;
-import com.heinrichreimersoftware.materialdrawer.theme.DrawerTheme;
 import com.mxn.soul.flowingdrawer_core.ElasticDrawer;
 import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
 
@@ -32,14 +20,14 @@ import lombok.val;
 import org.apmem.tools.layouts.FlowLayout;
 import ru.work.trainsheep.data.ServerRepository;
 import ru.work.trainsheep.data.ServerRepositoryFactory;
+import ru.work.trainsheep.send.AdvertRequest;
+import ru.work.trainsheep.send.Note;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static final String IS_LOGIN = "is_login";
-    ArrayList<EditText> list = new ArrayList<>();
     FlowingDrawer mDrawer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,8 +112,8 @@ public class MainActivity extends AppCompatActivity {
                 item.tagsField.removeAllViews();
                 item.description.setText(note.getContent());
                 item.companyName.setText(note.getCompany());
-                item.salaryText.setText(splitSalary((int)(Math.random()*200000))+" ₽/Секунда");
-                item.addTags(note.tags);
+                item.salaryText.setText(note.getSalary());
+                item.addTags(note.getTags());
             }
         }
 
@@ -134,27 +122,7 @@ public class MainActivity extends AppCompatActivity {
             return this.notes.size();
         }
 
-        public String splitSalary(int salaryNum)
-        {
-            String salary = String.valueOf(salaryNum);
-            StringBuilder builder = new StringBuilder();
-            int q = 0;
-            for (int i = salary.length()-1; i>-1; i--)
-            {
-                if (q == 2)
-                {
-                    if (i != 0)
-                        builder.insert(0, " "+salary.charAt(i));
-                    q = 0;
-                }
-                else
-                {
-                    builder.insert(0, salary.charAt(i));
-                    q++;
-                }
-            }
-            return builder.toString();
-        }
+
     }
 
     public static class ItemViewHolder extends RecyclerView.ViewHolder {

@@ -5,7 +5,7 @@ import android.os.Looper;
 import lombok.val;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-import ru.work.trainsheep.*;
+import ru.work.trainsheep.send.*;
 
 import java.io.IOException;
 import java.util.List;
@@ -17,7 +17,7 @@ import java.util.function.Consumer;
 public class RealServerRepository extends ServerRepository{
 
     Retrofit retrofit = new Retrofit.Builder()
-            .baseUrl("http://localhost:8080/")
+            .baseUrl("http://192.168.2.140:8080/")
             .addConverterFactory(GsonConverterFactory.create())
             .build();
     ServerApi api = retrofit.create(ServerApi.class);
@@ -53,7 +53,21 @@ public class RealServerRepository extends ServerRepository{
 
     @Override
     public void getAdverts(AdvertRequest request, Consumer<AdvertResult> callbackSuccess, Consumer<Exception> callbackFailure) {
+        executor.execute(() -> {
+            val call = api.adverts(request);
+            try {
+                val response = call.execute();
+                val result = response.body();
+                if (result != null && Objects.equals(result.getStatus(), "ok")) {
+                    handler.post(() -> callbackSuccess.accept(result.getResult()));
+                } else
+                    handler.post(() -> callbackFailure.accept(new Exception("status fail")));
 
+            } catch (IOException e) {
+                handler.post(() -> callbackFailure.accept(e));
+                System.err.println(e.getMessage());
+            }
+        });
     }
 
     @Override
@@ -70,6 +84,7 @@ public class RealServerRepository extends ServerRepository{
 
     @Override
     public boolean isLogin() {
-        return false;
+        return saveUserData != null;
     }
 }
+

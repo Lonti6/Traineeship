@@ -1,0 +1,11 @@
+POST /adverts HTTP/1.1
+Host: localhost:8080
+User-Agent: client android
+Accept: application/json
+Content-Type: application/json
+
+{
+  "tags": [],
+  "page": 1,
+  "countNotesOnPage": 15
+}

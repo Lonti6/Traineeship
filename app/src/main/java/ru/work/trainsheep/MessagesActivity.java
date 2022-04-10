@@ -15,6 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import lombok.NonNull;
 import lombok.val;
 import ru.work.trainsheep.data.ServerRepositoryFactory;
+import ru.work.trainsheep.send.ChatMessage;
+import ru.work.trainsheep.send.ChatRequest;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

@@ -1,8 +1,6 @@
 package ru.work.trainsheep.data;
 
-import android.app.Activity;
-import android.content.Context;
-import ru.work.trainsheep.*;
+import ru.work.trainsheep.send.*;
 
 import java.util.List;
 import java.util.function.Consumer;
