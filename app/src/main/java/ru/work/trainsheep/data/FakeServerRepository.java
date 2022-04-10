@@ -536,7 +536,11 @@ public class FakeServerRepository extends ServerRepository {
             ntags.add(getRandom(this.tags));
         }
 
-        return new Note(new ArrayList<>(ntags.stream().sorted().collect(Collectors.toList())), getRandom(headers), getRandom(contents), getRandom(companies));
+        return new Note(new ArrayList<>(ntags.stream().sorted().collect(Collectors.toList())),
+                getRandom(headers),
+                getRandom(contents),
+                getRandom(companies),
+                splitSalary((int)(Math.random()*200000))+" ₽/Секунда");
     }
     public ChatBlock generateChatBlock(){
         return ChatBlock.builder()
@@ -577,6 +581,28 @@ public class FakeServerRepository extends ServerRepository {
                 .icon(getRandom(icons))
                 .build();
     }
+    private String splitSalary(int salaryNum)
+    {
+        String salary = String.valueOf(salaryNum);
+        StringBuilder builder = new StringBuilder();
+        int q = 0;
+        for (int i = salary.length()-1; i>-1; i--)
+        {
+            if (q == 2)
+            {
+                if (i != 0)
+                    builder.insert(0, " "+salary.charAt(i));
+                q = 0;
+            }
+            else
+            {
+                builder.insert(0, salary.charAt(i));
+                q++;
+            }
+        }
+        return builder.toString();
+    }
+
     private static long START = 946080000000L;
     private Date generateDate(){
         return new Date(START + random.nextLong() % (START / 10));

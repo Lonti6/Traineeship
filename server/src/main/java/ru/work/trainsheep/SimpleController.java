@@ -60,7 +60,7 @@ public class SimpleController {
             val userPass = new UserPasswords(user.getEmail(), passwordEncoder.encode(user.getPassword()), Role.USER.toString());
             userPasswordRepository.save(userPass);
             model.addAttribute("status", "ok");
-            model.addAttribute("user", user);
+            model.addAttribute("user", new UserRegistrationData(user.getEmail(), null));
         }
         else
             model.addAttribute("status", "fail");
