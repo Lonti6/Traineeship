@@ -142,9 +142,11 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/main_green">
+
             <include layout="@layout/left_panel"/>
+
         </com.mxn.soul.flowingdrawer_core.FlowingMenuLayout>
         <!--Содержимое панели конец-->
     </com.mxn.soul.flowingdrawer_core.FlowingDrawer>
-    <include layout="@layout/bottom_sheet"/>
+    <!--<include layout="@layout/bottom_sheet"/>-->
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
