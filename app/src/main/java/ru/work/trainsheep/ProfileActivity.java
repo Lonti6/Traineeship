@@ -15,33 +15,30 @@ import org.apmem.tools.layouts.FlowLayout;
 import ru.work.trainsheep.data.FakeServerRepository;
 
 public class ProfileActivity extends AppCompatActivity {
-    FlowingDrawer mDrawer;
+
     FlowLayout flowLayout;
     DataGenerator generator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile);
-
+        setContentView(R.layout.activity_left_panel);
+        final FlowingDrawer mDrawer = Util.connectActivityLayout(this, R.layout.activity_profile);
+        findViewById(R.id.user_button).setOnClickListener(v -> mDrawer.openMenu(true));
         generator = new DataGenerator();
 
-        mDrawer = (FlowingDrawer) findViewById(R.id.drawerlayout);
-        mDrawer.setTouchMode(ElasticDrawer.TOUCH_MODE_FULLSCREEN);
-        Util.prepareLeftPanel(this);
-        ((ImageButton)findViewById(R.id.user_button)).setOnClickListener(v -> mDrawer.openMenu(true));
 
         BottomSheetBehavior.from(findViewById(R.id.sheet)).setPeekHeight(0);
         Util.prepareLeftPanel(this);
 
         flowLayout = findViewById(R.id.fields_field_bottom_sheet);
-        ((Button)findViewById(R.id.tags_but)).setTag("tags");
-        ((Button)findViewById(R.id.stages_but)).setTag("stages");
+        findViewById(R.id.tags_but).setTag("tags");
+        findViewById(R.id.stages_but).setTag("stages");
 
         MyListener myListener = new MyListener();
 
-        ((Button)findViewById(R.id.tags_but)).setOnClickListener(myListener);
-        ((Button)findViewById(R.id.stages_but)).setOnClickListener(myListener);
+        findViewById(R.id.tags_but).setOnClickListener(myListener);
+        findViewById(R.id.stages_but).setOnClickListener(myListener);
 
         String q = "";
         for (int i = 0; i <10000; i++)

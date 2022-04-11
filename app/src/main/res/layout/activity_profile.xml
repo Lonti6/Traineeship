@@ -6,145 +6,125 @@
         android:layout_height="match_parent"
         android:background="@color/white">
 
-    <com.mxn.soul.flowingdrawer_core.FlowingDrawer
-        android:id="@+id/drawerlayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:clipChildren="false"
-        android:clipToPadding="false"
-        app:edPosition="1"
-        app:edMenuSize="260dp"
-        app:edMenuBackground="@color/main_green">
-        <ScrollView
+    <ScrollView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
-    <RelativeLayout
-        android:id="@+id/content"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <ImageButton
-            android:id="@+id/user_button"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/ic_zaticha" />
-
         <RelativeLayout
-            android:layout_width="125dp"
-            android:layout_height="125dp"
-            android:layout_marginTop="95dp"
-            android:layout_centerHorizontal="true"
-            android:id="@+id/icon_container">
-            <androidx.cardview.widget.CardView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:cardCornerRadius="60dp"
-                android:id="@+id/container_icon_user">
+                android:id="@+id/content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-                <ImageView
-                    android:id="@+id/icon_user"
+            <ImageButton
+                    android:id="@+id/user_button"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/ic_zaticha"/>
+
+            <RelativeLayout
                     android:layout_width="125dp"
                     android:layout_height="125dp"
-                    android:background="@drawable/header" />
-            </androidx.cardview.widget.CardView>
+                    android:layout_marginTop="95dp"
+                    android:layout_centerHorizontal="true"
+                    android:id="@+id/icon_container">
+                <androidx.cardview.widget.CardView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:cardCornerRadius="60dp"
+                        android:id="@+id/container_icon_user">
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                app:cardCornerRadius="60dp"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentBottom="true"
-                android:backgroundTint="@color/main_green">
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="5dp"
-                    android:background="@drawable/edit_icon_white" />
-            </androidx.cardview.widget.CardView>
-        </RelativeLayout>
+                    <ImageView
+                            android:id="@+id/icon_user"
+                            android:layout_width="125dp"
+                            android:layout_height="125dp"
+                            android:background="@drawable/header"/>
+                </androidx.cardview.widget.CardView>
 
+                <androidx.cardview.widget.CardView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        app:cardCornerRadius="60dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentBottom="true"
+                        android:backgroundTint="@color/main_green">
+                    <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="5dp"
+                            android:background="@drawable/edit_icon_white"/>
+                </androidx.cardview.widget.CardView>
+            </RelativeLayout>
 
-        <TextView
-            android:id="@+id/name_user_profile"
-            style="@style/AdvertHeadingText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/icon_container"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
-            android:text="Дмитрий Башкирцев" />
-
-        <Button
-            android:id="@+id/tags_but"
-            android:layout_width="160dp"
-            android:layout_height="60dp"
-            android:layout_below="@+id/name_user_profile"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="20dp"
-            android:fontFamily="@font/open_sans"
-            android:text="Текущие теги"
-            android:textColor="@color/white"
-            android:textSize="14dp"
-            android:textStyle="normal" />
-
-        <Button
-            android:id="@+id/stages_but"
-            android:layout_width="160dp"
-            android:layout_height="60dp"
-            android:layout_below="@+id/name_user_profile"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="20dp"
-            android:layout_toEndOf="@+id/tags_but"
-            android:fontFamily="@font/open_sans"
-            android:text="Старые стажировки"
-            android:textColor="@color/white"
-            android:textSize="14dp"
-            android:textStyle="normal" />
-
-        <TableLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tags_but"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/advert_border_color">
 
             <TextView
-                android:id="@+id/user_description"
-                style="@style/AdvertDescriptionText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginRight="13dp"
-                android:layout_marginBottom="12dp"
-                android:text="Очень срочно ищем разработчика!!расрас
+                    android:id="@+id/name_user_profile"
+                    style="@style/AdvertHeadingText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/icon_container"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="20dp"
+                    android:text="Дмитрий Башкирцев"/>
+
+            <Button
+                    android:id="@+id/tags_but"
+                    android:layout_width="160dp"
+                    android:layout_height="60dp"
+                    android:layout_below="@+id/name_user_profile"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/open_sans"
+                    android:text="Текущие теги"
+                    android:textColor="@color/white"
+                    android:textSize="14dp"
+                    android:textStyle="normal"/>
+
+            <Button
+                    android:id="@+id/stages_but"
+                    android:layout_width="160dp"
+                    android:layout_height="60dp"
+                    android:layout_below="@+id/name_user_profile"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_toEndOf="@+id/tags_but"
+                    android:fontFamily="@font/open_sans"
+                    android:text="Старые стажировки"
+                    android:textColor="@color/white"
+                    android:textSize="14dp"
+                    android:textStyle="normal"/>
+
+            <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tags_but"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/advert_border_color">
+
+                <TextView
+                        android:id="@+id/user_description"
+                        style="@style/AdvertDescriptionText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="13dp"
+                        android:layout_marginBottom="12dp"
+                        android:text="Очень срочно ищем разработчика!!расрас
 Уметь должен всё: стрелять, варить халву, петь в хоре.
 График плавающий, в идеале - жить на работе, есть и спать тут же, а лучше не спать вообще.
-Опыт от ста миллионов лет и выше." />
+Опыт от ста миллионов лет и выше."/>
 
-        </TableLayout>
+            </TableLayout>
 
-    </RelativeLayout>
+        </RelativeLayout>
     </ScrollView>
-        <!--Конец контента сраницы-->
-        <!--Содержимое панели начало-->
-        <com.mxn.soul.flowingdrawer_core.FlowingMenuLayout
-            android:id="@+id/menulayout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/main_green">
-            <include layout="@layout/left_panel"/>
-        </com.mxn.soul.flowingdrawer_core.FlowingMenuLayout>
-        <!--Содержимое панели конец-->
-    </com.mxn.soul.flowingdrawer_core.FlowingDrawer>
     <include layout="@layout/bottom_sheet"/>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

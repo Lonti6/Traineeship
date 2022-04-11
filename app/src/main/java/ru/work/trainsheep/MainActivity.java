@@ -30,7 +30,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    FlowingDrawer mDrawer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +41,10 @@ public class MainActivity extends AppCompatActivity {
             val intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
         } else {
-            setContentView(R.layout.activity_search);
+            setContentView(R.layout.activity_left_panel);
+            final FlowingDrawer drawer = Util.connectActivityLayout(this, R.layout.activity_search);
+
+            ((ImageButton)findViewById(R.id.user_button)).setOnClickListener(v -> drawer.openMenu(true));
 
             val adapter = new ItemAdapter(new ArrayList<>());
             RecyclerView recyclerView = findViewById(R.id.rv);
@@ -57,10 +60,7 @@ public class MainActivity extends AppCompatActivity {
                     adapter.addAll(result.getNotes());
             });
             Util.setEditTextFocusListener(this, R.id.search_field);
-            mDrawer = (FlowingDrawer) findViewById(R.id.drawerlayout);
-            mDrawer.setTouchMode(ElasticDrawer.TOUCH_MODE_FULLSCREEN);
-            Util.prepareLeftPanel(this);
-            ((ImageButton)findViewById(R.id.user_button)).setOnClickListener(v -> mDrawer.openMenu(true));
+
         }
     }
 

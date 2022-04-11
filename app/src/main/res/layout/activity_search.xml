@@ -6,15 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" android:background="@color/white">
 
-    <com.mxn.soul.flowingdrawer_core.FlowingDrawer
-        android:id="@+id/drawerlayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:clipChildren="false"
-        android:clipToPadding="false"
-        app:edPosition="1"
-        app:edMenuSize="260dp"
-        app:edMenuBackground="@color/main_green">
     <RelativeLayout
         android:id="@+id/content"
         android:layout_width="match_parent"
@@ -91,15 +82,5 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="MissingConstraints" />
     </RelativeLayout>
-            <!--Конец контента сраницы-->
-        <!--Содержимое панели начало-->
-        <com.mxn.soul.flowingdrawer_core.FlowingMenuLayout
-            android:id="@+id/menulayout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/main_green">
-            <include layout="@layout/left_panel"/>
-        </com.mxn.soul.flowingdrawer_core.FlowingMenuLayout>
-        <!--Содержимое панели конец-->
-        </com.mxn.soul.flowingdrawer_core.FlowingDrawer>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

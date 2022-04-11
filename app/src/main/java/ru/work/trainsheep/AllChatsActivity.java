@@ -28,12 +28,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AllChatsActivity extends AppCompatActivity {
-    FlowingDrawer mDrawer;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_all_chats);
+        setContentView(R.layout.activity_left_panel);
+        final FlowingDrawer drawer = Util.connectActivityLayout(this, R.layout.activity_all_chats);
+        findViewById(R.id.user_button).setOnClickListener(v -> drawer.openMenu(true));
 
         RecyclerView rv = findViewById(R.id.rv);
         rv.setLayoutManager(new LinearLayoutManager(this));
@@ -44,15 +46,6 @@ public class AllChatsActivity extends AppCompatActivity {
 
         ServerRepository server = ServerRepositoryFactory.getInstance();
         server.getChats(adapter::addAll);
-
-        Util.prepareLeftPanel(this);
-
-        mDrawer = (FlowingDrawer) findViewById(R.id.drawerlayout);
-        mDrawer.setTouchMode(ElasticDrawer.TOUCH_MODE_FULLSCREEN);
-        Util.prepareLeftPanel(this);
-        ((ImageButton)findViewById(R.id.user_button)).setOnClickListener(v -> mDrawer.openMenu(true));
-
-        findViewById(R.id.user_button).setOnClickListener(v -> mDrawer.openMenu(true));
     }
 
     static class Adapter extends RecyclerView.Adapter<MyViewHolder>{

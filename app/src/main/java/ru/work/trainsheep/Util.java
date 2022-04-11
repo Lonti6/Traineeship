@@ -3,10 +3,13 @@ package ru.work.trainsheep;
 import android.app.Activity;
 import android.content.Intent;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import com.mxn.soul.flowingdrawer_core.ElasticDrawer;
+import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
 
 public class Util {
 
@@ -21,7 +24,16 @@ public class Util {
             });
         }
     }
+    public static FlowingDrawer connectActivityLayout(Activity activity, int id){
+        RelativeLayout drawer = activity.findViewById(R.id.content_drawer);
+        View view = LayoutInflater.from(activity).inflate(id, drawer, false);
+        drawer.addView(view);
 
+        final FlowingDrawer mDrawer = activity.findViewById(R.id.drawerlayout);
+        mDrawer.setTouchMode(ElasticDrawer.TOUCH_MODE_FULLSCREEN);
+        prepareLeftPanel(activity);
+        return mDrawer;
+    }
     public static void prepareLeftPanel(Activity activity)
     {
         ((LinearLayout)activity.findViewById(R.id.search_line)).setOnClickListener(v -> {
