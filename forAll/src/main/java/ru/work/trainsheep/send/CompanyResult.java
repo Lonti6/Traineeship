@@ -1,18 +1,16 @@
 package ru.work.trainsheep.send;
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NonNull;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Data
 @AllArgsConstructor
-public class AdvertResult {
-
+public class CompanyResult {
     @NonNull
-    List<Note> notes;
+    List<CompanyNote> notes;
     int numberPage = 1;
     int allNotes;
     int countNotesInPage;

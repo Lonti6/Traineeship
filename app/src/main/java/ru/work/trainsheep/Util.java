@@ -42,7 +42,8 @@ public class Util {
         });
 
         ((LinearLayout)activity.findViewById(R.id.favorite_line)).setOnClickListener(v -> {
-            Log.e("Поля \"Избранное\" ещё не существует", "Поля \"Избранное\" ещё не существует");
+            Intent intent = new Intent(activity, FavoriteActivity.class);
+            activity.startActivity(intent);
         });
 
         ((LinearLayout)activity.findViewById(R.id.message_line)).setOnClickListener(v -> {

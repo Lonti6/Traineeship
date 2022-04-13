@@ -22,23 +22,35 @@
     </style>
 
     <style name="GrayText">
-        <item name="android:textColor">#b0b0b0</item>
+        <item name="android:textColor">@color/gray</item>
         <item name="android:textSize">14dp</item>
         <item name="android:fontFamily">@font/open_sans</item>
     </style>
 
+    <style name="SomeGrayText">
+        <item name="android:textColor">@color/gray</item>
+        <item name="android:textSize">16dp</item>
+        <item name="android:fontFamily">@font/open_sans</item>
+    </style>
+
     <style name="SmallGrayText">
-        <item name="android:textColor">#b0b0b0</item>
+        <item name="android:textColor">@color/gray</item>
         <item name="android:textSize">10dp</item>
         <item name="android:fontFamily">@font/open_sans</item>
     </style>
 
     <style name="SmallGrayTextLeftPanel">
-        <item name="android:textColor">#b0b0b0</item>
+        <item name="android:textColor">@color/gray</item>
         <item name="android:textSize">10dp</item>
         <item name="android:fontFamily">@font/open_sans</item>
         <item name="android:layout_marginLeft">5dp</item>
         <item name="android:layout_marginTop">5dp</item>
+    </style>
+
+    <style name="SomeGreenText">
+        <item name="android:textColor">@color/main_green</item>
+        <item name="android:textSize">16dp</item>
+        <item name="android:fontFamily">@font/open_sans</item>
     </style>
 
     <style name="GreenBoldText">
@@ -142,5 +154,11 @@
         <item name="android:layout_height">25dp</item>
         <item name="android:layout_marginLeft">30dp</item>
         <item name="android:layout_marginRight">10dp</item>
+    </style>
+
+    <style name="LightGreenBut">
+        <item name="backgroundTint">@color/light_green</item>
+        <item name="android:textColor">@color/main_green</item>
+        <item name="fontFamily">@font/open_sans</item>
     </style>
 </resources>

@@ -1,29 +1,18 @@
 package ru.work.trainsheep;
 
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.content.DialogInterface;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDialogFragment;
-import androidx.cardview.widget.CardView;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.mxn.soul.flowingdrawer_core.ElasticDrawer;
 import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
-
-import org.jetbrains.annotations.NotNull;
 
 import io.ghyeok.stickyswitch.widget.StickySwitch;
 import io.ghyeok.stickyswitch.widget.StickySwitch.Direction;
@@ -51,7 +40,7 @@ public class SettingsActivity extends AppCompatActivity {
             if (direction.equals(Direction.RIGHT))
                 stickySwitchMessage.setSliderBackgroundColor(getColor(R.color.light_green));
             if (direction.name().equals("LEFT"))
-                stickySwitchMessage.setSliderBackgroundColor(getColor(R.color.line_grey));
+                stickySwitchMessage.setSliderBackgroundColor(getColor(R.color.light_gray));
         });
 
         StickySwitch stickySwitchVacansy = (StickySwitch) findViewById(R.id.sticky_switch_vacansy);
@@ -61,7 +50,7 @@ public class SettingsActivity extends AppCompatActivity {
             if (direction.name().equals("RIGHT"))
                 stickySwitchVacansy.setSliderBackgroundColor(getColor(R.color.light_green));
             if (direction.name().equals("LEFT"))
-                stickySwitchVacansy.setSliderBackgroundColor(getColor(R.color.line_grey));
+                stickySwitchVacansy.setSliderBackgroundColor(getColor(R.color.light_gray));
         });
 
         manager = getSupportFragmentManager();
@@ -77,7 +66,7 @@ public class SettingsActivity extends AppCompatActivity {
         if (stickySwitch.getDirection().name().equals("RIGHT"))
             stickySwitch.setSliderBackgroundColor(getColor(R.color.light_green));
         if (stickySwitch.getDirection().name().equals("LEFT"))
-            stickySwitch.setSliderBackgroundColor(getColor(R.color.line_grey));
+            stickySwitch.setSliderBackgroundColor(getColor(R.color.light_gray));
     }
 
     public static class MyDialogFragment extends DialogFragment {

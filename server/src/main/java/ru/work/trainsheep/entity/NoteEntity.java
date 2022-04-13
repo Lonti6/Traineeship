@@ -3,7 +3,7 @@ package ru.work.trainsheep.entity;
 import lombok.*;
 import org.hibernate.Hibernate;
 import org.springframework.lang.NonNull;
-import ru.work.trainsheep.send.Note;
+import ru.work.trainsheep.send.VacancyNote;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -72,7 +72,7 @@ public class NoteEntity {
                 "salary = " + salary + ")";
     }
 
-    public Note toNote(){
-        return new Note(tags.stream().map(Tag::getText).collect(Collectors.toList()), header, content, company, salary);
+    public VacancyNote toNote(){
+        return new VacancyNote(tags.stream().map(Tag::getText).collect(Collectors.toList()), header, content, company, salary);
     }
 }

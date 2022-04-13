@@ -7,31 +7,27 @@ import lombok.Data;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.swing.text.html.ImageView;
+
 @Data
 @AllArgsConstructor
-public class Note {
-    List<String> tags;
+public class CompanyNote {
+    ImageView companyImage;
     String header;
     String content;
-    String company;
-    String salary;
 
-    public Note(String header, String content, String company, String salary, String... tags) {
+    public CompanyNote(String header, String content, ImageView companyImage) {
         this.header = header;
         this.content = content;
-        this.company = company;
-        this.salary = salary;
-        this.tags = Arrays.asList(tags);
+        this.companyImage = companyImage;
     }
 
 
     @Override
     public String toString() {
         return "Note{\n" +
-                "tags=" + tags +
                 ", \n    header='" + header + '\'' +
                 ", \n    content='" + content + '\'' +
-                ", \n    company='" + company + '\'' +
                 "\n}\n";
     }
 }

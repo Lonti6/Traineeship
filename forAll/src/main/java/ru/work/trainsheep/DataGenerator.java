@@ -4,7 +4,8 @@ import lombok.val;
 import ru.work.trainsheep.send.ChatBlock;
 import ru.work.trainsheep.send.ChatMessage;
 import ru.work.trainsheep.send.ChatResult;
-import ru.work.trainsheep.send.Note;
+import ru.work.trainsheep.send.CompanyNote;
+import ru.work.trainsheep.send.VacancyNote;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -435,7 +436,7 @@ public class DataGenerator {
         );
     }
 
-    public Note generateNote(List<String> tags) {
+    public VacancyNote generateVacancyNote(List<String> tags) {
 
         Set<String> ntags = new HashSet<>(tags);
         int countTags = random.nextInt(5) + 1;
@@ -443,12 +444,20 @@ public class DataGenerator {
             ntags.add(getRandom(this.tags));
         }
 
-        return new Note(new ArrayList<>(ntags.stream().sorted().collect(Collectors.toList())),
+        return new VacancyNote(new ArrayList<>(ntags.stream().sorted().collect(Collectors.toList())),
                 getRandom(headers),
                 getRandom(contents),
                 getRandom(companies),
                 splitSalary((int)(Math.random()*20000))+" ₽/Час");
     }
+
+    public CompanyNote generateCompanyNote() {
+        return new CompanyNote(
+                getRandom(headers),
+                getRandom(contents),
+                null);
+    }
+
     public ChatBlock generateChatBlock(){
         return ChatBlock.builder()
                 .icon(getRandom(icons))

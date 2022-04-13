@@ -52,9 +52,28 @@ public class RealServerRepository extends ServerRepository{
     }
 
     @Override
-    public void getAdverts(AdvertRequest request, Consumer<AdvertResult> callbackSuccess, Consumer<Exception> callbackFailure) {
+    public void getVacancys(VacancyRequest request, Consumer<VacancyResult> callbackSuccess, Consumer<Exception> callbackFailure) {
         executor.execute(() -> {
             val call = api.adverts(request);
+            try {
+                val response = call.execute();
+                val result = response.body();
+                if (result != null && Objects.equals(result.getStatus(), "ok")) {
+                    handler.post(() -> callbackSuccess.accept(result.getResult()));
+                } else
+                    handler.post(() -> callbackFailure.accept(new Exception("status fail")));
+
+            } catch (IOException e) {
+                handler.post(() -> callbackFailure.accept(e));
+                System.err.println(e.getMessage());
+            }
+        });
+    }
+
+    @Override
+    public void getCompanys(CompanyRequest request, Consumer<CompanyResult> callbackSuccess, Consumer<Exception> callbackFailure) {
+        executor.execute(() -> {
+            val call = api.companys(request);
             try {
                 val response = call.execute();
                 val result = response.body();

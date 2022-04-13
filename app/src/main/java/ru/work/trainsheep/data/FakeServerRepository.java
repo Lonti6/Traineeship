@@ -38,14 +38,30 @@ public class FakeServerRepository extends ServerRepository {
     }
 
     @Override
-    public void getAdverts(AdvertRequest request, Consumer<AdvertResult> callbackSuccess, Consumer<Exception> callbackFailure) {
-        sleepAndRun(500, () -> createNotes(request), (notes) -> {
+    public void getVacancys(VacancyRequest request, Consumer<VacancyResult> callbackSuccess, Consumer<Exception> callbackFailure) {
+        sleepAndRun(500, () -> createVacansysNotes(request), (notes) -> {
             if (random.nextInt(100) > 2) {
-                callbackSuccess.accept(new AdvertResult(
+                callbackSuccess.accept(new VacancyResult(
                         notes, request.getPage(),
                         random.nextInt(100) + request.getPage() * request.getCountNotesOnPage(),
                         request.getCountNotesOnPage()));
             } else
+                callbackFailure.accept(new Exception("internal error try again"));
+        });
+    }
+
+    @Override
+    public void getCompanys(CompanyRequest request, Consumer<CompanyResult> callbackSuccess, Consumer<Exception> callbackFailure) {
+        sleepAndRun(500, () -> createCompanysNotes(request), (notes) -> {
+            if (random.nextInt(100)>2)
+            {
+                callbackSuccess.accept(new CompanyResult(
+                        notes, request.getPage(),
+                        random.nextInt(100) + request.getPage()*request.getCountNotesOnPage(),
+                        request.getCountNotesOnPage()
+                ));
+            }
+            else
                 callbackFailure.accept(new Exception("internal error try again"));
         });
     }
@@ -65,10 +81,19 @@ public class FakeServerRepository extends ServerRepository {
 
 
     @NonNull
-    private ArrayList<Note> createNotes(AdvertRequest request) {
-        ArrayList<Note> notes = new ArrayList<>();
+    private ArrayList<VacancyNote> createVacansysNotes(VacancyRequest request) {
+        ArrayList<VacancyNote> notes = new ArrayList<>();
         for (int i = 0; i < request.getCountNotesOnPage(); i++) {
-            notes.add(generator.generateNote(request.getTags()));
+            notes.add(generator.generateVacancyNote(request.getTags()));
+        }
+        return notes;
+    }
+
+    @NonNull
+    private ArrayList<CompanyNote> createCompanysNotes(CompanyRequest request) {
+        ArrayList<CompanyNote> notes = new ArrayList<>();
+        for (int i = 0; i < request.getCountNotesOnPage(); i++) {
+            notes.add(generator.generateCompanyNote());
         }
         return notes;
     }

@@ -3,8 +3,10 @@ package ru.work.trainsheep.data;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.POST;
-import ru.work.trainsheep.data.getting.AdvertResultGetting;
-import ru.work.trainsheep.send.AdvertRequest;
+import ru.work.trainsheep.data.getting.CompanyResultGetting;
+import ru.work.trainsheep.data.getting.VacancyResultGetting;
+import ru.work.trainsheep.send.CompanyRequest;
+import ru.work.trainsheep.send.VacancyRequest;
 import ru.work.trainsheep.send.LoginResult;
 import ru.work.trainsheep.send.UserRegistrationData;
 
@@ -13,5 +15,8 @@ public interface ServerApi {
     Call<LoginResult> register(@Body UserRegistrationData user);
 
     @POST("/adverts")
-    Call<AdvertResultGetting> adverts(@Body AdvertRequest request);
+    Call<VacancyResultGetting> adverts(@Body VacancyRequest request);
+
+    @POST("/companys")
+    Call<CompanyResultGetting> companys(@Body CompanyRequest request);
 }

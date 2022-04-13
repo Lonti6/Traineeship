@@ -14,7 +14,7 @@ import ru.work.trainsheep.entity.User;
 import ru.work.trainsheep.entity.Role;
 import ru.work.trainsheep.entity.UserPasswords;
 import ru.work.trainsheep.repository.UserPasswordRepository;
-import ru.work.trainsheep.send.AdvertRequest;
+import ru.work.trainsheep.send.VacancyRequest;
 import ru.work.trainsheep.send.UserData;
 import ru.work.trainsheep.send.UserRegistrationData;
 import ru.work.trainsheep.service.NotesService;
@@ -49,7 +49,7 @@ public class SimpleController {
     }
 
     @PostMapping("/adverts")
-    public String adverts(Model model, @RequestBody AdvertRequest advertRequest) {
+    public String adverts(Model model, @RequestBody VacancyRequest advertRequest) {
         if (advertRequest != null) {
             val result = notesService.getAdvertResult(advertRequest);
             model.addAttribute("status", "ok");
