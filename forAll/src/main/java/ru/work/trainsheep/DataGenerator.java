@@ -26,7 +26,10 @@ public class DataGenerator {
         tags = Arrays.asList("Бэкенд", "Angular", "Фронтенд", "Middle", "JavaScript", "HTML", "JQuery", "Angular",
                 "Linux", "Git", "PHP", "Golang", "React Native", "Sass", "React", "C#", ".NET", ".NET Core", "SQL", "python");
 
-        companies = Arrays.asList("Группа «СВЭЛ»", "Прософт-Системы", "Сима-ленд", "HRS", "ГК «Экстрим»", "Uploadcare", "DNA Team", "Сбер", "Ceramic 3D");
+        companies = Arrays.asList("Группа «СВЭЛ»", "Прософт-Системы", "Сима-ленд", "HRS", "ГК «Экстрим»", "Uploadcare",
+                "DNA Team", "Сбер", "Ceramic 3D", "Luxoft", "Яндекс", "СКБ Контур", "Tinkoff.ru", "Deutsche Bank",
+                "Mail.ru Group", "Компания БКС", "Home Credit Bank", "ВымпелКом", "Andersen", "Revolut", "КРОК",
+                "Grid Dynamics", "Skyeng", "Veeam Software");
 
         headers = Arrays.asList("Программист ERP",
                 "Frontend-разработчик (JS, Angular)",
@@ -453,9 +456,9 @@ public class DataGenerator {
 
     public CompanyNote generateCompanyNote() {
         return new CompanyNote(
-                getRandom(headers),
+                getRandom(companies),
                 getRandom(contents),
-                null);
+                getRandom(icons));
     }
 
     public ChatBlock generateChatBlock(){

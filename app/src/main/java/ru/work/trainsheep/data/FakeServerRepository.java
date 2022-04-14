@@ -1,12 +1,17 @@
 package ru.work.trainsheep.data;
 
+import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import lombok.NonNull;
-
-import ru.work.trainsheep.send.*;
+import lombok.val;
 import ru.work.trainsheep.DataGenerator;
-import java.util.*;
+import ru.work.trainsheep.send.*;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.function.Consumer;
@@ -22,24 +27,32 @@ public class FakeServerRepository extends ServerRepository {
 
 
     @Override
-    public void register(UserRegistrationData user, Consumer<UserRegistrationData> callbackSuccess, Consumer<Exception> callbackFailure) {
-        sleepAndRun(500, () -> {
-            if (random.nextDouble() > 0.05) {
-                userData = new UserRegistrationData("SuperUser", "pass");
-                callbackSuccess.accept(userData);
+    public void register(UserRegistrationData user, Consumer<String> callbackSuccess, Consumer<Exception> callbackFailure) {
+        sleepAndRun(200, () -> {
+            userData = user;
+            if (random.nextDouble() > 0.2) {
+                callbackSuccess.accept(user.getName());
             } else
                 callbackFailure.accept(new Exception("no correct username or login"));
         });
     }
 
     @Override
-    public void login(UserRegistrationData user, Consumer<UserRegistrationData> callbackSuccess, Consumer<Exception> callbackFailure) {
-        register(user, callbackSuccess, callbackFailure);
+    public void login(UserRegistrationData user, Consumer<String> callbackSuccess, Consumer<Exception> callbackFailure) {
+        sleepAndRun(200, () -> {
+            val data = UserInfo.getInstance().getRegistrationData();
+            Log.e(getClass().getSimpleName(),"data.name=" + data.getName());
+            if (!data.getName().equals("")) {
+                userData = data;
+                callbackSuccess.accept(userData.getName());
+            } else
+                callbackFailure.accept(new Exception("Вы не зарегистрированы!"));
+        });
     }
 
     @Override
-    public void getVacancys(VacancyRequest request, Consumer<VacancyResult> callbackSuccess, Consumer<Exception> callbackFailure) {
-        sleepAndRun(500, () -> createVacansysNotes(request), (notes) -> {
+    public void getVacancies(VacancyRequest request, Consumer<VacancyResult> callbackSuccess, Consumer<Exception> callbackFailure) {
+        sleepAndRun(200, () -> createVacansiesNotes(request), (notes) -> {
             if (random.nextInt(100) > 2) {
                 callbackSuccess.accept(new VacancyResult(
                         notes, request.getPage(),
@@ -51,37 +64,31 @@ public class FakeServerRepository extends ServerRepository {
     }
 
     @Override
-    public void getCompanys(CompanyRequest request, Consumer<CompanyResult> callbackSuccess, Consumer<Exception> callbackFailure) {
-        sleepAndRun(500, () -> createCompanysNotes(request), (notes) -> {
-            if (random.nextInt(100)>2)
-            {
-                callbackSuccess.accept(new CompanyResult(
-                        notes, request.getPage(),
-                        random.nextInt(100) + request.getPage()*request.getCountNotesOnPage(),
-                        request.getCountNotesOnPage()
-                ));
-            }
-            else
-                callbackFailure.accept(new Exception("internal error try again"));
+    public void getCompanies(CompanyRequest request, Consumer<CompanyResult> callbackSuccess, Consumer<Exception> callbackFailure) {
+        sleepAndRun(200, () -> createCompaniesNotes(request), (notes) -> {
+            callbackSuccess.accept(new CompanyResult(
+                    notes, request.getPage(),
+                    random.nextInt(100) + request.getPage() * request.getCountNotesOnPage(),
+                    request.getCountNotesOnPage()
+            ));
         });
     }
 
     @Override
     public void getChats(Consumer<List<ChatBlock>> callbackSuccess, Consumer<Exception> callbackFailure) {
-        sleepAndRun(500, generator::generateChats, callbackSuccess);
+        sleepAndRun(200, generator::generateChats, callbackSuccess);
     }
 
     @Override
     public void getMessages(ChatRequest request, Consumer<ChatResult> callbackSuccess, Consumer<Exception> callbackFailure) {
-        sleepAndRun(500,
+        sleepAndRun(200,
                 () -> generator.generateChatResult(request.getPage(), request.getCountMessageOnPage(), request.getName()),
                 callbackSuccess);
     }
 
 
-
     @NonNull
-    private ArrayList<VacancyNote> createVacansysNotes(VacancyRequest request) {
+    private ArrayList<VacancyNote> createVacansiesNotes(VacancyRequest request) {
         ArrayList<VacancyNote> notes = new ArrayList<>();
         for (int i = 0; i < request.getCountNotesOnPage(); i++) {
             notes.add(generator.generateVacancyNote(request.getTags()));
@@ -90,7 +97,7 @@ public class FakeServerRepository extends ServerRepository {
     }
 
     @NonNull
-    private ArrayList<CompanyNote> createCompanysNotes(CompanyRequest request) {
+    private ArrayList<CompanyNote> createCompaniesNotes(CompanyRequest request) {
         ArrayList<CompanyNote> notes = new ArrayList<>();
         for (int i = 0; i < request.getCountNotesOnPage(); i++) {
             notes.add(generator.generateCompanyNote());
@@ -128,9 +135,6 @@ public class FakeServerRepository extends ServerRepository {
             handler.post(runInGui);
         });
     }
-
-
-
 
 
 }

@@ -24,18 +24,16 @@ public class RealServerRepository extends ServerRepository{
     ExecutorService executor = Executors.newSingleThreadExecutor();
     Handler handler = new Handler(Looper.getMainLooper());
 
-    UserRegistrationData saveUserData = null;
 
     @Override
-    public void register(UserRegistrationData user, Consumer<UserRegistrationData> callbackSuccess, Consumer<Exception> callbackFailure) {
+    public void register(UserRegistrationData user, Consumer<String> callbackSuccess, Consumer<Exception> callbackFailure) {
         executor.execute(() -> {
             val call = api.register(user);
             try {
                 val response = call.execute();
                 val loginResult = response.body();
                 if (loginResult != null && Objects.equals(loginResult.getStatus(), "ok")) {
-                    saveUserData = loginResult.getUser();
-                    handler.post(() -> callbackSuccess.accept(saveUserData));
+                    handler.post(() -> callbackSuccess.accept(loginResult.getName()));
                 } else
                     handler.post(() -> callbackFailure.accept(new Exception("status fail")));
 
@@ -47,12 +45,12 @@ public class RealServerRepository extends ServerRepository{
     }
 
     @Override
-    public void login(UserRegistrationData user, Consumer<UserRegistrationData> callbackSuccess, Consumer<Exception> callbackFailure) {
+    public void login(UserRegistrationData user, Consumer<String> callbackSuccess, Consumer<Exception> callbackFailure) {
 
     }
 
     @Override
-    public void getVacancys(VacancyRequest request, Consumer<VacancyResult> callbackSuccess, Consumer<Exception> callbackFailure) {
+    public void getVacancies(VacancyRequest request, Consumer<VacancyResult> callbackSuccess, Consumer<Exception> callbackFailure) {
         executor.execute(() -> {
             val call = api.adverts(request);
             try {
@@ -71,9 +69,9 @@ public class RealServerRepository extends ServerRepository{
     }
 
     @Override
-    public void getCompanys(CompanyRequest request, Consumer<CompanyResult> callbackSuccess, Consumer<Exception> callbackFailure) {
+    public void getCompanies(CompanyRequest request, Consumer<CompanyResult> callbackSuccess, Consumer<Exception> callbackFailure) {
         executor.execute(() -> {
-            val call = api.companys(request);
+            val call = api.companies(request);
             try {
                 val response = call.execute();
                 val result = response.body();
@@ -103,7 +101,7 @@ public class RealServerRepository extends ServerRepository{
 
     @Override
     public boolean isLogin() {
-        return saveUserData != null;
+        return !UserInfo.getInstance().getRegistrationData().getEmail().equals("");
     }
 }
 
