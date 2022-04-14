@@ -17,6 +17,6 @@ public interface ServerApi {
     @POST("/adverts")
     Call<VacancyResultGetting> adverts(@Body VacancyRequest request);
 
-    @POST("/companys")
-    Call<CompanyResultGetting> companys(@Body CompanyRequest request);
+    @POST("/companies")
+    Call<CompanyResultGetting> companies(@Body CompanyRequest request);
 }

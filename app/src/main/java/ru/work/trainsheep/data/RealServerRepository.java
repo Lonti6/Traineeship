@@ -52,7 +52,7 @@ public class RealServerRepository extends ServerRepository{
     }
 
     @Override
-    public void getVacancys(VacancyRequest request, Consumer<VacancyResult> callbackSuccess, Consumer<Exception> callbackFailure) {
+    public void getVacancies(VacancyRequest request, Consumer<VacancyResult> callbackSuccess, Consumer<Exception> callbackFailure) {
         executor.execute(() -> {
             val call = api.adverts(request);
             try {
@@ -71,9 +71,9 @@ public class RealServerRepository extends ServerRepository{
     }
 
     @Override
-    public void getCompanys(CompanyRequest request, Consumer<CompanyResult> callbackSuccess, Consumer<Exception> callbackFailure) {
+    public void getCompanies(CompanyRequest request, Consumer<CompanyResult> callbackSuccess, Consumer<Exception> callbackFailure) {
         executor.execute(() -> {
-            val call = api.companys(request);
+            val call = api.companies(request);
             try {
                 val response = call.execute();
                 val result = response.body();

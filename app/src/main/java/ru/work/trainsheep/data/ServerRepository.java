@@ -11,9 +11,9 @@ public abstract class ServerRepository {
 
     public abstract void login(UserRegistrationData user, Consumer<UserRegistrationData> callbackSuccess, Consumer<Exception> callbackFailure);
 
-    public abstract void getVacancys(VacancyRequest request, Consumer<VacancyResult> callbackSuccess, Consumer<Exception> callbackFailure);
+    public abstract void getVacancies(VacancyRequest request, Consumer<VacancyResult> callbackSuccess, Consumer<Exception> callbackFailure);
 
-    public abstract void getCompanys(CompanyRequest request, Consumer<CompanyResult> callbackSuccess, Consumer<Exception> callbackFailure);
+    public abstract void getCompanies(CompanyRequest request, Consumer<CompanyResult> callbackSuccess, Consumer<Exception> callbackFailure);
 
     public abstract void getChats(Consumer<List<ChatBlock>>callbackSuccess, Consumer<Exception> callbackFailure);
 
@@ -30,12 +30,12 @@ public abstract class ServerRepository {
         login(user, callbackSuccess, Throwable::printStackTrace);
     }
 
-    public void getVacancys(VacancyRequest request, Consumer<VacancyResult> callbackSuccess){
-        getVacancys(request, callbackSuccess, Throwable::printStackTrace);
+    public void getVacancies(VacancyRequest request, Consumer<VacancyResult> callbackSuccess){
+        getVacancies(request, callbackSuccess, Throwable::printStackTrace);
     }
 
-    public void getCompanys(CompanyRequest request, Consumer<CompanyResult> callbackSuccess){
-        getCompanys(request, callbackSuccess, Throwable::printStackTrace);
+    public void getCompanies(CompanyRequest request, Consumer<CompanyResult> callbackSuccess){
+        getCompanies(request, callbackSuccess, Throwable::printStackTrace);
     }
 
     public void getChats(Consumer<List<ChatBlock>>callbackSuccess){

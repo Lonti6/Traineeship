@@ -3,10 +3,12 @@ package ru.work.trainsheep.data;
 import android.os.Handler;
 import android.os.Looper;
 import lombok.NonNull;
-
-import ru.work.trainsheep.send.*;
 import ru.work.trainsheep.DataGenerator;
-import java.util.*;
+import ru.work.trainsheep.send.*;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.function.Consumer;
@@ -38,8 +40,8 @@ public class FakeServerRepository extends ServerRepository {
     }
 
     @Override
-    public void getVacancys(VacancyRequest request, Consumer<VacancyResult> callbackSuccess, Consumer<Exception> callbackFailure) {
-        sleepAndRun(500, () -> createVacansysNotes(request), (notes) -> {
+    public void getVacancies(VacancyRequest request, Consumer<VacancyResult> callbackSuccess, Consumer<Exception> callbackFailure) {
+        sleepAndRun(500, () -> createVacansiesNotes(request), (notes) -> {
             if (random.nextInt(100) > 2) {
                 callbackSuccess.accept(new VacancyResult(
                         notes, request.getPage(),
@@ -51,18 +53,13 @@ public class FakeServerRepository extends ServerRepository {
     }
 
     @Override
-    public void getCompanys(CompanyRequest request, Consumer<CompanyResult> callbackSuccess, Consumer<Exception> callbackFailure) {
-        sleepAndRun(500, () -> createCompanysNotes(request), (notes) -> {
-            if (random.nextInt(100)>2)
-            {
-                callbackSuccess.accept(new CompanyResult(
-                        notes, request.getPage(),
-                        random.nextInt(100) + request.getPage()*request.getCountNotesOnPage(),
-                        request.getCountNotesOnPage()
-                ));
-            }
-            else
-                callbackFailure.accept(new Exception("internal error try again"));
+    public void getCompanies(CompanyRequest request, Consumer<CompanyResult> callbackSuccess, Consumer<Exception> callbackFailure) {
+        sleepAndRun(500, () -> createCompaniesNotes(request), (notes) -> {
+            callbackSuccess.accept(new CompanyResult(
+                    notes, request.getPage(),
+                    random.nextInt(100) + request.getPage() * request.getCountNotesOnPage(),
+                    request.getCountNotesOnPage()
+            ));
         });
     }
 
@@ -79,9 +76,8 @@ public class FakeServerRepository extends ServerRepository {
     }
 
 
-
     @NonNull
-    private ArrayList<VacancyNote> createVacansysNotes(VacancyRequest request) {
+    private ArrayList<VacancyNote> createVacansiesNotes(VacancyRequest request) {
         ArrayList<VacancyNote> notes = new ArrayList<>();
         for (int i = 0; i < request.getCountNotesOnPage(); i++) {
             notes.add(generator.generateVacancyNote(request.getTags()));
@@ -90,7 +86,7 @@ public class FakeServerRepository extends ServerRepository {
     }
 
     @NonNull
-    private ArrayList<CompanyNote> createCompanysNotes(CompanyRequest request) {
+    private ArrayList<CompanyNote> createCompaniesNotes(CompanyRequest request) {
         ArrayList<CompanyNote> notes = new ArrayList<>();
         for (int i = 0; i < request.getCountNotesOnPage(); i++) {
             notes.add(generator.generateCompanyNote());
@@ -128,9 +124,6 @@ public class FakeServerRepository extends ServerRepository {
             handler.post(runInGui);
         });
     }
-
-
-
 
 
 }

@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
                     ((RecyclerView)findViewById(R.id.rv)).smoothScrollToPosition(0));
 
 
-            server.getVacancys(new VacancyRequest(new ArrayList<>(), 1, 10), (result) -> {
+            server.getVacancies(new VacancyRequest(new ArrayList<>(), 1, 10), (result) -> {
                     adapter.addAll(result.getNotes());
             });
             Util.setEditTextFocusListener(this, R.id.search_field);
