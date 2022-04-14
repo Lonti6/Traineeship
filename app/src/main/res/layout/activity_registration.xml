@@ -52,17 +52,17 @@
         tools:ignore="MissingConstraints">
 
         <EditText
-                android:id="@+id/reg_name_field"
-                style="@style/MyTextFieldStyle"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="0.5dp"
-                android:layout_marginTop="3dp"
-                android:layout_marginRight="10dp"
-                android:layout_toRightOf="@+id/username_icon"
-                android:fontFamily="@font/open_sans"
-                android:hint="@string/full_name"
-                android:padding="10dp"/>
+            android:id="@+id/reg_name_field"
+            style="@style/MyTextFieldStyle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="0.5dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginRight="10dp"
+            android:layout_toRightOf="@+id/username_icon"
+            android:fontFamily="@font/open_sans"
+            android:hint="@string/full_name"
+            android:padding="10dp" />
 
         <ImageView
             android:id="@+id/username_icon"
@@ -203,14 +203,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/relativeLayout4" />
-    <TextView
-            android:text="TextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:id="@+id/error_info"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginEnd="10dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginTop="11dp"
-            app:layout_constraintTop_toBottomOf="@+id/registrationButton" android:layout_marginStart="10dp"
-            android:textColor="#B31919" android:fontFamily="@font/open_sans" android:textSize="16sp"
-            android:visibility="invisible"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

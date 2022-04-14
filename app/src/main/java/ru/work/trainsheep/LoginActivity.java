@@ -7,15 +7,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
-import lombok.val;
 import ru.work.trainsheep.data.ServerRepository;
 import ru.work.trainsheep.data.ServerRepositoryFactory;
-import ru.work.trainsheep.data.UserInfo;
 import ru.work.trainsheep.send.UserRegistrationData;
 
 public class LoginActivity extends AppCompatActivity {
-    EditText emailView;
-    EditText passView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,42 +21,20 @@ public class LoginActivity extends AppCompatActivity {
         findViewById(R.id.open_register).setOnClickListener(this::openRegistrationActivity);
 
         Util.setEditTextFocusListener(this, R.id.mail_field, R.id.password_field);
-        emailView = findViewById(R.id.mail_field);
-        passView = findViewById(R.id.password_field);
-        val info = UserInfo.getInstance();
-        info.load(this);
-        emailView.setText(info.getRegistrationData().getEmail());
-        passView.setText(info.getRegistrationData().getPassword());
     }
 
     public void checkValidEmailAndPassword(View view) {
         ServerRepository server = ServerRepositoryFactory.getInstance();
+        EditText mail = findViewById(R.id.mail_field);
+        EditText pass = findViewById(R.id.password_field);
         TextView error = findViewById(R.id.error_text_view);
-        val email = emailView.getText().toString();
-        if (!Util.validEmail(email)){
-            error.setText(R.string.no_correct_email);
-            error.setVisibility(View.VISIBLE);
-            return;
-        }
-
-        val password = passView.getText().toString();
-        if (!Util.validPassword(password)){
-            error.setText(R.string.no_correct_password);
-            error.setVisibility(View.VISIBLE);
-            return;
-        }
-
-
         error.setVisibility(View.GONE);
-        server.login(new UserRegistrationData("", email, password), (login) -> {
-
+        server.register(new UserRegistrationData(mail.getText().toString(), pass.getText().toString()), (result) -> {
+            String login = result.getEmail();
             Toast.makeText(getApplicationContext(), "Здравствуйте, " + login, Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(intent);
-        }, (ex) -> {
-            error.setText("Ошибка!\n" +ex.getMessage());
-            error.setVisibility(View.VISIBLE);
-        });
+        }, (ex) -> error.setVisibility(View.VISIBLE));
     }
 
     public void openRegistrationActivity(View view) {

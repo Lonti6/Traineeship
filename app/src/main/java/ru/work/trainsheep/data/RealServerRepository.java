@@ -24,16 +24,18 @@ public class RealServerRepository extends ServerRepository{
     ExecutorService executor = Executors.newSingleThreadExecutor();
     Handler handler = new Handler(Looper.getMainLooper());
 
+    UserRegistrationData saveUserData = null;
 
     @Override
-    public void register(UserRegistrationData user, Consumer<String> callbackSuccess, Consumer<Exception> callbackFailure) {
+    public void register(UserRegistrationData user, Consumer<UserRegistrationData> callbackSuccess, Consumer<Exception> callbackFailure) {
         executor.execute(() -> {
             val call = api.register(user);
             try {
                 val response = call.execute();
                 val loginResult = response.body();
                 if (loginResult != null && Objects.equals(loginResult.getStatus(), "ok")) {
-                    handler.post(() -> callbackSuccess.accept(loginResult.getName()));
+                    saveUserData = loginResult.getUser();
+                    handler.post(() -> callbackSuccess.accept(saveUserData));
                 } else
                     handler.post(() -> callbackFailure.accept(new Exception("status fail")));
 
@@ -45,7 +47,7 @@ public class RealServerRepository extends ServerRepository{
     }
 
     @Override
-    public void login(UserRegistrationData user, Consumer<String> callbackSuccess, Consumer<Exception> callbackFailure) {
+    public void login(UserRegistrationData user, Consumer<UserRegistrationData> callbackSuccess, Consumer<Exception> callbackFailure) {
 
     }
 
@@ -101,7 +103,7 @@ public class RealServerRepository extends ServerRepository{
 
     @Override
     public boolean isLogin() {
-        return !UserInfo.getInstance().getRegistrationData().getEmail().equals("");
+        return saveUserData != null;
     }
 }
 

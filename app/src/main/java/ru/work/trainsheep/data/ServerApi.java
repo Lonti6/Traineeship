@@ -14,9 +14,6 @@ public interface ServerApi {
     @POST("/register")
     Call<LoginResult> register(@Body UserRegistrationData user);
 
-    @POST("/login")
-    Call<LoginResult> login(@Body UserRegistrationData user);
-
     @POST("/adverts")
     Call<VacancyResultGetting> adverts(@Body VacancyRequest request);
 

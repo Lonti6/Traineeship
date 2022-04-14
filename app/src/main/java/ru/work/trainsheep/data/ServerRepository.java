@@ -1,6 +1,5 @@
 package ru.work.trainsheep.data;
 
-import android.content.Context;
 import ru.work.trainsheep.send.*;
 
 import java.util.List;
@@ -8,11 +7,9 @@ import java.util.function.Consumer;
 
 public abstract class ServerRepository {
 
-    public void setApplicationContext(Context context) {};
+    public abstract void register(UserRegistrationData user, Consumer<UserRegistrationData> callbackSuccess, Consumer<Exception> callbackFailure);
 
-    public abstract void register(UserRegistrationData user, Consumer<String> callbackSuccess, Consumer<Exception> callbackFailure);
-
-    public abstract void login(UserRegistrationData user, Consumer<String> callbackSuccess, Consumer<Exception> callbackFailure);
+    public abstract void login(UserRegistrationData user, Consumer<UserRegistrationData> callbackSuccess, Consumer<Exception> callbackFailure);
 
     public abstract void getVacancies(VacancyRequest request, Consumer<VacancyResult> callbackSuccess, Consumer<Exception> callbackFailure);
 
@@ -25,11 +22,11 @@ public abstract class ServerRepository {
     public abstract boolean isLogin();
 
 
-    public void register(UserRegistrationData user, Consumer<String> callbackSuccess){
+    public void register(UserRegistrationData user, Consumer<UserRegistrationData> callbackSuccess){
         register(user, callbackSuccess, Throwable::printStackTrace);
     }
 
-    public void login(UserRegistrationData user, Consumer<String> callbackSuccess){
+    public void login(UserRegistrationData user, Consumer<UserRegistrationData> callbackSuccess){
         login(user, callbackSuccess, Throwable::printStackTrace);
     }
 
