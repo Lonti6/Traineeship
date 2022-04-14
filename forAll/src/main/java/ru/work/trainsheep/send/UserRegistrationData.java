@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class UserRegistrationData {
 
-    private String email;
-    private String password;
+    private String name = "";
+    private String email = "";
+    private String password = "";
 }

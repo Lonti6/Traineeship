@@ -30,6 +30,11 @@
     <string name="_20_12">20:12</string>
     <string name="n_jakkk">Какой-то текст \n jakkk</string>
     <string name="enter_message">Введите сообщение</string>
+    <string name="no_correct_email">Не корректный email</string>
+    <string name="no_correct_name">Не корректное имя!</string>
+    <string name="no_correct_password">Не нажежный пароль!</string>
+    <string name="no_equals_password">Пароли не совпадают</string>
+    <string name="email_already_exist">Ошибка!\nДанная почта уже используется!</string>
     <string-array name="cat_names">
         <item>Рыжик</item>
         <item>Барсик</item>

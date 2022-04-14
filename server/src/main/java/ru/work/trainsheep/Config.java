@@ -13,7 +13,7 @@ public class Config {
     @Bean
     public View jsonTemplate() {
         MappingJackson2JsonView view = new MappingJackson2JsonView();
-        view.setPrettyPrint(true);
+        //view.setPrettyPrint(true);
         return view;
     }
 
