@@ -32,6 +32,7 @@ public class FakeServerRepository extends ServerRepository {
             } else
                 callbackFailure.accept(new Exception("no correct username or login"));
         });
+
     }
 
     @Override
