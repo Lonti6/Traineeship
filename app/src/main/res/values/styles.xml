@@ -21,6 +21,12 @@
         <item name="android:fontFamily">@font/open_sans</item>
     </style>
 
+    <style name="SmallText">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">14dp</item>
+        <item name="android:fontFamily">@font/open_sans</item>
+    </style>
+
     <style name="GrayText">
         <item name="android:textColor">@color/gray</item>
         <item name="android:textSize">14dp</item>

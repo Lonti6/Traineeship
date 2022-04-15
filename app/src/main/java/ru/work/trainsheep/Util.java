@@ -7,6 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+
+import androidx.constraintlayout.widget.ConstraintLayout;
+
 import com.mxn.soul.flowingdrawer_core.ElasticDrawer;
 import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
 
@@ -21,9 +24,9 @@ public class Util {
             View view = activity.findViewById(id);
             view.setOnFocusChangeListener((v, hasFocus) -> {
                 if (v.hasFocus())
-                    ((RelativeLayout) (v.getParent())).setBackgroundResource(R.drawable.border_style_color);
+                    ((ConstraintLayout) (v.getParent())).setBackgroundResource(R.drawable.border_style_color);
                 else
-                    ((RelativeLayout) (v.getParent())).setBackgroundResource(R.drawable.border_style_gray);
+                    ((ConstraintLayout) (v.getParent())).setBackgroundResource(R.drawable.border_style_gray);
             });
         }
     }

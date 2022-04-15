@@ -8,7 +8,138 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        <include layout="@layout/text_field_item"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="120dp"
+                android:background="@drawable/border_style_gray">
+                <EditText
+                    android:id="@+id/vacancyNameField"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    style="@style/MyTextFieldStyle"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:hint="Название вакансии"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/border_style_gray">
+                <EditText
+                    android:id="@+id/competenciesField"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    style="@style/MyTextFieldStyle"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:hint="Компетенции"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:text="Бесплатно"
+                    style="@style/SmallText"
+                    android:layout_marginRight="10dp"
+                    android:buttonTint="@color/main_green"
+                    android:textSize="14dp"/>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/border_style_gray">
+                    <EditText
+                        android:id="@+id/zpField"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/MyTextFieldStyle"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:hint="Сумма"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:inputType="number"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:text="Дальнейшее \nсотрудничество"
+                style="@style/SmallText"
+                android:layout_marginRight="10dp"
+                android:buttonTint="@color/main_green"/>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border_style_gray">
+                <EditText
+                    android:id="@+id/workTimeField"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/MyTextFieldStyle"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:hint="Часы работы"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:inputType="number"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/border_style_gray">
+                <EditText
+                    android:id="@+id/descriptionField"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/MyTextFieldStyle"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:hint="Описание вакансии"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
     </ScrollView>
 
     <ImageButton
