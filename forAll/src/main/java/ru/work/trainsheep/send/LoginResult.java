@@ -9,5 +9,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class LoginResult  {
     private String status;
-    private UserRegistrationData user;
+    private String name;
 }

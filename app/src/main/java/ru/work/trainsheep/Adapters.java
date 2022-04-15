@@ -1,5 +1,6 @@
 package ru.work.trainsheep;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -170,6 +171,8 @@ public class Adapters {
             if (holder instanceof CompanyItemViewHolder) {
                 val item = (CompanyItemViewHolder) holder;
                 CompanyNote note = notes.get(position);
+
+                Log.e("note.getHeader()", "note.getHeader()");
 
                 item.name.setText(note.getHeader());
                 //item.imageField(getResource())
