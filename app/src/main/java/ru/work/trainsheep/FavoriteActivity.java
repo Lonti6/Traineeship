@@ -25,11 +25,11 @@ public class FavoriteActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_left_panel);
-        final FlowingDrawer mDrawer = Util.connectActivityLayout(this, R.layout.activity_favorite);
+        final FlowingDrawer drawer = Util.connectActivityLayout(this, R.layout.activity_favorite);
 
         val server = ServerRepositoryFactory.getInstance();
 
-        findViewById(R.id.user_button).setOnClickListener(v -> mDrawer.openMenu(true));
+        findViewById(R.id.user_button).setOnClickListener(v -> drawer.openMenu(true));
 
         val vacancyAdapter = new Adapters.VacancyItemAdapter(new ArrayList<>());
         val companyAdapter = new Adapters.CompanyItemAdapter(new ArrayList<>());

@@ -14,6 +14,8 @@ import java.util.regex.Pattern;
 
 public class Util {
 
+    public static boolean isCompany = true;
+
     static void setEditTextFocusListener(Activity activity, int... ids) {
         for (int id : ids) {
             View view = activity.findViewById(id);
@@ -39,6 +41,9 @@ public class Util {
 
     public static void prepareLeftPanel(Activity activity) {
         final FlowingDrawer drawer = activity.findViewById(R.id.drawerlayout);
+        if (!isCompany)
+            activity.findViewById(R.id.create_line).setVisibility(View.GONE);
+
         ((LinearLayout) activity.findViewById(R.id.search_line)).setOnClickListener(v -> {
             Intent intent = new Intent(activity, MainActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
@@ -48,6 +53,13 @@ public class Util {
 
         ((LinearLayout) activity.findViewById(R.id.favorite_line)).setOnClickListener(v -> {
             Intent intent = new Intent(activity, FavoriteActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+            activity.startActivity(intent);
+            drawer.closeMenu(false);
+        });
+
+        ((LinearLayout) activity.findViewById(R.id.create_line)).setOnClickListener(v -> {
+            Intent intent = new Intent(activity, CreateActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
             activity.startActivity(intent);
             drawer.closeMenu(false);
