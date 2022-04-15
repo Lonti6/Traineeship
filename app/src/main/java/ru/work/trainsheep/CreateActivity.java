@@ -48,7 +48,7 @@ public class CreateActivity extends AppCompatActivity {
             if (textView.getText().toString().trim().length()!=0) {
                 val view = LayoutInflater.from(v.getContext()).inflate(R.layout.tag_item, tagsField, false);
                 tagsField.addView(view);
-                ((TextView) view.findViewById(R.id.tag)).setText(textView.getText());
+                ((TextView) view.findViewById(R.id.tag)).setText(textView.getText().toString());
                 tagsField.setVisibility(View.VISIBLE);
                 textView.setText("");
             }
