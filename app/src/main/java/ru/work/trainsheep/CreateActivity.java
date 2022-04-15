@@ -45,11 +45,13 @@ public class CreateActivity extends AppCompatActivity {
         TextView textView = (TextView)findViewById(R.id.competenciesField);
 
         findViewById(R.id.addBut).setOnClickListener(v -> {
-            val view = LayoutInflater.from(v.getContext()).inflate(R.layout.tag_item, tagsField, false);
-            tagsField.addView(view);
-            ((TextView) view.findViewById(R.id.tag)).setText(textView.getText());
-            tagsField.setVisibility(View.VISIBLE);
-            textView.setText("");
+            if (textView.getText().toString().trim().length()!=0) {
+                val view = LayoutInflater.from(v.getContext()).inflate(R.layout.tag_item, tagsField, false);
+                tagsField.addView(view);
+                ((TextView) view.findViewById(R.id.tag)).setText(textView.getText());
+                tagsField.setVisibility(View.VISIBLE);
+                textView.setText("");
+            }
         });
     }
 }
