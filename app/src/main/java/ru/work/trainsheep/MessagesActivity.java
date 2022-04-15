@@ -29,8 +29,8 @@ public class MessagesActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_left_panel);
-        Util.connectActivityLayout(this, R.layout.activity_messages);
+        setContentView(R.layout.activity_messages);
+        //Util.connectActivityLayout(this, R.layout.activity_messages);
         String name = null;
         Bundle extras = getIntent().getExtras();
         if (extras != null) {

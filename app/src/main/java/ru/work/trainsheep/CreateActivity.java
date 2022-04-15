@@ -28,7 +28,7 @@ public class CreateActivity extends AppCompatActivity {
         Util.setEditTextFocusListener(this, R.id.competenciesField);
         Util.setEditTextFocusListener(this, R.id.zpField);
         Util.setEditTextFocusListener(this, R.id.workTimeField);
-        Util.setEditTextFocusListener(this, R.id.descriptionField);
+        Util.setEditTextCreateFocusListener(this, R.id.descriptionField);
 
         AutoCompleteTextView mAutoCompleteTextView;
         final String[] mCats = { "Мурзик", "Рыжик", "Барсик", "Борис",

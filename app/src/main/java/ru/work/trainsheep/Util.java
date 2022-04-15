@@ -31,6 +31,18 @@ public class Util {
         }
     }
 
+    static void setEditTextCreateFocusListener(Activity activity, int... ids) {
+        for (int id : ids) {
+            View view = activity.findViewById(id);
+            view.setOnFocusChangeListener((v, hasFocus) -> {
+                if (v.hasFocus())
+                    ((ConstraintLayout) (v.getParent())).setBackgroundResource(R.drawable.half_round_border_style_color);
+                else
+                    ((ConstraintLayout) (v.getParent())).setBackgroundResource(R.drawable.half_round_border_style_color);
+            });
+        }
+    }
+
     public static FlowingDrawer connectActivityLayout(Activity activity, int id) {
         RelativeLayout drawer = activity.findViewById(R.id.content_drawer);
         View view = LayoutInflater.from(activity).inflate(id, drawer, false);

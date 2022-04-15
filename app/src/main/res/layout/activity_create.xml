@@ -58,12 +58,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="20dp"
+                        android:backgroundTint="@android:color/transparent"
                         android:hint="Компетенции"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:backgroundTint="@android:color/transparent"
-                        />
+                        app:layout_constraintTop_toTopOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <Button
@@ -75,6 +74,8 @@
                     android:insetTop="0dp"
                     android:insetBottom="0dp"
                     android:text="+"
+                    android:textSize="24dp"
+                    android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/constraintLayout2"
@@ -85,15 +86,8 @@
                 android:id="@+id/tags_field"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
                 android:layout_below="@+id/advert_name"
-                android:background="@drawable/half_round_border_style_color">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Компетенции"
-                    android:textAlignment="center"/>
+                android:layout_marginTop="5dp">
 
             </org.apmem.tools.layouts.FlowLayout>
 
@@ -175,7 +169,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
                 android:layout_marginBottom="20dp"
-                android:background="@drawable/border_style_gray">
+                android:background="@drawable/half_round_border_style_color">
 
                 <EditText
                     android:id="@+id/descriptionField"
