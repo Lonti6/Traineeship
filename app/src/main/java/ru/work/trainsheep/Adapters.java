@@ -1,6 +1,6 @@
 package ru.work.trainsheep;
 
-import android.util.Log;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import org.apmem.tools.layouts.FlowLayout;
 
 import java.util.ArrayList;
@@ -62,6 +63,10 @@ public class Adapters {
             name = itemView.findViewById(R.id.company_name);
             imageField = itemView.findViewById(R.id.company_image);
             description = itemView.findViewById(R.id.company_description);
+        }
+
+        public Context getContext(){
+            return name.getContext();
         }
     }
 
@@ -162,7 +167,7 @@ public class Adapters {
                         parent, false);
                 return new Adapters.FooterViewHolder(view);
             } else
-                return new VacancyItemViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.company_item, parent, false)) {
+                return new CompanyItemViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.company_item, parent, false)) {
                 };
         }
 
@@ -172,11 +177,10 @@ public class Adapters {
                 val item = (CompanyItemViewHolder) holder;
                 CompanyNote note = notes.get(position);
 
-                Log.e("note.getHeader()", "note.getHeader()");
-
                 item.name.setText(note.getHeader());
                 //item.imageField(getResource())
                 item.description.setText(note.getContent());
+                Glide.with(item.getContext()).load(note.getCompanyImage()).into(item.imageField);
             }
         }
 
