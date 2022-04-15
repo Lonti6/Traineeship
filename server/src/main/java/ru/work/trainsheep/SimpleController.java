@@ -2,6 +2,8 @@ package ru.work.trainsheep;
 
 
 import lombok.val;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -10,13 +12,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import ru.work.trainsheep.entity.User;
 import ru.work.trainsheep.entity.Role;
+import ru.work.trainsheep.entity.User;
 import ru.work.trainsheep.entity.UserPasswords;
 import ru.work.trainsheep.repository.UserPasswordRepository;
-import ru.work.trainsheep.send.VacancyRequest;
 import ru.work.trainsheep.send.UserData;
 import ru.work.trainsheep.send.UserRegistrationData;
+import ru.work.trainsheep.send.VacancyRequest;
 import ru.work.trainsheep.service.NotesService;
 import ru.work.trainsheep.service.UserService;
 
@@ -35,6 +37,8 @@ public class SimpleController {
 
     @Autowired
     PasswordEncoder passwordEncoder;
+
+    Logger log = LoggerFactory.getLogger(getClass());
 
     @GetMapping("/")
     public String index(Model model) {
@@ -60,8 +64,11 @@ public class SimpleController {
 
     @PostMapping("/login")
     public String register(Model model, Authentication authentication) {
-        if(authentication != null) {
+        if (authentication != null) {
+            val userPass = (UserPasswords) authentication.getPrincipal();
+            val user = userService.findByEmail(userPass.getUsername());
             model.addAttribute("status", "ok");
+            model.addAttribute("name", user.getFirstName());
         } else
             model.addAttribute("status", "fail");
         return "jsonTemplate";
@@ -74,10 +81,13 @@ public class SimpleController {
         if (user.getEmail() != null && user.getPassword() != null && userPasswordRepository.findByUsername(user.getEmail()) == null) {
             val userPass = new UserPasswords(user.getEmail(), passwordEncoder.encode(user.getPassword()), Role.USER.toString());
             userPasswordRepository.save(userPass);
+            val userbd = new User();
+            userbd.setFirstName(user.getName());
+            userbd.setEmail(user.getEmail());
+            userService.addUser(userbd);
             model.addAttribute("status", "ok");
-            model.addAttribute("user", new UserRegistrationData(user.getEmail(), null));
-        }
-        else
+            model.addAttribute("name", userbd.getFirstName());
+        } else
             model.addAttribute("status", "fail");
 
         return "jsonTemplate";

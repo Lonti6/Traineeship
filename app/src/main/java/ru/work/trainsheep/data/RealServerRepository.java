@@ -3,6 +3,7 @@ package ru.work.trainsheep.data;
 import android.os.Handler;
 import android.os.Looper;
 import lombok.val;
+import okhttp3.Credentials;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import ru.work.trainsheep.send.*;
@@ -17,7 +18,7 @@ import java.util.function.Consumer;
 public class RealServerRepository extends ServerRepository{
 
     Retrofit retrofit = new Retrofit.Builder()
-            .baseUrl("http://192.168.2.140:8080/")
+            .baseUrl(ServerRepositoryFactory.URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build();
     ServerApi api = retrofit.create(ServerApi.class);
@@ -28,6 +29,7 @@ public class RealServerRepository extends ServerRepository{
     @Override
     public void register(UserRegistrationData user, Consumer<String> callbackSuccess, Consumer<Exception> callbackFailure) {
         executor.execute(() -> {
+
             val call = api.register(user);
             try {
                 val response = call.execute();
@@ -46,7 +48,24 @@ public class RealServerRepository extends ServerRepository{
 
     @Override
     public void login(UserRegistrationData user, Consumer<String> callbackSuccess, Consumer<Exception> callbackFailure) {
+        executor.execute(() -> {
+            val info = UserInfo.getInstance().getRegistrationData();
+            val call = api.login(user, Credentials.basic(info.getEmail(), info.getPassword()));
 
+            try {
+                val response = call.execute();
+
+                val loginResult = response.body();
+                if (loginResult != null && Objects.equals(loginResult.getStatus(), "ok")) {
+                    handler.post(() -> callbackSuccess.accept(loginResult.getName()));
+                } else
+                    handler.post(() -> callbackFailure.accept(new Exception("status fail")));
+
+            } catch (IOException e) {
+                handler.post(() -> callbackFailure.accept(e));
+                System.err.println(e.getMessage());
+            }
+        });
     }
 
     @Override

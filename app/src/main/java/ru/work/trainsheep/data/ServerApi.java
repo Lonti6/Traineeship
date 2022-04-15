@@ -2,6 +2,7 @@ package ru.work.trainsheep.data;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.Header;
 import retrofit2.http.POST;
 import ru.work.trainsheep.data.getting.CompanyResultGetting;
 import ru.work.trainsheep.data.getting.VacancyResultGetting;
@@ -15,7 +16,7 @@ public interface ServerApi {
     Call<LoginResult> register(@Body UserRegistrationData user);
 
     @POST("/login")
-    Call<LoginResult> login(@Body UserRegistrationData user);
+    Call<LoginResult> login(@Body UserRegistrationData user, @Header("Authorization") String credentials);
 
     @POST("/adverts")
     Call<VacancyResultGetting> adverts(@Body VacancyRequest request);
