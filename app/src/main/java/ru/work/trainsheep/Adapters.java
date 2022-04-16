@@ -83,6 +83,7 @@ public class Adapters {
             return position > notes.size();
         }
 
+
         @Override
         public int getItemViewType(int position) {
             if (isPositionFooter(position)) {
@@ -90,6 +91,7 @@ public class Adapters {
             }
             return position;
         }
+
 
         public void addAll(List<VacancyNote> next) {
             notes.addAll(next);

@@ -22,7 +22,7 @@ public class CreateActivity extends AppCompatActivity {
         setContentView(R.layout.activity_left_panel);
         final FlowingDrawer drawer = Util.connectActivityLayout(this, R.layout.activity_create);
 
-        findViewById(R.id.user_button).setOnClickListener(v -> drawer.openMenu(true));
+        findViewById(R.id.menuBut).setOnClickListener(v -> drawer.openMenu(true));
 
         Util.setEditTextFocusListener(this, R.id.vacancyNameField);
         Util.setEditTextFocusListener(this, R.id.competenciesField);
@@ -53,5 +53,9 @@ public class CreateActivity extends AppCompatActivity {
                 textView.setText("");
             }
         });
+
+        findViewById(R.id.scroller).setOnScrollChangeListener(new ScrollListeners.MyScrollListener(
+                findViewById(R.id.header),
+                getResources().getDrawable(R.drawable.bg_header)));
     }
 }

@@ -31,7 +31,7 @@
                 android:layout_height="20dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="10dp"
-                app:srcCompat="@drawable/left_arrow" />
+                app:srcCompat="@drawable/left_arrow_white" />
         </RelativeLayout>
 
 

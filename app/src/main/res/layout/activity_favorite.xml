@@ -27,54 +27,89 @@
         >
     </androidx.recyclerview.widget.RecyclerView>
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <com.google.android.material.button.MaterialButtonToggleGroup
+        android:id="@+id/toggleGroup"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/bg_gray"
+        app:checkedButton="@id/vacancyBut"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/header"
+        app:singleSelection="true">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/vacancyBut"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:fontFamily="@font/open_sans"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:text="Вакансии" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/companyBut"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:fontFamily="@font/open_sans"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:text="Компании" />
+
+    </com.google.android.material.button.MaterialButtonToggleGroup>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="20dp"
-        android:orientation="horizontal"
-        android:gravity="center_vertical">
+        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/header"
+        android:background="@color/white">
 
-        <ImageButton
-                android:id="@+id/user_button"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:background="@drawable/ic_zaticha"
-                tools:ignore="MissingConstraints,SpeakableTextPresentCheck"/>
+        <RelativeLayout
+            android:id="@+id/menuBut"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-        <com.google.android.material.button.MaterialButtonToggleGroup
-            android:id="@+id/toggleGroup2"
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="10dp"
+                app:srcCompat="@drawable/three_line_icon" />
+        </RelativeLayout>
+
+
+        <TextView
+            android:id="@+id/name_top"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:checkedButton="@id/vacancyBut"
-            app:singleSelection="true"
-            android:background="@drawable/bg_gray"
-            android:layout_marginLeft="15dp">
+            android:layout_marginStart="5dp"
+            android:text="Избранное"
+            android:textColor="@color/black"
+            android:textSize="21sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.12"
+            app:layout_constraintStart_toEndOf="@+id/menuBut"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/vacancyBut"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/open_sans"
-                android:insetTop="0dp"
-                android:insetBottom="0dp"
-                android:text="Вакансии" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/companyBut"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/open_sans"
-                android:insetTop="0dp"
-                android:insetBottom="0dp"
-                android:text="Компании" />
-
-        </com.google.android.material.button.MaterialButtonToggleGroup>
-    </LinearLayout>
+        <ImageView
+            android:id="@+id/headerLineBottom"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:visibility="gone"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
