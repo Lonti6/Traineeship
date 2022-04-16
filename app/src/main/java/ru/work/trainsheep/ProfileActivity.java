@@ -70,7 +70,7 @@ public class ProfileActivity extends AppCompatActivity {
         public void onClick(View v) {
             if (v.getTag().equals("tags"))
             {
-                ((TextView)findViewById(R.id.category_text)).setText("Квалификация");
+                ((TextView)findViewById(R.id.category_text)).setText(((Button)v).getText());
                 flowLayout.removeAllViews();
                 BottomSheetBehavior.from(findViewById(R.id.sheet)).setPeekHeight(600, true);
                 for (int i = 0; i<((int)(Math.random()*20)+2); i++)
@@ -82,7 +82,7 @@ public class ProfileActivity extends AppCompatActivity {
             }
             if (v.getTag().equals("stages"))
             {
-                ((TextView)findViewById(R.id.category_text)).setText("Прошлые стажировки");
+                ((TextView)findViewById(R.id.category_text)).setText(((Button)v).getText());
                 flowLayout.removeAllViews();
                 for (int i = 0; i<((int)(Math.random()*20)+2); i++)
                 {

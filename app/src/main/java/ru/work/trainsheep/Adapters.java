@@ -4,6 +4,8 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -42,6 +44,24 @@ public class Adapters {
             description = itemView.findViewById(R.id.advert_description);
             companyName = itemView.findViewById(R.id.company_name);
             salaryText = itemView.findViewById(R.id.salary_text);
+
+            ImageView favBut = itemView.findViewById(R.id.favorite_but);
+            favBut.setTag("hollow");
+            itemView.findViewById(R.id.favorite_but).setOnClickListener(v -> {
+                if (v.getTag().toString().equals("hollow"))
+                {
+                    favBut.setImageDrawable(v.getResources().getDrawable(R.drawable.fill_star_color_icon));
+                    //v.setBackground(v.getResources().getDrawable(R.drawable.fill_star_color_icon));
+                    v.setTag("fill");
+                }
+                else
+                {
+                    //favBut.setBackgroundResource(R.drawable.hollow_star_color_icon);
+                    favBut.setImageDrawable(v.getResources().getDrawable(R.drawable.hollow_star_color_icon));
+                    //v.setBackground(v.getResources().getDrawable(R.drawable.hollow_star_color_icon));
+                    v.setTag("hollow");
+                }
+            });
         }
 
         public void addTags(List<String> tags) {
@@ -63,6 +83,24 @@ public class Adapters {
             name = itemView.findViewById(R.id.company_name);
             imageField = itemView.findViewById(R.id.company_image);
             description = itemView.findViewById(R.id.company_description);
+
+            ImageView favBut = itemView.findViewById(R.id.favorite_but);
+            favBut.setTag("hollow");
+            itemView.findViewById(R.id.favorite_but).setOnClickListener(v -> {
+                if (v.getTag().toString().equals("hollow"))
+                {
+                    favBut.setImageDrawable(v.getResources().getDrawable(R.drawable.fill_star_color_icon));
+                    //v.setBackground(v.getResources().getDrawable(R.drawable.fill_star_color_icon));
+                    v.setTag("fill");
+                }
+                else
+                {
+                    //favBut.setBackgroundResource(R.drawable.hollow_star_color_icon);
+                    favBut.setImageDrawable(v.getResources().getDrawable(R.drawable.hollow_star_color_icon));
+                    //v.setBackground(v.getResources().getDrawable(R.drawable.hollow_star_color_icon));
+                    v.setTag("hollow");
+                }
+            });
         }
 
         public Context getContext(){
