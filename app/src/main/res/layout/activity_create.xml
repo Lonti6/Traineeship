@@ -75,7 +75,7 @@
                     android:insetTop="0dp"
                     android:insetBottom="0dp"
                     android:text="+"
-                    android:textSize="24dp"
+                    android:textSize="30dp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -100,12 +100,13 @@
                 android:orientation="horizontal">
 
                 <CheckBox
+                    android:id="@+id/freeCheck"
                     style="@style/SmallText"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
                     android:layout_marginRight="10dp"
                     android:buttonTint="@color/main_green"
-                    android:text="Бесплатно"
+                    android:text="Без \nоплаты"
                     android:textSize="14dp" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -156,7 +157,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
                         android:layout_marginRight="20dp"
-                        android:hint="Часы работы"
+                        android:hint="Ч/нед"
                         android:inputType="number"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"

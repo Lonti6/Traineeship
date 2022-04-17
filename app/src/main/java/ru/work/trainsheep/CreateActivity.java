@@ -5,6 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -66,5 +68,18 @@ public class CreateActivity extends AppCompatActivity {
         findViewById(R.id.scroller).setOnScrollChangeListener(new ScrollListeners.MyScrollListener(
                 findViewById(R.id.header),
                 getResources().getDrawable(R.drawable.bg_header)));
+
+        findViewById(R.id.freeCheck).setOnClickListener(v -> {
+            EditText editText = findViewById(R.id.zpField);
+            if (((CheckBox)findViewById(R.id.freeCheck)).isChecked()) {
+                editText.setText("0");
+                editText.setEnabled(false);
+            }
+            else
+            {
+                editText.setEnabled(true);
+                editText.setText("");
+            }
+        });
     }
 }

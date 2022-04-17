@@ -50,13 +50,13 @@ public class FavoriteActivity extends AppCompatActivity {
         rvVacancies.setHasFixedSize(true);
         rvVacancies.setLayoutManager(new LinearLayoutManager(this));
         rvVacancies.setAdapter(vacancyAdapter);
-        rvVacancies.addItemDecoration(new SpaceItemDecoration(90));
+        rvVacancies.addItemDecoration(new SpaceItemDecoration(105));
 
         final RecyclerView rvCompanies = findViewById(R.id.rvCompanies);
         rvCompanies.setHasFixedSize(true);
         rvCompanies.setLayoutManager(new LinearLayoutManager(this));
         rvCompanies.setAdapter(companyAdapter);
-        rvCompanies.addItemDecoration(new SpaceItemDecoration(90));
+        rvCompanies.addItemDecoration(new SpaceItemDecoration(105));
 
         rvCompanies.setVisibility(View.GONE);
 

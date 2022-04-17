@@ -424,7 +424,7 @@ public class DataGenerator {
                 "—Живой старикашка!— сказал.",
                 "— Не смей отказаться! По гроб жизни.");
 
-        icons = Arrays.asList("https://images.unsplash.com/photo-1563694983011-6f4d90358083?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
+        /*icons = Arrays.asList("https://images.unsplash.com/photo-1563694983011-6f4d90358083?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
                 "https://images.unsplash.com/photo-1612810806546-ebbf22b53496?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80",
                 "https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80",
                 "https://images.unsplash.com/photo-1611606063065-ee7946f0787a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80",
@@ -436,6 +436,19 @@ public class DataGenerator {
                 "https://images.pexels.com/photos/2549050/pexels-photo-2549050.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
                 "https://images.pexels.com/photos/4631882/pexels-photo-4631882.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
                 "https://images.pexels.com/photos/3402028/pexels-photo-3402028.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+        );*/
+        icons = Arrays.asList("https://i.ytimg.com/vi/4D_6d9SjlVo/maxresdefault.jpg",
+                "https://yt3.ggpht.com/ytc/AKedOLRUjbHkeM7qRuUlK2bQ-0P0hqm0ZByKMljUNonulA=s900-c-k-c0x00ffffff-no-rj",
+                "https://i.ytimg.com/vi/s122452ZmUA/maxresdefault.jpg",
+                "https://games.mail.ru/hotbox/content_files/gallery/75/de/warcraft_3_the_frozen_throne_art_a84cbb49.jpeg",
+                "https://e2p.com/storage/products/September2019/879574.jpg",
+                "https://i.ytimg.com/vi/IS7zaNHT-58/maxresdefault.jpg",
+                "https://cs11.pikabu.ru/post_img/2018/06/07/8/og_og_152837707629983384.jpg",
+                "https://i.ytimg.com/vi/qQWJavEipwM/maxresdefault.jpg",
+                "https://c.wallhere.com/photos/fd/ae/might_and_magic_heroes_warrior_armor_sword_wings-728533.jpg!d",
+                "https://secure.diary.ru/userdir/1/2/7/6/1276539/71047703.jpg",
+                "https://static.wikia.nocookie.net/villains/images/4/4c/Alaric.jpg/revision/latest?cb=20130907122826",
+                "http://s01.riotpixels.net/data/1a/ea/1aeaa527-bc9b-43fb-ab97-cb455b4c2be9.jpg.2160p.jpg/artwork.might-and-magic-heroes-7-trial-by-fire.3246x2160.2016-05-03.9.jpg"
         );
     }
 

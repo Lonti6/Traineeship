@@ -96,7 +96,7 @@ public class ScrollListeners {
                 header.setY(header.getY()+(int)(header.getHeight()*0.1));
                 if (header.getY() >= 0)
                     header.setY(0);
-                otherElement.setY(header.getY()+header.getHeight()+5);
+                otherElement.setY(header.getY()+header.getHeight()+10);
             }
         }
     }

@@ -90,14 +90,11 @@ public class Adapters {
                 if (v.getTag().toString().equals("hollow"))
                 {
                     favBut.setImageDrawable(v.getResources().getDrawable(R.drawable.fill_star_color_icon));
-                    //v.setBackground(v.getResources().getDrawable(R.drawable.fill_star_color_icon));
                     v.setTag("fill");
                 }
                 else
                 {
-                    //favBut.setBackgroundResource(R.drawable.hollow_star_color_icon);
                     favBut.setImageDrawable(v.getResources().getDrawable(R.drawable.hollow_star_color_icon));
-                    //v.setBackground(v.getResources().getDrawable(R.drawable.hollow_star_color_icon));
                     v.setTag("hollow");
                 }
             });
@@ -133,6 +130,7 @@ public class Adapters {
 
         public void addAll(List<VacancyNote> next) {
             notes.addAll(next);
+            notes.add(null);
             notifyItemRangeInserted(notes.size(), next.size());
         }
 
@@ -141,7 +139,7 @@ public class Adapters {
         @Override
         public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-            if (viewType == notes.size() - 1) {
+            if (viewType == notes.size()-1) {
                 View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.footer_search,
                         parent, false);
                 return new Adapters.FooterViewHolder(view);
@@ -194,6 +192,7 @@ public class Adapters {
 
         public void addAll(List<CompanyNote> next) {
             notes.addAll(next);
+            notes.add(null);
             notifyItemRangeInserted(notes.size(), next.size());
         }
 

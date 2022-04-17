@@ -42,8 +42,8 @@
 
                 <ImageView
                     android:id="@+id/favorite_but"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
                     android:scaleType="centerCrop"
                     android:adjustViewBounds="false"
                     app:layout_constraintBottom_toBottomOf="parent"
