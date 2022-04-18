@@ -1,6 +1,7 @@
 package ru.work.trainsheep;
 
 import lombok.val;
+import lombok.var;
 import ru.work.trainsheep.send.ChatBlock;
 import ru.work.trainsheep.send.ChatMessage;
 import ru.work.trainsheep.send.ChatResult;
@@ -483,7 +484,7 @@ public class DataGenerator {
                 .lastMessageDate(generateDate())
                 .build();
     }
-    public ChatMessage generateMessage(Date date, String sender){
+    public ChatMessage generateMessage(long date, String sender){
         return ChatMessage.builder()
                 .message(getRandom(messages))
                 .date(date)
@@ -498,9 +499,10 @@ public class DataGenerator {
         }
         return res;
     }
-    public ChatResult generateChatResult(int page, int count, String sender) {
+    public ChatResult generateChatResult(int page, int count) {
         val res = new ArrayList<ChatMessage>(count);
-        Date date = generateDate();
+        var date = generateDate();
+        val sender = getRandom(companies);
         for (int i = 0; i < count; i++) {
             date = addRandom(date);
             res.add(generateMessage(date, sender));
@@ -512,6 +514,10 @@ public class DataGenerator {
                 .name(sender)
                 .icon(getRandom(icons))
                 .build();
+    }
+
+    public String getRandomMessageText(){
+        return getRandom(messages);
     }
     private String splitSalary(int salaryNum)
     {
@@ -536,11 +542,11 @@ public class DataGenerator {
     }
 
     private static long START = 946080000000L;
-    private Date generateDate(){
-        return new Date(START + random.nextLong() % (START / 10));
+    private long generateDate(){
+        return new Date(START + random.nextLong() % (START / 10)).getTime();
     }
-    public Date addRandom(Date start){
-        return new Date(start.getTime() + random.nextInt(601000) + 10000);
+    public long addRandom(long start){
+        return start + random.nextInt(601000) + 10000;
     }
 
     public <T> T getRandom(List<T> list) {

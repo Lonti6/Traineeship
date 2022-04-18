@@ -2,6 +2,7 @@ package ru.work.trainsheep;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import lombok.NonNull;
 import lombok.val;
 import ru.work.trainsheep.data.ServerRepositoryFactory;
+import ru.work.trainsheep.data.UserInfo;
 import ru.work.trainsheep.send.ChatMessage;
 import ru.work.trainsheep.send.ChatRequest;
 
@@ -24,7 +26,12 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
+import static android.content.ContentValues.TAG;
+
 public class MessagesActivity extends AppCompatActivity {
+    String email;
+    RecyclerView recyclerView;
+    Adapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,25 +39,22 @@ public class MessagesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_messages);
         //Util.connectActivityLayout(this, R.layout.activity_messages);
         String name = null;
+        email = "no_email";
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             name = extras.getString("name");
+            email = extras.getString("email");
         }
         if (name == null)
             name = "Избранное";
 
-        val server = ServerRepositoryFactory.getInstance();
+        adapter = new Adapter(email);
 
-        val adapter = new Adapter(name);
-
-        RecyclerView recyclerView = findViewById(R.id.rv);
+        recyclerView = findViewById(R.id.rv);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
 
-        server.getMessages(new ChatRequest(name, 1, 20), (res) -> {
-            adapter.addAll(res.getMessages());
-            recyclerView.smoothScrollToPosition(adapter.size() - 1);
-        });
+
 
         TextView nameTop = findViewById(R.id.name_top);
         nameTop.setText(name);
@@ -75,9 +79,19 @@ public class MessagesActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        val server = ServerRepositoryFactory.getInstance();
+        server.getMessages(new ChatRequest(email, 1, 20), (res) -> {
+            Log.i(getClass().getSimpleName(), "onCreate: " + res.getMessages() );
+            adapter.addAll(res.getMessages(), true);
+            recyclerView.smoothScrollToPosition(adapter.size() - 1);
+        });
+    }
+
     private void sendMessage(Adapter adapter, RecyclerView recyclerView, EditText text) {
-        val mes = new ChatMessage("you", text.getText().toString(), new Date());
-        System.out.println("message");
+        val mes = new ChatMessage(UserInfo.getInstance().getData().getEmail(), text.getText().toString(), new Date().getTime());
         adapter.add(mes);
         recyclerView.smoothScrollToPosition(adapter.size() - 1);
         text.setText("");
@@ -92,7 +106,12 @@ public class MessagesActivity extends AppCompatActivity {
             this.list = new ArrayList<>();
         }
 
-        public void addAll(List<ChatMessage> list) {
+        public void addAll(List<ChatMessage> list, boolean clear) {
+            if (clear) {
+                val size = this.list.size();
+                this.list.clear();
+                notifyItemRangeRemoved(0, size);
+            }
             this.list.addAll(0, list);
             notifyItemRangeInserted(0, list.size());
         }
@@ -127,7 +146,7 @@ public class MessagesActivity extends AppCompatActivity {
             }
 
             holder.message.setText(message.getMessage());
-            holder.time.setText(format.format(message.getDate()));
+            holder.time.setText(format.format(new Date(message.getDate())));
 
         }
 

@@ -82,7 +82,7 @@ public class FakeServerRepository extends ServerRepository {
     @Override
     public void getMessages(ChatRequest request, Consumer<ChatResult> callbackSuccess, Consumer<Exception> callbackFailure) {
         sleepAndRun(200,
-                () -> generator.generateChatResult(request.getPage(), request.getCountMessageOnPage(), request.getName()),
+                () -> generator.generateChatResult(request.getPage(), request.getCountMessageOnPage()),
                 callbackSuccess);
     }
 

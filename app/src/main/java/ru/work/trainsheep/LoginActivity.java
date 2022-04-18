@@ -35,14 +35,14 @@ public class LoginActivity extends AppCompatActivity {
     public void checkValidEmailAndPassword(View view) {
         ServerRepository server = ServerRepositoryFactory.getInstance();
         TextView error = findViewById(R.id.error_text_view);
-        val email = emailView.getText().toString();
+        val email = emailView.getText().toString().trim();
         if (!Util.validEmail(email)){
             error.setText(R.string.no_correct_email);
             error.setVisibility(View.VISIBLE);
             return;
         }
 
-        val password = passView.getText().toString();
+        val password = passView.getText().toString().trim();
         if (!Util.validPassword(password)){
             error.setText(R.string.no_correct_password);
             error.setVisibility(View.VISIBLE);
@@ -52,7 +52,10 @@ public class LoginActivity extends AppCompatActivity {
 
         error.setVisibility(View.GONE);
         server.login(new UserRegistrationData("", email, password), (login) -> {
-
+            val info = UserInfo.getInstance().getRegistrationData();
+            info.setEmail(email);
+            info.setPassword(password);
+            UserInfo.getInstance().save(this);
             Toast.makeText(getApplicationContext(), "Здравствуйте, " + login, Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(intent);

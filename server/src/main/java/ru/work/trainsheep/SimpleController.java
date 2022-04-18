@@ -16,9 +16,11 @@ import ru.work.trainsheep.entity.Role;
 import ru.work.trainsheep.entity.User;
 import ru.work.trainsheep.entity.UserPasswords;
 import ru.work.trainsheep.repository.UserPasswordRepository;
+import ru.work.trainsheep.send.ChatRequest;
 import ru.work.trainsheep.send.UserData;
 import ru.work.trainsheep.send.UserRegistrationData;
 import ru.work.trainsheep.send.VacancyRequest;
+import ru.work.trainsheep.service.ChatService;
 import ru.work.trainsheep.service.NotesService;
 import ru.work.trainsheep.service.UserService;
 
@@ -36,7 +38,7 @@ public class SimpleController {
     private NotesService notesService;
 
     @Autowired
-    PasswordEncoder passwordEncoder;
+    private ChatService chatService;
 
     Logger log = LoggerFactory.getLogger(getClass());
 
@@ -63,7 +65,7 @@ public class SimpleController {
     }
 
     @PostMapping("/login")
-    public String register(Model model, Authentication authentication) {
+    public String login(Model model, Authentication authentication) {
         if (authentication != null) {
             val userPass = (UserPasswords) authentication.getPrincipal();
             val user = userService.findByEmail(userPass.getUsername());
@@ -74,19 +76,43 @@ public class SimpleController {
         return "jsonTemplate";
     }
 
+    @PostMapping("/messages")
+    public String messages(Model model, Authentication authentication, @RequestBody ChatRequest request) {
+        if (authentication != null && request != null) {
+            val userPass = (UserPasswords) authentication.getPrincipal();
+            log.info("messages " + userPass.getUsername() + " to " + request);
+            val user = userService.findByEmail(userPass.getUsername());
+            val oldUser = userService.findByEmail(request.getEmail());
+
+            model.addAttribute("status", "ok");
+            model.addAttribute("messages", chatService.getMessages(user, oldUser, request.getPage(), request.getCountMessageOnPage()));
+        } else
+            model.addAttribute("status", "fail");
+        return "jsonTemplate";
+    }
+
+    @PostMapping("/chats")
+    public String chats(Model model, Authentication authentication) {
+        if (authentication != null) {
+            val userPass = (UserPasswords) authentication.getPrincipal();
+
+            model.addAttribute("status", "ok");
+            model.addAttribute("chats", chatService.getChats(userPass.getUsername()));
+        } else
+            model.addAttribute("status", "fail");
+        return "jsonTemplate";
+    }
+
+
+
     @PostMapping("/register")
     public String register(Model model, @RequestBody UserRegistrationData user) {
 
 
         if (user.getEmail() != null && user.getPassword() != null && userPasswordRepository.findByUsername(user.getEmail()) == null) {
-            val userPass = new UserPasswords(user.getEmail(), passwordEncoder.encode(user.getPassword()), Role.USER.toString());
-            userPasswordRepository.save(userPass);
-            val userbd = new User();
-            userbd.setFirstName(user.getName());
-            userbd.setEmail(user.getEmail());
-            userService.addUser(userbd);
+            userService.register(user.getEmail(), user.getPassword(), user.getName());
             model.addAttribute("status", "ok");
-            model.addAttribute("name", userbd.getFirstName());
+            model.addAttribute("name", user.getName());
         } else
             model.addAttribute("status", "fail");
 

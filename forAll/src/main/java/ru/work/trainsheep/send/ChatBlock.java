@@ -14,10 +14,12 @@ import java.util.Date;
 public class ChatBlock {
 
     String name;
+    String email;
     String lastMessage;
     String icon;
     int countUnreadMessages;
-    Date lastMessageDate;
+    long lastMessageDate;
+
     public static final int L = 30;
     public String minMessage(){
 

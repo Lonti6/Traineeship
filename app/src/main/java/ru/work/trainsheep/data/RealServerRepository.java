@@ -45,13 +45,19 @@ public class RealServerRepository extends ServerRepository{
             }
         });
     }
+    private String getCredentials(){
+        val info = UserInfo.getInstance().getRegistrationData();
+        return Credentials.basic(info.getEmail(), info.getPassword());
+    }
 
     @Override
     public void login(UserRegistrationData user, Consumer<String> callbackSuccess, Consumer<Exception> callbackFailure) {
+        val info = UserInfo.getInstance().getRegistrationData();
+        info.setEmail(user.getEmail());
+        info.setPassword(user.getPassword());
         executor.execute(() -> {
-            val info = UserInfo.getInstance().getRegistrationData();
-            val call = api.login(user, Credentials.basic(info.getEmail(), info.getPassword()));
 
+            val call = api.login(getCredentials());
             try {
                 val response = call.execute();
 
@@ -108,12 +114,46 @@ public class RealServerRepository extends ServerRepository{
 
     @Override
     public void getChats(Consumer<List<ChatBlock>> callbackSuccess, Consumer<Exception> callbackFailure) {
+        executor.execute(() -> {
 
+            val call = api.chats(getCredentials());
+
+            try {
+                val response = call.execute();
+
+                val result = response.body();
+                if (result != null && Objects.equals(result.getStatus(), "ok")) {
+                    handler.post(() -> callbackSuccess.accept(result.getChats()));
+                } else
+                    handler.post(() -> callbackFailure.accept(new Exception("status fail")));
+
+            } catch (IOException e) {
+                handler.post(() -> callbackFailure.accept(e));
+                System.err.println(e.getMessage());
+            }
+        });
     }
 
     @Override
     public void getMessages(ChatRequest request, Consumer<ChatResult> callbackSuccess, Consumer<Exception> callbackFailure) {
+        executor.execute(() -> {
 
+            val call = api.messages(request, getCredentials());
+
+            try {
+                val response = call.execute();
+
+                val result = response.body();
+                if (result != null && Objects.equals(result.getStatus(), "ok")) {
+                    handler.post(() -> callbackSuccess.accept(result.getMessages()));
+                } else
+                    handler.post(() -> callbackFailure.accept(new Exception("status fail")));
+
+            } catch (IOException e) {
+                handler.post(() -> callbackFailure.accept(e));
+                System.err.println(e.getMessage());
+            }
+        });
     }
 
 

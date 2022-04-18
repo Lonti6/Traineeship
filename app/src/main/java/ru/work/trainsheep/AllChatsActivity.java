@@ -2,6 +2,7 @@ package ru.work.trainsheep;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,10 +24,12 @@ import ru.work.trainsheep.send.ChatBlock;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class AllChatsActivity extends AppCompatActivity {
 
+    Adapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,12 +42,19 @@ public class AllChatsActivity extends AppCompatActivity {
         RecyclerView rv = findViewById(R.id.rv);
         rv.setLayoutManager(new LinearLayoutManager(this));
 
-        val adapter = new Adapter(new ArrayList<>(), this);
+        adapter = new Adapter(new ArrayList<>(), this);
         rv.setAdapter(adapter);
         rv.addItemDecoration(new SpaceItemDecoration(80));
 
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
         ServerRepository server = ServerRepositoryFactory.getInstance();
         server.getChats(adapter::addAll);
+
     }
 
     static class Adapter extends RecyclerView.Adapter<MyViewHolder>{
@@ -57,9 +67,13 @@ public class AllChatsActivity extends AppCompatActivity {
         }
 
         public void addAll(List<ChatBlock> list){
+            this.list.clear();
             this.list.addAll(list);
-            notifyItemRangeInserted(this.list.size(), list.size());
+            //Log.e("AllChar Act", "addAll: " +list);
+            notifyDataSetChanged();
         }
+
+
 
 
         @Override
@@ -73,7 +87,7 @@ public class AllChatsActivity extends AppCompatActivity {
         public void onBindViewHolder(AllChatsActivity.MyViewHolder holder, int position) {
             val chat = list.get(position);
             holder.message.setText(chat.minMessage());
-            holder.time.setText(format.format(chat.getLastMessageDate()));
+            holder.time.setText(format.format(new Date(chat.getLastMessageDate())));
             holder.header.setText(chat.getName());
             if (chat.getCountUnreadMessages() > 0){
                 holder.bg.setBackgroundResource(R.color.bg_message);
@@ -86,6 +100,7 @@ public class AllChatsActivity extends AppCompatActivity {
             holder.bg.setOnClickListener((view) -> {
                 val intent = new Intent(view.getContext(), MessagesActivity.class);
                 intent.putExtra("name", chat.getName());
+                intent.putExtra("email", chat.getEmail());
                 view.getContext().startActivity(intent);
             });
 

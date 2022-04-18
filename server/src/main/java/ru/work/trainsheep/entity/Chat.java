@@ -1,13 +1,12 @@
 package ru.work.trainsheep.entity;
 
 import lombok.*;
-import org.hibernate.Hibernate;
 import org.springframework.lang.NonNull;
+import ru.work.trainsheep.send.ChatBlock;
 import ru.work.trainsheep.send.ChatMessage;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.Objects;
 
 @Entity
 @Getter
@@ -15,7 +14,7 @@ import java.util.Objects;
 @ToString
 @RequiredArgsConstructor
 @NoArgsConstructor
-public class Message {
+public class Chat {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,25 +32,24 @@ public class Message {
 
     @NonNull
     @Column(length = 1000)
-    private String text;
+    String lastMessage;
 
     @NonNull
-    private Date dateCreate;
+    int countUnreadMessages;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        Message message = (Message) o;
-        return id ==  message.id;
+    @NonNull
+    Date lastMessageDate;
+
+    public ChatBlock toChatBlock() {
+        return new ChatBlock(recipient.getFirstName(), recipient.getEmail(), lastMessage, recipient.getImage(), countUnreadMessages, lastMessageDate.getTime());
     }
 
-    @Override
-    public int hashCode() {
-        return getClass().hashCode();
+    public void clearUnreadMessages() {
+        countUnreadMessages = 0;
     }
-
-    public ChatMessage toChatMessage(){
-        return new ChatMessage(sender.getEmail(), text, dateCreate.getTime());
+    public void addUnreadMessage(String text, Date date) {
+        setLastMessage(text);
+        countUnreadMessages += 1;
+        setLastMessageDate(date);
     }
 }
