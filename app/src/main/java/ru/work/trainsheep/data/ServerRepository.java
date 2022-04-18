@@ -22,6 +22,8 @@ public abstract class ServerRepository {
 
     public abstract void getMessages(ChatRequest request, Consumer<ChatResult> callbackSuccess, Consumer<Exception> callbackFailure);
 
+    public abstract void getSendMessage(SendMessageRequest request, Consumer<ChatMessage> callbackSuccess, Consumer<Exception> callbackFailure);
+
     public abstract boolean isLogin();
 
 
@@ -48,6 +50,14 @@ public abstract class ServerRepository {
     public void getMessages(ChatRequest request, Consumer<ChatResult> callbackSuccess){
         getMessages(request, callbackSuccess, Throwable::printStackTrace);
     }
+
+    public void getSendMessage(SendMessageRequest request, Consumer<ChatMessage> callbackSuccess){
+        getSendMessage(request, callbackSuccess, Throwable::printStackTrace);
+    }
+
+
+
+
 
 
 }

@@ -19,6 +19,7 @@ import ru.work.trainsheep.data.ServerRepositoryFactory;
 import ru.work.trainsheep.data.UserInfo;
 import ru.work.trainsheep.send.ChatMessage;
 import ru.work.trainsheep.send.ChatRequest;
+import ru.work.trainsheep.send.SendMessageRequest;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -91,9 +92,14 @@ public class MessagesActivity extends AppCompatActivity {
     }
 
     private void sendMessage(Adapter adapter, RecyclerView recyclerView, EditText text) {
-        val mes = new ChatMessage(UserInfo.getInstance().getData().getEmail(), text.getText().toString(), new Date().getTime());
+        val server = ServerRepositoryFactory.getInstance();
+        val message = text.getText().toString();
+        val mes = new ChatMessage(UserInfo.getInstance().getData().getEmail(), message, 0);
         adapter.add(mes);
         recyclerView.smoothScrollToPosition(adapter.size() - 1);
+        server.getSendMessage(new SendMessageRequest(email, message), (chatMessage -> {
+            adapter.update(chatMessage);
+        }));
         text.setText("");
     }
 
@@ -146,13 +152,26 @@ public class MessagesActivity extends AppCompatActivity {
             }
 
             holder.message.setText(message.getMessage());
-            holder.time.setText(format.format(new Date(message.getDate())));
+            if (message.getDate() != 0) {
+                holder.time.setText(format.format(new Date(message.getDate())));
+            } else {
+                holder.time.setText("...");
+            }
 
         }
 
         @Override
         public int getItemCount() {
             return list.size();
+        }
+
+        public void update(ChatMessage chatMessage) {
+            for(int i = list.size() - 1; i >= 0 && list.get(i).getDate() == 0; i--){
+                if (list.get(i).getMessage().equals(chatMessage.getMessage())){
+                    list.get(i).setDate(chatMessage.getDate());
+                    notifyItemChanged(i);
+                }
+            }
         }
     }
 

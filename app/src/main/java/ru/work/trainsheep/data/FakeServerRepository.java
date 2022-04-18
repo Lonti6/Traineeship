@@ -10,6 +10,7 @@ import ru.work.trainsheep.DataGenerator;
 import ru.work.trainsheep.send.*;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ExecutorService;
@@ -83,6 +84,13 @@ public class FakeServerRepository extends ServerRepository {
     public void getMessages(ChatRequest request, Consumer<ChatResult> callbackSuccess, Consumer<Exception> callbackFailure) {
         sleepAndRun(200,
                 () -> generator.generateChatResult(request.getPage(), request.getCountMessageOnPage()),
+                callbackSuccess);
+    }
+
+    @Override
+    public void getSendMessage(SendMessageRequest request, Consumer<ChatMessage> callbackSuccess, Consumer<Exception> callbackFailure) {
+        sleepAndRun(500,
+                () -> new ChatMessage(request.getEmail(), request.getText(), new Date().getTime()),
                 callbackSuccess);
     }
 
