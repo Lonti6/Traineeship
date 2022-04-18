@@ -34,7 +34,7 @@ public class AllChatsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_left_panel);
         final FlowingDrawer drawer = Util.connectActivityLayout(this, R.layout.activity_all_chats);
 
-        findViewById(R.id.user_button).setOnClickListener(v -> drawer.openMenu(true));
+        findViewById(R.id.menuBut).setOnClickListener(v -> drawer.openMenu(true));
 
         RecyclerView rv = findViewById(R.id.rv);
         rv.setLayoutManager(new LinearLayoutManager(this));

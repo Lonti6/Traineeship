@@ -32,19 +32,23 @@ public class CreateActivity extends AppCompatActivity {
         Util.setEditTextFocusListener(this, R.id.workTimeField);
         Util.setEditTextCreateFocusListener(this, R.id.descriptionField);
 
-        AutoCompleteTextView mAutoCompleteTextView;
         final String[] mCats = { "Мурзик", "Рыжик", "Барсик", "Борис",
                 "Мурзилка", "Мурка", "Муму", "Матроскин" };
 
+        DataGenerator dataGenerator = new DataGenerator();
 
-        mAutoCompleteTextView = findViewById(R.id.competenciesField);
-        mAutoCompleteTextView.setAdapter(new ArrayAdapter<>(this,
+        AutoCompleteTextView autoCompleteTags = findViewById(R.id.competenciesField);
+        autoCompleteTags.setAdapter(new ArrayAdapter<>(this,
                 android.R.layout.simple_dropdown_item_1line, mCats));
 
-        FlowLayout tagsField = (FlowLayout)findViewById(R.id.tags_field);
+        AutoCompleteTextView autoCompleteCities = findViewById(R.id.citiField);
+        autoCompleteCities.setAdapter(new ArrayAdapter<>(this,
+                android.R.layout.simple_dropdown_item_1line, dataGenerator.getCities()));
+
+        FlowLayout tagsField = findViewById(R.id.tags_field);
         tagsField.setVisibility(View.GONE);
 
-        TextView textView = (TextView)findViewById(R.id.competenciesField);
+        TextView textView = findViewById(R.id.competenciesField);
 
         findViewById(R.id.addBut).setOnClickListener(v -> {
             if (textView.getText().toString().trim().length()!=0) {

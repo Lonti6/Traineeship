@@ -25,13 +25,14 @@ public class SettingsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_settings);
+        setContentView(R.layout.activity_left_panel);
+        final FlowingDrawer drawer = Util.connectActivityLayout(this, R.layout.activity_settings);
 
-        mDrawer = (FlowingDrawer) findViewById(R.id.drawerlayout);
+        mDrawer = findViewById(R.id.drawerlayout);
         mDrawer.setTouchMode(ElasticDrawer.TOUCH_MODE_FULLSCREEN);
         Util.prepareLeftPanel(this);
 
-        ((ImageButton)findViewById(R.id.user_button)).setOnClickListener(v -> mDrawer.openMenu(true));
+        (findViewById(R.id.menuBut)).setOnClickListener(v -> drawer.openMenu(true));
 
         StickySwitch stickySwitchMessage = (StickySwitch) findViewById(R.id.sticky_switch_message);
         initToggleBut(stickySwitchMessage);

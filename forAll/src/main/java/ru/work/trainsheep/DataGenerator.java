@@ -20,6 +20,7 @@ public class DataGenerator {
     public final List<String> names;
     public final List<String> messages;
     public final List<String> icons;
+    public final List<String> cities;
     public final Random random = new Random();
 
     public DataGenerator() {
@@ -450,6 +451,11 @@ public class DataGenerator {
                 "https://static.wikia.nocookie.net/villains/images/4/4c/Alaric.jpg/revision/latest?cb=20130907122826",
                 "http://s01.riotpixels.net/data/1a/ea/1aeaa527-bc9b-43fb-ab97-cb455b4c2be9.jpg.2160p.jpg/artwork.might-and-magic-heroes-7-trial-by-fire.3246x2160.2016-05-03.9.jpg"
         );
+        cities = Arrays.asList("Москва", "Санкт-Петербург", "Новосибирск", "Екатеринбург", "Казань",
+                            "Нижний Новгород", "Челябинск", "Самара", "Омск", "Ростов-на-Дону", "Уфа",
+                            "Красноярск", "Воронеж", "Пермь", "Волгоград", "Краснодар", "Саратов", "Тюмень",
+                            "Тольятти", "Ижевск", "Барнаул", "Ульяновск", "Иркутск", "Хабаровск", "Махачкала",
+                            "Ярославль", "Владивосток", "Оренбург", "Томск", "Кемерово", "Семферопль", "Севастопль");
     }
 
     public VacancyNote generateVacancyNote(List<String> tags) {
@@ -545,5 +551,10 @@ public class DataGenerator {
 
     public <T> T getRandom(List<T> list) {
         return list.get(random.nextInt(list.size()));
+    }
+
+    public List<String> getCities()
+    {
+        return cities;
     }
 }

@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
             setContentView(R.layout.activity_left_panel);
             final FlowingDrawer drawer = Util.connectActivityLayout(this, R.layout.activity_search);
 
-            ((ImageButton)findViewById(R.id.user_button)).setOnClickListener(v -> drawer.openMenu(true));
+            //findViewById(R.id.menuBut).setOnClickListener(v -> drawer.openMenu(true));
 
             val adapter = new Adapters.VacancyItemAdapter(new ArrayList<>());
             RecyclerView recyclerView = findViewById(R.id.rv);
