@@ -47,9 +47,9 @@ public class SettingsActivity extends AppCompatActivity {
         initToggleBut(stickySwitchVacansy);
 
         stickySwitchVacansy.setOnSelectedChangeListener((direction, s) -> {
-            if (direction.name().equals("RIGHT"))
+            if (direction.equals(Direction.RIGHT))
                 stickySwitchVacansy.setSliderBackgroundColor(getColor(R.color.light_green));
-            if (direction.name().equals("LEFT"))
+            if (direction.equals(Direction.LEFT))
                 stickySwitchVacansy.setSliderBackgroundColor(getColor(R.color.light_gray));
         });
 
@@ -63,9 +63,9 @@ public class SettingsActivity extends AppCompatActivity {
 
     private void initToggleBut(StickySwitch stickySwitch)
     {
-        if (stickySwitch.getDirection().name().equals("RIGHT"))
+        if (stickySwitch.getDirection().equals(Direction.RIGHT))
             stickySwitch.setSliderBackgroundColor(getColor(R.color.light_green));
-        if (stickySwitch.getDirection().name().equals("LEFT"))
+        if (stickySwitch.getDirection().equals(Direction.LEFT))
             stickySwitch.setSliderBackgroundColor(getColor(R.color.light_gray));
     }
 
