@@ -18,8 +18,6 @@ import ru.work.trainsheep.send.VacancyRequest;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
             setContentView(R.layout.activity_left_panel);
             final FlowingDrawer drawer = Util.connectActivityLayout(this, R.layout.activity_search);
 
-            ((ImageButton)findViewById(R.id.user_button)).setOnClickListener(v -> drawer.openMenu(true));
+            findViewById(R.id.menuBut).setOnClickListener(v -> drawer.openMenu(true));
 
             val adapter = new Adapters.VacancyItemAdapter(new ArrayList<>());
             RecyclerView recyclerView = findViewById(R.id.rv);
@@ -41,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
             recyclerView.setAdapter(adapter);
             recyclerView.addItemDecoration(new SpaceItemDecoration(90));
-            ((ImageButton)findViewById(R.id.listButton)).setOnClickListener(v ->
+            (findViewById(R.id.listButton)).setOnClickListener(v ->
                     ((RecyclerView)findViewById(R.id.rv)).smoothScrollToPosition(0));
 
 

@@ -25,13 +25,14 @@ public class SettingsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_settings);
+        setContentView(R.layout.activity_left_panel);
+        final FlowingDrawer drawer = Util.connectActivityLayout(this, R.layout.activity_settings);
 
-        mDrawer = (FlowingDrawer) findViewById(R.id.drawerlayout);
+        mDrawer = findViewById(R.id.drawerlayout);
         mDrawer.setTouchMode(ElasticDrawer.TOUCH_MODE_FULLSCREEN);
         Util.prepareLeftPanel(this);
 
-        ((ImageButton)findViewById(R.id.user_button)).setOnClickListener(v -> mDrawer.openMenu(true));
+        (findViewById(R.id.menuBut)).setOnClickListener(v -> drawer.openMenu(true));
 
         StickySwitch stickySwitchMessage = (StickySwitch) findViewById(R.id.sticky_switch_message);
         initToggleBut(stickySwitchMessage);
@@ -47,9 +48,9 @@ public class SettingsActivity extends AppCompatActivity {
         initToggleBut(stickySwitchVacansy);
 
         stickySwitchVacansy.setOnSelectedChangeListener((direction, s) -> {
-            if (direction.name().equals("RIGHT"))
+            if (direction.equals(Direction.RIGHT))
                 stickySwitchVacansy.setSliderBackgroundColor(getColor(R.color.light_green));
-            if (direction.name().equals("LEFT"))
+            if (direction.equals(Direction.LEFT))
                 stickySwitchVacansy.setSliderBackgroundColor(getColor(R.color.light_gray));
         });
 
@@ -63,9 +64,9 @@ public class SettingsActivity extends AppCompatActivity {
 
     private void initToggleBut(StickySwitch stickySwitch)
     {
-        if (stickySwitch.getDirection().name().equals("RIGHT"))
+        if (stickySwitch.getDirection().equals(Direction.RIGHT))
             stickySwitch.setSliderBackgroundColor(getColor(R.color.light_green));
-        if (stickySwitch.getDirection().name().equals("LEFT"))
+        if (stickySwitch.getDirection().equals(Direction.LEFT))
             stickySwitch.setSliderBackgroundColor(getColor(R.color.light_gray));
     }
 

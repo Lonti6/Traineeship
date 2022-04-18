@@ -38,6 +38,8 @@
         <activity
             android:name=".CreateActivity"
             android:exported="true"/>
+        <activity android:name=".EditUserDataActivity"
+            android:exported="true"/>
         <activity
                 android:name=".MainActivity"
                 android:exported="true"

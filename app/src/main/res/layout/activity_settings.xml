@@ -5,117 +5,128 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <com.mxn.soul.flowingdrawer_core.FlowingDrawer
-        android:id="@+id/drawerlayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:clipChildren="false"
-        android:clipToPadding="false"
-        app:edPosition="1"
-        app:edMenuSize="260dp"
-        app:edMenuBackground="@color/main_green">
-    <RelativeLayout
-        android:id="@+id/content"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <!--Начало контента страницы-->
-        <ImageButton
-            android:id="@+id/user_button"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/ic_zaticha"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="MissingConstraints" />
+    <TextView
+        android:id="@+id/textView4"
+        style="@style/AdvertHeadingText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="Настройки"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="140dp"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Настройки"
-            style="@style/AdvertHeadingText"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="150dp"
-            />
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:orientation="vertical"
+        android:layout_marginTop="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="250dp">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginLeft="30dp">
-                <io.ghyeok.stickyswitch.widget.StickySwitch
-                        android:id="@+id/sticky_switch_vacansy"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:ss_animationDuration="600"
-                        app:ss_animationType="line"
-                        app:ss_iconPadding="15dp"
-                        app:ss_iconSize="8dp"
-                        app:ss_sliderBackgroundColor="@color/light_green"
-                        app:ss_switchColor="@color/main_green"/>
+            android:layout_marginLeft="30dp"
+            android:orientation="horizontal">
 
-                <TextView
-                    style="@style/SomeStandartText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="2dp"
-                    android:text="Уведомления о новых вакансиях" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
+            <io.ghyeok.stickyswitch.widget.StickySwitch
+                android:id="@+id/sticky_switch_vacansy"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginLeft="30dp">
-                <io.ghyeok.stickyswitch.widget.StickySwitch
-                    android:id="@+id/sticky_switch_message"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:ss_animationDuration="600"
-                    app:ss_animationType="line"
-                    app:ss_iconPadding="15dp"
-                    app:ss_iconSize="8dp"
-                    app:ss_sliderBackgroundColor="@color/light_green"
-                    app:ss_switchColor="@color/main_green"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginLeft="15dp"
-                    android:text="Уведомления о новых вакансиях"
-                    style="@style/SomeStandartText"/>
-            </LinearLayout>
+                app:ss_animationDuration="600"
+                app:ss_animationType="line"
+                app:ss_iconPadding="15dp"
+                app:ss_iconSize="8dp"
+                app:ss_sliderBackgroundColor="@color/light_green"
+                app:ss_switchColor="@color/main_green" />
+
+            <TextView
+                style="@style/SomeStandartText"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="2dp"
+                android:text="Уведомления о новых вакансиях" />
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/delete_text"
-            style="@style/GreenBoldText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="50dp"
-            android:text="Удалить аккаунт?" />
-        <!--Конец контента сраницы-->
-    </RelativeLayout>
-
-        <!--Содержимое панели начало-->
-        <com.mxn.soul.flowingdrawer_core.FlowingMenuLayout
-            android:id="@+id/menulayout"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/main_green">
-            <include layout="@layout/left_panel"/>
-        </com.mxn.soul.flowingdrawer_core.FlowingMenuLayout>
-        <!--Содержимое панели конец-->
-    </com.mxn.soul.flowingdrawer_core.FlowingDrawer>
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:orientation="horizontal">
 
+            <io.ghyeok.stickyswitch.widget.StickySwitch
+                android:id="@+id/sticky_switch_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:ss_animationDuration="600"
+                app:ss_animationType="line"
+                app:ss_iconPadding="15dp"
+                app:ss_iconSize="8dp"
+                app:ss_sliderBackgroundColor="@color/light_green"
+                app:ss_switchColor="@color/main_green" />
+
+            <TextView
+                style="@style/SomeStandartText"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="5dp"
+                android:text="Уведомления о новых вакансиях" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/delete_text"
+        style="@style/GreenBoldText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="120dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="Удалить аккаунт?"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@drawable/bg_header"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RelativeLayout
+            android:id="@+id/menuBut"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="10dp"
+                app:srcCompat="@drawable/three_line_icon" />
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/headerLineBottom"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

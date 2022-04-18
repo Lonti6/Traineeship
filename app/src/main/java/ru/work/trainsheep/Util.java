@@ -59,49 +59,49 @@ public class Util {
         if (!isCompany)
             activity.findViewById(R.id.create_line).setVisibility(View.GONE);
 
-        ((LinearLayout) activity.findViewById(R.id.search_line)).setOnClickListener(v -> {
+        (activity.findViewById(R.id.search_line)).setOnClickListener(v -> {
             Intent intent = new Intent(activity, MainActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
             activity.startActivity(intent);
             drawer.closeMenu(false);
         });
 
-        ((LinearLayout) activity.findViewById(R.id.favorite_line)).setOnClickListener(v -> {
+        (activity.findViewById(R.id.favorite_line)).setOnClickListener(v -> {
             Intent intent = new Intent(activity, FavoriteActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
             activity.startActivity(intent);
             drawer.closeMenu(false);
         });
 
-        ((LinearLayout) activity.findViewById(R.id.create_line)).setOnClickListener(v -> {
+        (activity.findViewById(R.id.create_line)).setOnClickListener(v -> {
             Intent intent = new Intent(activity, CreateActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
             activity.startActivity(intent);
             drawer.closeMenu(false);
         });
 
-        ((LinearLayout) activity.findViewById(R.id.message_line)).setOnClickListener(v -> {
+        (activity.findViewById(R.id.message_line)).setOnClickListener(v -> {
             Intent intent = new Intent(activity, AllChatsActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
             activity.startActivity(intent);
             drawer.closeMenu(false);
         });
 
-        ((LinearLayout) activity.findViewById(R.id.profile_line)).setOnClickListener(v -> {
+        (activity.findViewById(R.id.profile_line)).setOnClickListener(v -> {
             Intent intent = new Intent(activity, ProfileActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
             activity.startActivity(intent);
             drawer.closeMenu(false);
         });
 
-        ((LinearLayout) activity.findViewById(R.id.settings_line)).setOnClickListener(v -> {
+        (activity.findViewById(R.id.settings_line)).setOnClickListener(v -> {
             Intent intent = new Intent(activity, SettingsActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
             activity.startActivity(intent);
             drawer.closeMenu(false);
         });
 
-        ((LinearLayout) activity.findViewById(R.id.contacts_line)).setOnClickListener(v -> {
+        (activity.findViewById(R.id.contacts_line)).setOnClickListener(v -> {
             Log.e("LeftDrawer", "Поля \"Наши контакты\" ещё не существует");
             drawer.closeMenu(false);
         });

@@ -1,6 +1,10 @@
 package ru.work.trainsheep;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.*;
@@ -12,7 +16,13 @@ import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
 
 import org.apmem.tools.layouts.FlowLayout;
 
+import java.io.IOException;
+
+import lombok.val;
+
 public class ProfileActivity extends AppCompatActivity {
+
+    static final int GALLERY_REQUEST = 1;
 
     FlowLayout flowLayout;
     DataGenerator generator;
@@ -24,8 +34,10 @@ public class ProfileActivity extends AppCompatActivity {
         final FlowingDrawer mDrawer = Util.connectActivityLayout(this, R.layout.activity_profile);
         generator = new DataGenerator();
 
-        ((ScrollView)findViewById(R.id.scroller)).setOnScrollChangeListener(new ScrollListeners.MyScrollListener(findViewById(R.id.header),
-                getResources().getDrawable(R.drawable.bg_header)));
+        findViewById(R.id.scroller).setOnScrollChangeListener(new ScrollListeners.MyScrollListener(findViewById(R.id.header),
+                getDrawable(R.drawable.bg_header)));
+
+        findViewById(R.id.editBut).setOnClickListener(v -> LoadActivity(mDrawer));
 
         BottomSheetBehavior.from(findViewById(R.id.sheet)).setPeekHeight(0);
         Util.prepareLeftPanel(this);
@@ -62,6 +74,41 @@ public class ProfileActivity extends AppCompatActivity {
                 }
         });
 
+        findViewById(R.id.changeIconBut).setOnClickListener(v -> {
+            Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
+            photoPickerIntent.setType("image/*");
+            startActivityForResult(photoPickerIntent, GALLERY_REQUEST);
+        });
+
+    }
+
+    private void LoadActivity(FlowingDrawer drawer)
+    {
+        Intent intent = new Intent(this, EditUserDataActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        this.startActivity(intent);
+        drawer.closeMenu(false);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent imageReturnedIntent) {
+        super.onActivityResult(requestCode, resultCode, imageReturnedIntent);
+
+        Bitmap bitmap = null;
+        ImageView imageView = findViewById(R.id.icon_user);
+
+        switch(requestCode) {
+            case GALLERY_REQUEST:
+                if(resultCode == RESULT_OK){
+                    Uri selectedImage = imageReturnedIntent.getData();
+                    try {
+                        bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), selectedImage);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    imageView.setImageBitmap(bitmap);
+                }
+        }
     }
 
     class MyListener implements View.OnClickListener
