@@ -8,6 +8,6 @@ import lombok.*;
 public class ChatRequest {
     @NonNull
     String email;
-    int page = 1;
+    int page = 0;
     int countMessageOnPage = 20;
 }

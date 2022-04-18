@@ -16,10 +16,7 @@ import ru.work.trainsheep.entity.Role;
 import ru.work.trainsheep.entity.User;
 import ru.work.trainsheep.entity.UserPasswords;
 import ru.work.trainsheep.repository.UserPasswordRepository;
-import ru.work.trainsheep.send.ChatRequest;
-import ru.work.trainsheep.send.UserData;
-import ru.work.trainsheep.send.UserRegistrationData;
-import ru.work.trainsheep.send.VacancyRequest;
+import ru.work.trainsheep.send.*;
 import ru.work.trainsheep.service.ChatService;
 import ru.work.trainsheep.service.NotesService;
 import ru.work.trainsheep.service.UserService;
@@ -83,9 +80,25 @@ public class SimpleController {
             log.info("messages " + userPass.getUsername() + " to " + request);
             val user = userService.findByEmail(userPass.getUsername());
             val oldUser = userService.findByEmail(request.getEmail());
+            val messages = chatService.getMessages(user, oldUser, request.getPage(), request.getCountMessageOnPage());
+            log.info("messages size" + messages.getMessages().size() + " " + messages);
+            model.addAttribute("status", "ok");
+            model.addAttribute("messages", messages);
+        } else
+            model.addAttribute("status", "fail");
+        return "jsonTemplate";
+    }
+
+    @PostMapping("/send-message")
+    public String messages(Model model, Authentication authentication, @RequestBody SendMessageRequest request) {
+        if (authentication != null && request != null) {
+            val userPass = (UserPasswords) authentication.getPrincipal();
+            log.info("send messages from " + userPass.getUsername() + " to " + request);
+            val user = userService.findByEmail(userPass.getUsername());
+            val oldUser = userService.findByEmail(request.getEmail());
 
             model.addAttribute("status", "ok");
-            model.addAttribute("messages", chatService.getMessages(user, oldUser, request.getPage(), request.getCountMessageOnPage()));
+            model.addAttribute("message", chatService.sendMessage(user, oldUser, request.getText()));
         } else
             model.addAttribute("status", "fail");
         return "jsonTemplate";

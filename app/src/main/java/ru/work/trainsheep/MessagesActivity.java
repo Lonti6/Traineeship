@@ -84,10 +84,11 @@ public class MessagesActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         val server = ServerRepositoryFactory.getInstance();
-        server.getMessages(new ChatRequest(email, 1, 20), (res) -> {
+        server.getMessages(new ChatRequest(email, 0, 20), (res) -> {
             Log.i(getClass().getSimpleName(), "onCreate: " + res.getMessages() );
             adapter.addAll(res.getMessages(), true);
-            recyclerView.smoothScrollToPosition(adapter.size() - 1);
+            if (adapter.size() > 0)
+                recyclerView.smoothScrollToPosition(adapter.size() - 1);
         });
     }
 
