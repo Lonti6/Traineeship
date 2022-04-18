@@ -18,8 +18,6 @@ import ru.work.trainsheep.send.VacancyRequest;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
             recyclerView.setAdapter(adapter);
             recyclerView.addItemDecoration(new SpaceItemDecoration(90));
-            ((ImageButton)findViewById(R.id.listButton)).setOnClickListener(v ->
+            (findViewById(R.id.listButton)).setOnClickListener(v ->
                     ((RecyclerView)findViewById(R.id.rv)).smoothScrollToPosition(0));
 
 
