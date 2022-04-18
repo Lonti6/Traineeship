@@ -7,7 +7,7 @@ import lombok.*;
 @AllArgsConstructor
 public class ChatRequest {
     @NonNull
-    String name;
+    String email;
     int page = 1;
     int countMessageOnPage = 20;
 }
