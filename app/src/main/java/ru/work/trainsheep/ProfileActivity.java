@@ -8,11 +8,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
-import com.mxn.soul.flowingdrawer_core.ElasticDrawer;
 import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
 
 import org.apmem.tools.layouts.FlowLayout;
-import ru.work.trainsheep.data.FakeServerRepository;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -24,9 +22,10 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_left_panel);
         final FlowingDrawer mDrawer = Util.connectActivityLayout(this, R.layout.activity_profile);
-        findViewById(R.id.user_button).setOnClickListener(v -> mDrawer.openMenu(true));
         generator = new DataGenerator();
 
+        ((ScrollView)findViewById(R.id.scroller)).setOnScrollChangeListener(new ScrollListeners.MyScrollListener(findViewById(R.id.header),
+                getResources().getDrawable(R.drawable.bg_header)));
 
         BottomSheetBehavior.from(findViewById(R.id.sheet)).setPeekHeight(0);
         Util.prepareLeftPanel(this);
@@ -39,6 +38,8 @@ public class ProfileActivity extends AppCompatActivity {
 
         findViewById(R.id.tags_but).setOnClickListener(myListener);
         findViewById(R.id.stages_but).setOnClickListener(myListener);
+
+        findViewById(R.id.menuBut).setOnClickListener(v -> mDrawer.openMenu(true));
 
         String q = "";
         for (int i = 0; i <10000; i++)
@@ -69,7 +70,7 @@ public class ProfileActivity extends AppCompatActivity {
         public void onClick(View v) {
             if (v.getTag().equals("tags"))
             {
-                ((TextView)findViewById(R.id.category_text)).setText("Квалификация");
+                ((TextView)findViewById(R.id.category_text)).setText(((Button)v).getText());
                 flowLayout.removeAllViews();
                 BottomSheetBehavior.from(findViewById(R.id.sheet)).setPeekHeight(600, true);
                 for (int i = 0; i<((int)(Math.random()*20)+2); i++)
@@ -81,7 +82,7 @@ public class ProfileActivity extends AppCompatActivity {
             }
             if (v.getTag().equals("stages"))
             {
-                ((TextView)findViewById(R.id.category_text)).setText("Прошлые стажировки");
+                ((TextView)findViewById(R.id.category_text)).setText(((Button)v).getText());
                 flowLayout.removeAllViews();
                 for (int i = 0; i<((int)(Math.random()*20)+2); i++)
                 {

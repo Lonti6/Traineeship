@@ -54,14 +54,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/stages"
-                        style="@style/SmallGrayTextLeftPanel"/>
-
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         android:layout_marginTop="10dp"
@@ -69,7 +63,7 @@
                         android:id="@+id/search_line">
                         <ImageView
                             style="@style/LeftPanelIcon"
-                            android:background="@drawable/search_icon_white"/>
+                            android:background="@drawable/loupe_white_icon"/>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -78,7 +72,7 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         android:layout_marginTop="10dp"
@@ -94,29 +88,36 @@
                             style="@style/SmallWhiteTextLeftPanel"/>
                     </LinearLayout>
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:id="@+id/create_line">
+                        <ImageView
+                            style="@style/LeftPanelIcon"
+                            android:background="@drawable/round_plus_icon_white"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Создание вакансии"
+                            style="@style/SmallWhiteTextLeftPanel"/>
+                    </LinearLayout>
+
                 </LinearLayout>
                 <!--Конец подпункта "стажировки"-->
 
-                <!--Линия-->
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@drawable/white_rect"
-                    android:layout_marginTop="15dp"/>
+
 
                 <!--Начало подпункта "важное"-->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Важное"
-                        style="@style/SmallGrayTextLeftPanel"/>
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         android:layout_marginTop="10dp"
@@ -133,7 +134,7 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         android:layout_marginTop="10dp"
@@ -157,13 +158,12 @@
                     android:layout_height="1dp"
                     android:background="@drawable/white_rect"
                     android:layout_marginTop="15dp"/>
-                <!--Начало подпункта "прочее"-->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         android:layout_marginTop="10dp"
@@ -180,7 +180,7 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         android:layout_marginTop="10dp"

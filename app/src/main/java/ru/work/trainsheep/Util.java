@@ -7,6 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+
+import androidx.constraintlayout.widget.ConstraintLayout;
+
 import com.mxn.soul.flowingdrawer_core.ElasticDrawer;
 import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
 
@@ -14,14 +17,28 @@ import java.util.regex.Pattern;
 
 public class Util {
 
+    public static boolean isCompany = true;
+
     static void setEditTextFocusListener(Activity activity, int... ids) {
         for (int id : ids) {
             View view = activity.findViewById(id);
             view.setOnFocusChangeListener((v, hasFocus) -> {
                 if (v.hasFocus())
-                    ((RelativeLayout) (v.getParent())).setBackgroundResource(R.drawable.border_style_color);
+                    ((ConstraintLayout) (v.getParent())).setBackgroundResource(R.drawable.border_style_color);
                 else
-                    ((RelativeLayout) (v.getParent())).setBackgroundResource(R.drawable.border_style_gray);
+                    ((ConstraintLayout) (v.getParent())).setBackgroundResource(R.drawable.border_style_gray);
+            });
+        }
+    }
+
+    static void setEditTextCreateFocusListener(Activity activity, int... ids) {
+        for (int id : ids) {
+            View view = activity.findViewById(id);
+            view.setOnFocusChangeListener((v, hasFocus) -> {
+                if (v.hasFocus())
+                    ((ConstraintLayout) (v.getParent())).setBackgroundResource(R.drawable.half_round_border_style_color);
+                else
+                    ((ConstraintLayout) (v.getParent())).setBackgroundResource(R.drawable.half_round_border_style_color);
             });
         }
     }
@@ -39,6 +56,9 @@ public class Util {
 
     public static void prepareLeftPanel(Activity activity) {
         final FlowingDrawer drawer = activity.findViewById(R.id.drawerlayout);
+        if (!isCompany)
+            activity.findViewById(R.id.create_line).setVisibility(View.GONE);
+
         ((LinearLayout) activity.findViewById(R.id.search_line)).setOnClickListener(v -> {
             Intent intent = new Intent(activity, MainActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
@@ -48,6 +68,13 @@ public class Util {
 
         ((LinearLayout) activity.findViewById(R.id.favorite_line)).setOnClickListener(v -> {
             Intent intent = new Intent(activity, FavoriteActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+            activity.startActivity(intent);
+            drawer.closeMenu(false);
+        });
+
+        ((LinearLayout) activity.findViewById(R.id.create_line)).setOnClickListener(v -> {
+            Intent intent = new Intent(activity, CreateActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
             activity.startActivity(intent);
             drawer.closeMenu(false);

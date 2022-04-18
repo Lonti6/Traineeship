@@ -2,7 +2,8 @@ package ru.work.trainsheep.data;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import androidx.preference.PreferenceManager;
+import android.preference.PreferenceManager;
+
 import lombok.Value;
 import lombok.val;
 import ru.work.trainsheep.send.UserData;
