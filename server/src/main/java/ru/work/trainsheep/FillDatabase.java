@@ -46,8 +46,15 @@ public class FillDatabase implements InitializingBean {
     @Override
     public void afterPropertiesSet() {
 
-        createUser("admin@admin.ru", "password", "Админ", "https://ru.freepik.com/free-photo/rear-view-of-programmer-working-all-night-long_5698334.htm#query=system%20administrator&position=1&from_view=keyword");
-        createUser("nikita@ok.ru", "password", "Никита", "https://yt3.ggpht.com/a/AATXAJxxVTIrOzmAMHijjkT57-UJ83SSYlnLrlodfA=s900-c-k-c0xffffffff-no-rj-mo");
+        createUser("admin@admin.ru",
+                "password",
+                "Админ",
+                "https://ru.freepik.com/free-photo/rear-view-of-programmer-working-all-night-long_5698334.htm#query=system%20administrator&position=1&from_view=keyword");
+        createUser(
+                "nikita@ok.ru",
+                "password",
+                "Никита",
+                "https://www.pngitem.com/pimgs/m/177-1772631_psyduck-png-9-png-image-psyduck-pokemon.png");
         createUser("diana@ya.ru", "password", "Анна", "https://cs5.livemaster.ru/storage/8d/58/15676c2e3677f826dd7aac5a50yl--materialy-dlya-tvorchestva-organza-shelkovaya-chernaya.jpg");
         createUser("okki@lev.ru", "nopassword", "Лев", "https://yt3.ggpht.com/a/AATXAJxxVTIrOzmAMHijjkT57-UJ83SSYlnLrlodfA=s900-c-k-c0xffffffff-no-rj-mo");
 
