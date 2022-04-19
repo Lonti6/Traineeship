@@ -19,6 +19,7 @@ import org.apmem.tools.layouts.FlowLayout;
 import java.io.IOException;
 
 import lombok.val;
+import ru.work.trainsheep.data.UserInfo;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -38,6 +39,9 @@ public class ProfileActivity extends AppCompatActivity {
                 getDrawable(R.drawable.bg_header)));
 
         findViewById(R.id.editBut).setOnClickListener(v -> LoadActivity(mDrawer));
+
+        val instance = UserInfo.getInstance().getData();
+        ((TextView)findViewById(R.id.name_user_profile)).setText(instance.getFirstName() + " " + instance.getLastName());
 
         BottomSheetBehavior.from(findViewById(R.id.sheet)).setPeekHeight(0);
         Util.prepareLeftPanel(this);

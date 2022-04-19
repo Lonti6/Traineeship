@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 
@@ -17,6 +18,7 @@ import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
 
 import java.util.regex.Pattern;
 
+import lombok.val;
 import ru.work.trainsheep.data.UserInfo;
 import ru.work.trainsheep.send.UserData;
 
@@ -64,6 +66,9 @@ public class Util {
 
         /*Glide.with(activity.getApplicationContext()).load(chat.getIcon()).circleCrop()
                 .into((ImageView) activity.findViewById(R.id.icon_user));*/
+
+        val instance = UserInfo.getInstance().getData();
+        ((TextView)activity.findViewById(R.id.name_user)).setText(instance.getFirstName() + " " + instance.getLastName());
 
         if (!isCompany)
             activity.findViewById(R.id.create_line).setVisibility(View.GONE);

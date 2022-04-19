@@ -7,6 +7,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.util.ArrayList;
+import java.util.Date;
+
 import lombok.val;
 import ru.work.trainsheep.data.ServerRepository;
 import ru.work.trainsheep.data.ServerRepositoryFactory;
@@ -22,6 +26,8 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_autorization);
         findViewById(R.id.enter).setOnClickListener(this::checkValidEmailAndPassword);
         findViewById(R.id.open_register).setOnClickListener(this::openRegistrationActivity);
+
+        prepareUser();
 
         Util.setEditTextFocusListener(this, R.id.mail_field, R.id.password_field);
         emailView = findViewById(R.id.mail_field);
@@ -68,5 +74,29 @@ public class LoginActivity extends AppCompatActivity {
     public void openRegistrationActivity(View view) {
         Intent intent = new Intent(getApplicationContext(), RegistrationActivity.class);
         startActivity(intent);
+    }
+
+    public void prepareUser()
+    {
+        DataGenerator dataGenerator = new DataGenerator();
+        val instance = UserInfo.getInstance().getData();
+        instance.setLastName("Жильцов");
+        instance.setPatronymic("Сергеевич");
+        instance.setUniversity("УрГЭУ");
+        instance.setCurs(2);
+        instance.setDescription(dataGenerator.getRandomMessageText());
+        instance.setPhoneNumber("+7 937 859 18 75");
+        instance.setCity("Екатеринбург");
+
+        ArrayList<String> list = new ArrayList<>();
+        for (int  i = 0; i< (int)(Math.random()*10)+2; i++)
+            list.add(dataGenerator.tags.get((int)(Math.random()*dataGenerator.tags.size())));
+        instance.setCompetencies(list);
+
+        Date date = new Date();
+        date.setYear(2002);
+        date.setMonth(8);
+        date.setDate(6);
+        instance.setBirthdate(date);
     }
 }

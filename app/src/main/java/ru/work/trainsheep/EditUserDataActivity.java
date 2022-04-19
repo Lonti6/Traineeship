@@ -1,11 +1,16 @@
 package ru.work.trainsheep;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,10 +18,23 @@ import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
 
 import org.apmem.tools.layouts.FlowLayout;
 
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+
 import lombok.val;
 import ru.work.trainsheep.data.UserInfo;
+import ru.work.trainsheep.send.UserData;
 
 public class EditUserDataActivity extends AppCompatActivity {
+    DataGenerator dataGenerator;
+    UserData instance;
+
+    Calendar c = Calendar.getInstance();
+    int day;
+    int month;
+    int year;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,10 +45,10 @@ public class EditUserDataActivity extends AppCompatActivity {
 
         findViewById(R.id.scroller).setOnScrollChangeListener(new ScrollListeners.MyScrollListener(findViewById(R.id.header),
                 getDrawable(R.drawable.bg_header)));
-
+        dataGenerator = new DataGenerator();
         prepare();
 
-        DataGenerator dataGenerator = new DataGenerator();
+
         final String[] сats = dataGenerator.tags.toArray(new String[0]);
 
         AutoCompleteTextView autoCompleteTags = findViewById(R.id.competenciesField);
@@ -42,19 +60,19 @@ public class EditUserDataActivity extends AppCompatActivity {
                 android.R.layout.simple_dropdown_item_1line, dataGenerator.getCities()));
 
         FlowLayout tagsField = findViewById(R.id.tags_field);
-        tagsField.setVisibility(View.GONE);
+        if (tagsField.getChildCount() == 0) tagsField.setVisibility(View.GONE);
 
         findViewById(R.id.addBut).setOnClickListener(v -> {
-            if (autoCompleteTags.getText().toString().trim().length()!=0) {
+            if (autoCompleteTags.getText().toString().trim().length() != 0) {
                 val view = LayoutInflater.from(v.getContext()).inflate(R.layout.tag_item, tagsField, false);
                 tagsField.addView(view);
-                tagsField.getChildAt(tagsField.getChildCount()-1).setOnClickListener(new DoubleClickListener() {
+                tagsField.getChildAt(tagsField.getChildCount() - 1).setOnClickListener(new DoubleClickListener() {
                     @Override
                     public void onDoubleClick(View v) {
                         try {
                             tagsField.removeView(v);
+                        } catch (Exception e) {
                         }
-                        catch (Exception e){}
                     }
                 });
                 ((TextView) view.findViewById(R.id.tag)).setText(autoCompleteTags.getText().toString());
@@ -62,25 +80,69 @@ public class EditUserDataActivity extends AppCompatActivity {
                 autoCompleteTags.setText("");
             }
         });
+
+
+        findViewById(R.id.dateBut).setOnClickListener(v -> {
+            DatePickerDialog dpd = new DatePickerDialog(EditUserDataActivity.this,
+                    (view, year1, month1, dayOfMonth) -> {
+                        ((TextView) findViewById(R.id.dateText)).
+                                setText("Дата рождения: " + dayOfMonth + "." + (month1 + 1) + "." + year1);
+                        day = dayOfMonth;
+                        month = month1;
+                        year = year1;
+                    }, day, month, year);
+            dpd.updateDate(year, month, 6);
+            dpd.show();
+        });
+
+        findViewById(R.id.saveBut).setOnClickListener(v -> {
+            instance.setLastName(((TextView) findViewById(R.id.surnameField)).getText().toString());
+            instance.setFirstName(((TextView) findViewById(R.id.nameField)).getText().toString());
+            instance.setPatronymic(((TextView) findViewById(R.id.patronymicField)).getText().toString());
+            instance.setUniversity(((TextView) findViewById(R.id.vyzField)).getText().toString());
+            instance.setCity(((TextView) findViewById(R.id.cityField)).getText().toString());
+            instance.setCurs(Integer.parseInt(((TextView) findViewById(R.id.cursField)).getText().toString()));
+            instance.setEmail(((TextView) findViewById(R.id.mail_field)).getText().toString());
+            instance.setPhoneNumber(((TextView) findViewById(R.id.numberField)).getText().toString());
+            String passOne = ((TextView) findViewById(R.id.password_field)).getText().toString();
+            String passTwo = ((TextView) findViewById(R.id.repeatPasswordField)).getText().toString();
+            if (!(passOne != "") && !(passTwo != "") && passOne.equals(passTwo)) {
+                //меняем пароль
+            }
+
+            String text = ((TextView) findViewById(R.id.dateText)).getText().toString();
+
+            instance.setBirthdate(new Date(
+                    Integer.parseInt(text.substring(text.lastIndexOf('.') + 1)),
+                    Integer.parseInt(text.substring(text.indexOf('.') + 1, text.lastIndexOf('.'))) - 1,
+                    Integer.parseInt(text.substring(text.lastIndexOf(' ') + 1, text.indexOf('.'))))
+            );
+
+            Toast.makeText(getApplicationContext(), "Сохранение произошло", Toast.LENGTH_SHORT).show();
+        });
     }
 
-    public void prepare()
-    {
-        val instance = UserInfo.getInstance().getData();
-        instance.setLastName("Жильцов");
-        instance.setPatronymic("Сергеевич");
-        instance.setUniversity("УрГЭУ");
-        instance.setCurs(2);
-        ((TextView)findViewById(R.id.surnameField)).setText(instance.getLastName());
-        ((TextView)findViewById(R.id.nameField)).setText(instance.getFirstName());
-        ((TextView)findViewById(R.id.patronymicField)).setText(instance.getPatronymic());
-        ((TextView)findViewById(R.id.vyzField)).setText(instance.getUniversity());
-        //((TextView)findViewById(R.id.cityField)).setText(instance.get());
-        ((TextView)findViewById(R.id.cursField)).setText(String.valueOf(instance.getCurs()));
-        ((TextView)findViewById(R.id.mail_field)).setText(instance.getEmail());
-        //((TextView)findViewById(R.id.numberField)).setText(instance.get());
-        //((TextView)findViewById(R.id.competenciesField)).setText(instance.get());
-        ((TextView)findViewById(R.id.descriptionField)).setText(instance.getSpecialization());
+    public void prepare() {
+        instance = UserInfo.getInstance().getData();
+        ((EditText) findViewById(R.id.surnameField)).setText(instance.getLastName());
+        ((EditText) findViewById(R.id.nameField)).setText(instance.getFirstName());
+        ((EditText) findViewById(R.id.patronymicField)).setText(instance.getPatronymic());
+        ((EditText) findViewById(R.id.vyzField)).setText(instance.getUniversity());
+        ((EditText) findViewById(R.id.cityField)).setText(instance.getCity());
+        ((EditText) findViewById(R.id.cursField)).setText(String.valueOf(instance.getCurs()));
+        ((EditText) findViewById(R.id.mail_field)).setText(instance.getEmail());
+        ((EditText) findViewById(R.id.numberField)).setText(instance.getPhoneNumber());
+        val tagsField = (FlowLayout) findViewById(R.id.tags_field);
 
+        for (String tag : instance.getCompetencies()) {
+            val view = LayoutInflater.from(this).inflate(R.layout.tag_item, tagsField, false);
+            tagsField.addView(view);
+            ((TextView) view.findViewById(R.id.tag)).setText(tag);
+        }
+        day = instance.getBirthdate().getDay();
+        month = instance.getBirthdate().getMonth();
+        year = instance.getBirthdate().getYear();
+        ((TextView) findViewById(R.id.dateText)).setText("Дата рождения: " + day + "." + (month + 1) + "." + year);
+        ((EditText) findViewById(R.id.descriptionField)).setText(instance.getDescription());
     }
 }

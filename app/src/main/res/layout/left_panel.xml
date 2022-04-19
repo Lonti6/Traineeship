@@ -29,16 +29,17 @@
                             android:layout_height="100dp"
                             android:background="@drawable/header"/>
                     </androidx.cardview.widget.CardView>
+
                     <TextView
+                        android:id="@+id/name_user"
+                        style="@style/SomeSmallWhiteText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Дмитрий Башкирцев"
-                        android:id="@+id/name_user"
-                        android:textColor="@color/white"
-                        android:layout_marginTop="140dp"
                         android:layout_centerHorizontal="true"
-                        style="@style/SomeSmallWhiteText"
-                        android:textSize="20dp"/>
+                        android:layout_marginTop="140dp"
+                        android:text="Дмитрий Башкирцев"
+                        android:textColor="@color/white"
+                        android:textSize="20dp" />
                 </RelativeLayout>
                 <!--Конец шапки-->
 
