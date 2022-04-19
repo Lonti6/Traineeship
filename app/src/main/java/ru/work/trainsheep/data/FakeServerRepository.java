@@ -104,6 +104,12 @@ public class FakeServerRepository extends ServerRepository {
                 callbackSuccess);
     }
 
+    @Override
+    public void createVacancy(VacancyNote request, Consumer<VacancyNote> callbackSuccess, Consumer<Exception> callbackFailure) {
+        sleepAndRun(500,
+                () -> request,
+                callbackSuccess);
+    }
 
     @NonNull
     private ArrayList<VacancyNote> createVacansiesNotes(VacancyRequest request) {

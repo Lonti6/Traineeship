@@ -3,11 +3,7 @@ package ru.work.trainsheep;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
-import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.*;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -16,8 +12,15 @@ import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
 import org.apmem.tools.layouts.FlowLayout;
 
 import lombok.val;
+import ru.work.trainsheep.data.ServerRepositoryFactory;
+import ru.work.trainsheep.data.UserInfo;
+import ru.work.trainsheep.send.VacancyNote;
+
+import java.util.ArrayList;
 
 public class CreateActivity extends AppCompatActivity {
+
+    FlowLayout tagsField;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,20 +35,19 @@ public class CreateActivity extends AppCompatActivity {
         Util.setEditTextFocusListener(this, R.id.workTimeField);
         Util.setEditTextCreateFocusListener(this, R.id.descriptionField);
 
-        final String[] mCats = { "Мурзик", "Рыжик", "Барсик", "Борис",
-                "Мурзилка", "Мурка", "Муму", "Матроскин" };
-
         DataGenerator dataGenerator = new DataGenerator();
+        final String[] сats = dataGenerator.tags.toArray(new String[0]);
+
 
         AutoCompleteTextView autoCompleteTags = findViewById(R.id.competenciesField);
         autoCompleteTags.setAdapter(new ArrayAdapter<>(this,
-                android.R.layout.simple_dropdown_item_1line, mCats));
+                android.R.layout.simple_dropdown_item_1line, сats));
 
         AutoCompleteTextView autoCompleteCities = findViewById(R.id.cityField);
         autoCompleteCities.setAdapter(new ArrayAdapter<>(this,
                 android.R.layout.simple_dropdown_item_1line, dataGenerator.getCities()));
 
-        FlowLayout tagsField = findViewById(R.id.tags_field);
+        tagsField = findViewById(R.id.tags_field);
         tagsField.setVisibility(View.GONE);
 
         TextView textView = findViewById(R.id.competenciesField);
@@ -84,6 +86,43 @@ public class CreateActivity extends AppCompatActivity {
                 editText.setEnabled(true);
                 editText.setText("");
             }
+        });
+        findViewById(R.id.create).setOnClickListener((v) -> {
+            copyDateAndSend();
+        });
+
+    }
+
+
+    void copyDateAndSend(){
+
+        String header = ((EditText)findViewById(R.id.vacancyNameField)).getText().toString();
+        String content = ((EditText)findViewById(R.id.descriptionField)).getText().toString();
+        String company = UserInfo.getInstance().getData().getFirstName();
+        String salary = ((EditText)findViewById(R.id.zpField)).getText().toString();
+        boolean free = ((CheckBox)findViewById(R.id.freeCheck)).isChecked();
+
+        if (header.equals("") || content.equals("")) {
+            Toast.makeText(getApplicationContext(), "Поля не заполнены!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        val list = new ArrayList<String>();
+        for (int i = 0; i < tagsField.getChildCount(); i++) {
+            TextView view = tagsField.getChildAt(i).findViewById(R.id.tag);
+            list.add("" + view.getText());
+        }
+        if (free){
+            list.add("Бесплатно");
+        }
+        val note = new VacancyNote(list, header, content, company, salary, false, 0);
+        ServerRepositoryFactory.getInstance().createVacancy(note, (n) -> {
+            Toast.makeText(getApplicationContext(), "Создана вакансия " + header, Toast.LENGTH_SHORT).show();
+            ((EditText)findViewById(R.id.vacancyNameField)).setText("");
+            ((EditText)findViewById(R.id.descriptionField)).setText("");
+            ((EditText)findViewById(R.id.zpField)).setText("");
+            ((CheckBox)findViewById(R.id.freeCheck)).setChecked(false);
+            tagsField.removeAllViews();
         });
     }
 }

@@ -66,7 +66,7 @@ public class SimpleController {
             val userPass = (UserPasswords) authentication.getPrincipal();
             val user = userService.findByEmail(userPass.getUsername());
             val result = notesService.getVacancyResultWithLogin(vacancyRequest, user);
-            log.info("search " + vacancyRequest.getText() + " " + result);
+            log.info("search (" + vacancyRequest.getText() + ") " );
             model.addAttribute("status", "ok");
             model.addAttribute("result", result);
         } else
@@ -183,6 +183,22 @@ public class SimpleController {
         } else {
             model.addAttribute("status", "fail");
         }
+        return "jsonTemplate";
+    }
+
+
+    @PostMapping("/createVacancy")
+    public String createVacancy(Model model, Authentication authentication, @RequestBody VacancyNote note) {
+        if (authentication != null) {
+            val userPass = (UserPasswords) authentication.getPrincipal();
+            val user = userService.findByEmail(userPass.getUsername());
+            val e = notesService.createAndSave(user, note);
+            log.info("create vacancy " + e);
+
+            model.addAttribute("status", "ok");
+            model.addAttribute("vacancy", e);
+        } else
+            model.addAttribute("status", "fail");
         return "jsonTemplate";
     }
 

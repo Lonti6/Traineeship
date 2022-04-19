@@ -29,10 +29,9 @@ public class EditUserDataActivity extends AppCompatActivity {
                 getDrawable(R.drawable.bg_header)));
 
         prepare();
-        final String[] сats = { "Мурзик", "Рыжик", "Барсик", "Борис",
-                "Мурзилка", "Мурка", "Муму", "Матроскин" };
 
         DataGenerator dataGenerator = new DataGenerator();
+        final String[] сats = dataGenerator.tags.toArray(new String[0]);
 
         AutoCompleteTextView autoCompleteTags = findViewById(R.id.competenciesField);
         autoCompleteTags.setAdapter(new ArrayAdapter<>(this,

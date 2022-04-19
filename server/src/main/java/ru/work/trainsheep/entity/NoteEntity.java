@@ -39,8 +39,8 @@ public class NoteEntity {
     private String content;
 
     @NonNull
-    @Column(length = 500)
-    private String company;
+    @ManyToOne
+    private User company;
 
     @NonNull
     @Column(length = 100)
@@ -68,13 +68,12 @@ public class NoteEntity {
                 "id = " + id + ", " +
                 "header = " + header + ", " +
                 "content = " + content + ", " +
-                "company = " + company + ", " +
                 "date = " + dateCreate + ", " +
                 "salary = " + salary + ")";
     }
 
     public VacancyNote toNote(boolean favorite){
-        return new VacancyNote(tags.stream().map(Tag::getText).collect(Collectors.toList()), header, content, company, salary, favorite, id);
+        return new VacancyNote(tags.stream().map(Tag::getText).collect(Collectors.toList()), header, content, company.getFirstName(), salary, favorite, id);
     }
     public VacancyNote toNote(){
         return toNote(false);

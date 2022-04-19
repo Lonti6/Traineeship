@@ -6,6 +6,7 @@ import lombok.val;
 import okhttp3.Credentials;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import ru.work.trainsheep.data.getting.CreateVacancyGetting;
 import ru.work.trainsheep.send.*;
 
 import java.io.IOException;
@@ -216,6 +217,27 @@ public class RealServerRepository extends ServerRepository{
         });
     }
 
+    @Override
+    public void createVacancy(VacancyNote request, Consumer<VacancyNote> callbackSuccess, Consumer<Exception> callbackFailure) {
+        executor.execute(() -> {
+
+            val call = api.createVacancy(request, getCredentials());
+
+            try {
+                val response = call.execute();
+
+                val result = response.body();
+                if (result != null && Objects.equals(result.getStatus(), "ok")) {
+                    handler.post(() -> callbackSuccess.accept(result.getVacancy()));
+                } else
+                    handler.post(() -> callbackFailure.accept(new Exception("status fail")));
+
+            } catch (IOException e) {
+                handler.post(() -> callbackFailure.accept(e));
+                System.err.println(e.getMessage());
+            }
+        });
+    }
 
     @Override
     public boolean isLogin() {

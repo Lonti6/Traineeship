@@ -3,12 +3,14 @@ package ru.work.trainsheep.send;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Arrays;
 import java.util.List;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class VacancyNote {
     List<String> tags;
     String header;
@@ -27,13 +29,4 @@ public class VacancyNote {
     }
 
 
-    @Override
-    public String toString() {
-        return "Note{\n" +
-                "tags=" + tags +
-                ", \n    header='" + header + '\'' +
-                ", \n    content='" + content + '\'' +
-                ", \n    company='" + company + '\'' +
-                "\n}\n";
-    }
 }

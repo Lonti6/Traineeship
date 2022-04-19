@@ -17,6 +17,7 @@
             android:layout_marginRight="40dp"
             android:orientation="vertical">
 
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
@@ -24,17 +25,17 @@
                 android:background="@drawable/border_style_gray">
 
                 <EditText
-                    android:id="@+id/vacancyNameField"
-                    style="@style/MyTextFieldStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    android:hint="Название вакансии *"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                        android:id="@+id/vacancyNameField"
+                        style="@style/MyTextFieldStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:hint="Название вакансии *"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" app:layout_constraintVertical_bias="0.0"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -192,17 +193,16 @@
                 android:layout_marginTop="30dp">
 
                 <CheckBox
-                    android:id="@+id/freeCheck"
-                    style="@style/SmallText"
-                    android:layout_width="145dp"
-                    android:layout_height="50dp"
-                    android:buttonTint="@color/main_green"
-                    android:text="Без оплаты"
-                    android:textSize="14dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
+                        android:id="@+id/freeCheck"
+                        style="@style/SmallText"
+                        android:layout_width="145dp"
+                        android:layout_height="50dp"
+                        android:buttonTint="@color/main_green"
+                        android:text="Без оплаты"
+                        android:textSize="14dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" app:layout_constraintVertical_bias="0.0"/>
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="0dp"
                     android:layout_height="50dp"
@@ -248,6 +248,11 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <Button
+                    android:text="Cоздать"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/create"/>
 
         </LinearLayout>
     </ScrollView>

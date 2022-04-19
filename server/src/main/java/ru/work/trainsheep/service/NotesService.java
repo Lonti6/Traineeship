@@ -32,19 +32,22 @@ public class NotesService {
     @Autowired
     FavoriteNoteRepository favoriteNoteRepository;
 
-    public void save(VacancyNote note) {
-        val entity = createForm(note);
-        noteRepository.save(entity);
-    }
 
-    private NoteEntity createForm(VacancyNote note){
-        val entity = new NoteEntity(new HashSet<>(), note.getHeader(), note.getContent(), note.getCompany(), note.getSalary());
+
+    private NoteEntity createForm(VacancyNote note, User user){
+        val entity = new NoteEntity(new HashSet<>(), note.getHeader(), note.getContent(),user, note.getSalary());
         for (val textTag : note.getTags()){
             Tag tag = tags.findOrCreate(textTag);
             //tag.getNoteEntities().add(entity);
             entity.getTags().add(tag);
         }
         return entity;
+    }
+
+    public VacancyNote createAndSave(User user, VacancyNote note){
+        val entity = createForm(note, user);
+        noteRepository.save(entity);
+        return entity.toNote(false);
     }
 
 
