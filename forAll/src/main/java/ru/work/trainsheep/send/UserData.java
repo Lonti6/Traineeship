@@ -2,6 +2,7 @@ package ru.work.trainsheep.send;
 
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 @Data
@@ -17,11 +18,15 @@ public class UserData {
     private Date registrationDate;
     @NonNull
     private String email = "";
+    private String phoneNumber = "";
+    private ArrayList<String> competencies;
     private boolean isCompany = false;
 
     private String university = "";
     private String specialization = "";
-    private String city;
+    private String city = "";
+    private String description = "";
+
     private int year; //год обучения
     private int curs;
 

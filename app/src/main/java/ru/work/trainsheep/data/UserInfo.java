@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+import java.util.ArrayList;
+
 import lombok.Value;
 import lombok.val;
 import ru.work.trainsheep.send.UserData;
@@ -48,20 +50,19 @@ public class UserInfo {
         registrationData.setName(name);
     }
 
-    public void setPatronymic(String patronymic)
-    {
-        data.setPatronymic(patronymic);
-    }
+    public void setPatronymic(String patronymic){ data.setPatronymic(patronymic); }
 
-    public void setUniversity(String university)
-    {
-        data.setUniversity(university);
-    }
+    public void setUniversity(String university){ data.setUniversity(university); }
 
-    public void setCurs(int curs)
-    {
-        data.setCurs(curs);
-    }
+    public void setCurs(int curs){ data.setCurs(curs); }
+
+    public void setCity(String city){ data.setCity(city); }
+
+    public void setCompetencies(ArrayList competencies) { data.setCompetencies(competencies); }
+
+    public void setPhoneNumber(String number) { data.setPhoneNumber(number); }
+
+    public void setDescription(String description) { data.setDescription(description); }
 
     public void save(Context context){
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
