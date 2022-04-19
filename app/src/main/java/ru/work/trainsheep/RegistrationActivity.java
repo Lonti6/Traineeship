@@ -72,7 +72,7 @@ public class RegistrationActivity extends AppCompatActivity {
         val server = ServerRepositoryFactory.getInstance();
         server.register(UserInfo.getInstance().getRegistrationData(), (name) -> {
             Toast.makeText(getApplicationContext(), "Здравствуйте, " + name, Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
             //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
             startActivity(intent);
         }, (exc) -> {
