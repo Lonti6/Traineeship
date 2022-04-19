@@ -14,6 +14,7 @@ import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
 import org.apmem.tools.layouts.FlowLayout;
 
 import lombok.val;
+import ru.work.trainsheep.data.UserInfo;
 
 public class EditUserDataActivity extends AppCompatActivity {
     @Override
@@ -27,6 +28,7 @@ public class EditUserDataActivity extends AppCompatActivity {
         findViewById(R.id.scroller).setOnScrollChangeListener(new ScrollListeners.MyScrollListener(findViewById(R.id.header),
                 getDrawable(R.drawable.bg_header)));
 
+        prepare();
         final String[] сats = { "Мурзик", "Рыжик", "Барсик", "Борис",
                 "Мурзилка", "Мурка", "Муму", "Матроскин" };
 
@@ -61,5 +63,21 @@ public class EditUserDataActivity extends AppCompatActivity {
                 autoCompleteTags.setText("");
             }
         });
+    }
+
+    public void prepare()
+    {
+        val instance = UserInfo.getInstance().getData();
+        ((TextView)findViewById(R.id.surnameField)).setText(instance.getLastName());
+        ((TextView)findViewById(R.id.nameField)).setText(instance.getFirstName());
+        ((TextView)findViewById(R.id.patronymicField)).setText(instance.getPatronymic());
+        ((TextView)findViewById(R.id.vyzField)).setText(instance.getUniversity());
+        //((TextView)findViewById(R.id.cityField)).setText(instance.get());
+        //((TextView)findViewById(R.id.cursField)).setText(instance.get());
+        ((TextView)findViewById(R.id.mail_field)).setText(instance.getEmail());
+        //((TextView)findViewById(R.id.numberField)).setText(instance.get());
+        //((TextView)findViewById(R.id.competenciesField)).setText(instance.get());
+        ((TextView)findViewById(R.id.descriptionField)).setText(instance.getSpecialization());
+
     }
 }
