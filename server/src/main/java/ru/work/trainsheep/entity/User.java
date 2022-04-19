@@ -5,8 +5,9 @@ import org.hibernate.Hibernate;
 import ru.work.trainsheep.send.UserData;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.Objects;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -42,9 +43,10 @@ public class User {
     @Column(name = "email", unique = true, nullable = false)
     private String email;
     @NonNull
-    private boolean isStudent;
+    private boolean isCompany;
 
     private String image;
+
 
     @NonNull
     @OneToOne(cascade = CascadeType.ALL)
@@ -54,7 +56,7 @@ public class User {
 
     public static User from(UserData data){
         Resume resume = new Resume( data.getUniversity(), data.getSpecialization(), data.getYear());
-        return new User(data.getFirstName(), data.getLastName(), data.getPatronymic(), data.getBirthdate(), data.getRegistrationDate(), data.getEmail(), data.isStudent(), resume);
+        return new User(data.getFirstName(), data.getLastName(), data.getPatronymic(), data.getBirthdate(), data.getRegistrationDate(), data.getEmail(), data.isCompany(), resume);
     }
 
     @Override

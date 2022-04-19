@@ -3,12 +3,18 @@ package ru.work.trainsheep.service;
 import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import org.springframework.transaction.annotation.Transactional;
+import ru.work.trainsheep.entity.FavoriteNote;
 import ru.work.trainsheep.entity.NoteEntity;
 import ru.work.trainsheep.entity.Tag;
+import ru.work.trainsheep.entity.User;
+import ru.work.trainsheep.repository.FavoriteNoteRepository;
 import ru.work.trainsheep.repository.NoteRepository;
+import ru.work.trainsheep.send.SetFavoriteVacancyRequest;
 import ru.work.trainsheep.send.VacancyRequest;
 import ru.work.trainsheep.send.VacancyResult;
 import ru.work.trainsheep.send.VacancyNote;
@@ -22,6 +28,9 @@ public class NotesService {
     NoteRepository noteRepository;
     @Autowired
     TagService tags;
+
+    @Autowired
+    FavoriteNoteRepository favoriteNoteRepository;
 
     public void save(VacancyNote note) {
         val entity = createForm(note);
@@ -40,7 +49,7 @@ public class NotesService {
 
 
 
-    public VacancyResult getAdvertResult(VacancyRequest request){
+    public VacancyResult getVacancyResult(VacancyRequest request){
         val page = noteRepository.findAll(PageRequest.of(
                 request.getPage(),
                 request.getCountNotesOnPage(),
@@ -52,6 +61,46 @@ public class NotesService {
                 (int) page.getTotalElements(),
                 request.getCountNotesOnPage()
         );
+    }
+
+    public VacancyResult getVacancyResultWithLogin(VacancyRequest request, User user){
+        val page = noteRepository.findAll(PageRequest.of(
+                request.getPage(),
+                request.getCountNotesOnPage(),
+                Sort.by("dateCreate").descending()
+        ));
+        val favorites = noteRepository.favorites(user, Pageable.unpaged()).toSet();
+        return new VacancyResult(
+                page.get().map(e -> e.toNote(favorites.contains(e))).collect(Collectors.toList()),
+                page.getNumber(),
+                (int) page.getTotalElements(),
+                request.getCountNotesOnPage()
+        );
+    }
+
+    public VacancyResult getFavoriteVacancies(VacancyRequest request, User user){
+        val page = noteRepository.favorites(user, PageRequest.of(
+                request.getPage(),
+                request.getCountNotesOnPage(),
+                Sort.by("dateCreate").descending()
+        ));
+        return new VacancyResult(
+                page.get().map(e -> e.toNote(true)).collect(Collectors.toList()),
+                page.getNumber(),
+                (int) page.getTotalElements(),
+                request.getCountNotesOnPage()
+        );
+    }
+
+    @Transactional
+    public VacancyNote setFavorite(User user, SetFavoriteVacancyRequest request){
+        val note = noteRepository.findById(request.getId());
+        if (request.isFavorite()){
+            favoriteNoteRepository.save(new FavoriteNote(user, note));
+            return note.toNote(true);
+        }
+        favoriteNoteRepository.deleteByUserAndNote(user, note);
+        return note.toNote(false);
     }
 
 }

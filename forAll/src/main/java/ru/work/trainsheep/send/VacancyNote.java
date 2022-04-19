@@ -15,6 +15,8 @@ public class VacancyNote {
     String content;
     String company;
     String salary;
+    boolean favorite;
+    long id;
 
     public VacancyNote(String header, String content, String company, String salary, String... tags) {
         this.header = header;

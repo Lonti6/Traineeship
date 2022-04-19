@@ -7,6 +7,7 @@ import ru.work.trainsheep.send.VacancyNote;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -72,7 +73,10 @@ public class NoteEntity {
                 "salary = " + salary + ")";
     }
 
+    public VacancyNote toNote(boolean favorite){
+        return new VacancyNote(tags.stream().map(Tag::getText).collect(Collectors.toList()), header, content, company, salary, favorite, id);
+    }
     public VacancyNote toNote(){
-        return new VacancyNote(tags.stream().map(Tag::getText).collect(Collectors.toList()), header, content, company, salary);
+        return toNote(false);
     }
 }

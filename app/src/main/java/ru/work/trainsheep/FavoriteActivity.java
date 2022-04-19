@@ -24,27 +24,26 @@ import ru.work.trainsheep.send.VacancyRequest;
 
 public class FavoriteActivity extends AppCompatActivity {
 
+    ServerRepository server;
+    Adapters.VacancyItemAdapter vacancyAdapter;
+    Adapters.CompanyItemAdapter companyAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_left_panel);
         final FlowingDrawer drawer = Util.connectActivityLayout(this, R.layout.activity_favorite);
 
-        val server = ServerRepositoryFactory.getInstance();
+        server = ServerRepositoryFactory.getInstance();
 
         findViewById(R.id.menuBut).setOnClickListener(v -> drawer.openMenu(true));
 /*        ((RecyclerView)findViewById(R.id.rvVacancies)).setOnScrollChangeListener(new MyScrollListener(findViewById(R.id.header),
                 getResources().getDrawable(R.drawable.bg_header)));*/
 
-        val vacancyAdapter = new Adapters.VacancyItemAdapter(new ArrayList<>());
-        val companyAdapter = new Adapters.CompanyItemAdapter(new ArrayList<>());
+        vacancyAdapter = new Adapters.VacancyItemAdapter(new ArrayList<>());
+        companyAdapter = new Adapters.CompanyItemAdapter(new ArrayList<>());
 
-        server.getVacancies(new VacancyRequest(new ArrayList<>(), 1, 10), (result) -> {
-            vacancyAdapter.addAll(result.getNotes());
-        });
-        server.getCompanies(new CompanyRequest(1, 10), (result) -> {
-            companyAdapter.addAll(result.getNotes());
-        });
+
 
         final RecyclerView rvVacancies = findViewById(R.id.rvVacancies);
         rvVacancies.setHasFixedSize(true);
@@ -75,5 +74,16 @@ public class FavoriteActivity extends AppCompatActivity {
                 findViewById(R.id.toggleGroup));
         rvVacancies.addOnScrollListener(listener);
         rvCompanies.addOnScrollListener(listener);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        server.getFavoriteVacancies(new VacancyRequest(new ArrayList<>(), 0, 10), (result) -> {
+            vacancyAdapter.clearAndAddAll(result.getNotes());
+        });
+        server.getCompanies(new CompanyRequest(0, 10), (result) -> {
+            companyAdapter.addAll(result.getNotes());
+        });
     }
 }

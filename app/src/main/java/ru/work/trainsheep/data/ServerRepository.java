@@ -16,6 +16,11 @@ public abstract class ServerRepository {
 
     public abstract void getVacancies(VacancyRequest request, Consumer<VacancyResult> callbackSuccess, Consumer<Exception> callbackFailure);
 
+    public abstract void getFavoriteVacancies(VacancyRequest request, Consumer<VacancyResult> callbackSuccess, Consumer<Exception> callbackFailure);
+
+    public abstract void setFavoriteVacancy(SetFavoriteVacancyRequest request, Consumer<VacancyNote> callbackSuccess, Consumer<Exception> callbackFailure);
+
+
     public abstract void getCompanies(CompanyRequest request, Consumer<CompanyResult> callbackSuccess, Consumer<Exception> callbackFailure);
 
     public abstract void getChats(Consumer<List<ChatBlock>>callbackSuccess, Consumer<Exception> callbackFailure);
@@ -53,6 +58,15 @@ public abstract class ServerRepository {
 
     public void getSendMessage(SendMessageRequest request, Consumer<ChatMessage> callbackSuccess){
         getSendMessage(request, callbackSuccess, Throwable::printStackTrace);
+    }
+
+    public void getFavoriteVacancies(VacancyRequest request, Consumer<VacancyResult> callbackSuccess){
+        getFavoriteVacancies(request, callbackSuccess, Throwable::printStackTrace);
+    }
+
+
+    public void setFavoriteVacancy(SetFavoriteVacancyRequest request, Consumer<VacancyNote> callbackSuccess){
+        setFavoriteVacancy(request, callbackSuccess, Throwable::printStackTrace);
     }
 
 

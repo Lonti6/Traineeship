@@ -65,6 +65,16 @@ public class FakeServerRepository extends ServerRepository {
     }
 
     @Override
+    public void getFavoriteVacancies(VacancyRequest request, Consumer<VacancyResult> callbackSuccess, Consumer<Exception> callbackFailure) {
+        getVacancies(request, callbackSuccess, callbackFailure);
+    }
+
+    @Override
+    public void setFavoriteVacancy(SetFavoriteVacancyRequest request, Consumer<VacancyNote> callbackSuccess, Consumer<Exception> callbackFailure) {
+
+    }
+
+    @Override
     public void getCompanies(CompanyRequest request, Consumer<CompanyResult> callbackSuccess, Consumer<Exception> callbackFailure) {
         sleepAndRun(200, () -> createCompaniesNotes(request), (notes) -> {
             callbackSuccess.accept(new CompanyResult(

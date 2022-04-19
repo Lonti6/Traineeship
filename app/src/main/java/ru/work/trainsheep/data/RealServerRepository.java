@@ -77,12 +77,50 @@ public class RealServerRepository extends ServerRepository{
     @Override
     public void getVacancies(VacancyRequest request, Consumer<VacancyResult> callbackSuccess, Consumer<Exception> callbackFailure) {
         executor.execute(() -> {
-            val call = api.adverts(request);
+            val call = api.vacancies(request, getCredentials());
             try {
                 val response = call.execute();
                 val result = response.body();
                 if (result != null && Objects.equals(result.getStatus(), "ok")) {
                     handler.post(() -> callbackSuccess.accept(result.getResult()));
+                } else
+                    handler.post(() -> callbackFailure.accept(new Exception("status fail")));
+
+            } catch (IOException e) {
+                handler.post(() -> callbackFailure.accept(e));
+                System.err.println(e.getMessage());
+            }
+        });
+    }
+
+    @Override
+    public void getFavoriteVacancies(VacancyRequest request, Consumer<VacancyResult> callbackSuccess, Consumer<Exception> callbackFailure) {
+        executor.execute(() -> {
+            val call = api.favoriteVacancies(request, getCredentials());
+            try {
+                val response = call.execute();
+                val result = response.body();
+                if (result != null && Objects.equals(result.getStatus(), "ok")) {
+                    handler.post(() -> callbackSuccess.accept(result.getResult()));
+                } else
+                    handler.post(() -> callbackFailure.accept(new Exception("status fail")));
+
+            } catch (IOException e) {
+                handler.post(() -> callbackFailure.accept(e));
+                System.err.println(e.getMessage());
+            }
+        });
+    }
+
+    @Override
+    public void setFavoriteVacancy(SetFavoriteVacancyRequest request, Consumer<VacancyNote> callbackSuccess, Consumer<Exception> callbackFailure) {
+        executor.execute(() -> {
+            val call = api.setFavoriteVacancy(request, getCredentials());
+            try {
+                val response = call.execute();
+                val result = response.body();
+                if (result != null && Objects.equals(result.getStatus(), "ok")) {
+                    handler.post(() -> callbackSuccess.accept(result.getVacancy()));
                 } else
                     handler.post(() -> callbackFailure.accept(new Exception("status fail")));
 
