@@ -57,7 +57,7 @@ public class LoginActivity extends AppCompatActivity {
             info.setPassword(password);
             UserInfo.getInstance().save(this);
             Toast.makeText(getApplicationContext(), "Здравствуйте, " + login, Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
             startActivity(intent);
         }, (ex) -> {
             error.setText("Ошибка!\n" +ex.getMessage());

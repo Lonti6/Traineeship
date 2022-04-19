@@ -471,14 +471,15 @@ public class DataGenerator {
                 getRandom(headers),
                 getRandom(contents),
                 getRandom(companies),
-                splitSalary((int)(Math.random()*20000))+" ₽/Час");
+                splitSalary((int)(Math.random()*20000))+" ₽/Час", random.nextBoolean(), random.nextInt(10000));
     }
 
     public CompanyNote generateCompanyNote() {
         return new CompanyNote(
+                random.nextInt(10000),
                 getRandom(companies),
                 getRandom(contents),
-                getRandom(icons));
+                getRandom(icons), random.nextBoolean());
     }
 
     public ChatBlock generateChatBlock(){
@@ -508,7 +509,7 @@ public class DataGenerator {
     }
     public ChatResult generateChatResult(int page, int count) {
         val res = new ArrayList<ChatMessage>(count);
-        var date = generateDate();
+        long date = generateDate();
         val sender = getRandom(companies);
         for (int i = 0; i < count; i++) {
             date = addRandom(date);

@@ -14,8 +14,14 @@ public interface ServerApi {
     @POST("/login")
     Call<LoginResult> login(@Header("Authorization") String credentials);
 
-    @POST("/adverts")
-    Call<VacancyResultGetting> adverts(@Body VacancyRequest request);
+    @POST("/vacanciesWithAuth")
+    Call<VacancyResultGetting> vacancies(@Body VacancyRequest request, @Header("Authorization") String credentials);
+
+    @POST("/favoriteVacancies")
+    Call<VacancyResultGetting> favoriteVacancies(@Body VacancyRequest request, @Header("Authorization") String credentials);
+
+    @POST("/setFavoriteVacancy")
+    Call<SetFavoriteGetting> setFavoriteVacancy(@Body SetFavoriteVacancyRequest request, @Header("Authorization") String credentials);
 
     @POST("/companies")
     Call<CompanyResultGetting> companies(@Body CompanyRequest request);

@@ -1,173 +1,62 @@
 package ru.work.trainsheep;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-
+import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.bumptech.glide.Glide;
+import lombok.val;
 import org.apmem.tools.layouts.FlowLayout;
+import ru.work.trainsheep.adapters.holders.FooterViewHolder;
+import ru.work.trainsheep.data.ServerRepositoryFactory;
+import ru.work.trainsheep.send.CompanyNote;
+import ru.work.trainsheep.send.SetFavoriteVacancyRequest;
+import ru.work.trainsheep.send.VacancyNote;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import lombok.val;
-import ru.work.trainsheep.send.CompanyNote;
-import ru.work.trainsheep.send.VacancyNote;
-
 public class Adapters {
-    public static class FooterViewHolder extends RecyclerView.ViewHolder {
-        public FooterViewHolder(View v) {
-            super(v);
-            // Добавьте компоненты пользовательского интерфейса здесь.
-        }
-    }
 
-    public static class VacancyItemViewHolder extends RecyclerView.ViewHolder {
-        TextView name;
-        FlowLayout tagsField;
-        TextView description;
-        TextView companyName;
-        TextView salaryText;
-
-        public VacancyItemViewHolder(View itemView) {
-            super(itemView);
-            name = itemView.findViewById(R.id.advert_name);
-            tagsField = itemView.findViewById(R.id.tags_field);
-            description = itemView.findViewById(R.id.advert_description);
-            companyName = itemView.findViewById(R.id.company_name);
-            salaryText = itemView.findViewById(R.id.salary_text);
-
-            ImageView favBut = itemView.findViewById(R.id.favorite_but);
-            favBut.setTag("hollow");
-            itemView.findViewById(R.id.favorite_but).setOnClickListener(v -> {
-                if (v.getTag().toString().equals("hollow"))
-                {
-                    favBut.setImageDrawable(v.getResources().getDrawable(R.drawable.fill_star_color_icon));
-                    //v.setBackground(v.getResources().getDrawable(R.drawable.fill_star_color_icon));
-                    v.setTag("fill");
-                }
-                else
-                {
-                    //favBut.setBackgroundResource(R.drawable.hollow_star_color_icon);
-                    favBut.setImageDrawable(v.getResources().getDrawable(R.drawable.hollow_star_color_icon));
-                    //v.setBackground(v.getResources().getDrawable(R.drawable.hollow_star_color_icon));
-                    v.setTag("hollow");
-                }
-            });
-        }
-
-        public void addTags(List<String> tags) {
-            for (String tag : tags) {
-                val view = LayoutInflater.from(itemView.getContext()).inflate(R.layout.tag_item, tagsField, false);
-                tagsField.addView(view);
-                ((TextView) view.findViewById(R.id.tag)).setText(tag);
-            }
-        }
-    }
 
     public static class CompanyItemViewHolder extends RecyclerView.ViewHolder {
         TextView name;
         ImageView imageField;
         TextView description;
+        ImageView favoriteIcon;
 
         public CompanyItemViewHolder(View itemView) {
             super(itemView);
             name = itemView.findViewById(R.id.company_name);
             imageField = itemView.findViewById(R.id.company_image);
             description = itemView.findViewById(R.id.company_description);
+            favoriteIcon = itemView.findViewById(R.id.favorite_but);
+        }
 
-            ImageView favBut = itemView.findViewById(R.id.favorite_but);
-            favBut.setTag("hollow");
-            itemView.findViewById(R.id.favorite_but).setOnClickListener(v -> {
-                if (v.getTag().toString().equals("hollow"))
-                {
-                    favBut.setImageDrawable(v.getResources().getDrawable(R.drawable.fill_star_color_icon));
+        public Context getContext() {
+            return name.getContext();
+        }
+
+        public void setFavoriteIcon(boolean favorite, long id) {
+            favoriteIcon.setTag(favorite ? "fill" : "hollow");
+            favoriteIcon.setOnClickListener(v -> {
+                if (v.getTag().toString().equals("hollow")) {
+                    favoriteIcon.setImageResource(R.drawable.fill_star_color_icon);
                     v.setTag("fill");
-                }
-                else
-                {
-                    favBut.setImageDrawable(v.getResources().getDrawable(R.drawable.hollow_star_color_icon));
+                } else {
+                    favoriteIcon.setImageResource(R.drawable.hollow_star_color_icon);
                     v.setTag("hollow");
                 }
             });
         }
-
-        public Context getContext(){
-            return name.getContext();
-        }
     }
 
-    static final class VacancyItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-        private final ArrayList<VacancyNote> notes;
-
-
-        public VacancyItemAdapter(ArrayList<VacancyNote> notes) {
-            this.notes = notes;
-        }
-
-
-        private boolean isPositionFooter(int position) {
-            return position > notes.size();
-        }
-
-
-        @Override
-        public int getItemViewType(int position) {
-            if (isPositionFooter(position)) {
-                return notes.size() - 1;
-            }
-            return position;
-        }
-
-
-        public void addAll(List<VacancyNote> next) {
-            notes.addAll(next);
-            notes.add(null);
-            notifyItemRangeInserted(notes.size(), next.size());
-        }
-
-
-        @NonNull
-        @Override
-        public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
-            if (viewType == notes.size()-1) {
-                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.footer_search,
-                        parent, false);
-                return new Adapters.FooterViewHolder(view);
-            } else
-                return new VacancyItemViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.advert_item, parent, false)) {
-                };
-        }
-
-        @Override
-        public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-            if (holder instanceof VacancyItemViewHolder) {
-                val item = (VacancyItemViewHolder) holder;
-                VacancyNote note = notes.get(position);
-
-                item.name.setText(note.getHeader());
-                item.tagsField.removeAllViews();
-                item.description.setText(note.getContent());
-                item.companyName.setText(note.getCompany());
-                item.salaryText.setText(note.getSalary());
-                item.addTags(note.getTags());
-            }
-        }
-
-        @Override
-        public int getItemCount() {
-            return this.notes.size();
-        }
-    }
 
     static final class CompanyItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         private final ArrayList<CompanyNote> notes;
@@ -204,7 +93,7 @@ public class Adapters {
             if (viewType == notes.size() - 1) {
                 View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.footer_search,
                         parent, false);
-                return new Adapters.FooterViewHolder(view);
+                return new FooterViewHolder(view);
             } else
                 return new CompanyItemViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.company_item, parent, false)) {
                 };
@@ -220,6 +109,8 @@ public class Adapters {
                 //item.imageField(getResource())
                 item.description.setText(note.getContent());
                 Glide.with(item.getContext()).load(note.getCompanyImage()).into(item.imageField);
+                item.setFavoriteIcon(note.isFavorite(), note.getId());
+
             }
         }
 

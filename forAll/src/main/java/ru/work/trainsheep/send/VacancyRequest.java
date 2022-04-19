@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -12,9 +13,10 @@ import java.util.ArrayList;
 public class VacancyRequest {
 
     // use is empty for all tags
-    ArrayList<String> tags = new ArrayList<>();
+    List<String> tags = new ArrayList<>();
+    String text;
 
-    int page = 1;
+    int page = 0;
     int countNotesOnPage = 10;
 
 }

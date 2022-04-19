@@ -11,7 +11,9 @@ import java.util.List;
 @AllArgsConstructor
 public class CompanyNote {
 
+    private long id;
     private String header;
     private String content;
     private String companyImage;
+    private boolean favorite;
 }

@@ -51,13 +51,53 @@ public class SimpleController {
         return "jsonTemplate";
     }
 
-    @PostMapping("/adverts")
-    public String adverts(Model model, @RequestBody VacancyRequest advertRequest) {
-        if (advertRequest != null) {
-            val result = notesService.getAdvertResult(advertRequest);
+    @PostMapping("/vacancies")
+    public String vacancies(Model model, @RequestBody VacancyRequest vacancyRequest) {
+        if (vacancyRequest != null) {
+            val result = notesService.getVacancyResult(vacancyRequest);
             model.addAttribute("status", "ok");
             model.addAttribute("result", result);
         }
+        return "jsonTemplate";
+    }
+    @PostMapping("/vacanciesWithAuth")
+    public String vacanciesWithAuth(Model model, Authentication authentication, @RequestBody VacancyRequest vacancyRequest) {
+        if (authentication != null && vacancyRequest != null) {
+            val userPass = (UserPasswords) authentication.getPrincipal();
+            val user = userService.findByEmail(userPass.getUsername());
+            val result = notesService.getVacancyResultWithLogin(vacancyRequest, user);
+            model.addAttribute("status", "ok");
+            model.addAttribute("result", result);
+        } else
+            model.addAttribute("status", "fail");
+        return "jsonTemplate";
+    }
+
+    @PostMapping("/favoriteVacancies")
+    public String favoriteVacancies(Model model, Authentication authentication, @RequestBody VacancyRequest vacancyRequest) {
+        if (authentication != null && vacancyRequest != null) {
+            val userPass = (UserPasswords) authentication.getPrincipal();
+            val user = userService.findByEmail(userPass.getUsername());
+            val result = notesService.getFavoriteVacancies(vacancyRequest, user);
+            log.info("get favorites vacancies " + result);
+            model.addAttribute("status", "ok");
+            model.addAttribute("result", result);
+        } else
+            model.addAttribute("status", "fail");
+        return "jsonTemplate";
+    }
+
+    @PostMapping("/setFavoriteVacancy")
+    public String setFavoriteVacancy(Model model, Authentication authentication, @RequestBody SetFavoriteVacancyRequest request) {
+        if (authentication != null && request != null) {
+            val userPass = (UserPasswords) authentication.getPrincipal();
+            val user = userService.findByEmail(userPass.getUsername());
+            val vacancy = notesService.setFavorite(user, request);
+            log.info("set favorite vacancy " + user.getEmail() + " " + user.getFirstName() + " " + vacancy.isFavorite());
+            model.addAttribute("status", "ok");
+            model.addAttribute("vacancy", vacancy);
+        } else
+            model.addAttribute("status", "fail");
         return "jsonTemplate";
     }
 

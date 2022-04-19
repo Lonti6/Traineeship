@@ -16,7 +16,7 @@ public class UserData {
     private Date registrationDate;
     @NonNull
     private String email = "";
-    private boolean isStudent = true;
+    private boolean isCompany = false;
 
     private String university = "";
     private String specialization = "";

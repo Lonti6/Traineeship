@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import lombok.NonNull;
 import lombok.val;
-import ru.work.trainsheep.data.FakeServerRepository;
 import ru.work.trainsheep.data.ServerRepositoryFactory;
 import ru.work.trainsheep.data.UserInfo;
 import ru.work.trainsheep.send.ChatMessage;
@@ -28,7 +27,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
-import static android.content.ContentValues.TAG;
 
 public class MessagesActivity extends AppCompatActivity {
     String email;

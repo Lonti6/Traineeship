@@ -69,7 +69,7 @@ public class Util {
             activity.findViewById(R.id.create_line).setVisibility(View.GONE);
 
         (activity.findViewById(R.id.search_line)).setOnClickListener(v -> {
-            Intent intent = new Intent(activity, MainActivity.class);
+            Intent intent = new Intent(activity, SearchActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
             activity.startActivity(intent);
             drawer.closeMenu(false);

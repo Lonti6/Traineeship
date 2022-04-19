@@ -1,28 +1,24 @@
 package ru.work.trainsheep;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.AbsListView;
-import android.widget.ScrollView;
-
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.google.android.material.button.MaterialButton;
 import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
-
-import java.util.ArrayList;
-
 import lombok.val;
+import ru.work.trainsheep.adapters.VacancyItemAdapter;
 import ru.work.trainsheep.data.ServerRepository;
 import ru.work.trainsheep.data.ServerRepositoryFactory;
 import ru.work.trainsheep.send.CompanyRequest;
-import ru.work.trainsheep.send.VacancyRequest;
+
+import java.util.ArrayList;
 
 public class FavoriteActivity extends AppCompatActivity {
+
+    ServerRepository server;
+    VacancyItemAdapter vacancyAdapter;
+    Adapters.CompanyItemAdapter companyAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,21 +26,15 @@ public class FavoriteActivity extends AppCompatActivity {
         setContentView(R.layout.activity_left_panel);
         final FlowingDrawer drawer = Util.connectActivityLayout(this, R.layout.activity_favorite);
 
-        val server = ServerRepositoryFactory.getInstance();
+        server = ServerRepositoryFactory.getInstance();
 
         findViewById(R.id.menuBut).setOnClickListener(v -> drawer.openMenu(true));
 /*        ((RecyclerView)findViewById(R.id.rvVacancies)).setOnScrollChangeListener(new MyScrollListener(findViewById(R.id.header),
                 getResources().getDrawable(R.drawable.bg_header)));*/
 
-        val vacancyAdapter = new Adapters.VacancyItemAdapter(new ArrayList<>());
-        val companyAdapter = new Adapters.CompanyItemAdapter(new ArrayList<>());
+        vacancyAdapter = new VacancyItemAdapter(true);
+        companyAdapter = new Adapters.CompanyItemAdapter(new ArrayList<>());
 
-        server.getVacancies(new VacancyRequest(new ArrayList<>(), 1, 10), (result) -> {
-            vacancyAdapter.addAll(result.getNotes());
-        });
-        server.getCompanies(new CompanyRequest(1, 10), (result) -> {
-            companyAdapter.addAll(result.getNotes());
-        });
 
         final RecyclerView rvVacancies = findViewById(R.id.rvVacancies);
         rvVacancies.setHasFixedSize(true);
@@ -75,5 +65,17 @@ public class FavoriteActivity extends AppCompatActivity {
                 findViewById(R.id.toggleGroup));
         rvVacancies.addOnScrollListener(listener);
         rvCompanies.addOnScrollListener(listener);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        vacancyAdapter.clear();
+        vacancyAdapter.serverUpdateSearch();
+
+        server.getCompanies(new CompanyRequest(0, 10), (result) -> {
+            companyAdapter.addAll(result.getNotes());
+        });
     }
 }
