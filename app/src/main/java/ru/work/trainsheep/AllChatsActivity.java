@@ -54,7 +54,6 @@ public class AllChatsActivity extends AppCompatActivity {
         super.onStart();
         ServerRepository server = ServerRepositoryFactory.getInstance();
         server.getChats(adapter::addAll);
-
     }
 
     static class Adapter extends RecyclerView.Adapter<MyViewHolder>{
