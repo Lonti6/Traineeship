@@ -41,7 +41,7 @@ public class CreateActivity extends AppCompatActivity {
         autoCompleteTags.setAdapter(new ArrayAdapter<>(this,
                 android.R.layout.simple_dropdown_item_1line, mCats));
 
-        AutoCompleteTextView autoCompleteCities = findViewById(R.id.citiField);
+        AutoCompleteTextView autoCompleteCities = findViewById(R.id.cityField);
         autoCompleteCities.setAdapter(new ArrayAdapter<>(this,
                 android.R.layout.simple_dropdown_item_1line, dataGenerator.getCities()));
 

@@ -5,15 +5,20 @@ import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import com.bumptech.glide.Glide;
 import com.mxn.soul.flowingdrawer_core.ElasticDrawer;
 import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
 
 import java.util.regex.Pattern;
+
+import ru.work.trainsheep.data.UserInfo;
+import ru.work.trainsheep.send.UserData;
 
 public class Util {
 
@@ -56,6 +61,10 @@ public class Util {
 
     public static void prepareLeftPanel(Activity activity) {
         final FlowingDrawer drawer = activity.findViewById(R.id.drawerlayout);
+
+        /*Glide.with(activity.getApplicationContext()).load(chat.getIcon()).circleCrop()
+                .into((ImageView) activity.findViewById(R.id.icon_user));*/
+
         if (!isCompany)
             activity.findViewById(R.id.create_line).setVisibility(View.GONE);
 
@@ -102,7 +111,9 @@ public class Util {
         });
 
         (activity.findViewById(R.id.contacts_line)).setOnClickListener(v -> {
-            Log.e("LeftDrawer", "Поля \"Наши контакты\" ещё не существует");
+            Intent intent = new Intent(activity, ContactsActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+            activity.startActivity(intent);
             drawer.closeMenu(false);
         });
     }
