@@ -66,6 +66,7 @@ public class SimpleController {
             val userPass = (UserPasswords) authentication.getPrincipal();
             val user = userService.findByEmail(userPass.getUsername());
             val result = notesService.getVacancyResultWithLogin(vacancyRequest, user);
+            log.info("search " + vacancyRequest.getText() + " " + result);
             model.addAttribute("status", "ok");
             model.addAttribute("result", result);
         } else
@@ -79,7 +80,7 @@ public class SimpleController {
             val userPass = (UserPasswords) authentication.getPrincipal();
             val user = userService.findByEmail(userPass.getUsername());
             val result = notesService.getFavoriteVacancies(vacancyRequest, user);
-            log.info("get favorites vacancies " + result);
+            log.info("get favorites vacancies " + vacancyRequest + " [" + result.getNotes().size() + " ]");
             model.addAttribute("status", "ok");
             model.addAttribute("result", result);
         } else

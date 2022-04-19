@@ -60,7 +60,6 @@ public class ChatService {
         chats.save(chat);
         val message = new Message(sender, recipient, text, date);
         messages.save(message);
-        log.info("save message " + message);
         return new ChatMessage(sender.getEmail(), message.getText(), message.getDateCreate().getTime());
     }
 }

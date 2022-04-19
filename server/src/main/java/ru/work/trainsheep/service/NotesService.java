@@ -64,11 +64,12 @@ public class NotesService {
     }
 
     public VacancyResult getVacancyResultWithLogin(VacancyRequest request, User user){
-        val page = noteRepository.findByHeaderContains(request.getText(), PageRequest.of(
+        val page = noteRepository.findByHeaderContainingIgnoreCase(request.getText(), PageRequest.of(
                 request.getPage(),
                 request.getCountNotesOnPage(),
                 Sort.by("dateCreate").descending()
         ));
+
         val favorites = noteRepository.favorites(user, Pageable.unpaged()).toSet();
         if (request.getTags().size() > 0){
             val list = page.stream().filter(note -> note.toNote().getTags().containsAll(request.getTags()))
