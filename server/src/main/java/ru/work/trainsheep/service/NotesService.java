@@ -64,12 +64,24 @@ public class NotesService {
     }
 
     public VacancyResult getVacancyResultWithLogin(VacancyRequest request, User user){
-        val page = noteRepository.findAll(PageRequest.of(
+        val page = noteRepository.findByHeaderContains(request.getText(), PageRequest.of(
                 request.getPage(),
                 request.getCountNotesOnPage(),
                 Sort.by("dateCreate").descending()
         ));
         val favorites = noteRepository.favorites(user, Pageable.unpaged()).toSet();
+        if (request.getTags().size() > 0){
+            val list = page.stream().filter(note -> note.toNote().getTags().containsAll(request.getTags()))
+                    .skip((long) request.getPage() * request.getCountNotesOnPage())
+                    .limit(request.getCountNotesOnPage())
+                    .map(e -> e.toNote(favorites.contains(e)))
+                    .collect(Collectors.toList());
+            return new VacancyResult(list,
+                    page.getNumber(),
+                    (int) page.getTotalElements(),
+                    request.getCountNotesOnPage());
+        }
+
         return new VacancyResult(
                 page.get().map(e -> e.toNote(favorites.contains(e))).collect(Collectors.toList()),
                 page.getNumber(),

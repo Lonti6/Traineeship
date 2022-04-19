@@ -16,6 +16,7 @@ public interface NoteRepository extends CrudRepository<NoteEntity, Long> {
     NoteEntity findById(long id);
     Set<NoteEntity> findAllByHeaderStartingWith(String header);
     //Set<NoteEntity> findAllByTagsContains(Set<Tag> tags);
+    Page<NoteEntity> findByHeaderContains(String text, Pageable pageable);
     Page<NoteEntity> findAll(Pageable pageable);
 
     @Query(value = "select n from NoteEntity n, FavoriteNote f where f.user = ?1 and n = f.note")
