@@ -35,12 +35,14 @@ public class FillDatabase implements InitializingBean {
 
     Logger logger = LoggerFactory.getLogger(getClass());
 
-    private void createUser(String email, String pass, String name, String image){
+    private User createUser(String email, String pass, String name, String image, boolean isCompany){
         users.register(email, pass, name);
         val user = users.findByEmail(email);
         user.setImage(image);
+        user.setCompany(isCompany);
         users.save(user);
         logger.info("create user " + email + " " + pass + " " + name);
+        return user;
     }
 
     @Override
@@ -49,20 +51,23 @@ public class FillDatabase implements InitializingBean {
         createUser("admin@admin.ru",
                 "password",
                 "Админ",
-                "https://ru.freepik.com/free-photo/rear-view-of-programmer-working-all-night-long_5698334.htm#query=system%20administrator&position=1&from_view=keyword");
+                "https://ru.freepik.com/free-photo/rear-view-of-programmer-working-all-night-long_5698334.htm#query=system%20administrator&position=1&from_view=keyword",
+                false);
         createUser(
                 "nikita@ok.ru",
                 "password",
                 "Никита",
-                "https://www.pngitem.com/pimgs/m/177-1772631_psyduck-png-9-png-image-psyduck-pokemon.png");
-        createUser("diana@ya.ru", "password", "Анна", "https://cs5.livemaster.ru/storage/8d/58/15676c2e3677f826dd7aac5a50yl--materialy-dlya-tvorchestva-organza-shelkovaya-chernaya.jpg");
-        createUser("okki@lev.ru", "nopassword", "Лев", "https://yt3.ggpht.com/a/AATXAJxxVTIrOzmAMHijjkT57-UJ83SSYlnLrlodfA=s900-c-k-c0xffffffff-no-rj-mo");
+                "https://www.pngitem.com/pimgs/m/177-1772631_psyduck-png-9-png-image-psyduck-pokemon.png", false);
+        createUser("diana@ya.ru", "password", "Анна", "https://cs5.livemaster.ru/storage/8d/58/15676c2e3677f826dd7aac5a50yl--materialy-dlya-tvorchestva-organza-shelkovaya-chernaya.jpg", false);
+        createUser("okki@lev.ru", "nopassword", "Лев", "https://yt3.ggpht.com/a/AATXAJxxVTIrOzmAMHijjkT57-UJ83SSYlnLrlodfA=s900-c-k-c0xffffffff-no-rj-mo", false);
 
         val userList =  users.getAll();
 
-        int k = 100;
+        int k = 20;
         for (int i = 0; i < k; i++) {
-            notes.save(generator.generateVacancyNote(List.of()));
+            val name = generator.getRandom(generator.companies);
+            val user = createUser(name + "@ok.ru", "password", name, generator.getRandom(generator.icons), true);
+            notes.createAndSave(user, generator.generateVacancyNote(List.of()));
         }
 
         logger.info("create " + k +" notes. OK!");

@@ -1,6 +1,7 @@
 package ru.work.trainsheep.data;
 
 import android.content.Context;
+import ru.work.trainsheep.data.getting.CreateVacancyGetting;
 import ru.work.trainsheep.send.*;
 
 import java.util.List;
@@ -28,6 +29,8 @@ public abstract class ServerRepository {
     public abstract void getMessages(ChatRequest request, Consumer<ChatResult> callbackSuccess, Consumer<Exception> callbackFailure);
 
     public abstract void getSendMessage(SendMessageRequest request, Consumer<ChatMessage> callbackSuccess, Consumer<Exception> callbackFailure);
+
+    public abstract void createVacancy(VacancyNote request, Consumer<VacancyNote> callbackSuccess, Consumer<Exception> callbackFailure);
 
     public abstract boolean isLogin();
 
@@ -67,6 +70,10 @@ public abstract class ServerRepository {
 
     public void setFavoriteVacancy(SetFavoriteVacancyRequest request, Consumer<VacancyNote> callbackSuccess){
         setFavoriteVacancy(request, callbackSuccess, Throwable::printStackTrace);
+    }
+
+    public void createVacancy(VacancyNote request, Consumer<VacancyNote> callbackSuccess){
+        createVacancy(request, callbackSuccess, Throwable::printStackTrace);
     }
 
 

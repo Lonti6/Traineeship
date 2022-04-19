@@ -35,4 +35,7 @@ public interface ServerApi {
     @POST("/send-message")
     Call<SendMessageGetting> sendMessage(@Body SendMessageRequest request, @Header("Authorization") String credentials);
 
+    @POST("/createVacancy")
+    Call<CreateVacancyGetting> createVacancy(@Body VacancyNote request, @Header("Authorization") String credentials);
+
 }
