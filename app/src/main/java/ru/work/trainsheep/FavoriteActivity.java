@@ -31,12 +31,12 @@ public class FavoriteActivity extends AppCompatActivity {
         findViewById(R.id.menuBut).setOnClickListener(v -> drawer.openMenu(true));
 /*        ((RecyclerView)findViewById(R.id.rvVacancies)).setOnScrollChangeListener(new MyScrollListener(findViewById(R.id.header),
                 getResources().getDrawable(R.drawable.bg_header)));*/
-
-        vacancyAdapter = new VacancyItemAdapter(true);
+        final RecyclerView rvVacancies = findViewById(R.id.rvVacancies);
+        vacancyAdapter = new VacancyItemAdapter(rvVacancies, true);
         companyAdapter = new Adapters.CompanyItemAdapter(new ArrayList<>());
 
 
-        final RecyclerView rvVacancies = findViewById(R.id.rvVacancies);
+
         rvVacancies.setHasFixedSize(true);
         rvVacancies.setLayoutManager(new LinearLayoutManager(this));
         rvVacancies.setAdapter(vacancyAdapter);

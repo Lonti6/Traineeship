@@ -25,37 +25,39 @@ public class VacancyItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     private  int currentPage = 0;
     private String searchText = "";
     private List<String> tags = new ArrayList<>();
+    private RecyclerView rv;
 
-    public VacancyItemAdapter() {
+    public VacancyItemAdapter(RecyclerView rv) {
+        this.rv = rv;
         this.notes = new ArrayList<>();
     }
 
-    public VacancyItemAdapter(boolean onlyFavorite) {
+    public VacancyItemAdapter(RecyclerView rv, boolean onlyFavorite) {
+        this.rv = rv;
         this.onlyFavorite = onlyFavorite;
         this.notes = new ArrayList<>();
     }
 
     private boolean isPositionFooter(int position) {
-        return position > notes.size();
+        return position >= notes.size();
     }
 
 
     @Override
     public int getItemViewType(int position) {
         if (isPositionFooter(position)) {
-            return notes.size() - 1;
+            return 2;
         }
-        return position;
+        return 1;
     }
 
 
     public void addAll(List<VacancyNote> next) {
-        if (notes.isEmpty()) {
-            notes.add(null);
-        }
-        val start = notes.size() - 1;
-        notes.addAll(start, next);
+        val start = notes.size();
+        notes.addAll(next);
         notifyItemRangeInserted(start, next.size());
+        if (start == 0)
+            rv.smoothScrollToPosition(0);
     }
 
     public void clear() {
@@ -74,7 +76,7 @@ public class VacancyItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        if (viewType == notes.size() - 1) {
+        if (viewType == 2) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.footer_search, parent, false);
             return new FooterViewHolder(view);
         } else
@@ -83,7 +85,7 @@ public class VacancyItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        if (holder instanceof VacancyItemHolder) {
+        if (holder instanceof VacancyItemHolder && position < notes.size()) {
             val item = (VacancyItemHolder) holder;
             VacancyNote note = notes.get(position);
 
@@ -121,6 +123,6 @@ public class VacancyItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     @Override
     public int getItemCount() {
-        return this.notes.size();
+        return notes.size() + 1;
     }
 }
