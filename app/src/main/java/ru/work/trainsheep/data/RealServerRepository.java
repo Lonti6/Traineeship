@@ -156,6 +156,27 @@ public class RealServerRepository extends ServerRepository{
         });
     }
 
+    @Override
+    public void getSendMessage(SendMessageRequest request, Consumer<ChatMessage> callbackSuccess, Consumer<Exception> callbackFailure) {
+        executor.execute(() -> {
+
+            val call = api.sendMessage(request, getCredentials());
+
+            try {
+                val response = call.execute();
+
+                val result = response.body();
+                if (result != null && Objects.equals(result.getStatus(), "ok")) {
+                    handler.post(() -> callbackSuccess.accept(result.getMessage()));
+                } else
+                    handler.post(() -> callbackFailure.accept(new Exception("status fail")));
+
+            } catch (IOException e) {
+                handler.post(() -> callbackFailure.accept(e));
+                System.err.println(e.getMessage());
+            }
+        });
+    }
 
 
     @Override

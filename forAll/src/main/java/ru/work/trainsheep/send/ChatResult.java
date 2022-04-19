@@ -14,4 +14,5 @@ public class ChatResult {
     int countAllMessages;
     String name;
     String icon;
+
 }

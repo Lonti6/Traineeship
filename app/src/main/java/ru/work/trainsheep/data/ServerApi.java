@@ -4,13 +4,8 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
-import ru.work.trainsheep.data.getting.ChatsResultGetting;
-import ru.work.trainsheep.data.getting.CompanyResultGetting;
-import ru.work.trainsheep.data.getting.MessageResultGetting;
-import ru.work.trainsheep.data.getting.VacancyResultGetting;
+import ru.work.trainsheep.data.getting.*;
 import ru.work.trainsheep.send.*;
-
-import java.util.List;
 
 public interface ServerApi {
     @POST("/register")
@@ -29,6 +24,9 @@ public interface ServerApi {
     Call<ChatsResultGetting> chats(@Header("Authorization") String credentials);
 
     @POST("/messages")
-    Call<MessageResultGetting> messages(@Body ChatRequest request, @Header("Authorization") String credentials);
+    Call<MessagesResultGetting> messages(@Body ChatRequest request, @Header("Authorization") String credentials);
+
+    @POST("/send-message")
+    Call<SendMessageGetting> sendMessage(@Body SendMessageRequest request, @Header("Authorization") String credentials);
 
 }

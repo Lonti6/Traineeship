@@ -485,6 +485,7 @@ public class DataGenerator {
         return ChatBlock.builder()
                 .icon(getRandom(icons))
                 .name(getRandom(names))
+                .email("you")
                 .lastMessage(getRandom(messages))
                 .countUnreadMessages(random.nextBoolean() ? random.nextInt(10) : 0)
                 .lastMessageDate(generateDate())

@@ -60,7 +60,7 @@ public class FillDatabase implements InitializingBean {
 
         logger.info("create " + k +" notes. OK!");
 
-        k = 300;
+        k = 40;
         int count = 0;
         for (int i = 0; i < k; i++) {
             val user1 = generator.getRandom(userList);
