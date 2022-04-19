@@ -20,11 +20,18 @@ public class UserInfo {
         registrationData = new UserRegistrationData();
     }
 
+
+
     private static UserInfo instance;
     public static UserInfo getInstance(){
         if (instance == null)
             instance = new UserInfo();
         return instance;
+    }
+
+    public void setSurname(String surname)
+    {
+        data.setLastName(surname);
     }
 
     public void setEmail(String email){
@@ -39,6 +46,21 @@ public class UserInfo {
     public void setName(String name){
         data.setFirstName(name);
         registrationData.setName(name);
+    }
+
+    public void setPatronymic(String patronymic)
+    {
+        data.setPatronymic(patronymic);
+    }
+
+    public void setUniversity(String university)
+    {
+        data.setUniversity(university);
+    }
+
+    public void setCurs(int curs)
+    {
+        data.setCurs(curs);
     }
 
     public void save(Context context){

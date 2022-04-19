@@ -68,12 +68,16 @@ public class EditUserDataActivity extends AppCompatActivity {
     public void prepare()
     {
         val instance = UserInfo.getInstance().getData();
+        instance.setLastName("Жильцов");
+        instance.setPatronymic("Сергеевич");
+        instance.setUniversity("УрГЭУ");
+        instance.setCurs(2);
         ((TextView)findViewById(R.id.surnameField)).setText(instance.getLastName());
         ((TextView)findViewById(R.id.nameField)).setText(instance.getFirstName());
         ((TextView)findViewById(R.id.patronymicField)).setText(instance.getPatronymic());
         ((TextView)findViewById(R.id.vyzField)).setText(instance.getUniversity());
         //((TextView)findViewById(R.id.cityField)).setText(instance.get());
-        //((TextView)findViewById(R.id.cursField)).setText(instance.get());
+        ((TextView)findViewById(R.id.cursField)).setText(String.valueOf(instance.getCurs()));
         ((TextView)findViewById(R.id.mail_field)).setText(instance.getEmail());
         //((TextView)findViewById(R.id.numberField)).setText(instance.get());
         //((TextView)findViewById(R.id.competenciesField)).setText(instance.get());

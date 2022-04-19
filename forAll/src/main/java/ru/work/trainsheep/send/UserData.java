@@ -12,6 +12,7 @@ public class UserData {
     private String firstName = "";
     private String lastName = "";
     private String patronymic = "";
+
     private Date birthdate;
     private Date registrationDate;
     @NonNull
@@ -20,6 +21,8 @@ public class UserData {
 
     private String university = "";
     private String specialization = "";
+    private String city;
     private int year; //год обучения
+    private int curs;
 
 }
