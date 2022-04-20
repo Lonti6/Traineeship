@@ -2,6 +2,8 @@ package ru.work.trainsheep;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -32,6 +34,7 @@ public class MessagesActivity extends AppCompatActivity {
     String email;
     RecyclerView recyclerView;
     Adapter adapter;
+    Handler handler = new Handler(Looper.getMainLooper());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +58,6 @@ public class MessagesActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
 
-
         TextView nameTop = findViewById(R.id.name_top);
         nameTop.setText(name);
 
@@ -77,6 +79,8 @@ public class MessagesActivity extends AppCompatActivity {
             sendMessage(adapter, recyclerView, text);
         });
 
+        handler.postDelayed(this::updateMessages, 1000);
+
     }
 
     @Override
@@ -88,7 +92,7 @@ public class MessagesActivity extends AppCompatActivity {
     private void updateMessages() {
         val server = ServerRepositoryFactory.getInstance();
         server.getMessages(new ChatRequest(email, 0, 20), (res) -> {
-            Log.i(getClass().getSimpleName(), "onCreate: " + res.getMessages() );
+            Log.i(getClass().getSimpleName(), "update messages: " + res.getMessages());
             adapter.addAll(res.getMessages(), true);
             if (adapter.size() > 0)
                 recyclerView.smoothScrollToPosition(adapter.size() - 1);
@@ -115,14 +119,17 @@ public class MessagesActivity extends AppCompatActivity {
             this.list = new ArrayList<>();
         }
 
-        public void addAll(List<ChatMessage> list, boolean clear) {
-            if (clear) {
-                val size = this.list.size();
+        public void addAll(List<ChatMessage> nlist, boolean updated) {
+            if (updated) {
+                val size = list.size();
+                if (size > 0 && nlist.size() > 0 && nlist.get(nlist.size() - 1).equals(list.get(size - 1))) {
+                    return;
+                }
                 this.list.clear();
                 notifyItemRangeRemoved(0, size);
             }
-            this.list.addAll(0, list);
-            notifyItemRangeInserted(0, list.size());
+            this.list.addAll(0, nlist);
+            notifyItemRangeInserted(0, nlist.size());
         }
 
         public void add(ChatMessage message) {
@@ -169,8 +176,8 @@ public class MessagesActivity extends AppCompatActivity {
         }
 
         public void update(ChatMessage chatMessage) {
-            for(int i = list.size() - 1; i >= 0 && list.get(i).getDate() == 0; i--){
-                if (list.get(i).getMessage().equals(chatMessage.getMessage())){
+            for (int i = list.size() - 1; i >= 0 && list.get(i).getDate() == 0; i--) {
+                if (list.get(i).getMessage().equals(chatMessage.getMessage())) {
                     list.get(i).setDate(chatMessage.getDate());
                     notifyItemChanged(i);
                 }

@@ -17,10 +17,12 @@ import ru.work.trainsheep.send.ChatMessage;
 import ru.work.trainsheep.send.ChatResult;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class ChatService {
     Logger log = LoggerFactory.getLogger(getClass());
+    Set<Long> set = new HashSet<>();
 
     @Autowired
     MessageRepository messages;
@@ -29,6 +31,10 @@ public class ChatService {
     ChatRepository chats;
 
     public ChatResult getMessages(User sender, User recipient, int page, int counts){
+        if (sender == null || recipient == null){
+            log.error("sender or recipient is null " + sender + " " + recipient);
+            return null;
+        }
 
         val sort = Sort.by("dateCreate").descending();
         val pageable = PageRequest.of(page, counts, sort);
@@ -50,6 +56,10 @@ public class ChatService {
     }
 
     public ChatMessage sendMessage(User sender, User recipient, String text){
+        if (sender == null || recipient == null){
+            log.error("sender or recipient is null " + sender + " " + recipient);
+            return null;
+        }
         Chat chat = chats.findBySenderAndRecipient(sender, recipient);
         val date = new Date();
         if (chat == null){
@@ -60,6 +70,38 @@ public class ChatService {
         chats.save(chat);
         val message = new Message(sender, recipient, text, date);
         messages.save(message);
+        if (!set.contains(sender.getId()) && set.contains(recipient.getId())){
+            sendMessage(recipient, sender, getRandom(answers));
+        }
         return new ChatMessage(sender.getEmail(), message.getText(), message.getDateCreate().getTime());
+    }
+
+    public void createStartMessagesFor(User user, List<User> companies){
+        log.info("create start message for " + user.getFirstName() + " " + companies.stream().map(User::getFirstName).collect(Collectors.toList()));
+        for(User company : companies){
+            set.add(company.getId());
+            sendMessage(company, user, "Здравствуйте!");
+        }
+        for(User company : companies){
+            sendMessage(company, user, getRandom(hies));
+        }
+    }
+    private static String hies[] = {
+            "У нас есть для вас предложение",
+            "Вы не заняты?",
+            "У нас есть интересная вакансия для вас",
+            "Не могли бы вы ответить на несколько вопросов?"
+    };
+
+    private static String answers[] = {
+            "Ожидайте, сейчас с вами свяжется нас специалист",
+            "Благодарим за интерес, скоро вам ответят",
+            "Ожидайте ответ на полученный нами запрос",
+            "Ваше сообщение несомненно важно для нас!",
+            "Ожидайте, сотрудник свяжется с вами"
+    };
+    private static Random random = new Random();
+    private static <T> T getRandom(T [] arr){
+        return arr[random.nextInt(arr.length)];
     }
 }

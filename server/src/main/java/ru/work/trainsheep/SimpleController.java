@@ -118,11 +118,11 @@ public class SimpleController {
     public String messages(Model model, Authentication authentication, @RequestBody ChatRequest request) {
         if (authentication != null && request != null) {
             val userPass = (UserPasswords) authentication.getPrincipal();
-            log.info("messages " + userPass.getUsername() + " to " + request);
+            //log.info("messages " + userPass.getUsername() + " to " + request);
             val user = userService.findByEmail(userPass.getUsername());
             val oldUser = userService.findByEmail(request.getEmail());
             val messages = chatService.getMessages(user, oldUser, request.getPage(), request.getCountMessageOnPage());
-            log.info("messages size" + messages.getMessages().size() + " " + messages);
+           // log.info("messages size" + messages.getMessages().size() + " " + messages);
             model.addAttribute("status", "ok");
             model.addAttribute("messages", messages);
         } else
@@ -164,7 +164,7 @@ public class SimpleController {
 
 
         if (user.getEmail() != null && user.getPassword() != null && userPasswordRepository.findByUsername(user.getEmail()) == null) {
-            userService.register(user.getEmail(), user.getPassword(), user.getName());
+            userService.register(user.getEmail(), user.getPassword(), user.getName(), user.isCompany());
             model.addAttribute("status", "ok");
             model.addAttribute("name", user.getName());
         } else
@@ -173,18 +173,6 @@ public class SimpleController {
         return "jsonTemplate";
     }
 
-    @PostMapping("/addUser")
-    public String addUser(Model model, @RequestBody UserData userData) {
-        User user = User.from(userData);
-        boolean status = userService.addUser(user);
-        if (status) {
-            model.addAttribute("status", "ok");
-            model.addAttribute("user", user);
-        } else {
-            model.addAttribute("status", "fail");
-        }
-        return "jsonTemplate";
-    }
 
 
     @PostMapping("/createVacancy")

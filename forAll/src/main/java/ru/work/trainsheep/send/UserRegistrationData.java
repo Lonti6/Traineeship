@@ -13,4 +13,5 @@ public class UserRegistrationData {
     private String name = "";
     private String email = "";
     private String password = "";
+    private boolean isCompany = false;
 }
