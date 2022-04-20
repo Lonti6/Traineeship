@@ -36,17 +36,30 @@ public class FillDatabase implements InitializingBean {
     Logger logger = LoggerFactory.getLogger(getClass());
 
     private User createUser(String email, String pass, String name, String image, boolean isCompany){
-        users.register(email, pass, name);
+        val userR = users.register(email, pass, name, isCompany);
         val user = users.findByEmail(email);
         user.setImage(image);
-        user.setCompany(isCompany);
         users.save(user);
-        logger.info("create user " + email + " " + pass + " " + name);
+        if(userR != null)
+            logger.info("create user [" + user.getId() + "] " + email + " " + pass + " " + name);
         return user;
     }
 
     @Override
     public void afterPropertiesSet() {
+
+        createUser("Яндекс@ok.ru", "password", "Яндекс",
+                "https://smartsellgroup.ru/wp-content/uploads/2021/12/stoimost-prodvizheniya-sajta-v-yandekse-3.jpg",
+                true);
+        createUser("СКБ Контур@ok.ru", "password", "СКБ Контур",
+                "https://creativecallproject.ru/wp-content/uploads/2016/05/SKB.jpg",
+                true);
+        createUser("Mail.ru Group@ok.ru", "password", "Mail.ru Group",
+                "https://inopiter.ru/wp-content/uploads/2021/05/mail.ru-group.jpg",
+                true);
+        createUser("Skyeng@ok.ru", "password", "Skyeng",
+                "https://mir-s3-cdn-cf.behance.net/project_modules/fs/7707ad94913247.5e8b5149e560c.png",
+                true);
 
         createUser("admin@admin.ru",
                 "password",
@@ -61,7 +74,7 @@ public class FillDatabase implements InitializingBean {
         createUser("diana@ya.ru", "password", "Анна", "https://cs5.livemaster.ru/storage/8d/58/15676c2e3677f826dd7aac5a50yl--materialy-dlya-tvorchestva-organza-shelkovaya-chernaya.jpg", false);
         createUser("okki@lev.ru", "nopassword", "Лев", "https://yt3.ggpht.com/a/AATXAJxxVTIrOzmAMHijjkT57-UJ83SSYlnLrlodfA=s900-c-k-c0xffffffff-no-rj-mo", false);
 
-        val userList =  users.getAll();
+
 
         int k = 20;
         for (int i = 0; i < k; i++) {
@@ -69,10 +82,10 @@ public class FillDatabase implements InitializingBean {
             val user = createUser(name + "@ok.ru", "password", name, generator.getRandom(generator.icons), true);
             notes.createAndSave(user, generator.generateVacancyNote(List.of()));
         }
-
+        val userList =  users.getAll();
         logger.info("create " + k +" notes. OK!");
 
-        k = 40;
+        k = 100;
         int count = 0;
         for (int i = 0; i < k; i++) {
             val user1 = generator.getRandom(userList);

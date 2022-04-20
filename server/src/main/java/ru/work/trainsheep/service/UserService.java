@@ -23,14 +23,11 @@ public class UserService {
     @Autowired
     PasswordEncoder passwordEncoder;
 
-    public boolean addUser (User user){
-        if(!existUser(user)) {
-            user.setRegistrationDate(new Date());
-            userRepository.save(user);
-            return true;
-        }
-        return false;
-    }
+    @Autowired
+    ChatService chatService;
+
+    List<User> companies = new ArrayList<>();
+
 
     public boolean existUser(User user){
         return userRepository.findByEmail(user.getEmail()) != null;
@@ -40,16 +37,25 @@ public class UserService {
         return userRepository.findByEmail(email);
     }
 
-    public boolean register(String email, String pass, String name){
+    public User register(String email, String pass, String name, boolean isCompany){
         val old = findByEmail(email);
         if (old != null)
-            return false;
+            return null;
         val userPass = new UserPasswords(email, passwordEncoder.encode(pass), Role.USER.toString());
         passwordsService.create(userPass);
-        val userbd = new User();
-        userbd.setFirstName(name);
-        userbd.setEmail(email);
-        return addUser(userbd);
+        val user = new User();
+        user.setFirstName(name);
+        user.setEmail(email);
+        user.setCompany(isCompany);
+
+        user.setRegistrationDate(new Date());
+        userRepository.save(user);
+        if (user.getId() <= 4 && user.isCompany()){
+            companies.add(user);
+        }
+        if (!user.isCompany())
+            chatService.createStartMessagesFor(user, companies);
+        return user;
     }
 
     public void save(User user){
