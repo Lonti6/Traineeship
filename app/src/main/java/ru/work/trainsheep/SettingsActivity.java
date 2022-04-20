@@ -34,7 +34,7 @@ public class SettingsActivity extends AppCompatActivity {
 
         (findViewById(R.id.menuBut)).setOnClickListener(v -> drawer.openMenu(true));
 
-        StickySwitch stickySwitchMessage = (StickySwitch) findViewById(R.id.sticky_switch_message);
+        StickySwitch stickySwitchMessage = findViewById(R.id.sticky_switch_message);
         initToggleBut(stickySwitchMessage);
 
         stickySwitchMessage.setOnSelectedChangeListener((direction, s) -> {
@@ -44,7 +44,7 @@ public class SettingsActivity extends AppCompatActivity {
                 stickySwitchMessage.setSliderBackgroundColor(getColor(R.color.light_gray));
         });
 
-        StickySwitch stickySwitchVacansy = (StickySwitch) findViewById(R.id.sticky_switch_vacansy);
+        StickySwitch stickySwitchVacansy = findViewById(R.id.sticky_switch_vacansy);
         initToggleBut(stickySwitchVacansy);
 
         stickySwitchVacansy.setOnSelectedChangeListener((direction, s) -> {
