@@ -102,7 +102,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/advert_name"
-                android:layout_marginTop="5dp"></org.apmem.tools.layouts.FlowLayout>
+                android:layout_marginTop="5dp"/>
 
 
             <androidx.constraintlayout.widget.ConstraintLayout

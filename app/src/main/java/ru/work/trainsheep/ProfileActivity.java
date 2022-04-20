@@ -149,7 +149,6 @@ public class ProfileActivity extends AppCompatActivity {
             super.onStart();
             int width = (int) (getResources().getDisplayMetrics().widthPixels * 0.85);
             getDialog().getWindow().setLayout(width, ViewGroup.LayoutParams.WRAP_CONTENT);
-            val instance = UserInfo.getInstance().getData();
         }
     }
 
