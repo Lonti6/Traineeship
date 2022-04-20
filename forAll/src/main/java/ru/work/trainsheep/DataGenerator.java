@@ -17,6 +17,7 @@ public class DataGenerator {
     public final List<String> companies;
     public final List<String> headers;
     public final List<String> contents;
+    public final List<String> zpTypes;
 
     public final List<String> names;
     public final List<String> messages;
@@ -303,6 +304,8 @@ public class DataGenerator {
                             "Красноярск", "Воронеж", "Пермь", "Волгоград", "Краснодар", "Саратов", "Тюмень",
                             "Тольятти", "Ижевск", "Барнаул", "Ульяновск", "Иркутск", "Хабаровск", "Махачкала",
                             "Ярославль", "Владивосток", "Оренбург", "Томск", "Кемерово", "Семферопль", "Севастопль");
+
+        zpTypes = Arrays.asList("Р/Нед", "Р/Мес", "Р/час");
     }
 
     public VacancyNote generateVacancyNote(List<String> tags) {

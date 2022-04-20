@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -15,7 +16,8 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="40dp"
             android:layout_marginRight="40dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -25,17 +27,18 @@
                 android:background="@drawable/border_style_gray">
 
                 <EditText
-                        android:id="@+id/vacancyNameField"
-                        style="@style/MyTextFieldStyle"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp"
-                        android:hint="Название вакансии *"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" app:layout_constraintVertical_bias="0.0"/>
+                    android:id="@+id/vacancyNameField"
+                    style="@style/MyTextFieldStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:hint="Название вакансии *"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -99,8 +102,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/advert_name"
-                android:layout_marginTop="5dp">
-            </org.apmem.tools.layouts.FlowLayout>
+                android:layout_marginTop="5dp"></org.apmem.tools.layouts.FlowLayout>
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -192,24 +194,15 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp">
 
-                <CheckBox
-                        android:id="@+id/freeCheck"
-                        style="@style/SmallText"
-                        android:layout_width="145dp"
-                        android:layout_height="50dp"
-                        android:buttonTint="@color/main_green"
-                        android:text="Без оплаты"
-                        android:textSize="14dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" app:layout_constraintVertical_bias="0.0"/>
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintLayout3"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
+                    android:layout_marginRight="5dp"
                     android:background="@drawable/border_style_gray"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/freeCheck"
+                    app:layout_constraintEnd_toStartOf="@+id/constraintLayout4"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
                     <EditText
@@ -226,7 +219,65 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintLayout4"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="5dp"
+                    android:background="@drawable/border_style_gray"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/constraintLayout3"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/zpTypeField"
+                        style="@style/MyTextFieldStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:hint="Р/мес"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+                <CheckBox
+                    android:id="@+id/freeCheck"
+                    style="@style/SmallText"
+                    android:layout_width="145dp"
+                    android:layout_height="50dp"
+                    android:buttonTint="@color/main_green"
+                    android:text="Без оплаты"
+                    android:textSize="14dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0" />
+
+                <CheckBox
+                    android:id="@+id/contractZpCheck"
+                    style="@style/SmallText"
+                    android:layout_width="145dp"
+                    android:layout_height="50dp"
+                    android:buttonTint="@color/main_green"
+                    android:text="Договорная оплата"
+                    android:textSize="14dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0" />
+            </LinearLayout>
+
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -242,7 +293,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
-                    android:hint="Описание вакансии"
+                    android:hint="Описание вакансии *"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -250,9 +301,21 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <Button
-                    android:text="Cоздать"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" android:id="@+id/create"/>
+                android:id="@+id/create"
+                style="@style/ButtonStyle"
+                android:layout_width="230dp"
+                android:layout_height="50dp"
+                android:background="@drawable/q"
+                android:fontFamily="@font/open_sans"
+                android:text="Создать"
+                android:textSize="20dp"/>
+
+            <TextView
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Поля помеченные '*' обязательны для заполнения"
+                style="@style/SmallGrayText"/>
 
         </LinearLayout>
     </ScrollView>

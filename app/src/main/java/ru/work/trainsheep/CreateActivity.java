@@ -36,24 +36,27 @@ public class CreateActivity extends AppCompatActivity {
         Util.setEditTextCreateFocusListener(this, R.id.descriptionField);
 
         DataGenerator dataGenerator = new DataGenerator();
-        final String[] сats = dataGenerator.tags.toArray(new String[0]);
+        final String[] tags = dataGenerator.tags.toArray(new String[0]);
+        final String[] zpTypes = dataGenerator.zpTypes.toArray(new String[0]);
 
 
         AutoCompleteTextView autoCompleteTags = findViewById(R.id.competenciesField);
         autoCompleteTags.setAdapter(new ArrayAdapter<>(this,
-                android.R.layout.simple_dropdown_item_1line, сats));
+                android.R.layout.simple_dropdown_item_1line, tags));
 
         AutoCompleteTextView autoCompleteCities = findViewById(R.id.cityField);
         autoCompleteCities.setAdapter(new ArrayAdapter<>(this,
                 android.R.layout.simple_dropdown_item_1line, dataGenerator.getCities()));
 
+        AutoCompleteTextView autoCompleteZpTypes = findViewById(R.id.zpTypeField);
+        autoCompleteZpTypes.setAdapter(new ArrayAdapter<>(this,
+                android.R.layout.simple_dropdown_item_1line, zpTypes));
+
         tagsField = findViewById(R.id.tags_field);
         tagsField.setVisibility(View.GONE);
 
-        TextView textView = findViewById(R.id.competenciesField);
-
         findViewById(R.id.addBut).setOnClickListener(v -> {
-            if (textView.getText().toString().trim().length()!=0) {
+            if (autoCompleteTags.getText().toString().trim().length()!=0) {
                 val view = LayoutInflater.from(v.getContext()).inflate(R.layout.tag_item, tagsField, false);
                 tagsField.addView(view);
                 tagsField.getChildAt(tagsField.getChildCount()-1).setOnClickListener(new DoubleClickListener() {
@@ -62,44 +65,32 @@ public class CreateActivity extends AppCompatActivity {
                         try {
                             tagsField.removeView(v);
                         }
-                        catch (Exception e){}
+                        catch (Exception e){ e.printStackTrace(); }
                     }
                 });
-                ((TextView) view.findViewById(R.id.tag)).setText(textView.getText().toString());
+                ((TextView) view.findViewById(R.id.tag)).setText(autoCompleteTags.getText().toString());
                 tagsField.setVisibility(View.VISIBLE);
-                textView.setText("");
+                autoCompleteTags.setText("");
             }
         });
 
         findViewById(R.id.scroller).setOnScrollChangeListener(new ScrollListeners.MyScrollListener(
                 findViewById(R.id.header),
-                getResources().getDrawable(R.drawable.bg_header)));
-
-        findViewById(R.id.freeCheck).setOnClickListener(v -> {
-            EditText editText = findViewById(R.id.zpField);
-            if (((CheckBox)findViewById(R.id.freeCheck)).isChecked()) {
-                editText.setText("0");
-                editText.setEnabled(false);
-            }
-            else
-            {
-                editText.setEnabled(true);
-                editText.setText("");
-            }
-        });
+                getDrawable(R.drawable.bg_header)));
         findViewById(R.id.create).setOnClickListener((v) -> {
-            copyDateAndSend();
+            readDataAndSend();
         });
 
     }
 
 
-    void copyDateAndSend(){
+    void readDataAndSend(){
 
         String header = ((EditText)findViewById(R.id.vacancyNameField)).getText().toString();
         String content = ((EditText)findViewById(R.id.descriptionField)).getText().toString();
         String company = UserInfo.getInstance().getData().getFirstName();
         String salary = ((EditText)findViewById(R.id.zpField)).getText().toString();
+        String zpType = ((AutoCompleteTextView)findViewById(R.id.zpTypeField)).getText().toString();
         boolean free = ((CheckBox)findViewById(R.id.freeCheck)).isChecked();
 
         if (header.equals("") || content.equals("")) {
@@ -115,7 +106,7 @@ public class CreateActivity extends AppCompatActivity {
         if (free){
             list.add("Бесплатно");
         }
-        val note = new VacancyNote(list, header, content, company, salary, false, 0);
+        val note = new VacancyNote(list, header, content, company, (salary + " " + zpType), false, 0);
         ServerRepositoryFactory.getInstance().createVacancy(note, (n) -> {
             Toast.makeText(getApplicationContext(), "Создана вакансия " + header, Toast.LENGTH_SHORT).show();
             ((EditText)findViewById(R.id.vacancyNameField)).setText("");

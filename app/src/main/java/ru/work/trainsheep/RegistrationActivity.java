@@ -3,6 +3,7 @@ package ru.work.trainsheep;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,6 +27,14 @@ public class RegistrationActivity extends AppCompatActivity {
             Intent intent = new Intent(this, LoginActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
             this.startActivity(intent);
+        });
+
+        CheckBox checkBox = findViewById(R.id.companyCheck);
+        checkBox.setOnClickListener(v -> {
+            if (checkBox.isChecked())
+                ((EditText)findViewById(R.id.reg_name_field)).setHint("Наименование компании");
+            else
+                ((EditText)findViewById(R.id.reg_name_field)).setHint("Имя");
         });
     }
 

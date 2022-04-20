@@ -43,7 +43,7 @@ public class SearchActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         recyclerView.addItemDecoration(new SpaceItemDecoration(90));
         (findViewById(R.id.listButton)).setOnClickListener(v ->
-                ((RecyclerView) findViewById(R.id.rv)).smoothScrollToPosition(0));
+                recyclerView.smoothScrollToPosition(0));
         Util.setEditTextFocusListener(this, R.id.search_field);
         findText = findViewById(R.id.search_field);
         Log.i(getClass().getSimpleName(), "onCreate: " + findText.getText().toString() + " " + findText.getId());

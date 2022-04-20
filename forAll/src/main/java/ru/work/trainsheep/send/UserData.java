@@ -19,6 +19,7 @@ public class UserData {
     @NonNull
     private String email = "";
     private String phoneNumber = "";
+    private String avatarSrc = "";
     private ArrayList<String> competencies;
     private boolean isCompany = false;
 
