@@ -6,22 +6,27 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 
+import com.bumptech.glide.Glide;
 import com.mxn.soul.flowingdrawer_core.ElasticDrawer;
 import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
 
 import io.ghyeok.stickyswitch.widget.StickySwitch;
 import io.ghyeok.stickyswitch.widget.StickySwitch.Direction;
+import ru.work.trainsheep.data.UserInfo;
+import ru.work.trainsheep.send.UserData;
 
 
 public class SettingsActivity extends AppCompatActivity {
     FlowingDrawer mDrawer;
     FragmentManager manager;
     MyDialogFragment myDialogFragment;
+    UserData instance = UserInfo.getInstance().getData();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,6 +92,16 @@ public class SettingsActivity extends AppCompatActivity {
             super.onStart();
             int width = (int)(getResources().getDisplayMetrics().widthPixels*0.85);
             getDialog().getWindow().setLayout(width, ViewGroup.LayoutParams.WRAP_CONTENT);
+
         }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Glide.with(this)
+                .load(instance.getAvatarSrc())
+                .circleCrop()
+                .into((ImageView) this.findViewById(R.id.left_icon_user));
     }
 }

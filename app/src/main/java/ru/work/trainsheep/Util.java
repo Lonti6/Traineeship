@@ -64,10 +64,13 @@ public class Util {
     public static void prepareLeftPanel(Activity activity) {
         final FlowingDrawer drawer = activity.findViewById(R.id.drawerlayout);
 
-        /*Glide.with(activity.getApplicationContext()).load(chat.getIcon()).circleCrop()
-                .into((ImageView) activity.findViewById(R.id.icon_user));*/
-
         val instance = UserInfo.getInstance().getData();
+
+        Glide.with(activity)
+                .load(instance.getAvatarSrc())
+                .circleCrop()
+                .into((ImageView) activity.findViewById(R.id.left_icon_user));
+
         ((TextView)activity.findViewById(R.id.name_user)).setText(instance.getFirstName() + " " + instance.getLastName());
 
         if (!isCompany)

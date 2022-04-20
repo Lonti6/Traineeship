@@ -9,11 +9,13 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
 import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
 
 import org.apmem.tools.layouts.FlowLayout;
@@ -144,5 +146,14 @@ public class EditUserDataActivity extends AppCompatActivity {
         year = instance.getBirthdate().getYear();
         ((TextView) findViewById(R.id.dateText)).setText("Дата рождения: " + day + "." + (month + 1) + "." + year);
         ((EditText) findViewById(R.id.descriptionField)).setText(instance.getDescription());
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Glide.with(this)
+                .load(instance.getAvatarSrc())
+                .circleCrop()
+                .into((ImageView) this.findViewById(R.id.left_icon_user));
     }
 }
