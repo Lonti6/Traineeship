@@ -48,7 +48,7 @@ public class MessagesActivity extends AppCompatActivity {
         if (name == null)
             name = "Избранное";
 
-        adapter = new Adapter(email);
+        adapter = new Adapter();
 
         recyclerView = findViewById(R.id.rv);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -82,6 +82,10 @@ public class MessagesActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        updateMessages();
+    }
+
+    private void updateMessages() {
         val server = ServerRepositoryFactory.getInstance();
         server.getMessages(new ChatRequest(email, 0, 20), (res) -> {
             Log.i(getClass().getSimpleName(), "onCreate: " + res.getMessages() );
@@ -97,18 +101,17 @@ public class MessagesActivity extends AppCompatActivity {
         val mes = new ChatMessage(UserInfo.getInstance().getData().getEmail(), message, 0);
         adapter.add(mes);
         recyclerView.smoothScrollToPosition(adapter.size() - 1);
-        server.getSendMessage(new SendMessageRequest(email, message), (chatMessage -> {
-            adapter.update(chatMessage);
-        }));
+        server.getSendMessage(new SendMessageRequest(email, message), (mess) -> {
+            adapter.update(mess);
+            updateMessages();
+        });
         text.setText("");
     }
 
     static class Adapter extends RecyclerView.Adapter<MyHolder> {
         List<ChatMessage> list;
-        String name;
 
-        public Adapter(String name) {
-            this.name = name;
+        public Adapter() {
             this.list = new ArrayList<>();
         }
 
@@ -143,12 +146,12 @@ public class MessagesActivity extends AppCompatActivity {
         public void onBindViewHolder(MyHolder holder, int position) {
             val message = list.get(position);
             val params = (ConstraintLayout.LayoutParams) holder.bg.getLayoutParams();
-            if (Objects.equals(message.getSender(), name)) {
-                params.horizontalBias = 0;
-                holder.bg.setBackgroundResource(R.drawable.left_message);
-            } else {
+            if (Objects.equals(message.getSender(), UserInfo.getInstance().getData().getEmail())) {
                 params.horizontalBias = 1;
                 holder.bg.setBackgroundResource(R.drawable.right_message);
+            } else {
+                params.horizontalBias = 0;
+                holder.bg.setBackgroundResource(R.drawable.left_message);
             }
 
             holder.message.setText(message.getMessage());
