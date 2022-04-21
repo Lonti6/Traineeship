@@ -24,12 +24,11 @@
             android:name=".AllChatsActivity"
             android:exported="true" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".SearchActivity"
             android:exported="true"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -52,7 +51,8 @@
             android:name=".ContactsActivity"
             android:exported="true" />
         <activity
-            android:name=".SearchActivity"
+                android:name=".LoginActivity"
+
             android:exported="true" />
         <activity
             android:name=".FullVacancyActivity"

@@ -47,6 +47,7 @@ public class RegistrationActivity extends AppCompatActivity {
             errorView.setVisibility(View.VISIBLE);
             return;
         }
+        val lastname = ((EditText) findViewById(R.id.reg_last_name_field)).getText().toString().trim();
 
         val email = ((EditText) findViewById(R.id.reg_mail_field)).getText().toString().trim();
         if (!Util.validEmail(email)){
@@ -71,6 +72,9 @@ public class RegistrationActivity extends AppCompatActivity {
         info.setName(name);
         info.setEmail(email);
         info.setPassword(pass);
+        info.getRegistrationData().setLastName(lastname);
+        info.setLastName(lastname);
+
         info.save(this);
 
         sendRegisterRequest();
@@ -80,6 +84,7 @@ public class RegistrationActivity extends AppCompatActivity {
         val errorView = (TextView) findViewById(R.id.error_info);
         val server = ServerRepositoryFactory.getInstance();
         server.register(UserInfo.getInstance().getRegistrationData(), (name) -> {
+            UserInfo.getInstance().setLogin(true);
             Toast.makeText(getApplicationContext(), "Здравствуйте, " + name, Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
             //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);

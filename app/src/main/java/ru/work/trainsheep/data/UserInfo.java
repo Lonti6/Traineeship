@@ -2,20 +2,26 @@ package ru.work.trainsheep.data;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
+import androidx.preference.PreferenceManager;
 
 import java.util.ArrayList;
 
-import lombok.Value;
-import lombok.val;
+import lombok.*;
 import ru.work.trainsheep.send.UserData;
 import ru.work.trainsheep.send.UserRegistrationData;
 
-@Value
+
 public class UserInfo {
 
+    @Getter
     UserData data;
+
+    @Getter
     UserRegistrationData registrationData;
+
+    @Getter
+    @Setter
+    boolean login = false;
 
     private UserInfo(){
         data = new UserData();
@@ -53,6 +59,8 @@ public class UserInfo {
         editor.putString("name", registrationData.getName());
         editor.putString("email", registrationData.getEmail());
         editor.putString("pass", registrationData.getPassword());
+        editor.putString("lastname", registrationData.getLastName());
+        editor.putBoolean("login", login);
         editor.apply();
     }
     public void load(Context context){
@@ -60,5 +68,12 @@ public class UserInfo {
         setName(shared.getString("name", ""));
         setPassword(shared.getString("pass", ""));
         setEmail(shared.getString("email", ""));
+        setLastName(shared.getString("lastname", ""));
+        setLogin(shared.getBoolean("login", false));
+    }
+
+    public void setLastName(String lastname) {
+        data.setLastName(lastname);
+        registrationData.setLastName(lastname);
     }
 }
