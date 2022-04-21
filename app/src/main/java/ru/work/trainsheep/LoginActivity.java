@@ -80,7 +80,7 @@ public class LoginActivity extends AppCompatActivity {
     {
         DataGenerator dataGenerator = new DataGenerator();
         val instance = UserInfo.getInstance().getData();
-        instance.setLastName("Жильцов");
+        instance.setLastName("");
         instance.setPatronymic("Сергеевич");
         instance.setUniversity("УрГЭУ");
         instance.setCurs(2);

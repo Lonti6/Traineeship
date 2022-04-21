@@ -67,6 +67,7 @@ public class MessagesActivity extends AppCompatActivity {
         linear.setReverseLayout(true);
         //linear.setStackFromEnd(true);
         recyclerView.setLayoutManager(linear);
+        recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
 
 

@@ -47,7 +47,7 @@ public class SearchActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
-        recyclerView.addItemDecoration(new SpaceItemDecoration(90));
+        recyclerView.addItemDecoration(new SpaceItemDecoration(85));
         (findViewById(R.id.listButton)).setOnClickListener(v ->
                 recyclerView.smoothScrollToPosition(0));
         Util.setEditTextFocusListener(this, R.id.search_field);

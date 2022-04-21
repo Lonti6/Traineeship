@@ -55,11 +55,14 @@ public class AllChatsActivity extends AppCompatActivity {
         findViewById(R.id.menuBut).setOnClickListener(v -> drawer.openMenu(true));
 
         RecyclerView rv = findViewById(R.id.rv);
-        rv.setLayoutManager(new LinearLayoutManager(this));
+        val linear = new LinearLayoutManager(this);
+        linear.setReverseLayout(true);
+        linear.setStackFromEnd(true);
+        rv.setLayoutManager(linear);
 
         adapter = new Adapter(new ArrayList<>(), this);
         rv.setAdapter(adapter);
-        rv.addItemDecoration(new SpaceItemDecoration(80));
+        //rv.addItemDecoration(new SpaceItemDecoration(80));
         Log.i(getClass().getSimpleName(), "onCreate: open cre");
         findText = findViewById(R.id.search_field);
         findText.setOnEditorActionListener((v, actionId, event) -> {
