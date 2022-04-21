@@ -95,6 +95,7 @@ public class VacancyItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             item.companyName.setText(note.getCompany());
             item.salaryText.setText(note.getSalary());
             item.addTags(note.getTags());
+            item.setSrc();
             item.setFavoriteIcon(note.isFavorite(), note.getId());
         }
 

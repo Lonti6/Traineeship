@@ -2,15 +2,21 @@ package ru.work.trainsheep;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
 import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
 import lombok.val;
 import ru.work.trainsheep.adapters.VacancyItemAdapter;
 import ru.work.trainsheep.data.ServerRepository;
 import ru.work.trainsheep.data.ServerRepositoryFactory;
+import ru.work.trainsheep.data.UserInfo;
 import ru.work.trainsheep.send.CompanyRequest;
+import ru.work.trainsheep.send.UserData;
 
 import java.util.ArrayList;
 
@@ -19,6 +25,7 @@ public class FavoriteActivity extends AppCompatActivity {
     ServerRepository server;
     VacancyItemAdapter vacancyAdapter;
     Adapters.CompanyItemAdapter companyAdapter;
+    UserData instance = UserInfo.getInstance().getData();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,5 +84,10 @@ public class FavoriteActivity extends AppCompatActivity {
         server.getCompanies(new CompanyRequest(0, 10), (result) -> {
             companyAdapter.addAll(result.getNotes());
         });
+
+        Glide.with(this)
+                .load(instance.getAvatarSrc())
+                .circleCrop()
+                .into((ImageView) this.findViewById(R.id.left_icon_user));
     }
 }

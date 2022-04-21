@@ -31,15 +31,12 @@ public class UserInfo {
         return instance;
     }
 
-    public void setSurname(String surname)
-    {
-        data.setLastName(surname);
-    }
-
     public void setEmail(String email){
         data.setEmail(email);
         registrationData.setEmail(email);
     }
+
+
 
     public void setPassword(String password){
         registrationData.setPassword(password);
@@ -49,20 +46,6 @@ public class UserInfo {
         data.setFirstName(name);
         registrationData.setName(name);
     }
-
-    public void setPatronymic(String patronymic){ data.setPatronymic(patronymic); }
-
-    public void setUniversity(String university){ data.setUniversity(university); }
-
-    public void setCurs(int curs){ data.setCurs(curs); }
-
-    public void setCity(String city){ data.setCity(city); }
-
-    public void setCompetencies(ArrayList competencies) { data.setCompetencies(competencies); }
-
-    public void setPhoneNumber(String number) { data.setPhoneNumber(number); }
-
-    public void setDescription(String description) { data.setDescription(description); }
 
     public void save(Context context){
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);

@@ -20,7 +20,9 @@ import lombok.NonNull;
 import lombok.val;
 import ru.work.trainsheep.data.ServerRepository;
 import ru.work.trainsheep.data.ServerRepositoryFactory;
+import ru.work.trainsheep.data.UserInfo;
 import ru.work.trainsheep.send.ChatBlock;
+import ru.work.trainsheep.send.UserData;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -30,6 +32,7 @@ import java.util.List;
 public class AllChatsActivity extends AppCompatActivity {
 
     Adapter adapter;
+    UserData instance = UserInfo.getInstance().getData();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,8 +48,6 @@ public class AllChatsActivity extends AppCompatActivity {
         adapter = new Adapter(new ArrayList<>(), this);
         rv.setAdapter(adapter);
         rv.addItemDecoration(new SpaceItemDecoration(80));
-
-
     }
 
     @Override
@@ -54,6 +55,11 @@ public class AllChatsActivity extends AppCompatActivity {
         super.onStart();
         ServerRepository server = ServerRepositoryFactory.getInstance();
         server.getChats(adapter::addAll);
+
+        Glide.with(this)
+                .load(instance.getAvatarSrc())
+                .circleCrop()
+                .into((ImageView) this.findViewById(R.id.left_icon_user));
     }
 
     static class Adapter extends RecyclerView.Adapter<MyViewHolder>{
@@ -132,6 +138,4 @@ public class AllChatsActivity extends AppCompatActivity {
         }
 
     }
-
-
 }

@@ -1,5 +1,6 @@
 package ru.work.trainsheep.adapters.holders;
 
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,8 +8,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
+
 import lombok.val;
 import org.apmem.tools.layouts.FlowLayout;
+
+import ru.work.trainsheep.EditUserDataActivity;
+import ru.work.trainsheep.FullVacancyActivity;
 import ru.work.trainsheep.R;
 import ru.work.trainsheep.data.ServerRepositoryFactory;
 import ru.work.trainsheep.send.SetFavoriteVacancyRequest;
@@ -42,8 +49,21 @@ public class VacancyItemHolder extends RecyclerView.ViewHolder {
         }
     }
 
+    public void setSrc()
+    {
+        name.setOnContextClickListener(v -> {
+            Log.e("\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\", "//////////////////////////////////");
+
+            Intent intent = new Intent(itemView.getContext(), FullVacancyActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+            itemView.getContext().startActivity(intent);
+            return true;
+        });
+    }
+
     public void setFavoriteIcon(boolean favorite, long id) {
         val server = ServerRepositoryFactory.getInstance();
+
         favoriteIcon.setTag(favorite ? "fill" : "hollow");
 
         if (favoriteIcon.getTag().toString().equals("hollow"))

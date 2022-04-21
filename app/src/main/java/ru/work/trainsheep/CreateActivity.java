@@ -7,6 +7,7 @@ import android.widget.*;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
 import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
 
 import org.apmem.tools.layouts.FlowLayout;
@@ -14,6 +15,7 @@ import org.apmem.tools.layouts.FlowLayout;
 import lombok.val;
 import ru.work.trainsheep.data.ServerRepositoryFactory;
 import ru.work.trainsheep.data.UserInfo;
+import ru.work.trainsheep.send.UserData;
 import ru.work.trainsheep.send.VacancyNote;
 
 import java.util.ArrayList;
@@ -21,6 +23,7 @@ import java.util.ArrayList;
 public class CreateActivity extends AppCompatActivity {
 
     FlowLayout tagsField;
+    UserData instance = UserInfo.getInstance().getData();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -115,5 +118,14 @@ public class CreateActivity extends AppCompatActivity {
             ((CheckBox)findViewById(R.id.freeCheck)).setChecked(false);
             tagsField.removeAllViews();
         });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Glide.with(this)
+                .load(instance.getAvatarSrc())
+                .circleCrop()
+                .into((ImageView) this.findViewById(R.id.left_icon_user));
     }
 }
