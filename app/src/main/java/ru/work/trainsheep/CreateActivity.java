@@ -1,6 +1,7 @@
 package ru.work.trainsheep;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.*;
@@ -94,7 +95,10 @@ public class CreateActivity extends AppCompatActivity {
         String company = UserInfo.getInstance().getData().getFirstName();
         String salary = ((EditText)findViewById(R.id.zpField)).getText().toString();
         String zpType = ((AutoCompleteTextView)findViewById(R.id.zpTypeField)).getText().toString();
+        int workingTime = Integer.parseInt(((EditText)findViewById(R.id.workTimeField)).getText().toString());
+        Log.e("/////////////////////////////////////////////////////////////////////////", String.valueOf(workingTime));
         boolean free = ((CheckBox)findViewById(R.id.freeCheck)).isChecked();
+        boolean furtherCooperation = ((CheckBox)findViewById(R.id.furtherCooperationBox)).isChecked();
 
         if (header.equals("") || content.equals("")) {
             Toast.makeText(getApplicationContext(), "Поля не заполнены!", Toast.LENGTH_SHORT).show();
@@ -109,7 +113,8 @@ public class CreateActivity extends AppCompatActivity {
         if (free){
             list.add("Бесплатно");
         }
-        val note = new VacancyNote(list, header, content, company, (salary + " " + zpType), false, 0);
+        val note = new VacancyNote(list, header, content, company, (salary + " " + zpType), false ,0);
+        //val note = new VacancyNote(header, content, company, (salary + " " + zpType), furtherCooperation, workingTime);
         ServerRepositoryFactory.getInstance().createVacancy(note, (n) -> {
             Toast.makeText(getApplicationContext(), "Создана вакансия " + header, Toast.LENGTH_SHORT).show();
             ((EditText)findViewById(R.id.vacancyNameField)).setText("");

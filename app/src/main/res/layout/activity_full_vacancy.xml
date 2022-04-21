@@ -33,7 +33,7 @@
                 app:srcCompat="@drawable/header" />
 
             <TextView
-                android:id="@+id/textView14"
+                android:id="@+id/companyNameHeader"
                 style="@style/HeadingText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -46,9 +46,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintTop_toBottomOf="@+id/textView14">
+                app:layout_constraintTop_toBottomOf="@+id/companyNameHeader">
 
                 <TextView
+                    android:id="@+id/vacancyNameText"
                     style="@style/HeaderMessageText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -86,6 +87,7 @@
                     android:textAlignment="center" />
 
                 <TextView
+                    android:id="@+id/cityText"
                     style="@style/StandartText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -93,6 +95,7 @@
                     android:text="Населённый пункт: Екатеринбург" />
 
                 <TextView
+                    android:id="@+id/zpText"
                     style="@style/StandartText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -100,6 +103,7 @@
                     android:text="Оплата в месяц: 16 000" />
 
                 <TextView
+                    android:id="@+id/workTimeText"
                     style="@style/StandartText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -107,12 +111,14 @@
                     android:text="План работы: 30 часов в неделю" />
 
                 <CheckBox
+                    android:id="@+id/contractualSalary"
                     style="@style/SmallText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:buttonTint="@color/main_green"
-                    android:checked="true"
+                    android:checked="false"
+                    android:editable="false"
                     android:text="Возможность договорной оплаты" />
 
                 <CheckBox
@@ -121,7 +127,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:buttonTint="@color/main_green"
-                    android:checked="true"
+                    android:checked="false"
+                    android:editable="false"
                     android:text="Возможность дальнейшего трудоустройства" />
 
                 <CheckBox
@@ -130,7 +137,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:buttonTint="@color/main_green"
-                    android:checked="true"
+                    android:checked="false"
+                    android:editable="false"
                     android:text="Удалённая работа" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -140,8 +148,9 @@
                     android:layout_marginBottom="20dp"
                     android:background="@drawable/half_round_border_style_color">
 
-                    <EditText
-                        android:id="@+id/descriptionField"
+                    <TextView
+                        android:id="@+id/descriptionText"
+                        android:minHeight="40dp"
                         style="@style/MyTextFieldStyle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

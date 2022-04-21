@@ -29,18 +29,18 @@ public class VacancyNote implements Serializable {
     long id; // нужен для редактирования конкретной вакансии на сервере
     String imageSrc = "";
     String city = "Ёбург";
-    String workingHours = "30 часов";
+    int workingHours;
     boolean furtherCooperation = true;
 
 
-
-    public VacancyNote(String header, String content, String company, String salary, String... tags) {
+    public VacancyNote(String header, String content, String company, String salary,
+                       boolean furtherCooperation, int workingHours, String... tags) {
         this.header = header;
         this.content = content;
         this.company = company;
         this.salary = salary;
         this.tags = Arrays.asList(tags);
+        this.furtherCooperation = furtherCooperation;
+        this.workingHours = workingHours;
     }
-
-
 }
