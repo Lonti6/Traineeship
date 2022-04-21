@@ -134,12 +134,26 @@ public class SimpleController {
     public String messages(Model model, Authentication authentication, @RequestBody SendMessageRequest request) {
         if (authentication != null && request != null) {
             val userPass = (UserPasswords) authentication.getPrincipal();
-            log.info("send messages from " + userPass.getUsername() + " to " + request);
+//            log.info("send messages from " + userPass.getUsername() + " to " + request);
             val user = userService.findByEmail(userPass.getUsername());
             val oldUser = userService.findByEmail(request.getEmail());
 
             model.addAttribute("status", "ok");
             model.addAttribute("message", chatService.sendMessage(user, oldUser, request.getText()));
+        } else
+            model.addAttribute("status", "fail");
+        return "jsonTemplate";
+    }
+    @PostMapping("/search-chats")
+    public String messages(Model model, Authentication authentication, @RequestBody SearchChatsRequest request) {
+        if (authentication != null && request != null) {
+            val userPass = (UserPasswords) authentication.getPrincipal();
+//            log.info("send messages from " + userPass.getUsername() + " to " + request);
+            val user = userService.findByEmail(userPass.getUsername());
+            val list = userService.findUsersForChat(user, request);
+
+            model.addAttribute("status", "ok");
+            model.addAttribute("chats", list);
         } else
             model.addAttribute("status", "fail");
         return "jsonTemplate";

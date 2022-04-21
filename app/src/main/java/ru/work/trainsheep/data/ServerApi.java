@@ -38,4 +38,8 @@ public interface ServerApi {
     @POST("/createVacancy")
     Call<CreateVacancyGetting> createVacancy(@Body VacancyNote request, @Header("Authorization") String credentials);
 
+    @POST("/search-chats")
+    Call<ChatsResultGetting> searchChats(@Body SearchChatsRequest request, @Header("Authorization") String credentials);
+
+
 }

@@ -1,6 +1,7 @@
 package ru.work.trainsheep;
 
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -10,11 +11,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import com.bumptech.glide.Glide;
 import lombok.NonNull;
 import lombok.val;
 import ru.work.trainsheep.data.ServerRepositoryFactory;
@@ -24,10 +27,7 @@ import ru.work.trainsheep.send.ChatRequest;
 import ru.work.trainsheep.send.SendMessageRequest;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 
 public class MessagesActivity extends AppCompatActivity {
@@ -47,6 +47,15 @@ public class MessagesActivity extends AppCompatActivity {
         if (extras != null) {
             name = extras.getString("name");
             email = extras.getString("email");
+            val imageSrc = extras.getString("image");
+            if(imageSrc != null){
+                Glide.with(getBaseContext())
+                        .load(imageSrc)
+                        .placeholder(R.drawable.ic_zaticha)
+                        .error(R.drawable.ic_zaticha)
+                        .circleCrop()
+                        .into((ImageView) findViewById(R.id.profile_image));
+            }
         }
         if (name == null)
             name = "Избранное";
@@ -54,7 +63,10 @@ public class MessagesActivity extends AppCompatActivity {
         adapter = new Adapter();
 
         recyclerView = findViewById(R.id.rv);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        val linear = new LinearLayoutManager(this);
+        linear.setReverseLayout(true);
+        //linear.setStackFromEnd(true);
+        recyclerView.setLayoutManager(linear);
         recyclerView.setAdapter(adapter);
 
 
@@ -79,35 +91,53 @@ public class MessagesActivity extends AppCompatActivity {
             sendMessage(adapter, recyclerView, text);
         });
 
-        handler.postDelayed(this::updateMessages, 1000);
 
+
+    }
+    private boolean canAutoUpdate = false;
+    private void autoUpdateMessageFromServer(){
+        handler.postDelayed(() -> {
+            updateMessages();
+            if (canAutoUpdate)
+                autoUpdateMessageFromServer();
+        }, 1500);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
         updateMessages();
+        canAutoUpdate = true;
+        autoUpdateMessageFromServer();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        canAutoUpdate = false;
     }
 
     private void updateMessages() {
         val server = ServerRepositoryFactory.getInstance();
         server.getMessages(new ChatRequest(email, 0, 20), (res) -> {
             Log.i(getClass().getSimpleName(), "update messages: " + res.getMessages());
-            adapter.addAll(res.getMessages(), true);
+            adapter.addAll(res.getMessages());
             if (adapter.size() > 0)
-                recyclerView.smoothScrollToPosition(adapter.size() - 1);
+                recyclerView.smoothScrollToPosition(0);
         });
     }
 
     private void sendMessage(Adapter adapter, RecyclerView recyclerView, EditText text) {
         val server = ServerRepositoryFactory.getInstance();
         val message = text.getText().toString();
+        if (message.equals(""))
+            return;
         val mes = new ChatMessage(UserInfo.getInstance().getData().getEmail(), message, 0);
         adapter.add(mes);
-        recyclerView.smoothScrollToPosition(adapter.size() - 1);
+        recyclerView.smoothScrollToPosition(0);
         server.getSendMessage(new SendMessageRequest(email, message), (mess) -> {
             adapter.update(mess);
-            updateMessages();
+            //updateMessages();
         });
         text.setText("");
     }
@@ -119,22 +149,20 @@ public class MessagesActivity extends AppCompatActivity {
             this.list = new ArrayList<>();
         }
 
-        public void addAll(List<ChatMessage> nlist, boolean updated) {
-            if (updated) {
-                val size = list.size();
-                if (size > 0 && nlist.size() > 0 && nlist.get(nlist.size() - 1).equals(list.get(size - 1))) {
-                    return;
-                }
-                this.list.clear();
-                notifyItemRangeRemoved(0, size);
+        public void addAll(List<ChatMessage> nlist) {
+            for (int i = 0; i < nlist.size() && (list.size() <= i || !nlist.get(i).equals(list.get(i))); i++) {
+                list.add(i, nlist.get(i));
+                notifyItemInserted(i);
             }
-            this.list.addAll(0, nlist);
-            notifyItemRangeInserted(0, nlist.size());
+            for(int i = list.size() - 1; i >= nlist.size(); i--){
+                list.remove(i);
+                notifyItemRemoved(i);
+            }
         }
 
         public void add(ChatMessage message) {
-            this.list.add(message);
-            notifyItemInserted(list.size() - 1);
+            this.list.add(0, message);
+            notifyItemInserted(0);
         }
 
         public int size() {
@@ -147,12 +175,13 @@ public class MessagesActivity extends AppCompatActivity {
             return new MyHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.message_block, parent, false));
         }
 
-        SimpleDateFormat format = new SimpleDateFormat("hh:mm");
+        SimpleDateFormat format = new SimpleDateFormat("HH:mm", Locale.ENGLISH);
 
         @Override
         public void onBindViewHolder(MyHolder holder, int position) {
             val message = list.get(position);
             val params = (ConstraintLayout.LayoutParams) holder.bg.getLayoutParams();
+            Log.i(getClass().getSimpleName(), "onBindViewHolder: bind " + message.getSender() + " " + UserInfo.getInstance().getData().getEmail() + " " + message.getMessage());
             if (Objects.equals(message.getSender(), UserInfo.getInstance().getData().getEmail())) {
                 params.horizontalBias = 1;
                 holder.bg.setBackgroundResource(R.drawable.right_message);
@@ -176,7 +205,7 @@ public class MessagesActivity extends AppCompatActivity {
         }
 
         public void update(ChatMessage chatMessage) {
-            for (int i = list.size() - 1; i >= 0 && list.get(i).getDate() == 0; i--) {
+            for (int i = 0; i < list.size() && list.get(i).getDate() == 0; i++) {
                 if (list.get(i).getMessage().equals(chatMessage.getMessage())) {
                     list.get(i).setDate(chatMessage.getDate());
                     notifyItemChanged(i);

@@ -34,6 +34,9 @@ public abstract class ServerRepository {
 
     public abstract boolean isLogin();
 
+    public abstract void searchChats(SearchChatsRequest request, Consumer<List<ChatBlock>>callbackSuccess, Consumer<Exception> callbackFailure);
+
+
 
     public void register(UserRegistrationData user, Consumer<String> callbackSuccess){
         register(user, callbackSuccess, Throwable::printStackTrace);
@@ -76,9 +79,8 @@ public abstract class ServerRepository {
         createVacancy(request, callbackSuccess, Throwable::printStackTrace);
     }
 
-
-
-
-
+    public void searchChats(SearchChatsRequest request, Consumer<List<ChatBlock>>callbackSuccess){
+        searchChats(request, callbackSuccess, Throwable::printStackTrace);
+    }
 
 }

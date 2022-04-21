@@ -46,7 +46,7 @@ public class ChatService {
         }
         var list = new ArrayList<>(pages.map(Message::toChatMessage).toList());
 
-        Collections.reverse(list);
+        //Collections.reverse(list);
         return new ChatResult(list, pages.getNumber(), (int) pages.getTotalElements(), recipient.getFirstName(), recipient.getImage());
 
     }
@@ -60,20 +60,27 @@ public class ChatService {
             log.error("sender or recipient is null " + sender + " " + recipient);
             return null;
         }
-        Chat chat = chats.findBySenderAndRecipient(sender, recipient);
         val date = new Date();
+        createOrUpdateChat(sender, recipient, text, date);
+        createOrUpdateChat(recipient,sender, text, date);
+        val message = new Message(sender, recipient, text, date);
+        messages.save(message);
+
+        log.info("send message from " + message.getSender().getEmail() + " to " + message.getRecipient().getEmail() + " [" + message.getText() + "] (" + message.getId() + ")");
+        if (!set.contains(sender.getId()) && set.contains(recipient.getId())){
+            sendMessage(recipient, sender, getRandom(answers));
+        }
+        return new ChatMessage(sender.getEmail(), message.getText(), message.getDateCreate().getTime());
+    }
+
+    private void createOrUpdateChat(User sender, User recipient, String text, Date date) {
+        Chat chat = chats.findBySenderAndRecipient(sender, recipient);
         if (chat == null){
             chat = new Chat(sender, recipient, text, 1, date);
         } else {
             chat.addUnreadMessage(text, date);
         }
         chats.save(chat);
-        val message = new Message(sender, recipient, text, date);
-        messages.save(message);
-        if (!set.contains(sender.getId()) && set.contains(recipient.getId())){
-            sendMessage(recipient, sender, getRandom(answers));
-        }
-        return new ChatMessage(sender.getEmail(), message.getText(), message.getDateCreate().getTime());
     }
 
     public void createStartMessagesFor(User user, List<User> companies){

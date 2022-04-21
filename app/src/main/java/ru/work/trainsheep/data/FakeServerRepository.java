@@ -160,5 +160,8 @@ public class FakeServerRepository extends ServerRepository {
         });
     }
 
+    @Override
+    public void searchChats(SearchChatsRequest request, Consumer<List<ChatBlock>> callbackSuccess, Consumer<Exception> callbackFailure) {
 
+    }
 }

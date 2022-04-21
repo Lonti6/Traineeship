@@ -85,27 +85,19 @@ public class FillDatabase implements InitializingBean {
         val userList =  users.getAll();
         logger.info("create " + k +" notes. OK!");
 
-        k = 100;
-        int count = 0;
-        for (int i = 0; i < k; i++) {
-            val user1 = generator.getRandom(userList);
-            val user2 = generator.getRandom(userList);
-
-            if (user1 != user2){
-                chatService.sendMessage(user1, user2, generator.getRandomMessageText());
-                count ++;
-            }
-        }
-        logger.info("create " + count +" messages. OK!");
-
-
-//        notes.findAll().forEach((ent) -> {
-//            System.out.println(ent);
-//            System.out.print("    ");
-//            for(Tag tag : ent.getTags()){
-//                System.out.print(tag + " ");
+//        k = 100;
+//        int count = 0;
+//        for (int i = 0; i < k; i++) {
+//            val user1 = generator.getRandom(userList);
+//            val user2 = generator.getRandom(userList);
+//
+//            if (user1 != user2){
+//                chatService.sendMessage(user1, user2, generator.getRandomMessageText());
+//                count ++;
 //            }
-//            System.out.println();
-//        });
+//        }
+//        logger.info("create " + count +" messages. OK!");
+
+
     }
 }

@@ -57,10 +57,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent">
             <ImageView
-                android:id="@+id/editBut"
+                android:id="@+id/profile_image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/header"/>
+                android:background="@drawable/ic_zaticha"/>
         </androidx.cardview.widget.CardView>
 
         <ImageView

@@ -1,11 +1,17 @@
 package ru.work.trainsheep;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,17 +28,23 @@ import ru.work.trainsheep.data.ServerRepository;
 import ru.work.trainsheep.data.ServerRepositoryFactory;
 import ru.work.trainsheep.data.UserInfo;
 import ru.work.trainsheep.send.ChatBlock;
+import ru.work.trainsheep.send.SearchChatsRequest;
 import ru.work.trainsheep.send.UserData;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class AllChatsActivity extends AppCompatActivity {
 
     Adapter adapter;
     UserData instance = UserInfo.getInstance().getData();
+    ServerRepository server = ServerRepositoryFactory.getInstance();
+    EditText findText;
+
+    Handler handler = new Handler(Looper.getMainLooper());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,12 +60,39 @@ public class AllChatsActivity extends AppCompatActivity {
         adapter = new Adapter(new ArrayList<>(), this);
         rv.setAdapter(adapter);
         rv.addItemDecoration(new SpaceItemDecoration(80));
+        Log.i(getClass().getSimpleName(), "onCreate: open cre");
+        findText = findViewById(R.id.search_field);
+        findText.setOnEditorActionListener((v, actionId, event) -> {
+            Log.i("TAG", "onEditorAction: " + event);
+            if (actionId == EditorInfo.IME_ACTION_SEARCH){
+                sendSearchChats();
+                InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                findText.clearFocus();
+                return true;
+            }
+            return false;
+        });
+        autoUpdateMessageFromServer();
+    }
+
+    private void sendSearchChats(){
+        val text = findText.getText().toString();
+        Log.i(getClass().getSimpleName(), "------------------ sendSearchChats: " + text);
+        server.searchChats(new SearchChatsRequest(text), (list) -> adapter.addAll(list));
+    }
+
+    private void autoUpdateMessageFromServer(){
+        handler.postDelayed(() -> {
+            server.getChats(adapter::updates);
+            autoUpdateMessageFromServer();
+        }, 3000);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        ServerRepository server = ServerRepositoryFactory.getInstance();
+
         server.getChats(adapter::addAll);
 
         Glide.with(this)
@@ -86,7 +125,7 @@ public class AllChatsActivity extends AppCompatActivity {
             return new MyViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.chat_block, parent, false));
         }
 
-        SimpleDateFormat format = new SimpleDateFormat("hh:mm");
+        SimpleDateFormat format = new SimpleDateFormat("HH:mm", Locale.ENGLISH);
 
         @Override
         public void onBindViewHolder(AllChatsActivity.MyViewHolder holder, int position) {
@@ -106,15 +145,27 @@ public class AllChatsActivity extends AppCompatActivity {
                 val intent = new Intent(view.getContext(), MessagesActivity.class);
                 intent.putExtra("name", chat.getName());
                 intent.putExtra("email", chat.getEmail());
+                intent.putExtra("image", chat.getIcon());
                 view.getContext().startActivity(intent);
             });
 
-            Glide.with(context).load(chat.getIcon()).circleCrop().into(holder.icon);
+            Glide.with(context)
+                    .load(chat.getIcon())
+                    .placeholder(R.drawable.ic_zaticha)
+                    .error(R.drawable.ic_zaticha)
+                    .circleCrop()
+                    .into(holder.icon);
         }
 
         @Override
         public int getItemCount() {
             return list.size();
+        }
+
+        public void updates(List<ChatBlock> chatBlocks) {
+            if (!list.equals(chatBlocks)){
+                addAll(chatBlocks);
+            }
         }
     }
 
