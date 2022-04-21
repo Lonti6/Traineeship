@@ -153,7 +153,7 @@
                 android:layout_marginTop="30dp">
 
                 <CheckBox
-                    android:id="@+id/checkBox2"
+                    android:id="@+id/furtherCooperationBox"
                     style="@style/SmallText"
                     android:layout_width="145dp"
                     android:layout_height="50dp"
@@ -169,7 +169,7 @@
                     android:background="@drawable/border_style_gray"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/checkBox2"
+                    app:layout_constraintStart_toEndOf="@+id/furtherCooperationBox"
                     app:layout_constraintTop_toTopOf="parent">
 
                     <EditText
