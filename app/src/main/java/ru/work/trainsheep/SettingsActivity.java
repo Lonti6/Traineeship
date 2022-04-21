@@ -24,8 +24,7 @@ import ru.work.trainsheep.send.UserData;
 
 public class SettingsActivity extends AppCompatActivity {
     FlowingDrawer mDrawer;
-    FragmentManager manager;
-    MyDialogFragment myDialogFragment;
+
     UserData instance = UserInfo.getInstance().getData();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +44,7 @@ public class SettingsActivity extends AppCompatActivity {
         stickySwitchMessage.setOnSelectedChangeListener((direction, s) -> {
             if (direction.equals(Direction.RIGHT))
                 stickySwitchMessage.setSliderBackgroundColor(getColor(R.color.light_green));
-            if (direction.name().equals("LEFT"))
+            if (direction.equals(Direction.LEFT))
                 stickySwitchMessage.setSliderBackgroundColor(getColor(R.color.light_gray));
         });
 
@@ -59,11 +58,7 @@ public class SettingsActivity extends AppCompatActivity {
                 stickySwitchVacansy.setSliderBackgroundColor(getColor(R.color.light_gray));
         });
 
-        manager = getSupportFragmentManager();
-        myDialogFragment = new MyDialogFragment();
-
-        findViewById(R.id.delete_text).setOnClickListener(v ->
-                myDialogFragment.show(manager, "Frag"));
+        findViewById(R.id.exit_text).setOnClickListener(v -> Util.loadActivity(drawer, SettingsActivity.this, LoginActivity.class));
     }
 
 
@@ -73,27 +68,6 @@ public class SettingsActivity extends AppCompatActivity {
             stickySwitch.setSliderBackgroundColor(getColor(R.color.light_green));
         if (stickySwitch.getDirection().equals(Direction.LEFT))
             stickySwitch.setSliderBackgroundColor(getColor(R.color.light_gray));
-    }
-
-    public static class MyDialogFragment extends DialogFragment {
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
-        {
-            getDialog().getWindow().setBackgroundDrawableResource(R.drawable.round_corner);
-            View view = inflater.inflate(R.layout.dialog_layout, container, true);
-            view.findViewById(R.id.delete_field).setOnClickListener(v1 -> Log.e(v1.getClass()+"","Ещё не умеем удалять"));
-            view.findViewById(R.id.cancel_field).setOnClickListener(v1 -> getDialog().cancel());
-
-            return view;
-        }
-
-        @Override
-        public void onStart() {
-            super.onStart();
-            int width = (int)(getResources().getDisplayMetrics().widthPixels*0.85);
-            getDialog().getWindow().setLayout(width, ViewGroup.LayoutParams.WRAP_CONTENT);
-
-        }
     }
 
     @Override

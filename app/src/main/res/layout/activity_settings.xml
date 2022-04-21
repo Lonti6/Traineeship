@@ -82,14 +82,14 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/delete_text"
+        android:id="@+id/exit_text"
         style="@style/GreenBoldText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="120dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:text="Удалить аккаунт?"
+        android:text="Выйти из аккаунта?"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

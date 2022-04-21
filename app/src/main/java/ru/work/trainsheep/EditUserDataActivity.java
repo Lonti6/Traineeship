@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.DatePicker;
@@ -14,6 +15,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentManager;
 
 import com.bumptech.glide.Glide;
 import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
@@ -31,11 +34,15 @@ import ru.work.trainsheep.send.UserData;
 public class EditUserDataActivity extends AppCompatActivity {
     DataGenerator dataGenerator;
     UserData instance;
+    FragmentManager manager;
+    MyDialogFragment myDialogFragment;
 
     Calendar c = Calendar.getInstance();
     int day;
     int month;
     int year;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,6 +129,33 @@ public class EditUserDataActivity extends AppCompatActivity {
 
             Toast.makeText(getApplicationContext(), "Сохранение произошло", Toast.LENGTH_SHORT).show();
         });
+
+        manager = getSupportFragmentManager();
+        myDialogFragment = new MyDialogFragment();
+
+        findViewById(R.id.delete_text).setOnClickListener(v ->
+                myDialogFragment.show(manager, "Frag"));
+    }
+
+    public static class MyDialogFragment extends DialogFragment {
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+        {
+            getDialog().getWindow().setBackgroundDrawableResource(R.drawable.round_corner);
+            View view = inflater.inflate(R.layout.dialog_layout, container, true);
+            view.findViewById(R.id.delete_field).setOnClickListener(v1 -> Log.e(v1.getClass()+"","Ещё не умеем удалять"));
+            view.findViewById(R.id.cancel_field).setOnClickListener(v1 -> getDialog().cancel());
+
+            return view;
+        }
+
+        @Override
+        public void onStart() {
+            super.onStart();
+            int width = (int)(getResources().getDisplayMetrics().widthPixels*0.85);
+            getDialog().getWindow().setLayout(width, ViewGroup.LayoutParams.WRAP_CONTENT);
+
+        }
     }
 
     public void prepare() {
@@ -156,4 +190,6 @@ public class EditUserDataActivity extends AppCompatActivity {
                 .circleCrop()
                 .into((ImageView) this.findViewById(R.id.left_icon_user));
     }
+
+
 }
