@@ -123,8 +123,7 @@ public class MessagesActivity extends AppCompatActivity {
         server.getMessages(new ChatRequest(email, 0, 20), (res) -> {
             Log.i(getClass().getSimpleName(), "update messages: " + res.getMessages());
             adapter.addAll(res.getMessages());
-            if (adapter.size() > 0)
-                recyclerView.smoothScrollToPosition(0);
+
         });
     }
 
@@ -143,7 +142,7 @@ public class MessagesActivity extends AppCompatActivity {
         text.setText("");
     }
 
-    static class Adapter extends RecyclerView.Adapter<MyHolder> {
+    class Adapter extends RecyclerView.Adapter<MyHolder> {
         List<ChatMessage> list;
 
         public Adapter() {
@@ -154,6 +153,8 @@ public class MessagesActivity extends AppCompatActivity {
             for (int i = 0; i < nlist.size() && (list.size() <= i || !nlist.get(i).equals(list.get(i))); i++) {
                 list.add(i, nlist.get(i));
                 notifyItemInserted(i);
+                if (adapter.size() > 0)
+                    recyclerView.smoothScrollToPosition(0);
             }
             for(int i = list.size() - 1; i >= nlist.size(); i--){
                 list.remove(i);

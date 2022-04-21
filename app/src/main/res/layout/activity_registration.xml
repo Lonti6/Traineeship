@@ -15,16 +15,15 @@
         app:srcCompat="?attr/actionModeCloseDrawable" />
 
     <TextView
-        android:id="@+id/textView3"
-        style="@style/HeadingText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="70dp"
-        android:text="@string/reg"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+            android:id="@+id/textView3"
+            style="@style/HeadingText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:text="@string/reg"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
     <TextView
         android:id="@+id/textView5"
         style="@style/GrayText"
@@ -37,31 +36,69 @@
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <RelativeLayout
+            android:id="@+id/relativeLayoutName"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/border_style_gray"
+            android:paddingLeft="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView5"
+            tools:ignore="MissingConstraints">
+
+        <EditText
+                android:id="@+id/reg_name_field"
+                style="@style/MyTextFieldStyle"
+                android:singleLine="true"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="0.5dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginRight="10dp"
+                android:layout_toRightOf="@+id/username_icon1"
+                android:fontFamily="@font/open_sans"
+                android:hint="Имя"
+                android:padding="10dp"/>
+
+        <ImageView
+                android:id="@+id/username_icon1"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_marginLeft="3dp"
+                android:layout_marginTop="9dp"
+                android:padding="3dp"
+                android:src="@drawable/people_icon"/>
+    </RelativeLayout>
+    <RelativeLayout
         android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="14dp"
         android:layout_marginRight="20dp"
         android:background="@drawable/border_style_gray"
         android:paddingLeft="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayoutName"
         tools:ignore="MissingConstraints">
 
         <EditText
-            android:id="@+id/reg_name_field"
-            style="@style/MyTextFieldStyle"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="0.5dp"
-            android:layout_marginTop="3dp"
-            android:layout_marginRight="10dp"
-            android:layout_toRightOf="@+id/username_icon"
-            android:fontFamily="@font/open_sans"
-            android:hint="Имя"
-            android:padding="10dp" />
+                android:id="@+id/reg_last_name_field"
+                style="@style/MyTextFieldStyle"
+                android:singleLine="true"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="0.5dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginRight="10dp"
+                android:layout_toRightOf="@+id/username_icon"
+                android:fontFamily="@font/open_sans"
+                android:hint="Фамилия"
+                android:padding="10dp"/>
 
         <ImageView
             android:id="@+id/username_icon"
@@ -78,7 +115,7 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="14dp"
         android:layout_marginRight="20dp"
         android:background="@drawable/border_style_gray"
         android:paddingLeft="5dp"
@@ -91,6 +128,7 @@
             android:id="@+id/reg_mail_field"
             style="@style/MyTextFieldStyle"
             android:layout_width="match_parent"
+            android:singleLine="true"
             android:layout_height="match_parent"
             android:layout_marginLeft="0.5dp"
             android:layout_marginTop="3dp"
@@ -116,7 +154,7 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="14dp"
         android:layout_marginRight="20dp"
         android:background="@drawable/border_style_gray"
         android:paddingLeft="5dp"
@@ -126,19 +164,20 @@
         tools:ignore="MissingConstraints">
 
         <EditText
-            android:id="@+id/reg_password_field"
-            style="@style/MyTextFieldStyle"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="0.5dp"
-            android:layout_marginTop="3dp"
-            android:layout_marginRight="10dp"
-            android:layout_toRightOf="@+id/username_icon3"
-            android:ems="10"
-            android:fontFamily="@font/open_sans"
-            android:hint="@string/password"
-            android:inputType="textPassword"
-            android:padding="10dp" />
+                android:id="@+id/reg_password_field"
+                style="@style/MyTextFieldStyle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="0.5dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginRight="10dp"
+                android:layout_toRightOf="@+id/username_icon3"
+                android:ems="10"
+                android:singleLine="true"
+                android:fontFamily="@font/open_sans"
+                android:hint="@string/password"
+                android:inputType="textPassword"
+                android:padding="10dp"/>
 
         <ImageView
             android:id="@+id/username_icon3"
@@ -152,10 +191,11 @@
 
     <RelativeLayout
         android:id="@+id/relativeLayout4"
+
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="14dp"
         android:layout_marginRight="20dp"
         android:background="@drawable/border_style_gray"
         android:paddingLeft="5dp"
@@ -172,6 +212,7 @@
             android:layout_marginLeft="0.5dp"
             android:layout_marginTop="3dp"
             android:layout_marginRight="10dp"
+            android:singleLine="true"
             android:layout_toRightOf="@+id/username_icon4"
             android:ems="10"
             android:fontFamily="@font/open_sans"

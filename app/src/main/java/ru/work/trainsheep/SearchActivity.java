@@ -1,6 +1,7 @@
 package ru.work.trainsheep;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -36,6 +37,16 @@ public class SearchActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        val info = UserInfo.getInstance();
+        info.load(this);
+
+        if (!info.isLogin()){
+            Intent intent = new Intent(this, LoginActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+            startActivity(intent);
+            return;
+        }
 
         setContentView(R.layout.activity_left_panel);
         final FlowingDrawer drawer = Util.connectActivityLayout(this, R.layout.activity_search);

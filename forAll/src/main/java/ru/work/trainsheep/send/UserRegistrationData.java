@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 public class UserRegistrationData {
 
     private String name = "";
+    private String lastName = "";
     private String email = "";
     private String password = "";
     private boolean isCompany = false;
