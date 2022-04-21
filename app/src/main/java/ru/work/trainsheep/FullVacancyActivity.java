@@ -11,9 +11,11 @@ import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
 
 import ru.work.trainsheep.data.UserInfo;
 import ru.work.trainsheep.send.UserData;
+import ru.work.trainsheep.send.VacancyNote;
 
 public class FullVacancyActivity extends AppCompatActivity {
     UserData instance = UserInfo.getInstance().getData();
+    VacancyNote note;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +25,13 @@ public class FullVacancyActivity extends AppCompatActivity {
         findViewById(R.id.scroller).setOnScrollChangeListener(new ScrollListeners.MyScrollListener(findViewById(R.id.header),
                 getDrawable(R.drawable.bg_header)));
 
-        findViewById(R.id.editBut).setOnClickListener(v -> LoadActivity(mDrawer));
+        // этого id нету findViewById(R.id.editBut).setOnClickListener(v -> loadActivity(mDrawer));
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            note = (VacancyNote) extras.getSerializable("note");
+            // если правильно открыть активити, то в note будут данные о вакансии
+        }
     }
 
     @Override
@@ -35,7 +43,7 @@ public class FullVacancyActivity extends AppCompatActivity {
                 .into((ImageView) this.findViewById(R.id.left_icon_user));
     }
 
-    private void LoadActivity(FlowingDrawer drawer) {
+    private void loadActivity(FlowingDrawer drawer) {
         Intent intent = new Intent(this, EditUserDataActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         this.startActivity(intent);

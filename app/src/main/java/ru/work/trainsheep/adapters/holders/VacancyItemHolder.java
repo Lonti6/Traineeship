@@ -9,16 +9,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
-
 import lombok.val;
 import org.apmem.tools.layouts.FlowLayout;
 
-import ru.work.trainsheep.EditUserDataActivity;
 import ru.work.trainsheep.FullVacancyActivity;
 import ru.work.trainsheep.R;
 import ru.work.trainsheep.data.ServerRepositoryFactory;
 import ru.work.trainsheep.send.SetFavoriteVacancyRequest;
+import ru.work.trainsheep.send.VacancyNote;
 
 import java.util.List;
 
@@ -49,15 +47,15 @@ public class VacancyItemHolder extends RecyclerView.ViewHolder {
         }
     }
 
-    public void setSrc()
+    public void setOnClickListener(VacancyNote note)
     {
-        name.setOnContextClickListener(v -> {
-            Log.e("\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\", "//////////////////////////////////");
+        itemView.setOnClickListener(v -> {
 
             Intent intent = new Intent(itemView.getContext(), FullVacancyActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+            intent.putExtra("note", note);
             itemView.getContext().startActivity(intent);
-            return true;
+
         });
     }
 
