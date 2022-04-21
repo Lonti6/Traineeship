@@ -31,10 +31,13 @@ public class VacancyNote implements Serializable {
     String city = "Ёбург";
     int workingHours;
     boolean furtherCooperation = true;
+    boolean contractualSalary = true;
+    boolean distanceWork = true;
 
 
     public VacancyNote(String header, String content, String company, String salary,
-                       boolean furtherCooperation, int workingHours, String... tags) {
+                       boolean furtherCooperation, boolean contractualSalary,
+                       boolean distanceBox, int workingHours, int id, String... tags) {
         this.header = header;
         this.content = content;
         this.company = company;
@@ -42,5 +45,8 @@ public class VacancyNote implements Serializable {
         this.tags = Arrays.asList(tags);
         this.furtherCooperation = furtherCooperation;
         this.workingHours = workingHours;
+        this.contractualSalary = contractualSalary;
+        this.distanceWork = distanceBox;
+        this.id = id;
     }
 }

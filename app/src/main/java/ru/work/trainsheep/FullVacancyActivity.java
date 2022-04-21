@@ -36,6 +36,11 @@ public class FullVacancyActivity extends AppCompatActivity {
                 getDrawable(R.drawable.bg_header)));
 
         findViewById(R.id.menuBut).setOnClickListener(v -> loadActivity(drawer));
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
@@ -44,9 +49,12 @@ public class FullVacancyActivity extends AppCompatActivity {
             ((TextView)findViewById(R.id.vacancyNameText)).setText(note.getHeader());
             ((TextView)findViewById(R.id.cityText)).setText("Населённый пункт: "+note.getCity());
             ((TextView)findViewById(R.id.zpText)).setText("Оплата в месяц: "+note.getSalary());
-            System.out.println("/////////////////......................................................." +note.getWorkingHours());
             ((TextView)findViewById(R.id.workTimeText)).setText("План работы: "+note.getWorkingHours() + " часов в неделю");
             ((TextView)findViewById(R.id.descriptionText)).setText(note.getContent());
+
+            ((CheckBox)findViewById(R.id.isFurtherCooperationBox)).setChecked(note.isFurtherCooperation());
+            ((CheckBox)findViewById(R.id.contractualSalaryBox)).setChecked(note.isFurtherCooperation());
+            ((CheckBox)findViewById(R.id.distanceWorkBox)).setChecked(note.isDistanceWork());
 
             FlowLayout flowLayout = findViewById(R.id.tags_field);
             flowLayout.removeAllViews();
@@ -65,11 +73,7 @@ public class FullVacancyActivity extends AppCompatActivity {
             //((CheckBox)findViewById(R.id.contractualSalary)).setChecked(note.get);
             // если правильно открыть активити, то в note будут данные о вакансии
         }
-    }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
         Glide.with(this)
                 .load(instance.getAvatarSrc())
                 .circleCrop()
@@ -77,7 +81,7 @@ public class FullVacancyActivity extends AppCompatActivity {
     }
 
     private void loadActivity(FlowingDrawer drawer) {
-        Intent intent = new Intent(this, EditUserDataActivity.class);
+        Intent intent = new Intent(this, SearchActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         this.startActivity(intent);
         drawer.closeMenu(false);
