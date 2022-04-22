@@ -98,10 +98,7 @@ public class AllChatsActivity extends AppCompatActivity {
 
         server.getChats(adapter::addAll);
 
-        Glide.with(this)
-                .load(instance.getAvatarSrc())
-                .circleCrop()
-                .into((ImageView) this.findViewById(R.id.left_icon_user));
+        Util.prepareLeftIcon(this);
     }
 
     static class Adapter extends RecyclerView.Adapter<MyViewHolder>{

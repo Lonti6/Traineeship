@@ -133,6 +133,17 @@ public class Util {
         drawer.closeMenu(false);
     }
 
+    public static void prepareLeftIcon(Activity activity)
+    {
+        UserData instance = UserInfo.getInstance().getData();
+        Glide.with(activity)
+                .load(instance.getAvatarSrc())
+                .circleCrop()
+                .placeholder(R.drawable.ic_zaticha)
+                .error(R.drawable.ic_zaticha)
+                .into((ImageView) activity.findViewById(R.id.left_icon_user));
+    }
+
     private static final Pattern VALID_NAME = Pattern.compile("^[A-ZА-Я]+$", Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE);
 
     private static final Pattern VALID_EMAIL_REGEX = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);

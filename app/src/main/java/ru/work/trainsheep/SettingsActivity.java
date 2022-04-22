@@ -73,9 +73,6 @@ public class SettingsActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        Glide.with(this)
-                .load(instance.getAvatarSrc())
-                .circleCrop()
-                .into((ImageView) this.findViewById(R.id.left_icon_user));
+        Util.prepareLeftIcon(this);
     }
 }

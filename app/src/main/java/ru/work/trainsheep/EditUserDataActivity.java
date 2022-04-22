@@ -154,7 +154,6 @@ public class EditUserDataActivity extends AppCompatActivity {
             super.onStart();
             int width = (int)(getResources().getDisplayMetrics().widthPixels*0.85);
             getDialog().getWindow().setLayout(width, ViewGroup.LayoutParams.WRAP_CONTENT);
-
         }
     }
 
@@ -185,10 +184,7 @@ public class EditUserDataActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        Glide.with(this)
-                .load(instance.getAvatarSrc())
-                .circleCrop()
-                .into((ImageView) this.findViewById(R.id.left_icon_user));
+        Util.prepareLeftIcon(this);
     }
 
 

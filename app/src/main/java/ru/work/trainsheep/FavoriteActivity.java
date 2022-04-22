@@ -85,9 +85,6 @@ public class FavoriteActivity extends AppCompatActivity {
             companyAdapter.addAll(result.getNotes());
         });
 
-        Glide.with(this)
-                .load(instance.getAvatarSrc())
-                .circleCrop()
-                .into((ImageView) this.findViewById(R.id.left_icon_user));
+        Util.prepareLeftIcon(this);
     }
 }

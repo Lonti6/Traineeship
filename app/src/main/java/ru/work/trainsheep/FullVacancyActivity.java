@@ -62,6 +62,7 @@ public class FullVacancyActivity extends AppCompatActivity {
             ((TextView)findViewById(R.id.zpText)).setText("Оплата в месяц: "+note.getSalary());
             ((TextView)findViewById(R.id.workTimeText)).setText("План работы: "+note.getWorkingHours() + " часов в неделю");
             ((TextView)findViewById(R.id.descriptionText)).setText(note.getContent());
+            ((TextView)findViewById(R.id.name_top)).setText(note.getHeader());
 
             ((CheckBox)findViewById(R.id.isFurtherCooperationBox)).setChecked(note.isFurtherCooperation());
             ((CheckBox)findViewById(R.id.contractualSalaryBox)).setChecked(note.isFurtherCooperation());

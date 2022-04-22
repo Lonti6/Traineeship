@@ -16,7 +16,6 @@ import ru.work.trainsheep.data.UserInfo;
 import ru.work.trainsheep.send.UserData;
 
 public class ContactsActivity extends AppCompatActivity {
-    UserData instance = UserInfo.getInstance().getData();
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_left_panel);
@@ -35,9 +34,6 @@ public class ContactsActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        Glide.with(this)
-                .load(instance.getAvatarSrc())
-                .circleCrop()
-                .into((ImageView) this.findViewById(R.id.left_icon_user));
+        Util.prepareLeftIcon(this);
     }
 }
