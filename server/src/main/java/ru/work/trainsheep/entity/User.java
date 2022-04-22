@@ -3,11 +3,14 @@ package ru.work.trainsheep.entity;
 import lombok.*;
 import org.hibernate.Hibernate;
 import ru.work.trainsheep.send.UserData;
+import ru.work.trainsheep.service.TagService;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -44,19 +47,49 @@ public class User {
     private String email;
     @NonNull
     private boolean isCompany;
-
-    private String image;
-
-
     @NonNull
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "resume_id", referencedColumnName = "id")
-    private Resume resume;
+    private String image;
+    @NonNull
+    private String phone;
+    @NonNull
+    private String university;
+    @NonNull
+    private String specialization ;
+    @NonNull
+    private String city;
+    @NonNull
+    private String description ;
+    @NonNull
+    private int curs;
 
 
-    public static User from(UserData data){
-        Resume resume = new Resume( data.getUniversity(), data.getSpecialization(), data.getYear());
-        return new User(data.getFirstName(), data.getLastName(), data.getPatronymic(), data.getBirthdate(), data.getRegistrationDate(), data.getEmail(), data.isCompany(), resume);
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "have_tags",
+            joinColumns = @JoinColumn(name = "note_id"),
+            inverseJoinColumns = @JoinColumn(name = "tag_id"))
+    @ToString.Exclude
+    private Set<Tag> tags;
+
+
+
+
+    public static User from(UserData data, TagService tagService){
+
+        val user = new User(data.getFirstName(), data.getLastName(), data.getPatronymic(), data.getBirthdate(),
+                data.getRegistrationDate(), data.getEmail(), data.isCompany(), data.getAvatarSrc(),
+                data.getPhoneNumber(), data.getUniversity(), data.getSpecialization(), data.getCity(), data.getDescription(), data.getCurs());
+
+        val tags = data.getCompetencies().stream().map(tagService::findOrCreate).collect(Collectors.toSet());
+        user.setTags(tags);
+
+        return user;
+    }
+
+    public UserData toUserDate(){
+        return new UserData(firstName, lastName, patronymic, birthdate.getTime(), registrationDate.getTime(), email,
+                phone, image, tags.stream().map(Tag::getText).collect(Collectors.toList()), isCompany, getUniversity(),
+                getSpecialization(), getCity(), getDescription(), getCurs());
     }
 
     @Override

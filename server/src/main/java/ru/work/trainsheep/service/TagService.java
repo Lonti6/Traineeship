@@ -12,10 +12,10 @@ public class TagService {
     @Autowired
     TagRepository tagRepository;
 
-    Tag findOrCreate(String text){
+    public Tag findOrCreate(String text){
         Tag tag = tagRepository.findByTextIgnoreCase(text);
         if (tag == null) {
-            tag = new Tag(text, new HashSet<>());
+            tag = new Tag(text, new HashSet<>(), new HashSet<>());
             tagRepository.save(tag);
         }
         return tag;

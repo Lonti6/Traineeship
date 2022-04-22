@@ -10,9 +10,7 @@ import ru.work.trainsheep.entity.Role;
 import ru.work.trainsheep.entity.User;
 import ru.work.trainsheep.entity.UserPasswords;
 import ru.work.trainsheep.repository.UserRepository;
-import ru.work.trainsheep.send.ChatBlock;
-import ru.work.trainsheep.send.SearchChatsRequest;
-import ru.work.trainsheep.send.UserRegistrationData;
+import ru.work.trainsheep.send.*;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -29,6 +27,9 @@ public class UserService {
 
     @Autowired
     PasswordEncoder passwordEncoder;
+
+    @Autowired
+    TagService tagService;
 
     @Autowired
     ChatService chatService;
@@ -71,6 +72,21 @@ public class UserService {
                 new Date().getTime())).toList();
     }
 
+    public CompanyResult getCompanies(CompanyRequest request){
+        val page = userRepository.findAllByCompany(true, PageRequest.of(
+                request.getPage(),
+                request.getCountNotesOnPage(),
+                Sort.by("id").descending()
+        ));
+        val list = page.map((user) ->
+            new CompanyNote(user.getId(), user.getFirstName(), user.getDescription(), user.getImage(), false)
+        ).toList();
+        return new CompanyResult(list, page.getNumber(),
+                (int) page.getTotalElements(),
+                request.getCountNotesOnPage());
+
+    }
+
 
     public User register(UserRegistrationData userData) {
         val old = findByEmail(userData.getEmail());
@@ -92,5 +108,34 @@ public class UserService {
         if (!user.isCompany())
             chatService.createStartMessagesFor(user, companies);
         return user;
+    }
+
+    public void updateUser(User user, UserData request) {
+        val userUpdate = User.from(request, tagService);
+
+        if (!userUpdate.getFirstName().equals("")){
+            user.setFirstName(userUpdate.getFirstName());
+        }
+
+        if (!userUpdate.getLastName().equals("")){
+            user.setLastName(userUpdate.getLastName());
+        }
+
+        if (!userUpdate.getPatronymic().equals("")){
+            user.setPatronymic(userUpdate.getPatronymic());
+        }
+
+        if (!userUpdate.getImage().equals("")){
+            user.setImage(userUpdate.getImage());
+        }
+        user.setTags(userUpdate.getTags());
+        user.setCompany(userUpdate.isCompany());
+        user.setBirthdate(userUpdate.getBirthdate());
+        user.setPhone(userUpdate.getPhone());
+        user.setDescription(userUpdate.getDescription());
+        user.setCurs(userUpdate.getCurs());
+        user.setUniversity(userUpdate.getUniversity());
+
+        userRepository.save(user);
     }
 }

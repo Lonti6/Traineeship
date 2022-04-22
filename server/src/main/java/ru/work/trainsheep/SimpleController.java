@@ -130,6 +130,48 @@ public class SimpleController {
         return "jsonTemplate";
     }
 
+    @PostMapping("/update-user")
+    public String updateUser(Model model, Authentication authentication, @RequestBody UserData request) {
+        if (authentication != null && request != null) {
+            val userPass = (UserPasswords) authentication.getPrincipal();
+//            log.info("send messages from " + userPass.getUsername() + " to " + request);
+            val user = userService.findByEmail(userPass.getUsername());
+            userService.updateUser(user, request);
+
+            model.addAttribute("status", "ok");
+            model.addAttribute("user", user.toUserDate());
+        } else
+            model.addAttribute("status", "fail");
+        return "jsonTemplate";
+    }
+
+    @PostMapping("/get-user")
+    public String getUser(Model model, Authentication authentication) {
+        if (authentication != null) {
+            val userPass = (UserPasswords) authentication.getPrincipal();
+//            log.info("send messages from " + userPass.getUsername() + " to " + request);
+            val user = userService.findByEmail(userPass.getUsername());
+
+            model.addAttribute("status", "ok");
+            model.addAttribute("user", user.toUserDate());
+        } else
+            model.addAttribute("status", "fail");
+        return "jsonTemplate";
+    }
+
+    @PostMapping("/get-companies")
+    public String getCompanies(Model model, Authentication authentication, @RequestBody CompanyRequest request) {
+        if (authentication != null && request != null) {
+            val userPass = (UserPasswords) authentication.getPrincipal();
+//            log.info("send messages from " + userPass.getUsername() + " to " + request);
+
+            model.addAttribute("status", "ok");
+            model.addAttribute("user", userService.getCompanies(request));
+        } else
+            model.addAttribute("status", "fail");
+        return "jsonTemplate";
+    }
+
     @PostMapping("/send-message")
     public String messages(Model model, Authentication authentication, @RequestBody SendMessageRequest request) {
         if (authentication != null && request != null) {

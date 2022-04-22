@@ -4,6 +4,7 @@ import lombok.*;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -14,13 +15,13 @@ public class UserData {
     private String lastName = "";
     private String patronymic = "";
 
-    private Date birthdate = new Date();
-    private Date registrationDate = new Date();
+    private long birthdate;
+    private long registrationDate;
     @NonNull
     private String email = "";
     private String phoneNumber = "";
     private String avatarSrc = "";
-    private ArrayList<String> competencies = new ArrayList<>();
+    private List<String> competencies = new ArrayList<>();
     private boolean isCompany = false;
 
     private String university = "";
@@ -28,7 +29,21 @@ public class UserData {
     private String city = "";
     private String description = "";
 
-    private int year; //год обучения
     private int curs;
 
+    public void setBirthdate(Date date){
+        birthdate = date.getTime();
+    }
+
+    public Date getBirthdate(){
+        return new Date(birthdate);
+    }
+
+    public Date getRegistrationDate() {
+        return new Date(registrationDate);
+    }
+
+    public void setRegistrationDate(Date registrationDate) {
+        this.registrationDate = registrationDate.getTime();
+    }
 }
