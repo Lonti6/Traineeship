@@ -446,7 +446,7 @@
                 android:layout_height="30dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="10dp"
-                app:srcCompat="@drawable/three_line_icon" />
+                app:srcCompat="@drawable/left_arrow" />
         </RelativeLayout>
 
 

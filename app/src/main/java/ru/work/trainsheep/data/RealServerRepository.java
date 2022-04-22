@@ -262,6 +262,10 @@ public class RealServerRepository extends ServerRepository{
     }
 
     @Override
+    public void sendUser(UserData request, Consumer<UserData> callbackSuccess, Consumer<Exception> callbackFailure) {
+    }
+
+    @Override
     public boolean isLogin() {
         return !UserInfo.getInstance().getRegistrationData().getEmail().equals("");
     }
