@@ -178,7 +178,7 @@ public class SimpleController {
 
 
         if (user.getEmail() != null && user.getPassword() != null && userPasswordRepository.findByUsername(user.getEmail()) == null) {
-            userService.register(user.getEmail(), user.getPassword(), user.getName(), user.isCompany());
+            userService.register(user);
             model.addAttribute("status", "ok");
             model.addAttribute("name", user.getName());
         } else

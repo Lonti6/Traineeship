@@ -70,10 +70,9 @@ public class RegistrationActivity extends AppCompatActivity {
 
         val info = UserInfo.getInstance();
         info.setName(name);
+        info.setLastName(lastname);
         info.setEmail(email);
         info.setPassword(pass);
-        info.getRegistrationData().setLastName(lastname);
-        info.setLastName(lastname);
 
         info.save(this);
 
@@ -85,6 +84,7 @@ public class RegistrationActivity extends AppCompatActivity {
         val server = ServerRepositoryFactory.getInstance();
         server.register(UserInfo.getInstance().getRegistrationData(), (name) -> {
             UserInfo.getInstance().setLogin(true);
+            UserInfo.getInstance().save(this);
             Toast.makeText(getApplicationContext(), "Здравствуйте, " + name, Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
             //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);

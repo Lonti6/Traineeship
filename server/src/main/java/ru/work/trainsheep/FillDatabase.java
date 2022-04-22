@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import ru.work.trainsheep.entity.User;
+import ru.work.trainsheep.send.UserRegistrationData;
 import ru.work.trainsheep.service.ChatService;
 import ru.work.trainsheep.service.NotesService;
 import ru.work.trainsheep.service.PasswordsService;
@@ -36,7 +37,7 @@ public class FillDatabase implements InitializingBean {
     Logger logger = LoggerFactory.getLogger(getClass());
 
     private User createUser(String email, String pass, String name, String image, boolean isCompany){
-        val userR = users.register(email, pass, name, isCompany);
+        val userR = users.register(new UserRegistrationData(name, "", email, pass, isCompany));
         val user = users.findByEmail(email);
         user.setImage(image);
         users.save(user);

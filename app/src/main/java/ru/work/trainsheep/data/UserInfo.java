@@ -65,11 +65,11 @@ public class UserInfo {
     }
     public void load(Context context){
         SharedPreferences shared = PreferenceManager.getDefaultSharedPreferences(context);
-        setName(shared.getString("name", ""));
-        setPassword(shared.getString("pass", ""));
-        setEmail(shared.getString("email", ""));
-        setLastName(shared.getString("lastname", ""));
-        setLogin(shared.getBoolean("login", false));
+        setName(shared.getString("name", getRegistrationData().getName()));
+        setPassword(shared.getString("pass", getRegistrationData().getPassword()));
+        setEmail(shared.getString("email", getRegistrationData().getEmail()));
+        setLastName(shared.getString("lastname", getData().getLastName()));
+        setLogin(shared.getBoolean("login", isLogin()));
     }
 
     public void setLastName(String lastname) {

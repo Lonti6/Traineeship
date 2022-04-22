@@ -12,6 +12,7 @@ import ru.work.trainsheep.entity.UserPasswords;
 import ru.work.trainsheep.repository.UserRepository;
 import ru.work.trainsheep.send.ChatBlock;
 import ru.work.trainsheep.send.SearchChatsRequest;
+import ru.work.trainsheep.send.UserRegistrationData;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -43,26 +44,7 @@ public class UserService {
         return userRepository.findByEmail(email);
     }
 
-    public User register(String email, String pass, String name, boolean isCompany) {
-        val old = findByEmail(email);
-        if (old != null)
-            return null;
-        val userPass = new UserPasswords(email, passwordEncoder.encode(pass), Role.USER.toString());
-        passwordsService.create(userPass);
-        val user = new User();
-        user.setFirstName(name);
-        user.setEmail(email);
-        user.setCompany(isCompany);
 
-        user.setRegistrationDate(new Date());
-        userRepository.save(user);
-        if (user.getId() <= 4 && user.isCompany()) {
-            companies.add(user);
-        }
-        if (!user.isCompany())
-            chatService.createStartMessagesFor(user, companies);
-        return user;
-    }
 
     public void save(User user) {
         userRepository.save(user);
@@ -90,4 +72,25 @@ public class UserService {
     }
 
 
+    public User register(UserRegistrationData userData) {
+        val old = findByEmail(userData.getEmail());
+        if (old != null)
+            return null;
+        val userPass = new UserPasswords(userData.getEmail(), passwordEncoder.encode(userData.getPassword()), Role.USER.toString());
+        passwordsService.create(userPass);
+        val user = new User();
+        user.setFirstName(userData.getName());
+        user.setEmail(userData.getEmail());
+        user.setCompany(userData.isCompany());
+        user.setLastName(userData.getLastName());
+
+        user.setRegistrationDate(new Date());
+        userRepository.save(user);
+        if (user.getId() <= 4 && user.isCompany()) {
+            companies.add(user);
+        }
+        if (!user.isCompany())
+            chatService.createStartMessagesFor(user, companies);
+        return user;
+    }
 }
