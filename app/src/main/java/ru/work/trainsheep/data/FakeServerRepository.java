@@ -164,4 +164,9 @@ public class FakeServerRepository extends ServerRepository {
     public void searchChats(SearchChatsRequest request, Consumer<List<ChatBlock>> callbackSuccess, Consumer<Exception> callbackFailure) {
 
     }
+
+    @Override
+    public void sendUser(UserData request, Consumer<UserData> callbackSuccess, Consumer<Exception> callbackFailure) {
+        callbackSuccess.accept(request);
+    }
 }
