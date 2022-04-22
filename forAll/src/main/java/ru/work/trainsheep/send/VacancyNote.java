@@ -27,6 +27,8 @@ public class VacancyNote implements Serializable {
     boolean favorite;
     @NonNull
     long id; // нужен для редактирования конкретной вакансии на сервере
+    @NonNull
+    String email;
     String imageSrc = "";
     String city = "Ёбург";
     int workingHours;

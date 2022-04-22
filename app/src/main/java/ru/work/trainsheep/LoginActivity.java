@@ -55,7 +55,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
         error.setVisibility(View.GONE);
-        server.login(new UserRegistrationData("", email, password, "", false), (login) -> {
+        server.login(new UserRegistrationData("", "", email, password, false), (login) -> {
             val info = UserInfo.getInstance();
             info.setEmail(email);
             info.setPassword(password);

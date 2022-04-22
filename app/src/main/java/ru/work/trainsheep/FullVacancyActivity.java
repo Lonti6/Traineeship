@@ -56,6 +56,7 @@ public class FullVacancyActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             note = (VacancyNote) extras.getSerializable("note");
+            ((TextView)findViewById(R.id.name_top)).setText(note.getHeader());
             ((TextView)findViewById(R.id.companyNameHeader)).setText(note.getCompany());
             ((TextView)findViewById(R.id.vacancyNameText)).setText(note.getHeader());
             ((TextView)findViewById(R.id.cityText)).setText("Населённый пункт: "+note.getCity());
@@ -76,11 +77,18 @@ public class FullVacancyActivity extends AppCompatActivity {
                 ((TextView) view.findViewById(R.id.tag)).setText(tag);
             }
 
+            val sendButton = findViewById(R.id.open_chat);
+            sendButton.setOnClickListener((v) -> {
+                val intent = new Intent(this, MessagesActivity.class);
+                intent.putExtra("name", note.getCompany());
+                intent.putExtra("email", note.getEmail());
+                intent.putExtra("image", note.getImageSrc());
+                startActivity(intent);
+            });
+
             Glide.with(this)
                     .load(note.getImageSrc())
                     .into(((ImageView)findViewById(R.id.imageView)));
-            //((CheckBox)findViewById(R.id.contractualSalary)).setChecked(note.get);
-            // если правильно открыть активити, то в note будут данные о вакансии
         }
     }
 }

@@ -94,7 +94,7 @@ public class NoteEntity {
 
     public VacancyNote toNote(boolean favorite){
         return new VacancyNote(tags.stream().map(Tag::getText).collect(Collectors.toList()), header, content,
-                company.getFirstName(), salary, favorite, id, imageSrc, city, workingHours, furtherCooperation,
+                company.getFirstName(), salary, favorite, id, company.getEmail(), imageSrc, city, workingHours, furtherCooperation,
                 contractualSalary, distanceWork);
     }
     public VacancyNote toNote(){
