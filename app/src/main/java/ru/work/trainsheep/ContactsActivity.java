@@ -6,6 +6,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -54,11 +55,11 @@ public class ContactsActivity extends AppCompatActivity {
             NotificationCompat.Builder notificationBuilder =
                     new NotificationCompat.Builder(getApplicationContext(), CHANNEL_ID)
                             .setAutoCancel(false)
-                            .setSmallIcon(R.drawable.ic_launcher)
+                            .setSmallIcon(R.drawable.ic_push_action)
                             .setWhen(System.currentTimeMillis())
                             .setContentIntent(pendingIntent)
-                            .setContentTitle("Title")
-                            .setContentText("text");
+                            .setContentTitle("Спасибо за внимание!")
+                            .setContentText("Мы готовы ответить на ваши вопросы.");
 
             createChannelIfNeeded(notificationManager);
             notificationManager.notify(NOTIFY_ID, notificationBuilder.build());

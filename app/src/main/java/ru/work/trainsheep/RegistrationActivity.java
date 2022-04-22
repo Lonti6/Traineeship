@@ -73,6 +73,7 @@ public class RegistrationActivity extends AppCompatActivity {
         info.setLastName(lastname);
         info.setEmail(email);
         info.setPassword(pass);
+        info.getRegistrationData().setCompany(((CheckBox)findViewById(R.id.companyCheck)).isChecked());
 
         info.save(this);
 
