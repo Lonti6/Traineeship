@@ -31,6 +31,7 @@ import java.util.function.Consumer;
 import lombok.val;
 import ru.work.trainsheep.data.RealServerRepository;
 import ru.work.trainsheep.data.ServerRepository;
+import ru.work.trainsheep.data.ServerRepositoryFactory;
 import ru.work.trainsheep.data.UserInfo;
 import ru.work.trainsheep.send.UserData;
 
@@ -53,7 +54,7 @@ public class EditUserDataActivity extends AppCompatActivity {
         setContentView(R.layout.activity_left_panel);
         final FlowingDrawer drawer = Util.connectActivityLayout(this, R.layout.activity_edit_user_data);
 
-        findViewById(R.id.menuBut).setOnClickListener(v -> drawer.openMenu(true));
+        findViewById(R.id.menuBut).setOnClickListener(v -> Util.loadActivity(drawer, this, ProfileActivity.class));
 
         findViewById(R.id.scroller).setOnScrollChangeListener(new ScrollListeners.MyScrollListener(findViewById(R.id.header),
                 getDrawable(R.drawable.bg_header)));
@@ -130,7 +131,7 @@ public class EditUserDataActivity extends AppCompatActivity {
                     Integer.parseInt(text.substring(text.lastIndexOf(' ') + 1, text.indexOf('.'))))
             );
 
-            ServerRepository serverRepository = new RealServerRepository();
+            ServerRepository serverRepository = ServerRepositoryFactory.getInstance();
             serverRepository.sendUser(instance, userData -> {
                 Toast.makeText(getApplicationContext(), "Сохранение произошло", Toast.LENGTH_SHORT).show();
             });

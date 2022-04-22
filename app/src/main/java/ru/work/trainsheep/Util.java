@@ -71,7 +71,7 @@ public class Util {
                 .circleCrop()
                 .into((ImageView) activity.findViewById(R.id.left_icon_user));
 
-        ((TextView)activity.findViewById(R.id.name_user)).setText(instance.getFirstName() + " " + instance.getLastName());
+        ((TextView) activity.findViewById(R.id.name_user)).setText(instance.getFirstName() + " " + instance.getLastName());
 
         if (!isCompany)
             activity.findViewById(R.id.create_line).setVisibility(View.GONE);
@@ -126,15 +126,14 @@ public class Util {
         });
     }
 
-    public static void loadActivity(FlowingDrawer drawer, Activity activity,Class c) {
+    public static void loadActivity(FlowingDrawer drawer, Activity activity, Class c) {
         Intent intent = new Intent(activity, c);
         intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         activity.startActivity(intent);
         drawer.closeMenu(false);
     }
 
-    public static void prepareLeftIcon(Activity activity)
-    {
+    public static void prepareLeftIcon(Activity activity) {
         UserData instance = UserInfo.getInstance().getData();
         Glide.with(activity)
                 .load(instance.getAvatarSrc())

@@ -51,11 +51,15 @@
             android:name=".ContactsActivity"
             android:exported="true" />
         <activity
-                android:name=".LoginActivity"
+            android:name=".LoginActivity"
 
             android:exported="true" />
         <activity
             android:name=".FullVacancyActivity"
+            android:exported="true" />
+
+        <activity
+            android:name=".FullSearchActivity"
             android:exported="true" />
     </application>
 

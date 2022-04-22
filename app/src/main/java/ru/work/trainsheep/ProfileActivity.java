@@ -127,7 +127,7 @@ public class ProfileActivity extends AppCompatActivity {
             view.findViewById(R.id.saveBut).setOnClickListener(v ->
             {
                 val instance = new UserData();
-                ServerRepository serverRepository = new RealServerRepository();
+                ServerRepository serverRepository = ServerRepositoryFactory.getInstance();
                 instance.setAvatarSrc(((EditText)view.findViewById(R.id.srcField)).getText().toString());
 
                 serverRepository.sendUser(instance, userData -> Toast.makeText(ProfileActivity.icon.getContext(),
