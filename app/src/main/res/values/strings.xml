@@ -35,6 +35,7 @@
     <string name="no_correct_password">Не нажежный пароль!</string>
     <string name="no_equals_password">Пароли не совпадают</string>
     <string name="email_already_exist">Ошибка!\nДанная почта уже используется!</string>
+    <string name="send">Откликнуться</string>
     <string-array name="cat_names">
         <item>Рыжик</item>
         <item>Барсик</item>
