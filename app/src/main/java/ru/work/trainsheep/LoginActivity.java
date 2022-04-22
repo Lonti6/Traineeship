@@ -61,7 +61,7 @@ public class LoginActivity extends AppCompatActivity {
             info.setPassword(password);
             info.setLogin(true);
             UserInfo.getInstance().save(this);
-            Toast.makeText(getApplicationContext(), "Здравствуйте, " + login, Toast.LENGTH_SHORT).show();
+
             Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
             startActivity(intent);
         }, (ex) -> {

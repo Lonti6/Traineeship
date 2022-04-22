@@ -11,6 +11,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -48,6 +49,17 @@ public class SearchActivity extends AppCompatActivity {
             finish();
             return;
         }
+
+        val server = ServerRepositoryFactory.getInstance();
+        server.login(info.getRegistrationData(), name -> {
+            Toast.makeText(getApplicationContext(), "Здравствуйте, " + name, Toast.LENGTH_SHORT).show();
+        }, err -> {
+            Toast.makeText(getApplicationContext(), "Ошибка авторизации", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, LoginActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+            startActivity(intent);
+            finish();
+        });
 
         setContentView(R.layout.activity_left_panel);
         final FlowingDrawer drawer = Util.connectActivityLayout(this, R.layout.activity_search);

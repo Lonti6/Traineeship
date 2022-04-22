@@ -1,6 +1,8 @@
 package ru.work.trainsheep.service;
 
 import lombok.val;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -32,10 +34,14 @@ public class NotesService {
     @Autowired
     FavoriteNoteRepository favoriteNoteRepository;
 
+    Logger log = LoggerFactory.getLogger(getClass());
+
 
 
     private NoteEntity createForm(VacancyNote note, User user){
-        val entity = new NoteEntity(new HashSet<>(), note.getHeader(), note.getContent(),user, note.getSalary());
+        val entity = new NoteEntity(new HashSet<>(), note.getHeader(), note.getContent(),user, note.getSalary(),
+                note.getImageSrc(), note.getCity(), note.getWorkingHours(), note.isFurtherCooperation(),
+                note.isContractualSalary(), note.isDistanceWork());
         for (val textTag : note.getTags()){
             Tag tag = tags.findOrCreate(textTag);
             //tag.getNoteEntities().add(entity);
@@ -47,6 +53,7 @@ public class NotesService {
     public VacancyNote createAndSave(User user, VacancyNote note){
         val entity = createForm(note, user);
         noteRepository.save(entity);
+        log.info("save note " + entity);
         return entity.toNote(false);
     }
 

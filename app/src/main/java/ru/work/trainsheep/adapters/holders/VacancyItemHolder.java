@@ -52,7 +52,6 @@ public class VacancyItemHolder extends RecyclerView.ViewHolder {
         itemView.setOnClickListener(v -> {
 
             Intent intent = new Intent(itemView.getContext(), FullVacancyActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
             intent.putExtra("note", note);
             itemView.getContext().startActivity(intent);
 

@@ -320,7 +320,16 @@ public class DataGenerator {
                 getRandom(headers),
                 getRandom(contents),
                 getRandom(companies),
-                splitSalary((int)(Math.random()*20000))+" ₽/Час", random.nextBoolean(), random.nextInt(10000));
+                splitSalary((int)(Math.random()*20000))+" ₽/Час",
+                random.nextBoolean(),
+                random.nextInt(10000),
+                getRandom(icons),
+                getRandom(cities),
+                random.nextInt(30) + 8,
+                random.nextBoolean(),
+                random.nextBoolean(),
+                random.nextBoolean()
+                );
     }
 
     public CompanyNote generateCompanyNote() {

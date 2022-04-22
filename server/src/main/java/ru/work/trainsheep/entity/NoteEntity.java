@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 @Entity
 @Getter
 @Setter
+
 @RequiredArgsConstructor
 @NoArgsConstructor
 public class NoteEntity {
@@ -48,6 +49,34 @@ public class NoteEntity {
 
     @NonNull
     private Date dateCreate = new Date();
+    @NonNull
+    String imageSrc;
+    @NonNull
+    String city ;
+    @NonNull
+    int workingHours;
+    @NonNull
+    boolean furtherCooperation ;
+    @NonNull
+    boolean contractualSalary ;
+    @NonNull
+    boolean distanceWork;
+
+    @Override
+    public String toString() {
+        return "NoteEntity{" +
+                "id=" + id +
+                ", header='" + header + '\'' +
+                ", content='" + content + '\'' +
+                ", company=" + company +
+                ", salary='" + salary + '\'' +
+                ", city='" + city + '\'' +
+                ", workingHours=" + workingHours +
+                ", furtherCooperation=" + furtherCooperation +
+                ", contractualSalary=" + contractualSalary +
+                ", distanceWork=" + distanceWork +
+                '}';
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -62,18 +91,11 @@ public class NoteEntity {
         return getClass().hashCode();
     }
 
-    @Override
-    public String toString() {
-        return getClass().getSimpleName() + "(" +
-                "id = " + id + ", " +
-                "header = " + header + ", " +
-                "content = " + content + ", " +
-                "date = " + dateCreate + ", " +
-                "salary = " + salary + ")";
-    }
 
     public VacancyNote toNote(boolean favorite){
-        return new VacancyNote(tags.stream().map(Tag::getText).collect(Collectors.toList()), header, content, company.getFirstName(), salary, favorite, id);
+        return new VacancyNote(tags.stream().map(Tag::getText).collect(Collectors.toList()), header, content,
+                company.getFirstName(), salary, favorite, id, imageSrc, city, workingHours, furtherCooperation,
+                contractualSalary, distanceWork);
     }
     public VacancyNote toNote(){
         return toNote(false);
