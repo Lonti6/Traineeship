@@ -15,5 +15,5 @@ public interface UserRepository extends CrudRepository<User, Long> {
             "lower(u.lastName) like lower(concat('%', concat(?1, '%')))")
     Page<User> findUsersWith(String text, Pageable pageable);
 
-    Page<User> findAllByCompany(boolean isCompany, Pageable pageable);
+    Page<User> findAllByIsCompany(boolean isCompany, Pageable pageable);
 }

@@ -61,6 +61,7 @@ public class UserInfo {
         editor.putString("pass", registrationData.getPassword());
         editor.putString("lastname", registrationData.getLastName());
         editor.putBoolean("login", login);
+        editor.putString("image", data.getAvatarSrc());
         editor.apply();
     }
     public void load(Context context){
@@ -70,6 +71,7 @@ public class UserInfo {
         setEmail(shared.getString("email", getRegistrationData().getEmail()));
         setLastName(shared.getString("lastname", getData().getLastName()));
         setLogin(shared.getBoolean("login", isLogin()));
+        data.setAvatarSrc(shared.getString("image", data.getAvatarSrc()));
     }
 
     public void setLastName(String lastname) {

@@ -73,7 +73,7 @@ public class UserService {
     }
 
     public CompanyResult getCompanies(CompanyRequest request){
-        val page = userRepository.findAllByCompany(true, PageRequest.of(
+        val page = userRepository.findAllByIsCompany(true, PageRequest.of(
                 request.getPage(),
                 request.getCountNotesOnPage(),
                 Sort.by("id").descending()

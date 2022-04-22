@@ -161,12 +161,13 @@ public class SimpleController {
 
     @PostMapping("/get-companies")
     public String getCompanies(Model model, Authentication authentication, @RequestBody CompanyRequest request) {
+
         if (authentication != null && request != null) {
             val userPass = (UserPasswords) authentication.getPrincipal();
 //            log.info("send messages from " + userPass.getUsername() + " to " + request);
 
             model.addAttribute("status", "ok");
-            model.addAttribute("user", userService.getCompanies(request));
+            model.addAttribute("result", userService.getCompanies(request));
         } else
             model.addAttribute("status", "fail");
         return "jsonTemplate";
