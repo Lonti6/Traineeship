@@ -15,6 +15,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -142,8 +144,10 @@ public class EditUserDataActivity extends AppCompatActivity {
         manager = getSupportFragmentManager();
         myDialogFragment = new MyDialogFragment();
 
-        findViewById(R.id.delete_text).setOnClickListener(v ->
-                myDialogFragment.show(manager, "Frag"));
+
+        findViewById(R.id.delete_text).setOnClickListener(v -> {
+            myDialogFragment.show(manager, "Frag");
+        });
     }
 
     public static class MyDialogFragment extends DialogFragment {
