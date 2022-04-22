@@ -108,7 +108,7 @@ public class Adapters {
                 item.name.setText(note.getHeader());
                 //item.imageField(getResource())
                 item.description.setText(note.getContent());
-                Glide.with(item.getContext()).load(note.getCompanyImage()).into(item.imageField);
+                Glide.with(item.getContext()).load(note.getCompanyImage()).placeholder(R.drawable.ic_zaticha).error(R.drawable.ic_zaticha).into(item.imageField);
                 item.setFavoriteIcon(note.isFavorite(), note.getId());
 
             }

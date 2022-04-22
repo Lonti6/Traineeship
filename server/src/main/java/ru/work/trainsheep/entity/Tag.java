@@ -25,6 +25,10 @@ public class Tag {
     @ManyToMany(mappedBy = "tags")
     private Set<NoteEntity> noteEntities;
 
+    @NonNull
+    @ManyToMany(mappedBy = "tags")
+    private Set<User> users;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -135,7 +135,7 @@ public class RealServerRepository extends ServerRepository{
     @Override
     public void getCompanies(CompanyRequest request, Consumer<CompanyResult> callbackSuccess, Consumer<Exception> callbackFailure) {
         executor.execute(() -> {
-            val call = api.companies(request);
+            val call = api.companies(request, getCredentials());
             try {
                 val response = call.execute();
                 val result = response.body();
@@ -263,11 +263,26 @@ public class RealServerRepository extends ServerRepository{
 
     @Override
     public void sendUser(UserData request, Consumer<UserData> callbackSuccess, Consumer<Exception> callbackFailure) {
+        executor.execute(() -> {
+
+            val call = api.updateUser(request, getCredentials());
+
+            try {
+                val response = call.execute();
+
+                val result = response.body();
+                if (result != null && Objects.equals(result.getStatus(), "ok")) {
+                    handler.post(() -> callbackSuccess.accept(result.getUser()));
+                } else
+                    handler.post(() -> callbackFailure.accept(new Exception("status fail")));
+
+            } catch (IOException e) {
+                handler.post(() -> callbackFailure.accept(e));
+                System.err.println(e.getMessage());
+            }
+        });
     }
 
-    @Override
-    public boolean isLogin() {
-        return !UserInfo.getInstance().getRegistrationData().getEmail().equals("");
-    }
+
 }
 

@@ -130,10 +130,7 @@ public class FakeServerRepository extends ServerRepository {
     }
 
 
-    @Override
-    public boolean isLogin() {
-        return userData != null;
-    }
+
 
     private <T> void sleepAndRun(int millis, Supplier<T> runInService, Consumer<T> runInGui) {
         executor.execute(() -> {

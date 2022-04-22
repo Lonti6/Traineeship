@@ -81,7 +81,8 @@ public class FavoriteActivity extends AppCompatActivity {
         vacancyAdapter.clear();
         vacancyAdapter.serverUpdateSearch();
 
-        server.getCompanies(new CompanyRequest(0, 10), (result) -> {
+        server.getCompanies(new CompanyRequest(0, 20), (result) -> {
+            System.out.println(result.getNotes());
             companyAdapter.addAll(result.getNotes());
         });
 

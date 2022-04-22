@@ -7,6 +7,7 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import org.springframework.transaction.annotation.Transactional;
 import ru.work.trainsheep.entity.User;
 import ru.work.trainsheep.send.UserRegistrationData;
 import ru.work.trainsheep.service.ChatService;
@@ -46,6 +47,7 @@ public class FillDatabase implements InitializingBean {
         return user;
     }
 
+    @Transactional
     @Override
     public void afterPropertiesSet() {
 

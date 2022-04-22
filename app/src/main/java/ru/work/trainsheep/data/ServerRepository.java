@@ -36,7 +36,6 @@ public abstract class ServerRepository {
 
     public abstract void createVacancy(VacancyNote request, Consumer<VacancyNote> callbackSuccess, Consumer<Exception> callbackFailure);
 
-    public abstract boolean isLogin();
 
     public abstract void searchChats(SearchChatsRequest request, Consumer<List<ChatBlock>> callbackSuccess, Consumer<Exception> callbackFailure);
 

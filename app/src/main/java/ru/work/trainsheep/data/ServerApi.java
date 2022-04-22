@@ -23,8 +23,8 @@ public interface ServerApi {
     @POST("/setFavoriteVacancy")
     Call<SetFavoriteGetting> setFavoriteVacancy(@Body SetFavoriteVacancyRequest request, @Header("Authorization") String credentials);
 
-    @POST("/companies")
-    Call<CompanyResultGetting> companies(@Body CompanyRequest request);
+    @POST("/get-companies")
+    Call<CompanyResultGetting> companies(@Body CompanyRequest request, @Header("Authorization") String credentials);
 
     @POST("/chats")
     Call<ChatsResultGetting> chats(@Header("Authorization") String credentials);
@@ -40,6 +40,9 @@ public interface ServerApi {
 
     @POST("/search-chats")
     Call<ChatsResultGetting> searchChats(@Body SearchChatsRequest request, @Header("Authorization") String credentials);
+
+    @POST("/update-user")
+    Call<UpdateUserGetting> updateUser(@Body UserData request, @Header("Authorization") String credentials);
 
 
 }
