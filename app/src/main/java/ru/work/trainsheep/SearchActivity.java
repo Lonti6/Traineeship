@@ -90,6 +90,12 @@ public class SearchActivity extends AppCompatActivity {
             return false;
         });
 
+        findViewById(R.id.filterBut).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Util.loadActivity(drawer, SearchActivity.this, FullSearchActivity.class);
+            }
+        });
     }
 
     public void sendSearch(){
