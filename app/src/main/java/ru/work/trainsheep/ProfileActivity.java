@@ -26,8 +26,10 @@ import org.apmem.tools.layouts.FlowLayout;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.function.Consumer;
 
 import lombok.val;
+import ru.work.trainsheep.data.RealServerRepository;
 import ru.work.trainsheep.data.ServerRepository;
 import ru.work.trainsheep.data.ServerRepositoryFactory;
 import ru.work.trainsheep.data.UserInfo;
@@ -124,8 +126,13 @@ public class ProfileActivity extends AppCompatActivity {
             view.findViewById(R.id.cancelBut).setOnClickListener(v1 -> getDialog().cancel());
             view.findViewById(R.id.saveBut).setOnClickListener(v ->
             {
-                val instance = UserInfo.getInstance().getData();
+                val instance = new UserData();
+                ServerRepository serverRepository = new RealServerRepository();
                 instance.setAvatarSrc(((EditText)view.findViewById(R.id.srcField)).getText().toString());
+
+                serverRepository.sendUser(instance, userData -> Toast.makeText(ProfileActivity.icon.getContext(),
+                        "Аватар обновлён", Toast.LENGTH_SHORT).show());
+
                 Glide.with(getContext())
                         .load(instance.getAvatarSrc())
                         .circleCrop()
@@ -135,6 +142,8 @@ public class ProfileActivity extends AppCompatActivity {
                         .load(instance.getAvatarSrc())
                         .circleCrop()
                         .into(iconLeft);
+
+
 
                 getDialog().cancel();
             });

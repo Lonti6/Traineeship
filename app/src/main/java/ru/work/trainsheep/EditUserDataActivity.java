@@ -108,32 +108,34 @@ public class EditUserDataActivity extends AppCompatActivity {
         });
 
         findViewById(R.id.saveBut).setOnClickListener(v -> {
+            instance.setLastName(((TextView) findViewById(R.id.surnameField)).getText().toString());
+            instance.setFirstName(((TextView) findViewById(R.id.nameField)).getText().toString());
+            instance.setPatronymic(((TextView) findViewById(R.id.patronymicField)).getText().toString());
+            instance.setUniversity(((TextView) findViewById(R.id.vyzField)).getText().toString());
+            instance.setCity(((TextView) findViewById(R.id.cityField)).getText().toString());
+            instance.setCurs(Integer.parseInt(((TextView) findViewById(R.id.cursField)).getText().toString()));
+            instance.setEmail(((TextView) findViewById(R.id.mail_field)).getText().toString());
+            instance.setPhoneNumber(((TextView) findViewById(R.id.numberField)).getText().toString());
+            String passOne = ((TextView) findViewById(R.id.password_field)).getText().toString();
+            String passTwo = ((TextView) findViewById(R.id.repeatPasswordField)).getText().toString();
+            if (!(passOne != "") && !(passTwo != "") && passOne.equals(passTwo)) {
+                //меняем пароль
+            }
+
+            String text = ((TextView) findViewById(R.id.dateText)).getText().toString();
+
+            instance.setBirthdate(new Date(
+                    Integer.parseInt(text.substring(text.lastIndexOf('.') + 1)),
+                    Integer.parseInt(text.substring(text.indexOf('.') + 1, text.lastIndexOf('.'))) - 1,
+                    Integer.parseInt(text.substring(text.lastIndexOf(' ') + 1, text.indexOf('.'))))
+            );
+
             ServerRepository serverRepository = new RealServerRepository();
             serverRepository.sendUser(instance, userData -> {
-                instance.setLastName(((TextView) findViewById(R.id.surnameField)).getText().toString());
-                instance.setFirstName(((TextView) findViewById(R.id.nameField)).getText().toString());
-                instance.setPatronymic(((TextView) findViewById(R.id.patronymicField)).getText().toString());
-                instance.setUniversity(((TextView) findViewById(R.id.vyzField)).getText().toString());
-                instance.setCity(((TextView) findViewById(R.id.cityField)).getText().toString());
-                instance.setCurs(Integer.parseInt(((TextView) findViewById(R.id.cursField)).getText().toString()));
-                instance.setEmail(((TextView) findViewById(R.id.mail_field)).getText().toString());
-                instance.setPhoneNumber(((TextView) findViewById(R.id.numberField)).getText().toString());
-                String passOne = ((TextView) findViewById(R.id.password_field)).getText().toString();
-                String passTwo = ((TextView) findViewById(R.id.repeatPasswordField)).getText().toString();
-                if (!(passOne != "") && !(passTwo != "") && passOne.equals(passTwo)) {
-                    //меняем пароль
-                }
-
-                String text = ((TextView) findViewById(R.id.dateText)).getText().toString();
-
-                instance.setBirthdate(new Date(
-                        Integer.parseInt(text.substring(text.lastIndexOf('.') + 1)),
-                        Integer.parseInt(text.substring(text.indexOf('.') + 1, text.lastIndexOf('.'))) - 1,
-                        Integer.parseInt(text.substring(text.lastIndexOf(' ') + 1, text.indexOf('.'))))
-                );
+                Toast.makeText(getApplicationContext(), "Сохранение произошло", Toast.LENGTH_SHORT).show();
             });
 
-            Toast.makeText(getApplicationContext(), "Сохранение произошло", Toast.LENGTH_SHORT).show();
+
         });
 
         manager = getSupportFragmentManager();
