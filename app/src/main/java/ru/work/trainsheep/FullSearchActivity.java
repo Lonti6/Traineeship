@@ -1,10 +1,19 @@
 package ru.work.trainsheep;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
+
+import org.apmem.tools.layouts.FlowLayout;
+
+import lombok.val;
 
 public class FullSearchActivity extends AppCompatActivity {
     @Override
@@ -17,5 +26,33 @@ public class FullSearchActivity extends AppCompatActivity {
                 getDrawable(R.drawable.bg_header)));
 
         findViewById(R.id.menuBut).setOnClickListener(v -> Util.loadActivity(drawer, this, SearchActivity.class));
+
+        DataGenerator dataGenerator = new DataGenerator();
+
+        AutoCompleteTextView autoCompleteTags = findViewById(R.id.competenciesField);
+        autoCompleteTags.setAdapter(new ArrayAdapter<>(this,
+                android.R.layout.simple_dropdown_item_1line, dataGenerator.tags));
+
+        FlowLayout tagsField = findViewById(R.id.tags_field);
+        tagsField.setVisibility(View.GONE);
+
+        findViewById(R.id.addBut).setOnClickListener(v -> {
+            if (autoCompleteTags.getText().toString().trim().length()!=0) {
+                val view = LayoutInflater.from(v.getContext()).inflate(R.layout.tag_item, tagsField, false);
+                tagsField.addView(view);
+                tagsField.getChildAt(tagsField.getChildCount()-1).setOnClickListener(new DoubleClickListener() {
+                    @Override
+                    public void onDoubleClick(View v) {
+                        try {
+                            tagsField.removeView(v);
+                        }
+                        catch (Exception e){ e.printStackTrace(); }
+                    }
+                });
+                ((TextView) view.findViewById(R.id.tag)).setText(autoCompleteTags.getText().toString());
+                tagsField.setVisibility(View.VISIBLE);
+                autoCompleteTags.setText("");
+            }
+        });
     }
 }
