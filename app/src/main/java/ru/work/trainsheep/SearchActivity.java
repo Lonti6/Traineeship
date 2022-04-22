@@ -89,11 +89,14 @@ public class SearchActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        try {
         adapter.clear();
         adapter.serverUpdateSearch();
         Glide.with(this)
                 .load(instance.getAvatarSrc())
                 .circleCrop()
                 .into((ImageView) this.findViewById(R.id.left_icon_user));
+        }
+        catch (Exception e){e.printStackTrace();};
     }
 }

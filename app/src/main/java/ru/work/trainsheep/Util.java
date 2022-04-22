@@ -126,6 +126,12 @@ public class Util {
         });
     }
 
+    public static void loadActivity(FlowingDrawer drawer, Activity activity,Class c) {
+        Intent intent = new Intent(activity, c);
+        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        activity.startActivity(intent);
+        drawer.closeMenu(false);
+    }
 
     private static final Pattern VALID_NAME = Pattern.compile("^[A-ZА-Я]+$", Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE);
 

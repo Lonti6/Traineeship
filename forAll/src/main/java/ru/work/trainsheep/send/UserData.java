@@ -14,13 +14,13 @@ public class UserData {
     private String lastName = "";
     private String patronymic = "";
 
-    private Date birthdate;
-    private Date registrationDate;
+    private Date birthdate = new Date();
+    private Date registrationDate = new Date();
     @NonNull
     private String email = "";
     private String phoneNumber = "";
     private String avatarSrc = "";
-    private ArrayList<String> competencies;
+    private ArrayList<String> competencies = new ArrayList<>();
     private boolean isCompany = false;
 
     private String university = "";

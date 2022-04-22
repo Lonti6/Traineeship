@@ -1,5 +1,6 @@
 package ru.work.trainsheep;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -35,8 +36,23 @@ public class FullVacancyActivity extends AppCompatActivity {
         findViewById(R.id.scroller).setOnScrollChangeListener(new ScrollListeners.MyScrollListener(findViewById(R.id.header),
                 getDrawable(R.drawable.bg_header)));
 
-        findViewById(R.id.menuBut).setOnClickListener(v -> loadActivity(drawer));
+        findViewById(R.id.menuBut).setOnClickListener(v -> Util.loadActivity(drawer, this, SearchActivity.class));
 
+        uploadData();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        uploadData();
+        Glide.with(this)
+                .load(instance.getAvatarSrc())
+                .circleCrop()
+                .into((ImageView) this.findViewById(R.id.left_icon_user));
+    }
+
+    private void uploadData()
+    {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             note = (VacancyNote) extras.getSerializable("note");
@@ -44,9 +60,12 @@ public class FullVacancyActivity extends AppCompatActivity {
             ((TextView)findViewById(R.id.vacancyNameText)).setText(note.getHeader());
             ((TextView)findViewById(R.id.cityText)).setText("Населённый пункт: "+note.getCity());
             ((TextView)findViewById(R.id.zpText)).setText("Оплата в месяц: "+note.getSalary());
-            System.out.println("/////////////////......................................................." +note.getWorkingHours());
             ((TextView)findViewById(R.id.workTimeText)).setText("План работы: "+note.getWorkingHours() + " часов в неделю");
             ((TextView)findViewById(R.id.descriptionText)).setText(note.getContent());
+
+            ((CheckBox)findViewById(R.id.isFurtherCooperationBox)).setChecked(note.isFurtherCooperation());
+            ((CheckBox)findViewById(R.id.contractualSalaryBox)).setChecked(note.isFurtherCooperation());
+            ((CheckBox)findViewById(R.id.distanceWorkBox)).setChecked(note.isDistanceWork());
 
             FlowLayout flowLayout = findViewById(R.id.tags_field);
             flowLayout.removeAllViews();
@@ -57,29 +76,11 @@ public class FullVacancyActivity extends AppCompatActivity {
                 ((TextView) view.findViewById(R.id.tag)).setText(tag);
             }
 
-            //CompanyResult companyResult = new CompanyResult();
-
             Glide.with(this)
                     .load(note.getImageSrc())
                     .into(((ImageView)findViewById(R.id.imageView)));
             //((CheckBox)findViewById(R.id.contractualSalary)).setChecked(note.get);
             // если правильно открыть активити, то в note будут данные о вакансии
         }
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        Glide.with(this)
-                .load(instance.getAvatarSrc())
-                .circleCrop()
-                .into((ImageView) this.findViewById(R.id.left_icon_user));
-    }
-
-    private void loadActivity(FlowingDrawer drawer) {
-        Intent intent = new Intent(this, EditUserDataActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-        this.startActivity(intent);
-        drawer.closeMenu(false);
     }
 }

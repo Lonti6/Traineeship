@@ -111,34 +111,36 @@
                     android:text="План работы: 30 часов в неделю" />
 
                 <CheckBox
-                    android:id="@+id/contractualSalary"
+                    android:id="@+id/contractualSalaryBox"
                     style="@style/SmallText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:buttonTint="@color/main_green"
                     android:checked="false"
-                    android:editable="false"
+                    android:clickable="false"
                     android:text="Возможность договорной оплаты" />
 
                 <CheckBox
+                    android:id="@+id/isFurtherCooperationBox"
                     style="@style/SmallText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:buttonTint="@color/main_green"
                     android:checked="false"
-                    android:editable="false"
+                    android:clickable="false"
                     android:text="Возможность дальнейшего трудоустройства" />
 
                 <CheckBox
+                    android:id="@+id/distanceWorkBox"
                     style="@style/SmallText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:buttonTint="@color/main_green"
                     android:checked="false"
-                    android:editable="false"
+                    android:clickable="false"
                     android:text="Удалённая работа" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -192,7 +194,7 @@
                 android:layout_height="30dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="10dp"
-                app:srcCompat="@drawable/three_line_icon" />
+                app:srcCompat="@drawable/left_arrow" />
         </RelativeLayout>
 
 
