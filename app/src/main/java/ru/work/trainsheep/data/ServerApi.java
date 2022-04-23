@@ -44,5 +44,8 @@ public interface ServerApi {
     @POST("/update-user")
     Call<UpdateUserGetting> updateUser(@Body UserData request, @Header("Authorization") String credentials);
 
+    @POST("/removeVacancy")
+    Call<RemoveGetting> removeVacancy(@Body VacancyNote request, @Header("Authorization") String credentials);
+
 
 }

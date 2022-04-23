@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,6 +29,7 @@ public class VacancyItemHolder extends RecyclerView.ViewHolder {
     public TextView salaryText;
 
     public ImageView favoriteIcon;
+    public ImageView removed;
 
     public VacancyItemHolder(View itemView) {
         super(itemView);
@@ -37,6 +39,10 @@ public class VacancyItemHolder extends RecyclerView.ViewHolder {
         companyName = itemView.findViewById(R.id.company_name);
         salaryText = itemView.findViewById(R.id.salary_text);
         favoriteIcon = itemView.findViewById(R.id.favorite_but);
+        removed = itemView.findViewById(R.id.removed);
+        if (ServerRepositoryFactory.IS_ADMIN){
+            removed.setVisibility(View.VISIBLE);
+        }
     }
 
     public void addTags(List<String> tags) {
@@ -49,6 +55,7 @@ public class VacancyItemHolder extends RecyclerView.ViewHolder {
 
     public void setOnClickListener(VacancyNote note)
     {
+
         itemView.setOnClickListener(v -> {
 
             Intent intent = new Intent(itemView.getContext(), FullVacancyActivity.class);

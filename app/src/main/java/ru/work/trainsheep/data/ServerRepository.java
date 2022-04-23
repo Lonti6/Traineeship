@@ -36,6 +36,8 @@ public abstract class ServerRepository {
 
     public abstract void createVacancy(VacancyNote request, Consumer<VacancyNote> callbackSuccess, Consumer<Exception> callbackFailure);
 
+    public abstract void removeVacancy(VacancyNote request, Consumer<String> callbackSuccess, Consumer<Exception> callbackFailure);
+
 
     public abstract void searchChats(SearchChatsRequest request, Consumer<List<ChatBlock>> callbackSuccess, Consumer<Exception> callbackFailure);
 
@@ -90,4 +92,9 @@ public abstract class ServerRepository {
     public void sendUser(UserData request, Consumer<UserData> callbackSuccess) {
         sendUser(request, callbackSuccess, Throwable::printStackTrace);
     }
+
+    public void removeVacancy(VacancyNote request, Consumer<String> callbackSuccess){
+        removeVacancy(request, callbackSuccess, Throwable::printStackTrace);
+    }
+
 }

@@ -129,8 +129,10 @@ public class FakeServerRepository extends ServerRepository {
         return notes;
     }
 
+    @Override
+    public void removeVacancy(VacancyNote request, Consumer<String> callbackSuccess, Consumer<Exception> callbackFailure) {
 
-
+    }
 
     private <T> void sleepAndRun(int millis, Supplier<T> runInService, Consumer<T> runInGui) {
         executor.execute(() -> {

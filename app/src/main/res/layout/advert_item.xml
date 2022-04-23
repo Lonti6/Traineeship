@@ -2,7 +2,7 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     >
@@ -29,17 +29,26 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/advert_name"
-                    style="@style/AdvertHeadingText"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:text="C# Junior разработчик"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/favorite_but"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                        android:id="@+id/advert_name"
+                        style="@style/AdvertHeadingText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:text="C# Junior "
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/favorite_but"
+                        app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toEndOf="@+id/removed"
+                        android:layout_marginStart="3dp"/>
 
+                <ImageView
+                        android:scaleType="centerCrop"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp" android:id="@+id/removed"
+                        app:layout_constraintTop_toTopOf="parent" app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" android:layout_marginTop="3dp"
+                        app:layout_constraintVertical_bias="0.0"
+                        android:visibility="gone" tools:visibility="visible"
+                        app:srcCompat="@drawable/remove"/>
                 <ImageView
                     android:id="@+id/favorite_but"
                     android:layout_width="30dp"

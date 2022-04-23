@@ -97,6 +97,12 @@ public class VacancyItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             item.addTags(note.getTags());
             item.setOnClickListener(note);
             item.setFavoriteIcon(note.isFavorite(), note.getId());
+            item.removed.setOnClickListener(v -> {
+                ServerRepositoryFactory.getInstance().removeVacancy(note, (status) -> {
+                    clear();
+                    serverUpdateSearch();
+                });
+            });
         }
 
         if (position >= getItemCount() - 1){
