@@ -56,6 +56,8 @@ public class SettingsActivity extends AppCompatActivity {
             info.setEmail("");
             info.setPassword("");
             info.setLogin(false);
+            info.setName("");
+            info.setLastName("");
             info.save(this);
         });
     }

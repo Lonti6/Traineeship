@@ -25,6 +25,8 @@ import ru.work.trainsheep.send.UserData;
 
 public class Util {
 
+    static UserData instance = UserInfo.getInstance().getData();
+
     public static boolean isCompany = true;
 
     static void setEditTextFocusListener(Activity activity, int... ids) {
@@ -65,7 +67,7 @@ public class Util {
     public static void prepareLeftPanel(Activity activity) {
         final FlowingDrawer drawer = activity.findViewById(R.id.drawerlayout);
 
-        val instance = UserInfo.getInstance().getData();
+        instance = UserInfo.getInstance().getData();
 
         Glide.with(activity)
                 .load(instance.getAvatarSrc())
@@ -119,7 +121,7 @@ public class Util {
 
         (activity.findViewById(R.id.profile_line)).setOnClickListener(v -> {
             Intent intent;
-            if (!UserInfo.getInstance().getRegistrationData().isCompany())
+            if (!instance.isCompany())
                 intent = new Intent(activity, ProfileActivity.class);
             else
                 intent = new Intent(activity, CompanyProfileActivity.class);
@@ -151,7 +153,7 @@ public class Util {
     }
 
     public static void prepareLeftData(Activity activity) {
-        UserData instance = UserInfo.getInstance().getData();
+        instance = UserInfo.getInstance().getData();
         ((TextView) activity.findViewById(R.id.name_user)).setText(instance.getFirstName() + " " + instance.getLastName());
         Glide.with(activity)
                 .load(instance.getAvatarSrc())

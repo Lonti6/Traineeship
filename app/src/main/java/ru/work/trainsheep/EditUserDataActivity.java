@@ -52,11 +52,9 @@ public class EditUserDataActivity extends AppCompatActivity {
                 getDrawable(R.drawable.bg_header)));
         dataGenerator = new DataGenerator();
 
-        final String[] сats = dataGenerator.tags.toArray(new String[0]);
-
         AutoCompleteTextView autoCompleteTags = findViewById(R.id.competenciesField);
         autoCompleteTags.setAdapter(new ArrayAdapter<>(this,
-                android.R.layout.simple_dropdown_item_1line, сats));
+                android.R.layout.simple_dropdown_item_1line, dataGenerator.tags));
 
         AutoCompleteTextView autoCompleteCities = findViewById(R.id.cityField);
         autoCompleteCities.setAdapter(new ArrayAdapter<>(this,
@@ -189,7 +187,7 @@ public class EditUserDataActivity extends AppCompatActivity {
         prepare();
         Util.prepareLeftData(this);
 
-        if (instance.isCompany())
+        if (!instance.isCompany())
             findViewById(R.id.menuBut).setOnClickListener(v -> Util.loadActivity(drawer, this, ProfileActivity.class));
         else
             findViewById(R.id.menuBut).setOnClickListener(v -> Util.loadActivity(drawer, this, CompanyProfileActivity.class));

@@ -62,6 +62,7 @@ public class UserInfo {
         editor.putString("lastname", registrationData.getLastName());
         editor.putBoolean("login", login);
         editor.putString("image", data.getAvatarSrc());
+        editor.putBoolean("company", registrationData.isCompany());
         editor.apply();
     }
     public void load(Context context){
@@ -71,11 +72,18 @@ public class UserInfo {
         setEmail(shared.getString("email", getRegistrationData().getEmail()));
         setLastName(shared.getString("lastname", getData().getLastName()));
         setLogin(shared.getBoolean("login", isLogin()));
-        data.setAvatarSrc(shared.getString("image", data.getAvatarSrc()));
+        data.setAvatarSrc(shared.getString("image", getData().getAvatarSrc()));
+        setCompany(shared.getBoolean("company", getData().isCompany()));
     }
 
     public void setLastName(String lastname) {
         data.setLastName(lastname);
         registrationData.setLastName(lastname);
+    }
+
+    public void setCompany(Boolean isCompany)
+    {
+        data.setCompany(isCompany);
+        registrationData.setCompany(isCompany);
     }
 }
