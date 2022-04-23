@@ -18,6 +18,7 @@ import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
 
 import io.ghyeok.stickyswitch.widget.StickySwitch;
 import io.ghyeok.stickyswitch.widget.StickySwitch.Direction;
+import lombok.val;
 import ru.work.trainsheep.data.UserInfo;
 import ru.work.trainsheep.send.UserData;
 
@@ -58,7 +59,13 @@ public class SettingsActivity extends AppCompatActivity {
                 stickySwitchVacansy.setSliderBackgroundColor(getColor(R.color.light_gray));
         });
 
-        findViewById(R.id.exit_text).setOnClickListener(v -> Util.loadActivity(drawer, SettingsActivity.this, LoginActivity.class));
+        findViewById(R.id.exit_text).setOnClickListener(v -> {
+            Util.loadActivity(drawer, SettingsActivity.this, LoginActivity.class);
+            val info = UserInfo.getInstance();
+            info.setEmail("");
+            info.setPassword("");
+            info.setLogin(false);
+        });
     }
 
 
