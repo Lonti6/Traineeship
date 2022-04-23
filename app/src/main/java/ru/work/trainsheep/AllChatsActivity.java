@@ -87,7 +87,9 @@ public class AllChatsActivity extends AppCompatActivity {
 
     private void autoUpdateMessageFromServer(){
         handler.postDelayed(() -> {
-            server.getChats(adapter::updates);
+            val text = findText.getText().toString();
+            if (text.length() == 0)
+                server.getChats(adapter::updates);
             autoUpdateMessageFromServer();
         }, 3000);
     }
