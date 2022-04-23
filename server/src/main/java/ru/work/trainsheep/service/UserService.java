@@ -82,7 +82,7 @@ public class UserService {
                 Sort.by("id").descending()
         ));
         val list = page.map((user) ->
-            new CompanyNote(user.getId(), user.getFirstName(), user.getDescription(), user.getImage(), false)
+            new CompanyNote(user.getId(), user.getFirstName(), user.getDescription(), user.getImage(), user.getEmail())
         ).toList();
         return new CompanyResult(list, page.getNumber(),
                 (int) page.getTotalElements(),

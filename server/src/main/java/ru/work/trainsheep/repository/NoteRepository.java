@@ -21,4 +21,6 @@ public interface NoteRepository extends CrudRepository<NoteEntity, Long> {
 
     @Query(value = "select n from NoteEntity n, FavoriteNote f where f.user = ?1 and n = f.note")
     Page<NoteEntity> favorites(User user, Pageable pageable);
+
+    void deleteById(long id);
 }

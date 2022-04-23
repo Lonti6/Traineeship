@@ -338,7 +338,7 @@ public class DataGenerator {
                 random.nextInt(10000),
                 getRandom(companies),
                 getRandom(contents),
-                getRandom(icons), random.nextBoolean());
+                getRandom(icons),  getRandom(names) + "@ok.ru");
     }
 
     public ChatBlock generateChatBlock(){

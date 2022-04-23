@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
 import lombok.val;
+import ru.work.trainsheep.adapters.CompanyItemAdapter;
 import ru.work.trainsheep.adapters.VacancyItemAdapter;
 import ru.work.trainsheep.data.ServerRepository;
 import ru.work.trainsheep.data.ServerRepositoryFactory;
@@ -24,7 +25,7 @@ public class FavoriteActivity extends AppCompatActivity {
 
     ServerRepository server;
     VacancyItemAdapter vacancyAdapter;
-    Adapters.CompanyItemAdapter companyAdapter;
+    CompanyItemAdapter companyAdapter;
     UserData instance = UserInfo.getInstance().getData();
 
     @Override
@@ -39,8 +40,9 @@ public class FavoriteActivity extends AppCompatActivity {
 /*        ((RecyclerView)findViewById(R.id.rvVacancies)).setOnScrollChangeListener(new MyScrollListener(findViewById(R.id.header),
                 getResources().getDrawable(R.drawable.bg_header)));*/
         final RecyclerView rvVacancies = findViewById(R.id.rvVacancies);
+        final RecyclerView rvCompanies = findViewById(R.id.rvCompanies);
         vacancyAdapter = new VacancyItemAdapter(rvVacancies, true);
-        companyAdapter = new Adapters.CompanyItemAdapter(new ArrayList<>());
+        companyAdapter = new CompanyItemAdapter(rvCompanies);
 
 
 
@@ -49,7 +51,7 @@ public class FavoriteActivity extends AppCompatActivity {
         rvVacancies.setAdapter(vacancyAdapter);
         rvVacancies.addItemDecoration(new SpaceItemDecoration(105));
 
-        final RecyclerView rvCompanies = findViewById(R.id.rvCompanies);
+
         rvCompanies.setHasFixedSize(true);
         rvCompanies.setLayoutManager(new LinearLayoutManager(this));
         rvCompanies.setAdapter(companyAdapter);
@@ -81,10 +83,8 @@ public class FavoriteActivity extends AppCompatActivity {
         vacancyAdapter.clear();
         vacancyAdapter.serverUpdateSearch();
 
-        server.getCompanies(new CompanyRequest(0, 20), (result) -> {
-            System.out.println(result.getNotes());
-            companyAdapter.addAll(result.getNotes());
-        });
+        companyAdapter.clear();
+        companyAdapter.serverUpdateSearch();
 
         Util.prepareLeftIcon(this);
     }

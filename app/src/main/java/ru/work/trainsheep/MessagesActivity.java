@@ -75,9 +75,7 @@ public class MessagesActivity extends AppCompatActivity {
         nameTop.setText(name);
 
         findViewById(R.id.backButton).setOnClickListener(v -> {
-            Intent intent = new Intent(this, AllChatsActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-            this.startActivity(intent);
+            finish();
         });
         final EditText text = findViewById(R.id.text_message);
         text.setImeActionLabel("Send", KeyEvent.KEYCODE_ENTER);

@@ -15,5 +15,5 @@ public class CompanyNote {
     private String header;
     private String content;
     private String companyImage;
-    private boolean favorite;
+    private String email;
 }

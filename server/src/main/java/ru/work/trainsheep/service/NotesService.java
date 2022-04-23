@@ -126,4 +126,7 @@ public class NotesService {
         return note.toNote(false);
     }
 
+    public void remove(VacancyNote note) {
+        noteRepository.deleteById(note.getId());
+    }
 }

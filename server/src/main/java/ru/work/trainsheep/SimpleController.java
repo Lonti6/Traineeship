@@ -231,6 +231,21 @@ public class SimpleController {
     }
 
 
+    @PostMapping("/removeVacancy")
+    public String removeVacancy(Model model, Authentication authentication, @RequestBody VacancyNote note) {
+        if (authentication != null) {
+            val userPass = (UserPasswords) authentication.getPrincipal();
+
+            log.info("remove vacancy " + note);
+            notesService.remove(note);
+
+            model.addAttribute("status", "ok");
+            model.addAttribute("result", "ok");
+        } else
+            model.addAttribute("status", "fail");
+        return "jsonTemplate";
+    }
+
 
     @PostMapping("/createVacancy")
     public String createVacancy(Model model, Authentication authentication, @RequestBody VacancyNote note) {

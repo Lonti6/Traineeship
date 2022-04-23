@@ -58,6 +58,7 @@ public class User {
     @NonNull
     private String city;
     @NonNull
+    @Column(length = 2000)
     private String description ;
     @NonNull
     private int curs;

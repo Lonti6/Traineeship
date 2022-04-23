@@ -37,10 +37,12 @@ public class FillDatabase implements InitializingBean {
 
     Logger logger = LoggerFactory.getLogger(getClass());
 
+    @Transactional
     private User createUser(String email, String pass, String name, String image, boolean isCompany){
         val userR = users.register(new UserRegistrationData(name, "", email, pass, isCompany));
         val user = users.findByEmail(email);
         user.setImage(image);
+        user.setDescription(generator.getRandom(generator.contents));
         users.save(user);
         return user;
     }
