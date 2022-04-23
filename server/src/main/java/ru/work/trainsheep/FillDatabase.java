@@ -69,24 +69,24 @@ public class FillDatabase implements InitializingBean {
                 "Админ",
                 "https://ru.freepik.com/free-photo/rear-view-of-programmer-working-all-night-long_5698334.htm#query=system%20administrator&position=1&from_view=keyword",
                 false);
-//        createUser(
-//                "nikita@ok.ru",
-//                "password",
-//                "Никита",
-//                "https://www.pngitem.com/pimgs/m/177-1772631_psyduck-png-9-png-image-psyduck-pokemon.png", false);
-//        createUser("diana@ya.ru", "password", "Анна", "https://cs5.livemaster.ru/storage/8d/58/15676c2e3677f826dd7aac5a50yl--materialy-dlya-tvorchestva-organza-shelkovaya-chernaya.jpg", false);
-//        createUser("okki@lev.ru", "nopassword", "Лев", "https://yt3.ggpht.com/a/AATXAJxxVTIrOzmAMHijjkT57-UJ83SSYlnLrlodfA=s900-c-k-c0xffffffff-no-rj-mo", false);
-//
-//
-//
-//        int k = 20;
-//        for (int i = 0; i < k; i++) {
-//            val name = generator.getRandom(generator.companies);
-//            val user = createUser(name + "@ok.ru", "password", name, generator.getRandom(generator.icons), true);
-//            notes.createAndSave(user, generator.generateVacancyNote(List.of()));
-//        }
-//        val userList =  users.getAll();
-//        logger.info("create " + k +" notes. OK!");
+        createUser(
+                "nikita@ok.ru",
+                "password",
+                "Никита",
+                "https://www.pngitem.com/pimgs/m/177-1772631_psyduck-png-9-png-image-psyduck-pokemon.png", false);
+        createUser("diana@ya.ru", "password", "Анна", "https://cs5.livemaster.ru/storage/8d/58/15676c2e3677f826dd7aac5a50yl--materialy-dlya-tvorchestva-organza-shelkovaya-chernaya.jpg", false);
+        createUser("okki@lev.ru", "nopassword", "Лев", "https://yt3.ggpht.com/a/AATXAJxxVTIrOzmAMHijjkT57-UJ83SSYlnLrlodfA=s900-c-k-c0xffffffff-no-rj-mo", false);
+
+
+
+        int k = 50;
+        for (int i = 0; i < k; i++) {
+            val name = generator.getRandom(generator.companies);
+            val user = createUser(name + "@ok.ru", "password", name, generator.getRandom(generator.icons), true);
+            notes.createAndSave(user, generator.generateVacancyNote(List.of()));
+        }
+        val userList =  users.getAll();
+        logger.info("create " + k +" notes. OK!");
 
 //        k = 100;
 //        int count = 0;
