@@ -25,7 +25,6 @@ import ru.work.trainsheep.send.UserData;
 import ru.work.trainsheep.send.VacancyNote;
 
 public class FullVacancyActivity extends AppCompatActivity {
-    UserData instance = UserInfo.getInstance().getData();
     VacancyNote note;
 
     @Override
@@ -38,17 +37,13 @@ public class FullVacancyActivity extends AppCompatActivity {
 
         findViewById(R.id.menuBut).setOnClickListener(v -> Util.loadActivity(drawer, this, SearchActivity.class));
 
-        uploadData();
     }
 
     @Override
     protected void onStart() {
         super.onStart();
         uploadData();
-        Glide.with(this)
-                .load(instance.getAvatarSrc())
-                .circleCrop()
-                .into((ImageView) this.findViewById(R.id.left_icon_user));
+        Util.prepareLeftIcon(this);
     }
 
     private void uploadData()
@@ -89,6 +84,8 @@ public class FullVacancyActivity extends AppCompatActivity {
 
             Glide.with(this)
                     .load(note.getImageSrc())
+                    .placeholder(R.drawable.ic_zaticha)
+                    .error(R.drawable.ic_zaticha)
                     .into(((ImageView)findViewById(R.id.imageView)));
         }
     }

@@ -238,7 +238,7 @@ public class SimpleController {
             val userPass = (UserPasswords) authentication.getPrincipal();
             val user = userService.findByEmail(userPass.getUsername());
             val e = notesService.createAndSave(user, note);
-            log.info("create vacancy " + e);
+            //log.info("create vacancy " + e);
 
             model.addAttribute("status", "ok");
             model.addAttribute("vacancy", e);

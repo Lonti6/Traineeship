@@ -1,35 +1,23 @@
 package ru.work.trainsheep;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.DialogFragment;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
 
 import org.apmem.tools.layouts.FlowLayout;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.function.Consumer;
-
 import lombok.val;
-import ru.work.trainsheep.data.RealServerRepository;
 import ru.work.trainsheep.data.ServerRepository;
 import ru.work.trainsheep.data.ServerRepositoryFactory;
 import ru.work.trainsheep.data.UserInfo;
@@ -41,7 +29,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     FlowLayout flowLayout;
     DataGenerator generator;
-    public static ImageView icon, iconLeft;
+    public ImageView icon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,15 +41,9 @@ public class ProfileActivity extends AppCompatActivity {
         findViewById(R.id.scroller).setOnScrollChangeListener(new ScrollListeners.MyScrollListener(findViewById(R.id.header),
                 getDrawable(R.drawable.bg_header)));
 
-        findViewById(R.id.editBut).setOnClickListener(v -> LoadActivity(mDrawer));
+        findViewById(R.id.editBut).setOnClickListener(v -> loadActivity(mDrawer));
 
         icon = findViewById(R.id.icon_user);
-        iconLeft = findViewById(R.id.left_icon_user);
-
-        Glide.with(this)
-                .load(instance.getAvatarSrc())
-                .circleCrop()
-                .into(icon);
 
         val instance = UserInfo.getInstance().getData();
         ((TextView) findViewById(R.id.name_user_profile)).setText(instance.getFirstName() + " " + instance.getLastName());
@@ -111,11 +93,17 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         Util.prepareLeftIcon(this);
+        Glide.with(this)
+                .load(instance.getAvatarSrc())
+                .placeholder(R.drawable.ic_zaticha)
+                .error(R.drawable.ic_zaticha)
+                .circleCrop()
+                .into(icon);
     }
 
     public static class MyDialogFragment extends DialogFragment {
-        Activity parentActivity;
-        public MyDialogFragment(Activity parentActivity)
+        ProfileActivity parentActivity;
+        public MyDialogFragment(ProfileActivity parentActivity)
         {
             this.parentActivity = parentActivity;
         }
@@ -126,22 +114,21 @@ public class ProfileActivity extends AppCompatActivity {
             view.findViewById(R.id.cancelBut).setOnClickListener(v1 -> getDialog().cancel());
             view.findViewById(R.id.saveBut).setOnClickListener(v ->
             {
-                val instance = new UserData();
+                val instance = UserInfo.getInstance().getData();
                 ServerRepository serverRepository = ServerRepositoryFactory.getInstance();
                 instance.setAvatarSrc(((EditText)view.findViewById(R.id.srcField)).getText().toString());
 
-                serverRepository.sendUser(instance, userData -> Toast.makeText(ProfileActivity.icon.getContext(),
+                serverRepository.sendUser(instance, userData -> Toast.makeText(parentActivity.icon.getContext(),
                         "Аватар обновлён", Toast.LENGTH_SHORT).show());
 
-                Glide.with(getContext())
+                Glide.with(parentActivity)
                         .load(instance.getAvatarSrc())
                         .circleCrop()
-                        .into(icon);
+                        .placeholder(R.drawable.ic_zaticha)
+                        .error(R.drawable.ic_zaticha)
+                        .into(parentActivity.icon);
 
-                Glide.with(getContext())
-                        .load(instance.getAvatarSrc())
-                        .circleCrop()
-                        .into(iconLeft);
+                Util.prepareLeftIcon(parentActivity);
 
 
 
@@ -158,7 +145,7 @@ public class ProfileActivity extends AppCompatActivity {
         }
     }
 
-    private void LoadActivity(FlowingDrawer drawer) {
+    private void loadActivity(FlowingDrawer drawer) {
         Intent intent = new Intent(this, EditUserDataActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         this.startActivity(intent);

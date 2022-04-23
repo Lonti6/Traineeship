@@ -42,8 +42,6 @@ public class FillDatabase implements InitializingBean {
         val user = users.findByEmail(email);
         user.setImage(image);
         users.save(user);
-        if(userR != null)
-            logger.info("create user [" + user.getId() + "] " + email + " " + pass + " " + name);
         return user;
     }
 

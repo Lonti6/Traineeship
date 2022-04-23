@@ -95,7 +95,13 @@ public class CreateActivity extends AppCompatActivity {
         String company = UserInfo.getInstance().getData().getFirstName();
         String salary = ((EditText)findViewById(R.id.zpField)).getText().toString();
         String zpType = ((AutoCompleteTextView)findViewById(R.id.zpTypeField)).getText().toString();
-        int workingTime = Integer.parseInt(((EditText)findViewById(R.id.workTimeField)).getText().toString());
+        int workingTime = 0;
+        try {
+            workingTime = Integer.parseInt(((EditText)findViewById(R.id.workTimeField)).getText().toString());
+        } catch (NumberFormatException e){
+            System.err.println(e.getMessage());
+        }
+
         boolean free = ((CheckBox)findViewById(R.id.freeCheck)).isChecked();
         boolean furtherCooperation = ((CheckBox)findViewById(R.id.furtherCooperationBox)).isChecked();
         boolean distanceWork = ((CheckBox)findViewById(R.id.distanceBox)).isChecked();

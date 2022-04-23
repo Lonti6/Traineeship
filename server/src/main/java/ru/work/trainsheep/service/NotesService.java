@@ -40,7 +40,7 @@ public class NotesService {
 
     private NoteEntity createForm(VacancyNote note, User user){
         val entity = new NoteEntity(new HashSet<>(), note.getHeader(), note.getContent(),user, note.getSalary(),
-                note.getImageSrc(), note.getCity(), note.getWorkingHours(), note.isFurtherCooperation(),
+                note.getCity(), note.getWorkingHours(), note.isFurtherCooperation(),
                 note.isContractualSalary(), note.isDistanceWork());
         for (val textTag : note.getTags()){
             Tag tag = tags.findOrCreate(textTag);

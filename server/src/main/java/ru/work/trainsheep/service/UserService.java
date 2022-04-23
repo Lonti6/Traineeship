@@ -1,6 +1,8 @@
 package ru.work.trainsheep.service;
 
 import lombok.val;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -35,6 +37,7 @@ public class UserService {
     ChatService chatService;
 
     List<User> companies = new ArrayList<>();
+    Logger log = LoggerFactory.getLogger(getClass());
 
 
     public boolean existUser(User user) {
@@ -102,6 +105,8 @@ public class UserService {
 
         user.setRegistrationDate(new Date());
         userRepository.save(user);
+
+        log.info("register " + user.getId() + " " + user.getFirstName() + " " + user.getEmail() + " " + user.isCompany());
         if (user.getId() <= 4 && user.isCompany()) {
             companies.add(user);
         }
@@ -137,5 +142,7 @@ public class UserService {
         user.setUniversity(userUpdate.getUniversity());
 
         userRepository.save(user);
+
+        log.info("update user : " + user);
     }
 }
