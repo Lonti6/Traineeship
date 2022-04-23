@@ -128,15 +128,16 @@
             android:id="@+id/reg_mail_field"
             style="@style/MyTextFieldStyle"
             android:layout_width="match_parent"
-            android:singleLine="true"
             android:layout_height="match_parent"
             android:layout_marginLeft="0.5dp"
             android:layout_marginTop="3dp"
+            android:inputType="textEmailAddress"
             android:layout_marginRight="10dp"
             android:layout_toRightOf="@+id/username_icon2"
             android:fontFamily="@font/open_sans"
             android:hint="@string/email"
-            android:padding="10dp" />
+            android:padding="10dp"
+            android:singleLine="true" />
 
         <ImageView
             android:id="@+id/username_icon2"

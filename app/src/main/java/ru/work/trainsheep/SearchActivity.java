@@ -9,6 +9,8 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -62,12 +64,36 @@ public class SearchActivity extends AppCompatActivity {
 
         findViewById(R.id.tree_palka).setOnClickListener(v -> drawer.openMenu(true));
 
+        val updateButton = findViewById(R.id.updateBut);
+        updateButton.setOnClickListener(v -> {
+            adapter.clear();
+            adapter.serverUpdateSearch();
+        });
+
         recyclerView = findViewById(R.id.rv);
         adapter = new VacancyItemAdapter(recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
         recyclerView.addItemDecoration(new SpaceItemDecoration(85));
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                LinearLayoutManager manager = (LinearLayoutManager)recyclerView.getLayoutManager();
+                if (manager.findFirstVisibleItemPosition() == 0
+                        && manager.findFirstCompletelyVisibleItemPosition() == 0)
+                {
+                    updateButton.setVisibility(View.VISIBLE);
+                }
+                else {updateButton.setVisibility(View.GONE);}
+            }
+        });
         (findViewById(R.id.listButton)).setOnClickListener(v ->
                 recyclerView.smoothScrollToPosition(0));
         Util.setEditTextFocusListener(this, R.id.search_field);
@@ -86,12 +112,8 @@ public class SearchActivity extends AppCompatActivity {
             return false;
         });
 
-        findViewById(R.id.filterBut).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Util.loadActivity(drawer, SearchActivity.this, FullSearchActivity.class);
-            }
-        });
+        findViewById(R.id.filterBut).setOnClickListener(v ->
+                Util.loadActivity(drawer, SearchActivity.this, FullSearchActivity.class));
     }
 
     public void sendSearch(){

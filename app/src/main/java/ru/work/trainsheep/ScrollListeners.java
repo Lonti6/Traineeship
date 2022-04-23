@@ -72,7 +72,6 @@ public class ScrollListeners {
         }
 
         public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-            System.out.println(otherElement.getClass());
             LinearLayoutManager manager = (LinearLayoutManager)recyclerView.getLayoutManager();
             if (manager.findFirstVisibleItemPosition() == 0
                     && manager.findFirstCompletelyVisibleItemPosition() == 0)
