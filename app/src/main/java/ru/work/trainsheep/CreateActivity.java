@@ -1,14 +1,12 @@
 package ru.work.trainsheep;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.*;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.bumptech.glide.Glide;
 import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
 
 import org.apmem.tools.layouts.FlowLayout;
@@ -137,6 +135,6 @@ public class CreateActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        Util.prepareLeftIcon(this);
+        Util.prepareLeftData(this);
     }
 }

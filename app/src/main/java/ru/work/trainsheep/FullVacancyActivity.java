@@ -1,6 +1,5 @@
 package ru.work.trainsheep;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,12 +15,6 @@ import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
 import org.apmem.tools.layouts.FlowLayout;
 
 import lombok.val;
-import ru.work.trainsheep.data.UserInfo;
-import ru.work.trainsheep.data.getting.CompanyResultGetting;
-import ru.work.trainsheep.send.CompanyNote;
-import ru.work.trainsheep.send.CompanyRequest;
-import ru.work.trainsheep.send.CompanyResult;
-import ru.work.trainsheep.send.UserData;
 import ru.work.trainsheep.send.VacancyNote;
 
 public class FullVacancyActivity extends AppCompatActivity {
@@ -43,7 +36,7 @@ public class FullVacancyActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         uploadData();
-        Util.prepareLeftIcon(this);
+        Util.prepareLeftData(this);
     }
 
     private void uploadData()

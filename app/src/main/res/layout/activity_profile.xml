@@ -65,72 +65,141 @@
                 android:layout_marginTop="20dp"
                 android:text="Дмитрий Башкирцев" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/butC"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/name_user_profile"
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="20dp"
-                android:layout_marginRight="15dp">
-
-                <Button
-                    android:id="@+id/tags_but"
-                    android:layout_width="160dp"
-                    android:layout_height="60dp"
-                    android:layout_alignParentLeft="true"
-                    android:fontFamily="@font/open_sans"
-                    android:text="Текущие \nкомпетенции"
-                    android:textColor="@color/white"
-                    android:textSize="14dp"
-                    android:textStyle="normal"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/stages_but"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <Button
-                    android:id="@+id/stages_but"
-                    android:layout_width="160dp"
-                    android:layout_height="60dp"
-                    android:layout_marginStart="31dp"
-                    android:fontFamily="@font/open_sans"
-                    android:text="Пройденные стажировки"
-                    android:textColor="@color/white"
-                    android:textSize="14dp"
-                    android:textStyle="normal"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/tags_but"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-            <TableLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/butC"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="10dp"
                 android:layout_marginRight="15dp"
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/advert_border_color">
+                android:orientation="vertical">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/butC"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <Button
+                        android:id="@+id/tags_but"
+                        android:layout_width="160dp"
+                        android:layout_height="60dp"
+                        android:layout_alignParentLeft="true"
+                        android:fontFamily="@font/open_sans"
+                        android:text="Текущие \nкомпетенции"
+                        android:textColor="@color/white"
+                        android:textSize="14dp"
+                        android:textStyle="normal"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/stages_but"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <Button
+                        android:id="@+id/stages_but"
+                        android:layout_width="160dp"
+                        android:layout_height="60dp"
+                        android:layout_marginStart="31dp"
+                        android:fontFamily="@font/open_sans"
+                        android:text="Пройденные стажировки"
+                        android:textColor="@color/white"
+                        android:textSize="14dp"
+                        android:textStyle="normal"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/tags_but"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <TextView
-                    android:id="@+id/user_description"
-                    style="@style/AdvertDescriptionText"
+                    style="@style/HeadingText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginRight="13dp"
-                    android:layout_marginBottom="12dp"
-                    android:text="Очень срочно ищем разработчика!!расрас
+                    android:layout_marginTop="10dp"
+                    android:text="Личная информация"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/vyzText"
+                    style="@style/StandartText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Место обучения: Уральский государственный жкономический университет" />
+
+                <TextView
+                    android:id="@+id/cityText"
+                    style="@style/StandartText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Город проживания: Екатеринбург" />
+
+                <TextView
+                    android:id="@+id/dateText"
+                    style="@style/StandartText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Дата рождения: 01.01.2002" />
+
+                <TextView
+                    android:id="@+id/cursText"
+                    style="@style/StandartText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Курс обучения: 2" />
+
+                <TextView
+                    style="@style/HeadingText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Контактная информация"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/mailText"
+                    style="@style/StandartText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Электронная почта: mail@mail.ru" />
+
+                <TextView
+                    android:id="@+id/numberText"
+                    style="@style/StandartText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Номер телефона: +7 777 777 77 77" />
+
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/advert_border_color">
+
+                    <TextView
+                        android:id="@+id/user_description"
+                        style="@style/AdvertDescriptionText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="13dp"
+                        android:layout_marginBottom="12dp"
+                        android:text="Очень срочно ищем разработчика!!расрас
 Уметь должен всё: стрелять, варить халву, петь в хоре.
 График плавающий, в идеале - жить на работе, есть и спать тут же, а лучше не спать вообще.
 Опыт от ста миллионов лет и выше." />
 
-            </TableLayout>
+                </TableLayout>
+
+            </LinearLayout>
 
         </RelativeLayout>
     </ScrollView>

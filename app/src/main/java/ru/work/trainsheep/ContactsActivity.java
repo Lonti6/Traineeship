@@ -1,29 +1,14 @@
 package ru.work.trainsheep;
 
-import android.app.Notification;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
 
-import com.bumptech.glide.Glide;
 import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
-
-import lombok.val;
-import ru.work.trainsheep.data.UserInfo;
-import ru.work.trainsheep.send.UserData;
 
 public class ContactsActivity extends AppCompatActivity {
 
@@ -52,6 +37,6 @@ public class ContactsActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        Util.prepareLeftIcon(this);
+        Util.prepareLeftData(this);
     }
 }

@@ -8,30 +8,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 
-import com.bumptech.glide.Glide;
 import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
 
 import org.apmem.tools.layouts.FlowLayout;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.function.Consumer;
 
 import lombok.val;
-import ru.work.trainsheep.data.RealServerRepository;
 import ru.work.trainsheep.data.ServerRepository;
 import ru.work.trainsheep.data.ServerRepositoryFactory;
 import ru.work.trainsheep.data.UserInfo;
@@ -61,8 +53,6 @@ public class EditUserDataActivity extends AppCompatActivity {
         findViewById(R.id.scroller).setOnScrollChangeListener(new ScrollListeners.MyScrollListener(findViewById(R.id.header),
                 getDrawable(R.drawable.bg_header)));
         dataGenerator = new DataGenerator();
-        prepare();
-
 
         final String[] сats = dataGenerator.tags.toArray(new String[0]);
 
@@ -119,6 +109,7 @@ public class EditUserDataActivity extends AppCompatActivity {
             instance.setCurs(Integer.parseInt(((TextView) findViewById(R.id.cursField)).getText().toString()));
             instance.setEmail(((TextView) findViewById(R.id.mail_field)).getText().toString());
             instance.setPhoneNumber(((TextView) findViewById(R.id.numberField)).getText().toString());
+            instance.setDescription(((TextView) findViewById(R.id.descriptionField)).getText().toString());
             String passOne = ((TextView) findViewById(R.id.password_field)).getText().toString();
             String passTwo = ((TextView) findViewById(R.id.repeatPasswordField)).getText().toString();
             if (!(passOne != "") && !(passTwo != "") && passOne.equals(passTwo)) {
@@ -197,7 +188,8 @@ public class EditUserDataActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        Util.prepareLeftIcon(this);
+        prepare();
+        Util.prepareLeftData(this);
     }
 
 

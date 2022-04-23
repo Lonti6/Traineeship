@@ -1,31 +1,24 @@
 package ru.work.trainsheep;
 
 import android.app.Activity;
-import android.app.Service;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
 import lombok.val;
 import ru.work.trainsheep.adapters.VacancyItemAdapter;
-import ru.work.trainsheep.data.ServerRepository;
 import ru.work.trainsheep.data.ServerRepositoryFactory;
 import ru.work.trainsheep.data.UserInfo;
 import ru.work.trainsheep.send.UserData;
-import ru.work.trainsheep.send.VacancyRequest;
 
 import java.util.ArrayList;
 
@@ -113,6 +106,6 @@ public class SearchActivity extends AppCompatActivity {
 
         adapter.clear();
         adapter.serverUpdateSearch();
-        Util.prepareLeftIcon(this);
+        Util.prepareLeftData(this);
     }
 }

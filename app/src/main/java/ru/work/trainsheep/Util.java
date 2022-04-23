@@ -146,8 +146,9 @@ public class Util {
         drawer.closeMenu(false);
     }
 
-    public static void prepareLeftIcon(Activity activity) {
+    public static void prepareLeftData(Activity activity) {
         UserData instance = UserInfo.getInstance().getData();
+        ((TextView) activity.findViewById(R.id.name_user)).setText(instance.getFirstName() + " " + instance.getLastName());
         Glide.with(activity)
                 .load(instance.getAvatarSrc())
                 .circleCrop()

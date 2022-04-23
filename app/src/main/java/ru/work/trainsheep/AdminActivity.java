@@ -1,11 +1,8 @@
 package ru.work.trainsheep;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.view.View;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
@@ -52,7 +49,7 @@ public class AdminActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        Util.prepareLeftIcon(this);
+        Util.prepareLeftData(this);
 
     }
 }

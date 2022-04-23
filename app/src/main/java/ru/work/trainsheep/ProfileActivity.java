@@ -2,6 +2,7 @@ package ru.work.trainsheep;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,11 +26,10 @@ import ru.work.trainsheep.send.UserData;
 
 public class ProfileActivity extends AppCompatActivity {
 
-    UserData instance = UserInfo.getInstance().getData();
-
     FlowLayout flowLayout;
     DataGenerator generator;
     public ImageView icon;
+    UserData instance = UserInfo.getInstance().getData();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,9 +45,6 @@ public class ProfileActivity extends AppCompatActivity {
 
         icon = findViewById(R.id.icon_user);
 
-        val instance = UserInfo.getInstance().getData();
-        ((TextView) findViewById(R.id.name_user_profile)).setText(instance.getFirstName() + " " + instance.getLastName());
-
         BottomSheetBehavior.from(findViewById(R.id.sheet)).setPeekHeight(0);
         Util.prepareLeftPanel(this);
 
@@ -61,12 +58,6 @@ public class ProfileActivity extends AppCompatActivity {
         findViewById(R.id.stages_but).setOnClickListener(myListener);
 
         findViewById(R.id.menuBut).setOnClickListener(v -> mDrawer.openMenu(true));
-
-        String q = "";
-        for (int i = 0; i < 10000; i++) {
-            q += "a";
-        }
-        ((TextView) findViewById(R.id.user_description)).setText(q);
 
         (findViewById(R.id.close_but_profile)).setOnClickListener(v -> {
             if (BottomSheetBehavior.from(findViewById(R.id.sheet)).getState() == Integer.parseInt("3")) {
@@ -92,13 +83,14 @@ public class ProfileActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        Util.prepareLeftIcon(this);
+        Util.prepareLeftData(this);
+        prepare();
         Glide.with(this)
                 .load(instance.getAvatarSrc())
+                .circleCrop()
                 .placeholder(R.drawable.ic_zaticha)
                 .error(R.drawable.ic_zaticha)
-                .circleCrop()
-                .into(icon);
+                .into((ImageView) findViewById(R.id.icon_user));
     }
 
     public static class MyDialogFragment extends DialogFragment {
@@ -128,7 +120,7 @@ public class ProfileActivity extends AppCompatActivity {
                         .error(R.drawable.ic_zaticha)
                         .into(parentActivity.icon);
 
-                Util.prepareLeftIcon(parentActivity);
+                Util.prepareLeftData(parentActivity);
 
 
 
@@ -159,22 +151,39 @@ public class ProfileActivity extends AppCompatActivity {
                 ((TextView) findViewById(R.id.category_text)).setText(((Button) v).getText());
                 flowLayout.removeAllViews();
                 BottomSheetBehavior.from(findViewById(R.id.sheet)).setPeekHeight(600, true);
-                for (int i = 0; i < ((int) (Math.random() * 20) + 2); i++) {
+                Log.e("////////////////////////////////////////////////////", String.valueOf(instance.getCompetencies().size()));
+                for (String tag: instance.getCompetencies()) {
                     LayoutInflater.from(ProfileActivity.this).inflate(R.layout.tag_item, flowLayout, true);
-                    ((TextView) ((ConstraintLayout) (flowLayout.getChildAt(flowLayout.getChildCount() - 1))).getChildAt(0)).setText(generator.getRandom(generator.tags));
+                    ((TextView) ((ConstraintLayout) (flowLayout.getChildAt(flowLayout.getChildCount() - 1))).getChildAt(0)).setText(tag);
                 }
                 return;
             }
             if (v.getTag().equals("stages")) {
                 ((TextView) findViewById(R.id.category_text)).setText(((Button) v).getText());
                 flowLayout.removeAllViews();
-                for (int i = 0; i < ((int) (Math.random() * 20) + 2); i++) {
+                for (int i = 0; i < 1; i++) {
                     LayoutInflater.from(ProfileActivity.this).inflate(R.layout.stage_title, flowLayout, true);
-                    ((TextView) ((LinearLayout) (flowLayout.getChildAt(flowLayout.getChildCount() - 1))).getChildAt(0)).setText(generator.getRandom(generator.tags));
-                    ;
+                    ((TextView) ((LinearLayout) (flowLayout.getChildAt(flowLayout.getChildCount() - 1))).getChildAt(0)).setText("Ещё не реализованно");
                 }
                 BottomSheetBehavior.from(findViewById(R.id.sheet)).setPeekHeight(600, true);
             }
         }
+    }
+
+    private void prepare()
+    {
+        instance = UserInfo.getInstance().getData();
+        ((TextView) findViewById(R.id.name_user_profile)).setText(instance.getFirstName() + " " + instance.getLastName());
+        ((TextView) findViewById(R.id.user_description)).setText(instance.getDescription());
+        ((TextView) findViewById(R.id.vyzText)).setText("Место обучения: "+instance.getUniversity());
+        ((TextView) findViewById(R.id.cityText)).setText("Город проживания: " + instance.getCity());
+        val date = instance.getBirthdate();
+        ((TextView) findViewById(R.id.dateText)).setText(
+                "Дата рождения: " + date.getDay() + "."+(date.getMonth()+1)+"."+date.getYear());
+        ((TextView) findViewById(R.id.cursText)).setText("Курс обучения: "+instance.getCurs());
+        ((TextView) findViewById(R.id.mailText)).setText("Электронная почта: "+instance.getEmail());
+        ((TextView) findViewById(R.id.numberText)).setText("Номер телефона: : "+instance.getPhoneNumber());
+
+        ((TextView) findViewById(R.id.user_description)).setText(instance.getDescription());
     }
 }

@@ -100,7 +100,7 @@ public class AllChatsActivity extends AppCompatActivity {
 
         server.getChats(adapter::addAll);
 
-        Util.prepareLeftIcon(this);
+        Util.prepareLeftData(this);
     }
 
     static class Adapter extends RecyclerView.Adapter<MyViewHolder>{
