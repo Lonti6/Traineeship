@@ -7,6 +7,7 @@ import android.widget.*;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
 import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
 
 import org.apmem.tools.layouts.FlowLayout;
@@ -136,5 +137,12 @@ public class CreateActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         Util.prepareLeftData(this);
+
+        Glide.with(this)
+                .load(instance.getAvatarSrc())
+                .circleCrop()
+                .placeholder(R.drawable.ic_zaticha)
+                .error(R.drawable.ic_zaticha)
+                .into((ImageView) findViewById(R.id.icon_user));
     }
 }

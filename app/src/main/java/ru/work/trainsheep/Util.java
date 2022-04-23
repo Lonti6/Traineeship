@@ -118,7 +118,11 @@ public class Util {
         });
 
         (activity.findViewById(R.id.profile_line)).setOnClickListener(v -> {
-            Intent intent = new Intent(activity, ProfileActivity.class);
+            Intent intent;
+            if (!UserInfo.getInstance().getRegistrationData().isCompany())
+                intent = new Intent(activity, ProfileActivity.class);
+            else
+                intent = new Intent(activity, CompanyProfileActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
             activity.startActivity(intent);
             drawer.closeMenu(false);

@@ -34,8 +34,8 @@ public class EditUserDataActivity extends AppCompatActivity {
     UserData instance;
     FragmentManager manager;
     MyDialogFragment myDialogFragment;
+    FlowingDrawer drawer;
 
-    Calendar c = Calendar.getInstance();
     int day;
     int month;
     int year;
@@ -46,9 +46,7 @@ public class EditUserDataActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_left_panel);
-        final FlowingDrawer drawer = Util.connectActivityLayout(this, R.layout.activity_edit_user_data);
-
-        findViewById(R.id.menuBut).setOnClickListener(v -> Util.loadActivity(drawer, this, ProfileActivity.class));
+        drawer = Util.connectActivityLayout(this, R.layout.activity_edit_user_data);
 
         findViewById(R.id.scroller).setOnScrollChangeListener(new ScrollListeners.MyScrollListener(findViewById(R.id.header),
                 getDrawable(R.drawable.bg_header)));
@@ -113,7 +111,7 @@ public class EditUserDataActivity extends AppCompatActivity {
             String passOne = ((TextView) findViewById(R.id.password_field)).getText().toString();
             String passTwo = ((TextView) findViewById(R.id.repeatPasswordField)).getText().toString();
             if (!(passOne != "") && !(passTwo != "") && passOne.equals(passTwo)) {
-                //меняем пароль
+                UserInfo.getInstance().setPassword(passOne);
             }
 
             String text = ((TextView) findViewById(R.id.dateText)).getText().toString();
@@ -124,11 +122,11 @@ public class EditUserDataActivity extends AppCompatActivity {
                     Integer.parseInt(text.substring(text.lastIndexOf(' ') + 1, text.indexOf('.'))))
             );
 
+            UserInfo.getInstance().save(this);
             ServerRepository serverRepository = ServerRepositoryFactory.getInstance();
             serverRepository.sendUser(instance, userData -> {
                 Toast.makeText(getApplicationContext(), "Сохранение произошло", Toast.LENGTH_SHORT).show();
             });
-
 
         });
 
@@ -190,6 +188,11 @@ public class EditUserDataActivity extends AppCompatActivity {
         super.onStart();
         prepare();
         Util.prepareLeftData(this);
+
+        if (instance.isCompany())
+            findViewById(R.id.menuBut).setOnClickListener(v -> Util.loadActivity(drawer, this, ProfileActivity.class));
+        else
+            findViewById(R.id.menuBut).setOnClickListener(v -> Util.loadActivity(drawer, this, CompanyProfileActivity.class));
     }
 
 

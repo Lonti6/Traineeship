@@ -31,10 +31,16 @@ public class RegistrationActivity extends AppCompatActivity {
 
         CheckBox checkBox = findViewById(R.id.companyCheck);
         checkBox.setOnClickListener(v -> {
-            if (checkBox.isChecked())
-                ((EditText)findViewById(R.id.reg_name_field)).setHint("Наименование компании");
+            if (checkBox.isChecked()) {
+                ((EditText) findViewById(R.id.reg_name_field)).setHint("Наименование компании");
+                ((EditText) findViewById(R.id.reg_last_name_field)).setText("");
+                (findViewById(R.id.relativeLayout)).setVisibility(View.GONE);
+            }
             else
+            {
                 ((EditText)findViewById(R.id.reg_name_field)).setHint("Имя");
+                (findViewById(R.id.relativeLayout)).setVisibility(View.VISIBLE);
+            }
         });
     }
 

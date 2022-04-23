@@ -27,7 +27,6 @@ import ru.work.trainsheep.send.UserData;
 public class ProfileActivity extends AppCompatActivity {
 
     FlowLayout flowLayout;
-    DataGenerator generator;
     public ImageView icon;
     UserData instance = UserInfo.getInstance().getData();
 
@@ -35,13 +34,12 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_left_panel);
-        final FlowingDrawer mDrawer = Util.connectActivityLayout(this, R.layout.activity_profile);
-        generator = new DataGenerator();
+        final FlowingDrawer drawer = Util.connectActivityLayout(this, R.layout.activity_profile);
 
         findViewById(R.id.scroller).setOnScrollChangeListener(new ScrollListeners.MyScrollListener(findViewById(R.id.header),
                 getDrawable(R.drawable.bg_header)));
 
-        findViewById(R.id.editBut).setOnClickListener(v -> loadActivity(mDrawer));
+        findViewById(R.id.editBut).setOnClickListener(v -> loadActivity(drawer));
 
         icon = findViewById(R.id.icon_user);
 
@@ -57,7 +55,7 @@ public class ProfileActivity extends AppCompatActivity {
         findViewById(R.id.tags_but).setOnClickListener(myListener);
         findViewById(R.id.stages_but).setOnClickListener(myListener);
 
-        findViewById(R.id.menuBut).setOnClickListener(v -> mDrawer.openMenu(true));
+        findViewById(R.id.menuBut).setOnClickListener(v -> drawer.openMenu(true));
 
         (findViewById(R.id.close_but_profile)).setOnClickListener(v -> {
             if (BottomSheetBehavior.from(findViewById(R.id.sheet)).getState() == Integer.parseInt("3")) {
@@ -151,7 +149,6 @@ public class ProfileActivity extends AppCompatActivity {
                 ((TextView) findViewById(R.id.category_text)).setText(((Button) v).getText());
                 flowLayout.removeAllViews();
                 BottomSheetBehavior.from(findViewById(R.id.sheet)).setPeekHeight(600, true);
-                Log.e("////////////////////////////////////////////////////", String.valueOf(instance.getCompetencies().size()));
                 for (String tag: instance.getCompetencies()) {
                     LayoutInflater.from(ProfileActivity.this).inflate(R.layout.tag_item, flowLayout, true);
                     ((TextView) ((ConstraintLayout) (flowLayout.getChildAt(flowLayout.getChildCount() - 1))).getChildAt(0)).setText(tag);
