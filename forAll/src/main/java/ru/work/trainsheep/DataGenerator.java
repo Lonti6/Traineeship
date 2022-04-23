@@ -27,7 +27,8 @@ public class DataGenerator {
 
     public DataGenerator() {
         tags = Arrays.asList("Бэкенд", "Angular", "Фронтенд", "Middle", "JavaScript", "HTML", "JQuery", "Angular",
-                "Linux", "Git", "PHP", "Golang", "React Native", "Sass", "React", "C#", ".NET", ".NET Core", "SQL", "python");
+                "Linux", "Git", "PHP", "Golang", "React Native", "Sass", "React", "C#", ".NET", ".NET Core", "SQL", "Python",
+                "C", "C++", "Visual Basic", "PHP", "Go", "Swift", "Ruby" );
 
         companies = Arrays.asList("Группа «СВЭЛ»", "Прософт-Системы", "Сима-ленд", "HRS", "ГК «Экстрим»", "Uploadcare",
                 "DNA Team", "Сбер", "Ceramic 3D", "Luxoft",  "Tinkoff.ru", "Deutsche Bank",
@@ -37,11 +38,22 @@ public class DataGenerator {
         headers = Arrays.asList("Программист ERP",
                 "Frontend-разработчик (JS, Angular)",
                 "Backend-разработчик (Middle-to-Senior)",
-                "Middle Frontend Developer / React Native",
+                "Middle Frontend Developer ", "React Native",
                 "Разработчик .NET",
                 "Python разработчик",
-                "Frontend-разработчик (React)",
-                "Middle Unity3D Developer");
+                "Frontend-разработчик (React)", "Инженер-программист", "DevOps engineer", "Менеджер по продажам",
+                "Координатор ИТ-проектов",
+                "Специалист расчетного отдела",
+                "Руководитель дивизиона",
+                "Мастер по озеленению",
+                "Разработчик мобильных приложений",
+                "Художник промо-материалов",
+                "Начинающий специалист",
+                "Онлайн-куратор/консультант",
+                "Сотрудник в архив",
+                "Стажер-разработчик Python",
+                "Сборщик медицинских препаратов",
+                "Unity3D Developer");
 
         contents = Arrays.asList(
                 "Разработка новых приложений. Поддержание/развитие существующих приложений. Кодревью. Написание тестов. Участие в обсуждении и проектировании архитектуры и бизнес-логики.\n" +
@@ -322,7 +334,7 @@ public class DataGenerator {
                 getRandom(companies),
                 splitSalary((int)(Math.random()*20000))+" ₽/месяц",
                 random.nextBoolean(),
-                random.nextInt(10000),
+                0,
                 getRandom(names) + "@ok.ru",
                 getRandom(icons),
                 getRandom(cities),

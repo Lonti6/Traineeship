@@ -51,7 +51,7 @@ public class NotesService {
     }
 
     public VacancyNote createAndSave(User user, VacancyNote note){
-        val entity = createForm(note, user);
+        NoteEntity entity = createForm(note, user);
         noteRepository.save(entity);
         log.info("save note " + entity);
         return entity.toNote(false);

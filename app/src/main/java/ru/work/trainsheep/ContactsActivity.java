@@ -27,8 +27,7 @@ import ru.work.trainsheep.send.UserData;
 
 public class ContactsActivity extends AppCompatActivity {
 
-    private static final int NOTIFY_ID = 101;
-    private static final String CHANNEL_ID = "CHANNEL_ID";
+
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,33 +44,10 @@ public class ContactsActivity extends AppCompatActivity {
         findViewById(R.id.srcVkNikita).setOnClickListener(listener);
         findViewById(R.id.srcVkDima).setOnClickListener(listener);
 
-        val notificationManager = (NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
 
-        findViewById(R.id.show).setOnClickListener(v -> {
-            Intent intent = new Intent(getApplicationContext(), ContactsActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-            PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-
-            NotificationCompat.Builder notificationBuilder =
-                    new NotificationCompat.Builder(getApplicationContext(), CHANNEL_ID)
-                            .setAutoCancel(false)
-                            .setSmallIcon(R.drawable.ic_push_action)
-                            .setWhen(System.currentTimeMillis())
-                            .setContentIntent(pendingIntent)
-                            .setContentTitle("Спасибо за внимание!")
-                            .setContentText("Мы готовы ответить на ваши вопросы.");
-
-            createChannelIfNeeded(notificationManager);
-            notificationManager.notify(NOTIFY_ID, notificationBuilder.build());
-        });
     }
 
-    public static void createChannelIfNeeded(NotificationManager manager) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationChannel notificationChannel = new NotificationChannel(CHANNEL_ID, CHANNEL_ID, NotificationManager.IMPORTANCE_DEFAULT);
-            manager.createNotificationChannel(notificationChannel);
-        }
-    }
+
 
     @Override
     protected void onStart() {

@@ -180,6 +180,11 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <TextView
+                    android:text="Админка"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/admins" android:padding="15dp"
+                    android:textColor="#FFFEFE" android:textSize="28sp" android:visibility="gone"/>
             <LinearLayout
                 android:id="@+id/settings_line"
                 android:layout_width="match_parent"

@@ -1,6 +1,7 @@
 package ru.work.trainsheep;
 
 import android.app.Activity;
+import android.app.Service;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -49,6 +50,8 @@ public class SearchActivity extends AppCompatActivity {
             finish();
             return;
         }
+        Intent service = new Intent(this, ServiceForNotifi.class);
+        startService(service);
 
         val server = ServerRepositoryFactory.getInstance();
         server.login(info.getRegistrationData(), name -> {

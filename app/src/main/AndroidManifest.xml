@@ -1,66 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="ru.work.trainsheep">
+          package="ru.work.trainsheep">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
-        android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
-        android:theme="@style/Theme.Traineeship"
-        android:usesCleartextTraffic="true">
+            android:allowBackup="true"
+            android:icon="@mipmap/ic_launcher"
+            android:label="@string/app_name"
+            android:roundIcon="@mipmap/ic_launcher_round"
+            android:supportsRtl="true"
+            android:theme="@style/Theme.Traineeship"
+            android:usesCleartextTraffic="true">
+        <service
+                android:name=".ServiceForNotifi"
+                android:enabled="true"
+                android:exported="true">
+        </service>
 
         <activity
-            android:name=".MessagesActivity"
-            android:exported="true" />
+                android:name=".MessagesActivity"
+                android:exported="true"/>
         <activity
-            android:name=".RegistrationActivity"
-            android:exported="true" />
+                android:name=".RegistrationActivity"
+                android:exported="true"/>
         <activity
-            android:name=".AllChatsActivity"
-            android:exported="true" />
+                android:name=".AdminActivity"
+                android:exported="true"/>
         <activity
-            android:name=".SearchActivity"
-            android:exported="true"
-            android:label="@string/app_name">
+                android:name=".AllChatsActivity"
+                android:exported="true"/>
+        <activity
+                android:name=".SearchActivity"
+                android:exported="true"
+                android:label="@string/app_name">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
         <activity
-            android:name=".SettingsActivity"
-            android:exported="true" />
+                android:name=".SettingsActivity"
+                android:exported="true"/>
         <activity
-            android:name=".ProfileActivity"
-            android:exported="true" />
+                android:name=".ProfileActivity"
+                android:exported="true"/>
         <activity
-            android:name=".FavoriteActivity"
-            android:exported="true" />
+                android:name=".FavoriteActivity"
+                android:exported="true"/>
         <activity
-            android:name=".CreateActivity"
-            android:exported="true" />
+                android:name=".CreateActivity"
+                android:exported="true"/>
         <activity
-            android:name=".EditUserDataActivity"
-            android:exported="true" />
+                android:name=".EditUserDataActivity"
+                android:exported="true"/>
         <activity
-            android:name=".ContactsActivity"
-            android:exported="true" />
+                android:name=".ContactsActivity"
+                android:exported="true"/>
         <activity
-            android:name=".LoginActivity"
-
-            android:exported="true" />
+                android:name=".LoginActivity"
+                android:exported="true"/>
         <activity
-            android:name=".FullVacancyActivity"
-            android:exported="true" />
-
+                android:name=".FullVacancyActivity"
+                android:exported="true"/>
         <activity
-            android:name=".FullSearchActivity"
-            android:exported="true" />
+                android:name=".FullSearchActivity"
+                android:exported="true"/>
     </application>
 
 </manifest>

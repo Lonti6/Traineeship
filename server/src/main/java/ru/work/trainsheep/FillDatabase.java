@@ -79,7 +79,7 @@ public class FillDatabase implements InitializingBean {
 
 
 
-        int k = 50;
+        int k = 20;
         for (int i = 0; i < k; i++) {
             val name = generator.getRandom(generator.companies);
             val user = createUser(name + "@ok.ru", "password", name, generator.getRandom(generator.icons), true);

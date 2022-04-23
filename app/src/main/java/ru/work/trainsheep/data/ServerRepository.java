@@ -3,6 +3,7 @@ package ru.work.trainsheep.data;
 import android.content.Context;
 
 import ru.work.trainsheep.data.getting.CreateVacancyGetting;
+import ru.work.trainsheep.data.getting.NotifiGetting;
 import ru.work.trainsheep.send.*;
 
 import java.util.List;
@@ -96,5 +97,8 @@ public abstract class ServerRepository {
     public void removeVacancy(VacancyNote request, Consumer<String> callbackSuccess){
         removeVacancy(request, callbackSuccess, Throwable::printStackTrace);
     }
+
+    public void getNotifi(Consumer<NotifiGetting> callback){}
+    public void setNotifi(SetNotification request, Consumer<NotifiGetting> callback){}
 
 }

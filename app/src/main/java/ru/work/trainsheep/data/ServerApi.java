@@ -47,5 +47,15 @@ public interface ServerApi {
     @POST("/removeVacancy")
     Call<RemoveGetting> removeVacancy(@Body VacancyNote request, @Header("Authorization") String credentials);
 
+    @POST("/setNotification")
+    Call<NotifiGetting> setNotification(@Body SetNotification request, @Header("Authorization") String credentials);
+
+
+    @POST("/getNotification")
+    Call<NotifiGetting> getNotification(@Header("Authorization") String credentials);
+
+
+
+
 
 }

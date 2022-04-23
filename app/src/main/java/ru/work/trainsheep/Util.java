@@ -19,6 +19,7 @@ import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
 import java.util.regex.Pattern;
 
 import lombok.val;
+import ru.work.trainsheep.data.ServerRepositoryFactory;
 import ru.work.trainsheep.data.UserInfo;
 import ru.work.trainsheep.send.UserData;
 
@@ -75,6 +76,18 @@ public class Util {
 
         if (!isCompany)
             activity.findViewById(R.id.create_line).setVisibility(View.GONE);
+
+        val admins = activity.findViewById(R.id.admins);
+
+        if (ServerRepositoryFactory.IS_ADMIN){
+            admins.setVisibility(View.VISIBLE);
+            admins.setOnClickListener((v) -> {
+                Intent intent = new Intent(activity, AdminActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                activity.startActivity(intent);
+                drawer.closeMenu(false);
+            });
+        }
 
         (activity.findViewById(R.id.search_line)).setOnClickListener(v -> {
             Intent intent = new Intent(activity, SearchActivity.class);

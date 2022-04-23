@@ -21,6 +21,9 @@ import ru.work.trainsheep.service.ChatService;
 import ru.work.trainsheep.service.NotesService;
 import ru.work.trainsheep.service.UserService;
 
+import java.util.Set;
+import java.util.concurrent.CopyOnWriteArraySet;
+
 
 @Controller
 public class SimpleController {
@@ -38,6 +41,7 @@ public class SimpleController {
     private ChatService chatService;
 
     Logger log = LoggerFactory.getLogger(getClass());
+
 
     @GetMapping("/")
     public String index(Model model) {
