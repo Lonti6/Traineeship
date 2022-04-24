@@ -1,5 +1,6 @@
 package ru.work.trainsheep;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -51,7 +52,7 @@ public class SettingsActivity extends AppCompatActivity {
         });
 
         findViewById(R.id.exit_text).setOnClickListener(v -> {
-            Util.loadActivity(drawer, SettingsActivity.this, LoginActivity.class);
+
             val info = UserInfo.getInstance();
             info.setEmail("");
             info.setPassword("");
@@ -59,6 +60,11 @@ public class SettingsActivity extends AppCompatActivity {
             info.setName("");
             info.setLastName("");
             info.save(this);
+            Intent intent = new Intent(this, LoginActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+            finish();
+
         });
     }
 

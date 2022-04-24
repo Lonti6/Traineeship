@@ -28,6 +28,7 @@ public class CompanyProfileActivity extends AppCompatActivity {
     UserData instance;
     VacancyItemAdapter adapter;
     RecyclerView recyclerView;
+    View changeIconView;
     public ImageView icon;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +65,8 @@ public class CompanyProfileActivity extends AppCompatActivity {
             Util.loadActivity(drawer, CompanyProfileActivity.this, EditCompanyDataActivity.class);
         });
 
-        findViewById(R.id.changeIconBut).setOnClickListener(v -> {
+        changeIconView = findViewById(R.id.changeIconBut);
+        changeIconView.setOnClickListener(v -> {
             val manager = getSupportFragmentManager();
             val myDialogFragment = new MyDialogFragment(this);
             myDialogFragment.show(manager, "Frag");
@@ -76,6 +78,12 @@ public class CompanyProfileActivity extends AppCompatActivity {
         instance = UserInfo.getInstance().getData();
         super.onStart();
         Util.prepareLeftData(this);
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null && extras.containsKey("company")) {
+            instance = (UserData) extras.getSerializable("company");
+            changeIconView.setVisibility(View.GONE);
+        }
 
         adapter.clear();
         adapter.serverUpdateSearch();

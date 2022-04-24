@@ -2,6 +2,7 @@ package ru.work.trainsheep.send;
 
 import lombok.*;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -9,7 +10,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserData {
+public class UserData implements Serializable {
 
     private String firstName = "";
     private String lastName = "";

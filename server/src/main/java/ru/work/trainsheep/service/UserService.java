@@ -103,6 +103,7 @@ public class UserService {
         user.setCompany(userData.isCompany());
         user.setLastName(userData.getLastName());
         user.setBirthdate(new Date(0));
+        user.setCompany(userData.isCompany());
 
         user.setRegistrationDate(new Date());
         userRepository.save(user);

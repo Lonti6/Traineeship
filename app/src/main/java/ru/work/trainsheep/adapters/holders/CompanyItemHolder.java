@@ -11,12 +11,14 @@ import android.widget.Toast;
 import androidx.recyclerview.widget.RecyclerView;
 import lombok.val;
 import org.apmem.tools.layouts.FlowLayout;
+import ru.work.trainsheep.CompanyProfileActivity;
 import ru.work.trainsheep.FullVacancyActivity;
 import ru.work.trainsheep.MessagesActivity;
 import ru.work.trainsheep.R;
 import ru.work.trainsheep.data.ServerRepositoryFactory;
 import ru.work.trainsheep.send.CompanyNote;
 import ru.work.trainsheep.send.SetFavoriteVacancyRequest;
+import ru.work.trainsheep.send.UserDataRequest;
 import ru.work.trainsheep.send.VacancyNote;
 
 import java.util.List;
@@ -48,6 +50,15 @@ public class CompanyItemHolder extends RecyclerView.ViewHolder {
             intent.putExtra("email", note.getEmail());
             intent.putExtra("image", note.getCompanyImage());
             itemView.getContext().startActivity(intent);
+
+        });
+
+        openCompany.setOnClickListener(v -> {
+            ServerRepositoryFactory.getInstance().getUser(new UserDataRequest(note.getEmail()), (user) -> {
+                val intent = new Intent(itemView.getContext(), CompanyProfileActivity.class);
+                intent.putExtra("company", user);
+                itemView.getContext().startActivity(intent);
+            });
 
         });
     }
