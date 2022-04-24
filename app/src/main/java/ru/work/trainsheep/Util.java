@@ -2,6 +2,7 @@ package ru.work.trainsheep;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,9 +17,11 @@ import com.bumptech.glide.Glide;
 import com.mxn.soul.flowingdrawer_core.ElasticDrawer;
 import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
 
+import java.util.function.Consumer;
 import java.util.regex.Pattern;
 
 import lombok.val;
+import ru.work.trainsheep.data.ServerRepository;
 import ru.work.trainsheep.data.ServerRepositoryFactory;
 import ru.work.trainsheep.data.UserInfo;
 import ru.work.trainsheep.send.UserData;
@@ -154,14 +157,24 @@ public class Util {
 
     public static void prepareLeftData(Activity activity) {
         instance = UserInfo.getInstance().getData();
-        ((TextView) activity.findViewById(R.id.name_user)).setText(instance.getFirstName() + " " + instance.getLastName());
-        Glide.with(activity)
-                .load(instance.getAvatarSrc())
-                .circleCrop()
-                .placeholder(R.drawable.ic_zaticha)
-                .error(R.drawable.ic_zaticha)
-                .into((ImageView) activity.findViewById(R.id.left_icon_user));
+        //((TextView) activity.findViewById(R.id.name_user)).setText(instance.getFirstName() + " " + instance.getLastName());
+
+        Bundle extras = activity.getIntent().getExtras();
+        if (extras != null) {
+            val data = UserInfo.getInstance();
+            //val imageSrc = extras.getString("image");
+            ((TextView) activity.findViewById(R.id.name_user)).setText(data.getRegistrationData().getName() +
+                                                " " + data.getRegistrationData().getLastName());
+            Glide.with(activity)
+                    .load(data.getData().getAvatarSrc())
+                    .circleCrop()
+                    .placeholder(R.drawable.ic_zaticha)
+                    .error(R.drawable.ic_zaticha)
+                    .into((ImageView) activity.findViewById(R.id.left_icon_user));
+        }
     }
+
+
 
     private static final Pattern VALID_NAME = Pattern.compile("^[A-ZА-Я]+$", Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE);
 

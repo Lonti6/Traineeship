@@ -41,7 +41,6 @@ public class EditUserDataActivity extends AppCompatActivity {
     int year;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -139,11 +138,10 @@ public class EditUserDataActivity extends AppCompatActivity {
 
     public static class MyDialogFragment extends DialogFragment {
         @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
-        {
+        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
             getDialog().getWindow().setBackgroundDrawableResource(R.drawable.round_corner);
             View view = inflater.inflate(R.layout.dialog_layout, container, true);
-            view.findViewById(R.id.delete_field).setOnClickListener(v1 -> Log.e(v1.getClass()+"","Ещё не умеем удалять"));
+            view.findViewById(R.id.delete_field).setOnClickListener(v1 -> Log.e(v1.getClass() + "", "Ещё не умеем удалять"));
             view.findViewById(R.id.cancel_field).setOnClickListener(v1 -> getDialog().cancel());
 
             return view;
@@ -152,7 +150,7 @@ public class EditUserDataActivity extends AppCompatActivity {
         @Override
         public void onStart() {
             super.onStart();
-            int width = (int)(getResources().getDisplayMetrics().widthPixels*0.85);
+            int width = (int) (getResources().getDisplayMetrics().widthPixels * 0.85);
             getDialog().getWindow().setLayout(width, ViewGroup.LayoutParams.WRAP_CONTENT);
         }
     }
@@ -186,12 +184,6 @@ public class EditUserDataActivity extends AppCompatActivity {
         super.onStart();
         prepare();
         Util.prepareLeftData(this);
-
-        if (!instance.isCompany())
-            findViewById(R.id.menuBut).setOnClickListener(v -> Util.loadActivity(drawer, this, ProfileActivity.class));
-        else
-            findViewById(R.id.menuBut).setOnClickListener(v -> Util.loadActivity(drawer, this, CompanyProfileActivity.class));
+        findViewById(R.id.menuBut).setOnClickListener(v -> Util.loadActivity(drawer, this, ProfileActivity.class));
     }
-
-
 }

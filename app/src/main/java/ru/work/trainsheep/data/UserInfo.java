@@ -66,6 +66,17 @@ public class UserInfo {
         editor.apply();
     }
     public void load(Context context){
+        ServerRepository serverRepository = ServerRepositoryFactory.getInstance();
+        serverRepository.getUser(UserInfo.getInstance(), userInfo -> {
+            setName(userInfo.getRegistrationData().getName());
+            setPassword(userInfo.getRegistrationData().getPassword());
+            setEmail(userInfo.getRegistrationData().getEmail());
+            setLastName(userInfo.getRegistrationData().getLastName());
+            setLogin(userInfo.isLogin());
+            data.setAvatarSrc(userInfo.getData().getAvatarSrc());
+            setCompany(userInfo.getRegistrationData().isCompany());
+        });
+
         SharedPreferences shared = PreferenceManager.getDefaultSharedPreferences(context);
         setName(shared.getString("name", getRegistrationData().getName()));
         setPassword(shared.getString("pass", getRegistrationData().getPassword()));

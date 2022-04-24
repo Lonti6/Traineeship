@@ -285,6 +285,28 @@ public class RealServerRepository extends ServerRepository{
     }
 
     @Override
+    public void getUser(UserInfo request, Consumer<UserInfo> callbackSuccess, Consumer<Exception> callbackFailure) {
+        executor.execute(() ->
+        {
+            val call = api.getUser(request.getRegistrationData().getEmail());
+
+            try {
+                val response = call.execute();
+                val result = response.body();
+                if (result != null && Objects.equals(result.getStatus(), "ok"))
+                    handler.post(() -> callbackSuccess.accept(result.getUser()));
+                else
+                    handler.post(() -> callbackFailure.accept(new Exception("status fail")));
+            }
+            catch (IOException e)
+            {
+                handler.post(() -> callbackFailure.accept(e));
+                System.err.println(e.getMessage());
+            }
+        });
+    }
+
+    @Override
     public void removeVacancy(VacancyNote request, Consumer<String> callbackSuccess, Consumer<Exception> callbackFailure) {
         executor.execute(() -> {
 

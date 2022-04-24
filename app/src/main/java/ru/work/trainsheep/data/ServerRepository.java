@@ -44,6 +44,7 @@ public abstract class ServerRepository {
 
     public abstract void sendUser(UserData request, Consumer<UserData> callbackSuccess, Consumer<Exception> callbackFailure);
 
+    public abstract void getUser(UserInfo request, Consumer<UserInfo> callbackSuccess, Consumer<Exception> callbackFailure);
 
     public void register(UserRegistrationData user, Consumer<String> callbackSuccess) {
         register(user, callbackSuccess, Throwable::printStackTrace);
@@ -92,6 +93,11 @@ public abstract class ServerRepository {
 
     public void sendUser(UserData request, Consumer<UserData> callbackSuccess) {
         sendUser(request, callbackSuccess, Throwable::printStackTrace);
+    }
+
+    public void getUser(UserInfo request, Consumer<UserInfo> callbackSuccess)
+    {
+        getUser(request, callbackSuccess, Throwable::printStackTrace);
     }
 
     public void removeVacancy(VacancyNote request, Consumer<String> callbackSuccess){

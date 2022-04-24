@@ -53,7 +53,7 @@ public class CompanyProfileActivity extends AppCompatActivity {
         findViewById(R.id.menuBut).setOnClickListener(v -> drawer.openMenu(true));
 
         findViewById(R.id.editBut).setOnClickListener(v -> {
-            Util.loadActivity(drawer, CompanyProfileActivity.this, EditUserDataActivity.class);
+            Util.loadActivity(drawer, CompanyProfileActivity.this, EditCompanyDataActivity.class);
         });
 
         findViewById(R.id.createBut).setOnClickListener(v -> {
@@ -61,7 +61,7 @@ public class CompanyProfileActivity extends AppCompatActivity {
         });
 
         findViewById(R.id.changeBut).setOnClickListener(v -> {
-            Util.loadActivity(drawer, CompanyProfileActivity.this, EditUserDataActivity.class);
+            Util.loadActivity(drawer, CompanyProfileActivity.this, EditCompanyDataActivity.class);
         });
 
         findViewById(R.id.changeIconBut).setOnClickListener(v -> {
