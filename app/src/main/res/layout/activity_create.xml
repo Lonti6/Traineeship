@@ -373,7 +373,8 @@
                 android:id="@+id/icon_user"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/header" />
+                android:src="@drawable/header"
+                android:scaleType="fitXY"/>
         </androidx.cardview.widget.CardView>
 
         <ImageView
