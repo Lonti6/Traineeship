@@ -64,7 +64,7 @@ public class UserInfo {
         editor.putString("lastname", registrationData.getLastName());
         editor.putBoolean("login", login);
         editor.putString("image", data.getAvatarSrc());
-        editor.putBoolean("company", registrationData.isCompany());
+        editor.putBoolean("company", data.isCompany());
         editor.apply();
     }
     public void load(Context context){

@@ -94,6 +94,9 @@ public class RegistrationActivity extends AppCompatActivity {
 //        });
         System.out.println("/////////" + info.getRegistrationData().isCompany());
         sendRegisterRequest();
+        ServerRepository serverRepository = new RealServerRepository();
+        serverRepository.sendUser(info.getData(), userData -> {
+        });
     }
 
     private void sendRegisterRequest(){
