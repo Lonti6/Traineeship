@@ -24,10 +24,10 @@
         android:layout_marginLeft="35dp"
         android:layout_marginTop="10dp"
         android:text="mail@mail.ru"
+        android:textColor="@color/main_green"
         android:textSize="18dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView6"
-        android:textColor="@color/main_green"/>
+        app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
     <TextView
         android:id="@+id/textView7"
@@ -49,10 +49,10 @@
         android:layout_marginLeft="35dp"
         android:layout_marginTop="10dp"
         android:text="mailTech@mail.ru"
+        android:textColor="@color/main_green"
         android:textSize="18dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView7"
-        android:textColor="@color/main_green"/>
+        app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
     <TextView
         android:id="@+id/textView8"
@@ -85,7 +85,8 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:srcCompat="@drawable/psy_duck" />
+                app:srcCompat="@drawable/psy_duck"
+                android:scaleType="fitXY"/>
 
         </androidx.cardview.widget.CardView>
 
@@ -96,11 +97,12 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:text="https://vk.com/lonti6"
-            android:textSize="18dp"
-            android:textColor="@color/main_green"/>
+            android:textColor="@color/main_green"
+            android:textSize="18dp" />
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/linearLayout7"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -118,7 +120,8 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:srcCompat="@drawable/java_token" />
+                app:srcCompat="@drawable/java_token"
+                android:scaleType="fitXY"/>
 
         </androidx.cardview.widget.CardView>
 
@@ -129,22 +132,56 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:text="https://vk.com/bdm2505"
-            android:textSize="18dp"
-            android:textColor="@color/main_green"/>
+            android:textColor="@color/main_green"
+            android:textSize="18dp" />
     </LinearLayout>
 
-    <Button
-        android:id="@+id/show"
-        style="@style/ButtonStyle"
-        android:layout_width="230dp"
-        android:layout_height="50dp"
-        android:background="@drawable/q"
-        android:fontFamily="@font/open_sans"
-        android:text="Уведомления"
-        android:textSize="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+    <TextView
+        android:id="@+id/textView9"
+        style="@style/StandartText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="30dp"
+        android:text="Контакты разработчиков в Telegram"
+        android:textSize="18dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout7" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout8"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView9">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginLeft="30dp"
+            app:cardCornerRadius="50dp">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:srcCompat="@drawable/diana_token"
+                android:scaleType="fitXY"/>
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/srcTelegaDiana"
+            style="@style/StandartText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="https://t.me/n_nrsk"
+            android:textColor="@color/main_green"
+            android:textSize="18dp" />
+    </LinearLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/header"

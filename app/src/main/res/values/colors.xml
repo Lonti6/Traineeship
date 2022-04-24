@@ -14,5 +14,5 @@
     <color name="bg_message">#E7EDED</color>
     <color name="light_gray">#D0D0D0</color>
     <color name="middle_green">#46B2B2</color>
-
+    <color name="red">#E1574B</color>
 </resources>

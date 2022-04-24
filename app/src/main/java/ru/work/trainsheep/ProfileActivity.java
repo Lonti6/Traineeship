@@ -160,7 +160,7 @@ public class ProfileActivity extends AppCompatActivity {
                 flowLayout.removeAllViews();
                 for (int i = 0; i < 1; i++) {
                     LayoutInflater.from(ProfileActivity.this).inflate(R.layout.stage_title, flowLayout, true);
-                    ((TextView) ((LinearLayout) (flowLayout.getChildAt(flowLayout.getChildCount() - 1))).getChildAt(0)).setText("Ещё не реализованно");
+                    ((TextView) ((LinearLayout) (flowLayout.getChildAt(flowLayout.getChildCount() - 1))).getChildAt(0)).setText("В разработке");
                 }
                 BottomSheetBehavior.from(findViewById(R.id.sheet)).setPeekHeight(600, true);
             }
@@ -178,7 +178,7 @@ public class ProfileActivity extends AppCompatActivity {
         ((TextView) findViewById(R.id.dateText)).setText(
                 "Дата рождения: " + date.getDay() + "."+(date.getMonth()+1)+"."+date.getYear());
         ((TextView) findViewById(R.id.cursText)).setText("Курс обучения: "+instance.getCurs());
-        ((TextView) findViewById(R.id.mailText)).setText("Электронная почта: "+instance.getEmail());
+        ((TextView) findViewById(R.id.mailText)).setText("Электронная почта:\n"+instance.getEmail());
         ((TextView) findViewById(R.id.numberText)).setText("Номер телефона: : "+instance.getPhoneNumber());
 
         ((TextView) findViewById(R.id.user_description)).setText(instance.getDescription());

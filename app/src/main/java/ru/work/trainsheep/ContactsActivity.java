@@ -28,7 +28,7 @@ public class ContactsActivity extends AppCompatActivity {
 
         findViewById(R.id.srcVkNikita).setOnClickListener(listener);
         findViewById(R.id.srcVkDima).setOnClickListener(listener);
-
+        findViewById(R.id.srcTelegaDiana).setOnClickListener(listener);
 
     }
 

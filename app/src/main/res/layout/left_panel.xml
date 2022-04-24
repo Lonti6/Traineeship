@@ -137,6 +137,8 @@
                 android:orientation="horizontal">
 
                 <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="20dp"
                     style="@style/LeftPanelIcon"
                     android:background="@drawable/message_icon_white" />
 

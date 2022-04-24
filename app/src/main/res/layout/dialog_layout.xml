@@ -58,7 +58,7 @@
             android:layout_marginTop="15dp"
             android:text="УДАЛИТЬ"
             android:textAlignment="center"
-            android:textColor="#E1574B"
+            android:textColor="@color/red"
             android:textSize="18dp"
             android:textStyle="bold" />
     </androidx.cardview.widget.CardView>
