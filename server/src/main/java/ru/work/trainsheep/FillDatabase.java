@@ -39,7 +39,7 @@ public class FillDatabase implements InitializingBean {
 
     @Transactional
     private User createUser(String email, String pass, String name, String image, boolean isCompany){
-        val userR = users.register(new UserRegistrationData(name, "", email, pass, isCompany));
+        val userR = users.register(new UserRegistrationData(name, "", email, pass, isCompany ? "true" : "false"));
         val user = users.findByEmail(email);
         user.setImage(image);
         user.setDescription(generator.getRandom(generator.contents));

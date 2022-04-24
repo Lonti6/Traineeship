@@ -23,7 +23,7 @@ public class UserData implements Serializable {
     private String phoneNumber = "";
     private String avatarSrc = "";
     private List<String> competencies = new ArrayList<>();
-    private boolean isCompany = false;
+    private String isCompany = "false";
 
     private String university = "";
     private String specialization = "";
@@ -46,5 +46,16 @@ public class UserData implements Serializable {
 
     public void setRegistrationDate(Date registrationDate) {
         this.registrationDate = registrationDate.getTime();
+    }
+
+    public boolean isCompany(){
+        return isCompany.equals("true");
+    }
+
+    public void setCompany(boolean c){
+        if (c)
+            isCompany = "true";
+        else
+            isCompany = "false";
     }
 }

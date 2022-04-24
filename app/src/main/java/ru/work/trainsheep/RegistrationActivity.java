@@ -83,22 +83,23 @@ public class RegistrationActivity extends AppCompatActivity {
         info.setLastName(lastname);
         info.setEmail(email);
         info.setPassword(pass);
-        info.getData().setCompany(((CheckBox)findViewById(R.id.companyCheck)).isChecked());
-        info.getRegistrationData().setCompany(((CheckBox)findViewById(R.id.companyCheck)).isChecked());
+        //info.getData().setCompany(((CheckBox)findViewById(R.id.companyCheck)).isChecked());
+        info.setCompany(((CheckBox)findViewById(R.id.companyCheck)).isChecked());
 
         info.save(this);
 
-        ServerRepository serverRepository = new RealServerRepository();
-        serverRepository.sendUser(UserInfo.getInstance().getData(), userData -> {
-
-        });
-
+//        ServerRepository serverRepository = new RealServerRepository();
+//        serverRepository.sendUser(UserInfo.getInstance().getData(), userData -> {
+//
+//        });
+        System.out.println("/////////" + info.getRegistrationData().isCompany());
         sendRegisterRequest();
     }
 
     private void sendRegisterRequest(){
         val errorView = (TextView) findViewById(R.id.error_info);
         val server = ServerRepositoryFactory.getInstance();
+        System.out.println("send user registr " + UserInfo.getInstance().getRegistrationData());
         server.register(UserInfo.getInstance().getRegistrationData(), (name) -> {
             UserInfo.getInstance().setLogin(true);
             UserInfo.getInstance().save(this);

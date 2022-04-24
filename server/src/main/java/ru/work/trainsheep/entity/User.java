@@ -87,7 +87,7 @@ public class User {
 
     public UserData toUserDate(){
         return new UserData(firstName, lastName, patronymic, birthdate.getTime(), registrationDate.getTime(), email,
-                phone, image, tags.stream().map(Tag::getText).collect(Collectors.toList()), isCompany, getUniversity(),
+                phone, image, tags.stream().map(Tag::getText).collect(Collectors.toList()), isCompany ? "true" : "false", getUniversity(),
                 getSpecialization(), getCity(), getDescription(), getCurs());
     }
 

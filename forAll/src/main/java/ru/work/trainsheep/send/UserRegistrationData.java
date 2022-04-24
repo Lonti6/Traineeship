@@ -14,5 +14,16 @@ public class UserRegistrationData {
     private String lastName = "";
     private String email = "";
     private String password = "";
-    private boolean isCompany = false;
+    private String isCompany = "false";
+
+    public boolean isCompany(){
+        return isCompany.equals("true");
+    }
+
+    public void setCompany(boolean c){
+        if (c)
+            isCompany = "true";
+        else
+            isCompany = "false";
+    }
 }
