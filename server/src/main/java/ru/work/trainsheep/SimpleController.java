@@ -70,7 +70,7 @@ public class SimpleController {
             val userPass = (UserPasswords) authentication.getPrincipal();
             val user = userService.findByEmail(userPass.getUsername());
             val result = notesService.getVacancyResultWithLogin(vacancyRequest, user);
-            log.info("search (" + vacancyRequest.getText() + ") " );
+            log.info("search (" + vacancyRequest.getText() + ") ("  + vacancyRequest.getEmailFilter() + ")" );
             model.addAttribute("status", "ok");
             model.addAttribute("result", result);
         } else

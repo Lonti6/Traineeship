@@ -74,7 +74,7 @@ public class NotesService {
     }
 
     public VacancyResult getVacancyResultWithLogin(VacancyRequest request, User user){
-        val page = noteRepository.findByHeaderContainingIgnoreCase(request.getText(), PageRequest.of(
+        val page = noteRepository.findByHeaderContainingIgnoreCaseAndCompany_EmailContainingIgnoreCase(request.getText(), request.getEmailFilter(), PageRequest.of(
                 request.getPage(),
                 request.getCountNotesOnPage(),
                 Sort.by("dateCreate").descending()
