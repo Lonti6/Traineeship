@@ -57,6 +57,6 @@ public interface ServerApi {
 
 
     @POST("/get-user")
-    Call<UserGetting> getUser(@Header("Authorization") String credentials);
+    Call<UserGetting> getUser(@Body UserDataRequest request, @Header("Authorization") String credentials);
 
 }

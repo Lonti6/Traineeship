@@ -170,7 +170,7 @@ public class FakeServerRepository extends ServerRepository {
     }
 
     @Override
-    public void getUser(UserInfo request, Consumer<UserInfo> callbackSuccess, Consumer<Exception> callbackFailure) {
-        callbackSuccess.accept(request);
+    public void getUser(UserDataRequest request, Consumer<UserData> callbackSuccess, Consumer<Exception> callbackFailure) {
+        callbackSuccess.accept(UserInfo.getInstance().getData());
     }
 }

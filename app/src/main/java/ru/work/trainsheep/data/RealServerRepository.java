@@ -285,10 +285,10 @@ public class RealServerRepository extends ServerRepository{
     }
 
     @Override
-    public void getUser(UserInfo request, Consumer<UserInfo> callbackSuccess, Consumer<Exception> callbackFailure) {
+    public void getUser(UserDataRequest request, Consumer<UserData> callbackSuccess, Consumer<Exception> callbackFailure) {
         executor.execute(() ->
         {
-            val call = api.getUser(request.getRegistrationData().getEmail());
+            val call = api.getUser(request, getCredentials());
 
             try {
                 val response = call.execute();

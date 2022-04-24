@@ -150,11 +150,11 @@ public class SimpleController {
     }
 
     @PostMapping("/get-user")
-    public String getUser(Model model, Authentication authentication) {
-        if (authentication != null) {
+    public String getUser(Model model, Authentication authentication, @RequestBody UserDataRequest request) {
+        if (authentication != null && request != null) {
             val userPass = (UserPasswords) authentication.getPrincipal();
-//            log.info("send messages from " + userPass.getUsername() + " to " + request);
-            val user = userService.findByEmail(userPass.getUsername());
+            val user = userService.findByEmail(request.getEmail());
+            log.info("get user " + user);
 
             model.addAttribute("status", "ok");
             model.addAttribute("user", user.toUserDate());

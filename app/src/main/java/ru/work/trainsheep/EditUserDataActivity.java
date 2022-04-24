@@ -96,6 +96,7 @@ public class EditUserDataActivity extends AppCompatActivity {
         });
 
         findViewById(R.id.saveBut).setOnClickListener(v -> {
+            instance = UserInfo.getInstance().getData();
             instance.setLastName(((TextView) findViewById(R.id.surnameField)).getText().toString());
             instance.setFirstName(((TextView) findViewById(R.id.nameField)).getText().toString());
             instance.setPatronymic(((TextView) findViewById(R.id.patronymicField)).getText().toString());
@@ -107,9 +108,9 @@ public class EditUserDataActivity extends AppCompatActivity {
             instance.setDescription(((TextView) findViewById(R.id.descriptionField)).getText().toString());
             String passOne = ((TextView) findViewById(R.id.password_field)).getText().toString();
             String passTwo = ((TextView) findViewById(R.id.repeatPasswordField)).getText().toString();
-            if (!(passOne != "") && !(passTwo != "") && passOne.equals(passTwo)) {
-                UserInfo.getInstance().setPassword(passOne);
-            }
+//            if (!(passOne != "") && !(passTwo != "") && passOne.equals(passTwo)) {
+//                UserInfo.getInstance().setPassword(passOne);
+//            }
 
             String text = ((TextView) findViewById(R.id.dateText)).getText().toString();
 
@@ -118,6 +119,11 @@ public class EditUserDataActivity extends AppCompatActivity {
                     Integer.parseInt(text.substring(text.indexOf('.') + 1, text.lastIndexOf('.'))) - 1,
                     Integer.parseInt(text.substring(text.lastIndexOf(' ') + 1, text.indexOf('.'))))
             );
+
+            for (int i = 0; i < tagsField.getChildCount(); i++) {
+                val child = tagsField.getChildAt(i);
+                instance.getCompetencies().add(((TextView) child.findViewById(R.id.tag)).getText().toString());
+            }
 
             UserInfo.getInstance().save(this);
             ServerRepository serverRepository = ServerRepositoryFactory.getInstance();
@@ -157,6 +163,7 @@ public class EditUserDataActivity extends AppCompatActivity {
 
     public void prepare() {
         instance = UserInfo.getInstance().getData();
+        Log.i(getClass().getSimpleName(), "prepare: user data " + instance);
         ((EditText) findViewById(R.id.surnameField)).setText(instance.getLastName());
         ((EditText) findViewById(R.id.nameField)).setText(instance.getFirstName());
         ((EditText) findViewById(R.id.patronymicField)).setText(instance.getPatronymic());
@@ -172,6 +179,7 @@ public class EditUserDataActivity extends AppCompatActivity {
             tagsField.addView(view);
             ((TextView) view.findViewById(R.id.tag)).setText(tag);
         }
+        if (tagsField.getChildCount() > 0) tagsField.setVisibility(View.VISIBLE);
         day = instance.getBirthdate().getDay();
         month = instance.getBirthdate().getMonth();
         year = instance.getBirthdate().getYear();
@@ -184,6 +192,6 @@ public class EditUserDataActivity extends AppCompatActivity {
         super.onStart();
         prepare();
         Util.prepareLeftData(this);
-        findViewById(R.id.menuBut).setOnClickListener(v -> Util.loadActivity(drawer, this, ProfileActivity.class));
+        findViewById(R.id.menuBut).setOnClickListener(v -> finish());
     }
 }

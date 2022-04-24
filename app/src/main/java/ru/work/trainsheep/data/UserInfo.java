@@ -2,12 +2,14 @@ package ru.work.trainsheep.data;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 import androidx.preference.PreferenceManager;
 
 import java.util.ArrayList;
 
 import lombok.*;
 import ru.work.trainsheep.send.UserData;
+import ru.work.trainsheep.send.UserDataRequest;
 import ru.work.trainsheep.send.UserRegistrationData;
 
 
@@ -66,17 +68,6 @@ public class UserInfo {
         editor.apply();
     }
     public void load(Context context){
-        ServerRepository serverRepository = ServerRepositoryFactory.getInstance();
-        serverRepository.getUser(UserInfo.getInstance(), userInfo -> {
-            setName(userInfo.getRegistrationData().getName());
-            setPassword(userInfo.getRegistrationData().getPassword());
-            setEmail(userInfo.getRegistrationData().getEmail());
-            setLastName(userInfo.getRegistrationData().getLastName());
-            setLogin(userInfo.isLogin());
-            data.setAvatarSrc(userInfo.getData().getAvatarSrc());
-            setCompany(userInfo.getRegistrationData().isCompany());
-        });
-
         SharedPreferences shared = PreferenceManager.getDefaultSharedPreferences(context);
         setName(shared.getString("name", getRegistrationData().getName()));
         setPassword(shared.getString("pass", getRegistrationData().getPassword()));
@@ -85,6 +76,12 @@ public class UserInfo {
         setLogin(shared.getBoolean("login", isLogin()));
         data.setAvatarSrc(shared.getString("image", getData().getAvatarSrc()));
         setCompany(shared.getBoolean("company", getData().isCompany()));
+
+        ServerRepository serverRepository = ServerRepositoryFactory.getInstance();
+        serverRepository.getUser(new UserDataRequest(getData().getEmail()), userData -> {
+            data = userData;
+            Log.i(getClass().getSimpleName(), "load: set Data" + data);
+        });
     }
 
     public void setLastName(String lastname) {

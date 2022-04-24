@@ -2,7 +2,7 @@ package ru.work.trainsheep.data;
 
 public class ServerRepositoryFactory {
 
-    public static final String URL = "http://192.168.0.101:8080/";
+    public static final String URL = "http://192.168.43.223:8080/";
     public static final boolean IS_ADMIN = false;
 
 

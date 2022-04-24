@@ -33,35 +33,35 @@ public class User {
     private long id;
 
     @NonNull
-    private String firstName;
+    private String firstName = "";
     @NonNull
-    private String lastName;
+    private String lastName = "";
     @NonNull
-    private String patronymic;
+    private String patronymic = "";
     @NonNull
-    private Date birthdate;
+    private Date birthdate = new Date(0);
     @NonNull
-    private Date registrationDate;
+    private Date registrationDate = new Date();
     @NonNull
     @Column(name = "email", unique = true, nullable = false)
     private String email;
     @NonNull
     private boolean isCompany;
     @NonNull
-    private String image;
+    private String image = "";
     @NonNull
-    private String phone;
+    private String phone = "";
     @NonNull
-    private String university;
+    private String university = "";
     @NonNull
-    private String specialization ;
+    private String specialization = "";
     @NonNull
-    private String city;
+    private String city = "";
     @NonNull
     @Column(length = 2000)
-    private String description ;
+    private String description = "";
     @NonNull
-    private int curs;
+    private int curs ;
 
 
     @ManyToMany(fetch = FetchType.LAZY)
@@ -76,13 +76,11 @@ public class User {
 
 
     public static User from(UserData data, TagService tagService){
-
-        val user = new User(data.getFirstName(), data.getLastName(), data.getPatronymic(), data.getBirthdate(),
-                data.getRegistrationDate(), data.getEmail(), data.isCompany(), data.getAvatarSrc(),
-                data.getPhoneNumber(), data.getUniversity(), data.getSpecialization(), data.getCity(), data.getDescription(), data.getCurs());
-
         val tags = data.getCompetencies().stream().map(tagService::findOrCreate).collect(Collectors.toSet());
-        user.setTags(tags);
+
+        val user = new User(0, data.getFirstName(), data.getLastName(), data.getPatronymic(), data.getBirthdate(),
+                data.getRegistrationDate(), data.getEmail(), data.isCompany(), data.getAvatarSrc(),
+                data.getPhoneNumber(), data.getUniversity(), data.getSpecialization(), data.getCity(), data.getDescription(), data.getCurs(), tags);
 
         return user;
     }

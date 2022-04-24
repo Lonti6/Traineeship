@@ -102,6 +102,7 @@ public class UserService {
         user.setEmail(userData.getEmail());
         user.setCompany(userData.isCompany());
         user.setLastName(userData.getLastName());
+        user.setBirthdate(new Date(0));
 
         user.setRegistrationDate(new Date());
         userRepository.save(user);
