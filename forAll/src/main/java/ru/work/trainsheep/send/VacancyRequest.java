@@ -18,7 +18,7 @@ public class VacancyRequest {
     @NonNull
     String text = "";
 
-    String emailFilter = "all";
+    String emailFilter = "";
 
     int page = 0;
     int countNotesOnPage = 10;
