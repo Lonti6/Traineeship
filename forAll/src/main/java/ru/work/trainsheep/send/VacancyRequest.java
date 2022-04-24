@@ -18,6 +18,8 @@ public class VacancyRequest {
     @NonNull
     String text = "";
 
+    String emailFilter = "all";
+
     int page = 0;
     int countNotesOnPage = 10;
 
