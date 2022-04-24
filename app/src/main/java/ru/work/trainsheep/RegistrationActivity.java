@@ -9,10 +9,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import lombok.val;
+import ru.work.trainsheep.data.RealServerRepository;
+import ru.work.trainsheep.data.ServerRepository;
 import ru.work.trainsheep.data.ServerRepositoryFactory;
 import ru.work.trainsheep.data.UserInfo;
+import ru.work.trainsheep.send.UserData;
 import ru.work.trainsheep.send.UserRegistrationData;
 
+import java.util.function.Consumer;
 import java.util.regex.Pattern;
 
 public class RegistrationActivity extends AppCompatActivity {
@@ -79,9 +83,15 @@ public class RegistrationActivity extends AppCompatActivity {
         info.setLastName(lastname);
         info.setEmail(email);
         info.setPassword(pass);
+        info.getData().setCompany(((CheckBox)findViewById(R.id.companyCheck)).isChecked());
         info.getRegistrationData().setCompany(((CheckBox)findViewById(R.id.companyCheck)).isChecked());
 
         info.save(this);
+
+        ServerRepository serverRepository = new RealServerRepository();
+        serverRepository.sendUser(UserInfo.getInstance().getData(), userData -> {
+
+        });
 
         sendRegisterRequest();
     }

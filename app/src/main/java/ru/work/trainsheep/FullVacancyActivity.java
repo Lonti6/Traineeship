@@ -78,8 +78,8 @@ public class FullVacancyActivity extends AppCompatActivity {
 
             Glide.with(this)
                     .load(note.getImageSrc())
-                    .placeholder(R.drawable.ic_zaticha)
-                    .error(R.drawable.ic_zaticha)
+                    .placeholder(R.drawable.company_zaticha)
+                    .error(R.drawable.company_zaticha)
                     .into(((ImageView)findViewById(R.id.imageView)));
         }
     }

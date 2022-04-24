@@ -29,7 +29,6 @@ public class SearchActivity extends AppCompatActivity {
     VacancyItemAdapter adapter;
     EditText findText;
     RecyclerView recyclerView;
-    UserData instance = UserInfo.getInstance().getData();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -125,7 +124,6 @@ public class SearchActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-
         adapter.clear();
         adapter.serverUpdateSearch();
         Util.prepareLeftData(this);

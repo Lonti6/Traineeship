@@ -157,20 +157,18 @@ public class Util {
 
     public static void prepareLeftData(Activity activity) {
         instance = UserInfo.getInstance().getData();
+        Log.e("//////////////////////////////////////////////", String.valueOf(instance.isCompany()));
 
-        Bundle extras = activity.getIntent().getExtras();
-        if (extras != null) {
-            val data = UserInfo.getInstance();
-            //val imageSrc = extras.getString("image");
-            ((TextView) activity.findViewById(R.id.name_user)).setText(data.getRegistrationData().getName() +
-                                                " " + data.getRegistrationData().getLastName());
-            Glide.with(activity)
-                    .load(data.getData().getAvatarSrc())
-                    .circleCrop()
-                    .placeholder(R.drawable.ic_zaticha)
-                    .error(R.drawable.ic_zaticha)
-                    .into((ImageView) activity.findViewById(R.id.left_icon_user));
-        }
+        val data = UserInfo.getInstance();
+        //val imageSrc = extras.getString("image");
+        ((TextView) activity.findViewById(R.id.name_user)).setText(data.getRegistrationData().getName() +
+                                            " " + data.getRegistrationData().getLastName());
+        Glide.with(activity)
+                .load(data.getData().getAvatarSrc())
+                .circleCrop()
+                .placeholder(R.drawable.ic_zaticha)
+                .error(R.drawable.ic_zaticha)
+                .into((ImageView) activity.findViewById(R.id.left_icon_user));
     }
 
 

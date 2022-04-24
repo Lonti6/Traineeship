@@ -108,7 +108,7 @@ public class CreateActivity extends AppCompatActivity {
         boolean distanceWork = ((CheckBox)findViewById(R.id.distanceBox)).isChecked();
         boolean contractZpCheck = ((CheckBox)findViewById(R.id.contractZpCheck)).isChecked();
 
-        if (header.equals("") || content.equals("")) {
+        if (header.equals("") || content.equals("") || city.equals("")) {
             Toast.makeText(getApplicationContext(), "Поля не заполнены!", Toast.LENGTH_SHORT).show();
             return;
         }
