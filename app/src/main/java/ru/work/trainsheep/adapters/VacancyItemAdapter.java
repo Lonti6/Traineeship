@@ -116,11 +116,11 @@ public class VacancyItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         searchText = text;
         this.tags = tags;
         if (onlyFavorite){
-            server.getFavoriteVacancies(new VacancyRequest(tags, searchText, currentPage, pageSize), (result) -> {
+            server.getFavoriteVacancies(new VacancyRequest(tags, searchText, "", currentPage, pageSize), (result) -> {
                 addAll(result.getNotes());
             });
         } else {
-            server.getVacancies(new VacancyRequest(tags, searchText, currentPage, pageSize), (result) -> {
+            server.getVacancies(new VacancyRequest(tags, searchText, "", currentPage, pageSize), (result) -> {
                 addAll(result.getNotes());
             });
         }

@@ -6,10 +6,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,17 +19,22 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
 
+import org.apmem.tools.layouts.FlowLayout;
+
+import java.util.function.Consumer;
+
 import lombok.val;
 import ru.work.trainsheep.adapters.VacancyItemAdapter;
+import ru.work.trainsheep.data.RealServerRepository;
 import ru.work.trainsheep.data.ServerRepository;
 import ru.work.trainsheep.data.ServerRepositoryFactory;
 import ru.work.trainsheep.data.UserInfo;
 import ru.work.trainsheep.send.UserData;
+import ru.work.trainsheep.send.VacancyRequest;
+import ru.work.trainsheep.send.VacancyResult;
 
 public class CompanyProfileActivity extends AppCompatActivity {
     UserData instance;
-    VacancyItemAdapter adapter;
-    RecyclerView recyclerView;
     View changeIconView;
     public ImageView icon;
     @Override
@@ -40,16 +47,6 @@ public class CompanyProfileActivity extends AppCompatActivity {
                 getDrawable(R.drawable.bg_header)));
 
         icon = findViewById(R.id.company_icon);
-
-        recyclerView = findViewById(R.id.rv);
-        adapter = new VacancyItemAdapter(recyclerView);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(adapter);
-        recyclerView.addItemDecoration(new SpaceItemDecoration(85));
-
-        recyclerView.addOnScrollListener(new ScrollListeners.CustomScrollListener(
-                findViewById(R.id.header), getDrawable(R.drawable.bg_header), null));
 
         findViewById(R.id.menuBut).setOnClickListener(v -> drawer.openMenu(true));
 
@@ -85,8 +82,37 @@ public class CompanyProfileActivity extends AppCompatActivity {
             changeIconView.setVisibility(View.GONE);
         }
 
-        adapter.clear();
-        adapter.serverUpdateSearch();
+        val container = ((LinearLayout)findViewById(R.id.vacancyContainer));
+
+        container.removeAllViews();
+
+        ServerRepository serverRepository = new RealServerRepository();
+        VacancyRequest vacancyRequest = new VacancyRequest();
+        vacancyRequest.setEmailFilter(instance.getEmail());
+        serverRepository.getVacancies(vacancyRequest, new Consumer<VacancyResult>() {
+            @Override
+            public void accept(VacancyResult vacancyResult) {
+
+                for (val note: vacancyResult.getNotes()) {
+                    val view = LayoutInflater.from(CompanyProfileActivity.this).inflate(R.layout.advert_item, container, false);
+                    container.addView(view);
+                    ((TextView)view.findViewById(R.id.advert_name)).setText(note.getHeader());
+                    ((TextView)view.findViewById(R.id.company_name)).setText(note.getCompany());
+                    ((TextView)view.findViewById(R.id.salary_text)).setText(note.getSalary());
+                    ((TextView)view.findViewById(R.id.advert_description)).setText(note.getContent());
+
+                    val tagsField = (FlowLayout)view.findViewById(R.id.tags_field);
+                    tagsField.removeAllViews();
+                    for (String tag: note.getTags()) {
+                        val tempTag = LayoutInflater.from(CompanyProfileActivity.this).inflate(R.layout.tag_item, tagsField, false);
+                        tagsField.addView(tempTag);
+                        ((TextView) tempTag.findViewById(R.id.tag)).setText(tag);
+                    }
+                    //((TextView) view.findViewById(R.id.tag)).setText(tag);
+                }
+
+            }
+        });
 
         Glide.with(this)
                 .load(instance.getAvatarSrc())

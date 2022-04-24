@@ -30,8 +30,6 @@ public class Util {
 
     static UserData instance = UserInfo.getInstance().getData();
 
-    public static boolean isCompany = true;
-
     static void setEditTextFocusListener(Activity activity, int... ids) {
         for (int id : ids) {
             View view = activity.findViewById(id);
@@ -78,9 +76,6 @@ public class Util {
                 .into((ImageView) activity.findViewById(R.id.left_icon_user));
 
         ((TextView) activity.findViewById(R.id.name_user)).setText(instance.getFirstName() + " " + instance.getLastName());
-
-        if (!isCompany)
-            activity.findViewById(R.id.create_line).setVisibility(View.GONE);
 
         val admins = activity.findViewById(R.id.admins);
 
@@ -157,6 +152,10 @@ public class Util {
 
     public static void prepareLeftData(Activity activity) {
         instance = UserInfo.getInstance().getData();
+        if (!instance.isCompany())
+            activity.findViewById(R.id.create_line).setVisibility(View.GONE);
+        else
+            activity.findViewById(R.id.create_line).setVisibility(View.VISIBLE);
         Log.e("//////////////////////////////////////////////", String.valueOf(instance.isCompany()));
 
         val data = UserInfo.getInstance();
