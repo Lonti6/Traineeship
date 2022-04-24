@@ -1,6 +1,8 @@
 package ru.work.trainsheep;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +31,7 @@ import ru.work.trainsheep.data.RealServerRepository;
 import ru.work.trainsheep.data.ServerRepository;
 import ru.work.trainsheep.data.ServerRepositoryFactory;
 import ru.work.trainsheep.data.UserInfo;
+import ru.work.trainsheep.send.SetFavoriteVacancyRequest;
 import ru.work.trainsheep.send.UserData;
 import ru.work.trainsheep.send.VacancyRequest;
 import ru.work.trainsheep.send.VacancyResult;
@@ -108,6 +111,14 @@ public class CompanyProfileActivity extends AppCompatActivity {
                         tagsField.addView(tempTag);
                         ((TextView) tempTag.findViewById(R.id.tag)).setText(tag);
                     }
+
+                    view.setOnClickListener(v -> {
+                        Intent intent = new Intent(view.getContext(), FullVacancyActivity.class);
+                        intent.putExtra("note", note);
+                        view.getContext().startActivity(intent);
+                    });
+
+                    setFavoriteIcon(((ImageView) findViewById(R.id.favorite_but)), note.isFavorite(), note.getId());
                     //((TextView) view.findViewById(R.id.tag)).setText(tag);
                 }
 
@@ -121,6 +132,42 @@ public class CompanyProfileActivity extends AppCompatActivity {
                 .into((ImageView)findViewById(R.id.company_icon));
 
         ((TextView)findViewById(R.id.descriptionText)).setText(instance.getDescription());
+    }
+
+    public void setFavoriteIcon(ImageView favoriteIcon,boolean favorite, long id) {
+        val server = ServerRepositoryFactory.getInstance();
+
+        favoriteIcon.setTag(favorite ? "fill" : "hollow");
+
+        if (favoriteIcon.getTag().toString().equals("hollow"))
+            favoriteIcon.setImageResource(R.drawable.hollow_star_color_icon);
+        else
+            favoriteIcon.setImageResource(R.drawable.fill_star_color_icon);
+
+        favoriteIcon.setOnClickListener(v -> {
+            if (v.getTag().toString().equals("hollow")) {
+                favoriteIcon.setImageResource(R.drawable.fill_star_color_icon);
+                v.setTag("fill");
+                server.setFavoriteVacancy(new SetFavoriteVacancyRequest(id, true), (note) -> {
+                    Log.i(getClass().getSimpleName(), "setFavoriteIcon: server: " + note);
+                }, (th) -> {
+                    Toast.makeText(CompanyProfileActivity.this, "Error: " + th.getMessage(), Toast.LENGTH_SHORT).show();
+                    favoriteIcon.setImageResource(R.drawable.hollow_star_color_icon);
+                    v.setTag("hollow");
+                });
+            } else {
+                favoriteIcon.setImageResource(R.drawable.hollow_star_color_icon);
+                v.setTag("hollow");
+                server.setFavoriteVacancy(new SetFavoriteVacancyRequest(id, false), (note) -> {
+                    Log.i(getClass().getSimpleName(), "setFavoriteIcon: server: " + note);
+
+                }, (th) -> {
+                    Toast.makeText(CompanyProfileActivity.this, "Error: " + th.getMessage(), Toast.LENGTH_SHORT).show();
+                    favoriteIcon.setImageResource(R.drawable.fill_star_color_icon);
+                    v.setTag("fill");
+                });
+            }
+        });
     }
 
     public static class MyDialogFragment extends DialogFragment {
