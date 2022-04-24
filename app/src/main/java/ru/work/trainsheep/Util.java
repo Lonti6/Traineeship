@@ -124,7 +124,7 @@ public class Util {
 
         (activity.findViewById(R.id.profile_line)).setOnClickListener(v -> {
             Intent intent;
-            if (!instance.isCompany())
+            if (!UserInfo.getInstance().getData().isCompany())
                 intent = new Intent(activity, ProfileActivity.class);
             else
                 intent = new Intent(activity, CompanyProfileActivity.class);
