@@ -1,6 +1,7 @@
 package ru.work.trainsheep;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.*;
@@ -94,6 +95,7 @@ public class CreateActivity extends AppCompatActivity {
         String company = UserInfo.getInstance().getData().getFirstName();
         String salary = ((EditText)findViewById(R.id.zpField)).getText().toString();
         String zpType = ((AutoCompleteTextView)findViewById(R.id.zpTypeField)).getText().toString();
+        String city = ((AutoCompleteTextView)findViewById(R.id.cityField)).getText().toString();
         int workingTime = 0;
         try {
             workingTime = Integer.parseInt(((EditText)findViewById(R.id.workTimeField)).getText().toString());
@@ -119,10 +121,10 @@ public class CreateActivity extends AppCompatActivity {
         if (free){
             list.add("Бесплатно");
         }
-        //val note = new VacancyNote(list, header, content, company, (salary + " " + zpType), false ,0);
 
-        val note = new VacancyNote(header, content, company, (salary + " " + zpType),
-                                    furtherCooperation, contractZpCheck, distanceWork, workingTime, 0);
+        val note = new VacancyNote(list, header, content, company, salary, false, 0, instance.getEmail(),
+                instance.getAvatarSrc(), city, workingTime, furtherCooperation, contractZpCheck, distanceWork);
+
         ServerRepositoryFactory.getInstance().createVacancy(note, (n) -> {
             Toast.makeText(getApplicationContext(), "Создана вакансия " + header, Toast.LENGTH_SHORT).show();
             ((EditText)findViewById(R.id.vacancyNameField)).setText("");

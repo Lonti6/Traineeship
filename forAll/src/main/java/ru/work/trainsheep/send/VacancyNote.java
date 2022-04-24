@@ -30,7 +30,7 @@ public class VacancyNote implements Serializable {
     @NonNull
     String email;
     String imageSrc = "";
-    String city = "Ёбург";
+    String city = "";
     int workingHours;
     boolean furtherCooperation = true;
     boolean contractualSalary = true;

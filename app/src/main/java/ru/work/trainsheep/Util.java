@@ -157,7 +157,6 @@ public class Util {
 
     public static void prepareLeftData(Activity activity) {
         instance = UserInfo.getInstance().getData();
-        //((TextView) activity.findViewById(R.id.name_user)).setText(instance.getFirstName() + " " + instance.getLastName());
 
         Bundle extras = activity.getIntent().getExtras();
         if (extras != null) {
