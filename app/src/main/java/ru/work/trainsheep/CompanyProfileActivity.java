@@ -139,8 +139,8 @@ public class CompanyProfileActivity extends AppCompatActivity {
 
         Glide.with(this)
                 .load(instance.getAvatarSrc())
-                .placeholder(R.drawable.ic_zaticha)
-                .error(R.drawable.ic_zaticha)
+                .placeholder(R.drawable.company_zaticha)
+                .error(R.drawable.company_zaticha)
                 .into((ImageView) findViewById(R.id.company_icon));
 
         ((TextView) findViewById(R.id.descriptionText)).setText(instance.getDescription());
@@ -209,7 +209,6 @@ public class CompanyProfileActivity extends AppCompatActivity {
 
                 Glide.with(parentActivity)
                         .load(instance.getAvatarSrc())
-                        .circleCrop()
                         .placeholder(R.drawable.company_zaticha)
                         .error(R.drawable.company_zaticha)
                         .into(parentActivity.icon);

@@ -31,9 +31,9 @@ public class EditCompanyDataActivity extends AppCompatActivity {
         findViewById(R.id.saveBut).setOnClickListener(v -> {
             instance = UserInfo.getInstance().getData();
             instance.setFirstName(((TextView) findViewById(R.id.nameField)).getText().toString());
-            instance.setFirstName(((TextView) findViewById(R.id.mail_field)).getText().toString());
-            instance.setFirstName(((TextView) findViewById(R.id.numberField)).getText().toString());
-            instance.setFirstName(((TextView) findViewById(R.id.descriptionField)).getText().toString());
+            instance.setEmail(((TextView) findViewById(R.id.mail_field)).getText().toString());
+            instance.setPhoneNumber(((TextView) findViewById(R.id.numberField)).getText().toString());
+            instance.setDescription(((TextView) findViewById(R.id.descriptionField)).getText().toString());
 
             UserInfo.getInstance().save(this);
             ServerRepository serverRepository = ServerRepositoryFactory.getInstance();
