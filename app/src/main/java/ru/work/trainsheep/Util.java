@@ -31,6 +31,7 @@ import ru.work.trainsheep.send.UserData;
 public class Util {
 
     public static ArrayList<String> tagsForSearch = new ArrayList<>();
+    public static String textForSearcg = "";
 
     static UserData instance = UserInfo.getInstance().getData();
 

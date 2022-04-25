@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -66,6 +67,7 @@ public class FullSearchActivity extends AppCompatActivity {
                     list.add(((TextView)(tagsField.getChildAt(i).findViewById(R.id.tag))).getText().toString());
                 }
                 Util.tagsForSearch = list;
+                Util.textForSearcg = ((EditText)findViewById(R.id.headerFinderText)).getText().toString();
                 Util.loadActivity(drawer, FullSearchActivity.this, SearchActivity.class);
             }
         });
