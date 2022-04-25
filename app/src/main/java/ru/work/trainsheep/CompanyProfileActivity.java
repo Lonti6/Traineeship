@@ -40,6 +40,7 @@ public class CompanyProfileActivity extends AppCompatActivity {
     UserData instance;
     View changeIconView;
     public ImageView icon;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,7 +86,7 @@ public class CompanyProfileActivity extends AppCompatActivity {
             changeIconView.setVisibility(View.GONE);
         }
 
-        val container = ((LinearLayout)findViewById(R.id.vacancyContainer));
+        val container = ((LinearLayout) findViewById(R.id.vacancyContainer));
 
         container.removeAllViews();
 
@@ -96,17 +97,17 @@ public class CompanyProfileActivity extends AppCompatActivity {
             @Override
             public void accept(VacancyResult vacancyResult) {
 
-                for (val note: vacancyResult.getNotes()) {
+                for (val note : vacancyResult.getNotes()) {
                     val view = LayoutInflater.from(CompanyProfileActivity.this).inflate(R.layout.advert_item, container, false);
                     container.addView(view);
-                    ((TextView)view.findViewById(R.id.advert_name)).setText(note.getHeader());
-                    ((TextView)view.findViewById(R.id.company_name)).setText(note.getCompany());
-                    ((TextView)view.findViewById(R.id.salary_text)).setText(note.getSalary());
-                    ((TextView)view.findViewById(R.id.advert_description)).setText(note.getContent());
+                    ((TextView) view.findViewById(R.id.advert_name)).setText(note.getHeader());
+                    ((TextView) view.findViewById(R.id.company_name)).setText(note.getCompany());
+                    ((TextView) view.findViewById(R.id.salary_text)).setText(note.getSalary());
+                    ((TextView) view.findViewById(R.id.advert_description)).setText(note.getContent());
 
-                    val tagsField = (FlowLayout)view.findViewById(R.id.tags_field);
+                    val tagsField = (FlowLayout) view.findViewById(R.id.tags_field);
                     tagsField.removeAllViews();
-                    for (String tag: note.getTags()) {
+                    for (String tag : note.getTags()) {
                         val tempTag = LayoutInflater.from(CompanyProfileActivity.this).inflate(R.layout.tag_item, tagsField, false);
                         tagsField.addView(tempTag);
                         ((TextView) tempTag.findViewById(R.id.tag)).setText(tag);
@@ -129,12 +130,14 @@ public class CompanyProfileActivity extends AppCompatActivity {
                 .load(instance.getAvatarSrc())
                 .placeholder(R.drawable.ic_zaticha)
                 .error(R.drawable.ic_zaticha)
-                .into((ImageView)findViewById(R.id.company_icon));
+                .into((ImageView) findViewById(R.id.company_icon));
 
-        ((TextView)findViewById(R.id.descriptionText)).setText(instance.getDescription());
+        ((TextView) findViewById(R.id.descriptionText)).setText(instance.getDescription());
+        ((TextView) findViewById(R.id.numberText)).setText("Номер телефона: " + instance.getPhoneNumber());
+        ((TextView) findViewById(R.id.mailText)).setText("Электронная почта: " + instance.getEmail());
     }
 
-    public void setFavoriteIcon(ImageView favoriteIcon,boolean favorite, long id) {
+    public void setFavoriteIcon(ImageView favoriteIcon, boolean favorite, long id) {
         val server = ServerRepositoryFactory.getInstance();
 
         favoriteIcon.setTag(favorite ? "fill" : "hollow");
@@ -172,10 +175,11 @@ public class CompanyProfileActivity extends AppCompatActivity {
 
     public static class MyDialogFragment extends DialogFragment {
         CompanyProfileActivity parentActivity;
-        public MyDialogFragment(CompanyProfileActivity parentActivity)
-        {
+
+        public MyDialogFragment(CompanyProfileActivity parentActivity) {
             this.parentActivity = parentActivity;
         }
+
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
             getDialog().getWindow().setBackgroundDrawableResource(R.drawable.round_corner);
@@ -185,7 +189,7 @@ public class CompanyProfileActivity extends AppCompatActivity {
             {
                 val instance = UserInfo.getInstance().getData();
                 ServerRepository serverRepository = ServerRepositoryFactory.getInstance();
-                instance.setAvatarSrc(((EditText)view.findViewById(R.id.srcField)).getText().toString());
+                instance.setAvatarSrc(((EditText) view.findViewById(R.id.srcField)).getText().toString());
 
                 UserInfo.getInstance().save(parentActivity);
 

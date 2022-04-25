@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,6 +13,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
 
 import org.apmem.tools.layouts.FlowLayout;
+
+import java.util.ArrayList;
 
 import lombok.val;
 
@@ -52,6 +55,20 @@ public class FullSearchActivity extends AppCompatActivity {
                 ((TextView) view.findViewById(R.id.tag)).setText(autoCompleteTags.getText().toString());
                 tagsField.setVisibility(View.VISIBLE);
                 autoCompleteTags.setText("");
+            }
+        });
+
+        findViewById(R.id.searchBut).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ArrayList<String> list = new ArrayList<>();
+                for (int i = 0; i<tagsField.getChildCount(); i++)
+                {
+                    list.add(((TextView)(tagsField.getChildAt(i).findViewById(R.id.tag))).getText().toString());
+                }
+                Util.tagsForSearch = list;
+                Util.textForSearcg = ((EditText)findViewById(R.id.headerFinderText)).getText().toString();
+                Util.loadActivity(drawer, FullSearchActivity.this, SearchActivity.class);
             }
         });
     }

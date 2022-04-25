@@ -3,7 +3,7 @@ package ru.work.trainsheep.data;
 public class ServerRepositoryFactory {
 
     public static final String URL = "http://79.143.29.47:8080/";
-    public static final boolean IS_ADMIN = false;
+    public static final boolean IS_ADMIN = true;
 
 
     private static ServerRepository serverRepository;

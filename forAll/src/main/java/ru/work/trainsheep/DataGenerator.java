@@ -26,14 +26,25 @@ public class DataGenerator {
     public final Random random = new Random();
 
     public DataGenerator() {
-        tags = Arrays.asList("Бэкенд", "Angular", "Фронтенд", "Middle", "JavaScript", "HTML", "JQuery", "Angular",
-                "Linux", "Git", "PHP", "Golang", "React Native", "Sass", "React", "C#", ".NET", ".NET Core", "SQL", "Python",
-                "C", "C++", "Visual Basic", "PHP", "Go", "Swift", "Ruby" );
+        tags = Arrays.asList("Высшее образование", "Средне специальное образование", "MS Office", "B2B продажи",
+                "B2C продажи", "Водительское удостоверение категории C", "Водительское удостоверение категории B",
+                "Водительское удостоверение категории D", "AutoCAD", "SOLIDWORKS", "Kompas", "1С", "1С:ERP", "1С:УПП",
+                "1С Бухгалтерия 8", "1С УТ", "1С ЗУП", "Английский B1", "Английский B2", "Английский C1", "Английский C2",
+                "Английский (тех)", "SPDS", "nanoCAD", "Procreate", "3Dds Max", "CorelDraw", "PRO100", "Bitrix-24", "ADO.NET",
+                "EntityFramework", "Transact-SQL", "MS SQL", "jQuery", "HTML", "CSS", "С#", "PHP", "Illustrator", "Photoshop",
+                "After Effects", "ArchiCad", "Revit", "Sketch Up", "Blender", "Яндекс.Метрика", "Google Analytics", "myTarget",
+                "1С-Битрикс", "OC Linux", "OC Windows", "FreePBX", "MS Exchange", "Zabbix", "Symantec Backup Exec",
+                "Veritas Backup Exec", "Veeam Backup", "Avaya", "Mikrotik", "CISCO", "Копирайтинг", "Рерайтинг", "Visual Basic",
+                "Swift", "iOS SDK", "Android", "iOS", "Unit-тесты", "GitHub", "GitLab", "MobileNet", "EfficientNet", "Python", "SQL",
+                "PostgreSQL", "ClickHouse", "Hadoop", "Apache Spark", "Scala", "VMware", "Cacti", "Nginx", "Haproxy", "Cisco", "SNR",
+                "D-link", "SoapUI", "Postman", "Agile", "Kotlin", "AWT", "GOLG", "JSF", "JavaScript", "Java Database", "Java EE",
+                "Oracle", "DevOps", "Backend", "Frontend", "Angular", "React Native", "Sass", "React", ".NET", ".NET Core", "C",
+                "C++", "Ruby");
 
         companies = Arrays.asList("Группа «СВЭЛ»", "Прософт-Системы", "Сима-ленд", "HRS", "ГК «Экстрим»", "Uploadcare",
-                "DNA Team", "Сбер", "Ceramic 3D", "Luxoft",  "Tinkoff.ru", "Deutsche Bank",
+                "DNA Team", "Сбер", "Ceramic 3D", "Luxoft", "Tinkoff.ru", "Deutsche Bank",
                 "Компания БКС", "Home Credit Bank", "ВымпелКом", "Andersen", "Revolut", "КРОК",
-                "Grid Dynamics",  "Veeam Software");
+                "Grid Dynamics", "Veeam Software");
 
         headers = Arrays.asList("Программист ERP",
                 "Frontend-разработчик (JS, Angular)",
@@ -82,7 +93,7 @@ public class DataGenerator {
         );
 
         names = Arrays.asList("Не Никита Жильцов", "Диана Имранова", "Дмитрий Башкирцев", "Иван Малышев", "Кристина Казакова",
-                "Анна Маркова", "Иван Вешняков", "Полина Попова", "Роман Пирогов", "Вероника Киселева", "Егор Карасев", "София Макарова","Калинина Ульяна", "Ефимов Егор", "Самсонов Ярослав", "Попов Илья", "Андрианова Аиша", "Соловьев Савелий", "Синицын Андрей", "Кравцова Софья", "Вдовин Филипп", "Жуков Фёдор", "Семенов Михаил", "Климов Иван", "Волкова Полина", "Белов Кирилл", "Ушакова Василиса", "Антонова Вероника", "Виноградова Алиса", "Булгаков Владимир", "Суворова Анастасия", "Титов Максим", "Иванов Андрей", "Лаптев Игорь", "Иванов Григорий", "Харитонова Виктория", "Иванова Алиса", "Трошина Юлия", "Тарасова Анастасия", "Белов Александр", "Власова Полина", "Иванов Святослав");
+                "Анна Маркова", "Иван Вешняков", "Полина Попова", "Роман Пирогов", "Вероника Киселева", "Егор Карасев", "София Макарова", "Калинина Ульяна", "Ефимов Егор", "Самсонов Ярослав", "Попов Илья", "Андрианова Аиша", "Соловьев Савелий", "Синицын Андрей", "Кравцова Софья", "Вдовин Филипп", "Жуков Фёдор", "Семенов Михаил", "Климов Иван", "Волкова Полина", "Белов Кирилл", "Ушакова Василиса", "Антонова Вероника", "Виноградова Алиса", "Булгаков Владимир", "Суворова Анастасия", "Титов Максим", "Иванов Андрей", "Лаптев Игорь", "Иванов Григорий", "Харитонова Виктория", "Иванова Алиса", "Трошина Юлия", "Тарасова Анастасия", "Белов Александр", "Власова Полина", "Иванов Святослав");
         messages = Arrays.asList("Уснувшая степь слушала его шум. — Не смей отказаться! По гроб жизни обидишь! Не выпьешь —.",
                 "Не знаю, ослабел ли я от водки, или же бутылка была слишком.",
                 "Я всё понял с первого взгляда, да едва ли в Европе есть еще мужчины, которые не умеют отличить с.",
@@ -283,7 +294,7 @@ public class DataGenerator {
                 "Дело в том, что у нас были припасены две бутылки шампанского,.",
                 "Думали они о том, что в человеке выше происхождения,.",
                 "Ну, так что же из этого?—Нехорошо,— сказала она, ставя свой."
-                );
+        );
 
 
         icons = Arrays.asList("https://i.ytimg.com/vi/4D_6d9SjlVo/maxresdefault.jpg",
@@ -311,11 +322,23 @@ public class DataGenerator {
                 "https://images.pexels.com/photos/4631882/pexels-photo-4631882.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
                 "https://images.pexels.com/photos/3402028/pexels-photo-3402028.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
         );
-        cities = Arrays.asList("Москва", "Санкт-Петербург", "Новосибирск", "Екатеринбург", "Казань",
-                            "Нижний Новгород", "Челябинск", "Самара", "Омск", "Ростов-на-Дону", "Уфа",
-                            "Красноярск", "Воронеж", "Пермь", "Волгоград", "Краснодар", "Саратов", "Тюмень",
-                            "Тольятти", "Ижевск", "Барнаул", "Ульяновск", "Иркутск", "Хабаровск", "Махачкала",
-                            "Ярославль", "Владивосток", "Оренбург", "Томск", "Кемерово", "Семферопль", "Севастопль");
+        cities = Arrays.asList("Москва", "Санкт-Петербург", "Екатеринбург", "Волгоград", "Саратов",
+                "Пермь", "Уфа", "Тюмень", "Орск", "Казань", "Воронеж", "Омск", "Самара", "Чита", "Челябинск",
+                "Новосибирск", "Махачкала", "Новокузнецк", "Дзержинск", "Нижний Новгород", "Курган", "Магнитогорск",
+                "Хабаровск", "Улан-Удэ", "Петропавловск-Камчатский", "Сургут", "Красноярск", "Ростов-на-Дону", "Краснодар",
+                "Ханты-Мансийск", "Междуреченск", "Владивосток", "Липецк", "Комсомольск-на-Амуре", "Грозный", "Барнаул",
+                "Благовещенск", "Ижевск", "Тольятти", "Пенза", "Ульяновск", "Нижний Тагил", "Томск", "Магадан", "Кемерово",
+                "Архангельск", "Ангарск", "Бийск", "Владикавказ", "Иркутск", "Лесосибирск", "Ставрополь", "Нижневартовск",
+                "Братск", "Оренбург", "Новоульяновск", "Тобольск", "Копейск", "Волжский", "Рязань", "Калининград", "Белово",
+                "Прокопьевск", "Астрахань", "Курск", "Усть-Илимск", "Ярославль", "Старый Оскол", "Чапаевск", "Смоленск",
+                "Златоуст", "Брянск", "Севастополь", "Сочи", "Шадринск", "Уссурийск", "Киров", "Кумертау", "Биробиджан",
+                "Калуга", "Волгодонск", "Соликамск", "Южно-Сахалинск", "Набережные Челны", "Выборг", "Красноармейск", "Белгород",
+                "Каменск-Шахтинский", "Домодедово", "Шахты", "Мурманск", "Сибай", "Нефтеюганск", "Тула", "Тверь", "Сыктывкар",
+                "Нефтекамск", "Кострома", "Каменск-Уральский", "Троицк", "Новошахтинск", "Владимир", "Новочеркасск", "Находка",
+                "Череповец", "Северодвинск", "Орёл", "Якутск", "Камышин", "Сызрань", "Нижнекамск", "Вологда", "Альметьевск",
+                "Энгельс", "Петрозаводск", "Абакан", "Воткинск", "Железногорск", "Донецк", "Химки", "Чебоксары", "Мыски",
+                "Стерлитамак", "Керчь", "Симферополь", "Салават", "Иваново", "Димитровград", "Пятигорск", "Ишимбай", "Рыбинск",
+                "Йошкар-Ола");
 
         zpTypes = Arrays.asList("Р/Нед", "Р/Мес", "Р/час");
     }
@@ -332,7 +355,7 @@ public class DataGenerator {
                 getRandom(headers),
                 getRandom(contents),
                 getRandom(companies),
-                splitSalary((int)(Math.random()*20000))+" ₽/месяц",
+                splitSalary((int) (Math.random() * 20000)) + " ₽/месяц",
                 random.nextBoolean(),
                 0,
                 getRandom(names) + "@ok.ru",
@@ -342,7 +365,7 @@ public class DataGenerator {
                 random.nextBoolean(),
                 random.nextBoolean(),
                 random.nextBoolean()
-                );
+        );
     }
 
     public CompanyNote generateCompanyNote() {
@@ -350,10 +373,10 @@ public class DataGenerator {
                 random.nextInt(10000),
                 getRandom(companies),
                 getRandom(contents),
-                getRandom(icons),  getRandom(names) + "@ok.ru");
+                getRandom(icons), getRandom(names) + "@ok.ru");
     }
 
-    public ChatBlock generateChatBlock(){
+    public ChatBlock generateChatBlock() {
         return ChatBlock.builder()
                 .icon(getRandom(icons))
                 .name(getRandom(names))
@@ -363,14 +386,16 @@ public class DataGenerator {
                 .lastMessageDate(generateDate())
                 .build();
     }
-    public ChatMessage generateMessage(long date, String sender){
+
+    public ChatMessage generateMessage(long date, String sender) {
         return ChatMessage.builder()
                 .message(getRandom(messages))
                 .date(date)
                 .sender(random.nextBoolean() ? sender : "you")
                 .build();
     }
-    public List<ChatBlock> generateChats(){
+
+    public List<ChatBlock> generateChats() {
         val count = random.nextInt(30) + 5;
         val res = new ArrayList<ChatBlock>(count);
         for (int i = 0; i < count; i++) {
@@ -378,6 +403,7 @@ public class DataGenerator {
         }
         return res;
     }
+
     public ChatResult generateChatResult(int page, int count) {
         val res = new ArrayList<ChatMessage>(count);
         long date = generateDate();
@@ -387,7 +413,7 @@ public class DataGenerator {
             res.add(generateMessage(date, sender));
         }
         return ChatResult.builder()
-                .countAllMessages((page+1) * count + random.nextInt(100))
+                .countAllMessages((page + 1) * count + random.nextInt(100))
                 .messages(res)
                 .page(page)
                 .name(sender)
@@ -395,24 +421,20 @@ public class DataGenerator {
                 .build();
     }
 
-    public String getRandomMessageText(){
+    public String getRandomMessageText() {
         return getRandom(messages);
     }
-    private String splitSalary(int salaryNum)
-    {
+
+    private String splitSalary(int salaryNum) {
         String salary = String.valueOf(salaryNum);
         StringBuilder builder = new StringBuilder();
         int q = 0;
-        for (int i = salary.length()-1; i>-1; i--)
-        {
-            if (q == 2)
-            {
+        for (int i = salary.length() - 1; i > -1; i--) {
+            if (q == 2) {
                 if (i != 0)
-                    builder.insert(0, " "+salary.charAt(i));
+                    builder.insert(0, " " + salary.charAt(i));
                 q = 0;
-            }
-            else
-            {
+            } else {
                 builder.insert(0, salary.charAt(i));
                 q++;
             }
@@ -421,10 +443,12 @@ public class DataGenerator {
     }
 
     private static long START = 946080000000L;
-    private long generateDate(){
+
+    private long generateDate() {
         return new Date(START + random.nextLong() % (START / 10)).getTime();
     }
-    public long addRandom(long start){
+
+    public long addRandom(long start) {
         return start + random.nextInt(601000) + 10000;
     }
 
@@ -432,8 +456,7 @@ public class DataGenerator {
         return list.get(random.nextInt(list.size()));
     }
 
-    public List<String> getCities()
-    {
+    public List<String> getCities() {
         return cities;
     }
 }

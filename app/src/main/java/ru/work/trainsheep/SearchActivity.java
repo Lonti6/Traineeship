@@ -85,8 +85,8 @@ public class SearchActivity extends AppCompatActivity {
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
                 LinearLayoutManager manager = (LinearLayoutManager)recyclerView.getLayoutManager();
-                if (manager.findFirstVisibleItemPosition() == 0
-                        && manager.findFirstCompletelyVisibleItemPosition() == 0)
+                if (manager.findFirstVisibleItemPosition() < 1
+                        && manager.findFirstCompletelyVisibleItemPosition() < 1)
                 {
                     updateButton.setVisibility(View.VISIBLE);
                 }
@@ -116,9 +116,9 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     public void sendSearch(){
-        val text = findText.getText().toString();
-        Log.i("TAG", "------------------ sendSearch: " + text);
-        adapter.clearAndSearch(text, new ArrayList<>());
+        Util.textForSearcg = findText.getText().toString();
+        Log.i("TAG", "------------------ sendSearch: " + Util.textForSearcg);
+        adapter.clearAndSearch(Util.textForSearcg, Util.tagsForSearch);
     }
 
     @Override
@@ -126,6 +126,8 @@ public class SearchActivity extends AppCompatActivity {
         super.onStart();
         adapter.clear();
         adapter.serverUpdateSearch();
+        sendSearch();
+        Util.tagsForSearch = new ArrayList<>();
         Util.prepareLeftData(this);
     }
 }

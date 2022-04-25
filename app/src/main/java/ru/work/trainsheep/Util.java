@@ -17,6 +17,8 @@ import com.bumptech.glide.Glide;
 import com.mxn.soul.flowingdrawer_core.ElasticDrawer;
 import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.function.Consumer;
 import java.util.regex.Pattern;
 
@@ -27,6 +29,9 @@ import ru.work.trainsheep.data.UserInfo;
 import ru.work.trainsheep.send.UserData;
 
 public class Util {
+
+    public static ArrayList<String> tagsForSearch = new ArrayList<>();
+    public static String textForSearcg = "";
 
     static UserData instance = UserInfo.getInstance().getData();
 
@@ -160,8 +165,8 @@ public class Util {
 
         val data = UserInfo.getInstance();
         //val imageSrc = extras.getString("image");
-        ((TextView) activity.findViewById(R.id.name_user)).setText(data.getRegistrationData().getName() +
-                                            " " + data.getRegistrationData().getLastName());
+        ((TextView) activity.findViewById(R.id.name_user)).setText(data.getData().getFirstName() +
+                                            " " + data.getData().getLastName());
         Glide.with(activity)
                 .load(data.getData().getAvatarSrc())
                 .circleCrop()
