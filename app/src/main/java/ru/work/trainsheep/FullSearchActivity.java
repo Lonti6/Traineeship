@@ -1,5 +1,6 @@
 package ru.work.trainsheep;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -66,9 +67,11 @@ public class FullSearchActivity extends AppCompatActivity {
                 {
                     list.add(((TextView)(tagsField.getChildAt(i).findViewById(R.id.tag))).getText().toString());
                 }
-                Util.tagsForSearch = list;
-                Util.textForSearcg = ((EditText)findViewById(R.id.headerFinderText)).getText().toString();
-                Util.loadActivity(drawer, FullSearchActivity.this, SearchActivity.class);
+
+                val intent = new Intent(FullSearchActivity.this, SearchActivity.class);
+                intent.putExtra("tags", list);
+                intent.putExtra("header", ((EditText)findViewById(R.id.headerFinderText)).getText().toString());
+                startActivity(intent);
             }
         });
     }
