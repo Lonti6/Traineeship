@@ -119,7 +119,18 @@ public class CompanyProfileActivity extends AppCompatActivity {
                         view.getContext().startActivity(intent);
                     });
 
-                    setFavoriteIcon(((ImageView) findViewById(R.id.favorite_but)), note.isFavorite(), note.getId());
+                    if (note.getEmail().equals(UserInfo.getInstance().getData().getEmail()) || ServerRepositoryFactory.IS_ADMIN)
+                        view.findViewById(R.id.removed).setVisibility(View.VISIBLE);
+                    else
+                        view.findViewById(R.id.removed).setVisibility(View.GONE);
+
+                    view.findViewById(R.id.removed).setOnClickListener(v -> {
+                        ServerRepositoryFactory.getInstance().removeVacancy(note, (status) -> {
+                            container.removeView(view);
+                        });
+                    });
+
+                    setFavoriteIcon(((ImageView) view.findViewById(R.id.favorite_but)), note.isFavorite(), note.getId());
                     //((TextView) view.findViewById(R.id.tag)).setText(tag);
                 }
 
@@ -199,8 +210,8 @@ public class CompanyProfileActivity extends AppCompatActivity {
                 Glide.with(parentActivity)
                         .load(instance.getAvatarSrc())
                         .circleCrop()
-                        .placeholder(R.drawable.ic_zaticha)
-                        .error(R.drawable.ic_zaticha)
+                        .placeholder(R.drawable.company_zaticha)
+                        .error(R.drawable.company_zaticha)
                         .into(parentActivity.icon);
 
                 Util.prepareLeftData(parentActivity);

@@ -11,6 +11,7 @@ import ru.work.trainsheep.adapters.holders.FooterViewHolder;
 import ru.work.trainsheep.adapters.holders.VacancyItemHolder;
 import ru.work.trainsheep.data.ServerRepository;
 import ru.work.trainsheep.data.ServerRepositoryFactory;
+import ru.work.trainsheep.data.UserInfo;
 import ru.work.trainsheep.send.VacancyNote;
 import ru.work.trainsheep.send.VacancyRequest;
 
@@ -88,6 +89,11 @@ public class VacancyItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         if (holder instanceof VacancyItemHolder && position < notes.size()) {
             val item = (VacancyItemHolder) holder;
             VacancyNote note = notes.get(position);
+
+            if (note.getEmail().equals(UserInfo.getInstance().getData().getEmail()) || ServerRepositoryFactory.IS_ADMIN)
+                item.removed.setVisibility(View.VISIBLE);
+            else
+                item.removed.setVisibility(View.GONE);
 
             item.name.setText(note.getHeader());
             item.tagsField.removeAllViews();

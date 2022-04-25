@@ -16,6 +16,7 @@ import org.apmem.tools.layouts.FlowLayout;
 import ru.work.trainsheep.FullVacancyActivity;
 import ru.work.trainsheep.R;
 import ru.work.trainsheep.data.ServerRepositoryFactory;
+import ru.work.trainsheep.data.UserInfo;
 import ru.work.trainsheep.send.SetFavoriteVacancyRequest;
 import ru.work.trainsheep.send.VacancyNote;
 
