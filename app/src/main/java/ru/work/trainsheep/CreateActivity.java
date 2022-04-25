@@ -122,7 +122,7 @@ public class CreateActivity extends AppCompatActivity {
             list.add("Бесплатно");
         }
 
-        val note = new VacancyNote(list, header, content, company, salary, false, 0, instance.getEmail(),
+        val note = new VacancyNote(list, header, content, company, salary + " " + zpType, false, 0, instance.getEmail(),
                 instance.getAvatarSrc(), city, workingTime, furtherCooperation, contractZpCheck, distanceWork);
 
         ServerRepositoryFactory.getInstance().createVacancy(note, (n) -> {
