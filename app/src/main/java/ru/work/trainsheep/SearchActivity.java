@@ -118,7 +118,7 @@ public class SearchActivity extends AppCompatActivity {
     public void sendSearch(){
         val text = findText.getText().toString();
         Log.i("TAG", "------------------ sendSearch: " + text);
-        adapter.clearAndSearch(text, new ArrayList<>());
+        adapter.clearAndSearch(text, Util.tagsForSearch);
     }
 
     @Override
@@ -126,6 +126,8 @@ public class SearchActivity extends AppCompatActivity {
         super.onStart();
         adapter.clear();
         adapter.serverUpdateSearch();
+        sendSearch();
+        Util.tagsForSearch = new ArrayList<>();
         Util.prepareLeftData(this);
     }
 }

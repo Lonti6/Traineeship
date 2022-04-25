@@ -17,6 +17,8 @@ import com.bumptech.glide.Glide;
 import com.mxn.soul.flowingdrawer_core.ElasticDrawer;
 import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.function.Consumer;
 import java.util.regex.Pattern;
 
@@ -27,6 +29,8 @@ import ru.work.trainsheep.data.UserInfo;
 import ru.work.trainsheep.send.UserData;
 
 public class Util {
+
+    public static ArrayList<String> tagsForSearch = new ArrayList<>();
 
     static UserData instance = UserInfo.getInstance().getData();
 

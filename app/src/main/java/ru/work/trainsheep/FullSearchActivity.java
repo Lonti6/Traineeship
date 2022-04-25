@@ -13,6 +13,8 @@ import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
 
 import org.apmem.tools.layouts.FlowLayout;
 
+import java.util.ArrayList;
+
 import lombok.val;
 
 public class FullSearchActivity extends AppCompatActivity {
@@ -52,6 +54,19 @@ public class FullSearchActivity extends AppCompatActivity {
                 ((TextView) view.findViewById(R.id.tag)).setText(autoCompleteTags.getText().toString());
                 tagsField.setVisibility(View.VISIBLE);
                 autoCompleteTags.setText("");
+            }
+        });
+
+        findViewById(R.id.searchBut).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ArrayList<String> list = new ArrayList<>();
+                for (int i = 0; i<tagsField.getChildCount(); i++)
+                {
+                    list.add(((TextView)(tagsField.getChildAt(i).findViewById(R.id.tag))).getText().toString());
+                }
+                Util.tagsForSearch = list;
+                Util.loadActivity(drawer, FullSearchActivity.this, SearchActivity.class);
             }
         });
     }
