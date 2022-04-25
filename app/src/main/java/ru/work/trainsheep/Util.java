@@ -160,8 +160,8 @@ public class Util {
 
         val data = UserInfo.getInstance();
         //val imageSrc = extras.getString("image");
-        ((TextView) activity.findViewById(R.id.name_user)).setText(data.getRegistrationData().getName() +
-                                            " " + data.getRegistrationData().getLastName());
+        ((TextView) activity.findViewById(R.id.name_user)).setText(data.getData().getFirstName() +
+                                            " " + data.getData().getLastName());
         Glide.with(activity)
                 .load(data.getData().getAvatarSrc())
                 .circleCrop()

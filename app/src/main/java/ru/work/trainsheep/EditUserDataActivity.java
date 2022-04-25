@@ -20,8 +20,10 @@ import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
 
 import org.apmem.tools.layouts.FlowLayout;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import lombok.val;
 import ru.work.trainsheep.data.ServerRepository;
@@ -119,11 +121,13 @@ public class EditUserDataActivity extends AppCompatActivity {
                     Integer.parseInt(text.substring(text.indexOf('.') + 1, text.lastIndexOf('.'))) - 1,
                     Integer.parseInt(text.substring(text.lastIndexOf(' ') + 1, text.indexOf('.'))))
             );
-
+            List<String> list = new ArrayList<>();
             for (int i = 0; i < tagsField.getChildCount(); i++) {
                 val child = tagsField.getChildAt(i);
-                instance.getCompetencies().add(((TextView) child.findViewById(R.id.tag)).getText().toString());
+
+                list.add(((TextView) child.findViewById(R.id.tag)).getText().toString());
             }
+            instance.setCompetencies(list);
 
             UserInfo.getInstance().save(this);
             ServerRepository serverRepository = ServerRepositoryFactory.getInstance();
@@ -173,11 +177,21 @@ public class EditUserDataActivity extends AppCompatActivity {
         ((EditText) findViewById(R.id.mail_field)).setText(instance.getEmail());
         ((EditText) findViewById(R.id.numberField)).setText(instance.getPhoneNumber());
         val tagsField = (FlowLayout) findViewById(R.id.tags_field);
+        tagsField.removeAllViews();
 
         for (String tag : instance.getCompetencies()) {
             val view = LayoutInflater.from(this).inflate(R.layout.tag_item, tagsField, false);
             tagsField.addView(view);
             ((TextView) view.findViewById(R.id.tag)).setText(tag);
+            view.setOnClickListener(new DoubleClickListener() {
+                @Override
+                public void onDoubleClick(View v) {
+                    try {
+                        tagsField.removeView(v);
+                    } catch (Exception e) {
+                    }
+                }
+            });
         }
         if (tagsField.getChildCount() > 0) tagsField.setVisibility(View.VISIBLE);
         day = instance.getBirthdate().getDay();
