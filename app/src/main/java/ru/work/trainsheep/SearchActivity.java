@@ -23,6 +23,7 @@ import ru.work.trainsheep.data.UserInfo;
 import ru.work.trainsheep.send.UserData;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class SearchActivity extends AppCompatActivity {
 
@@ -116,18 +117,23 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     public void sendSearch(){
-        Util.textForSearcg = findText.getText().toString();
-        Log.i("TAG", "------------------ sendSearch: " + Util.textForSearcg);
-        adapter.clearAndSearch(Util.textForSearcg, Util.tagsForSearch);
+        val text = findText.getText().toString();
+        Log.i("TAG", "------------------ sendSearch: " + text);
+        adapter.clearAndSearch(text, new ArrayList<>());
     }
 
     @Override
     protected void onStart() {
         super.onStart();
         adapter.clear();
-        adapter.serverUpdateSearch();
-        sendSearch();
-        Util.tagsForSearch = new ArrayList<>();
+        Bundle extras = getIntent().getExtras();
+        if (extras != null && extras.containsKey("header")) {
+            val header = extras.getString("header");
+            val tags = (List<String>)extras.getSerializable("tags");
+            adapter.serverUpdateSearch(header, tags);
+        }
+        else
+            adapter.serverUpdateSearch();
         Util.prepareLeftData(this);
     }
 }

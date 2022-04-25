@@ -40,7 +40,6 @@ import java.util.Locale;
 public class AllChatsActivity extends AppCompatActivity {
 
     Adapter adapter;
-    UserData instance = UserInfo.getInstance().getData();
     ServerRepository server = ServerRepositoryFactory.getInstance();
     EditText findText;
 
